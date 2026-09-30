@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>THREEFOLD historical screen layout study</title><style>html{color-scheme:light dark}body{max-width:1200px;margin:24px auto;padding:0 16px;font:14px/1.5 system-ui,sans-serif}.history-note{margin:0 0 18px}</style></head><body>
+<p class="history-note">Historical layout sketch: this predates the twelve-guild and open-PvP decisions. See the <a href="../game-concept.md">current game concept</a>. These are screen relationships, not gameplay or final visual quality.</p>
+<div id="threefold-study" aria-label="Threefold game interface layout study">
+<style>
+#threefold-study{--tf-bg:light-dark(#f3efe5,#11181b);--tf-panel:light-dark(#e5dfcf,#1a2428);--tf-ink:light-dark(#242e30,#f1ece0);--tf-dim:light-dark(#586468,#adbbb9);--tf-line:light-dark(#aaa58f,#465653);--tf-gold:light-dark(#725420,#d6b67b);--tf-green:light-dark(#437860,#78af91);--tf-blue:light-dark(#457b98,#77adc7);font-family:system-ui,sans-serif;color:var(--tf-ink);font-size:14px;line-height:1.5}
+#threefold-study *{box-sizing:border-box}
+#threefold-study .tf-shell{background:var(--tf-bg);border:1px solid var(--tf-line);border-radius:10px;overflow:hidden}
+#threefold-study .tf-header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:16px 20px;border-bottom:1px solid var(--tf-line)}
+#threefold-study .tf-brand{font-family:Georgia,serif;font-size:24px;letter-spacing:3px}
+#threefold-study .tf-caption{font-size:12px;color:var(--tf-dim)}
+#threefold-study .tf-nav{display:flex;flex-wrap:wrap;gap:5px;padding:10px 16px;border-bottom:1px solid var(--tf-line)}
+#threefold-study button{font:inherit;color:var(--tf-ink);background:var(--tf-panel);border:1px solid var(--tf-line);border-radius:4px;padding:8px 12px;min-height:40px;text-align:left}
+#threefold-study button[aria-pressed="true"]{border-color:var(--tf-gold);color:var(--tf-gold)}
+#threefold-study button:hover{filter:brightness(1.12)}
+#threefold-study .tf-body{display:grid;grid-template-columns:minmax(0,1fr) 250px;min-height:465px}
+#threefold-study .tf-main{padding:20px;min-width:0}
+#threefold-study .tf-side{padding:20px;background:var(--tf-panel);border-left:1px solid var(--tf-line);min-width:0}
+#threefold-study .tf-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.6px;color:var(--tf-gold);margin:0 0 7px}
+#threefold-study .tf-title{font:25px/1.2 Georgia,serif;margin:0 0 12px}
+#threefold-study .tf-copy{color:var(--tf-dim);margin:8px 0 14px}
+#threefold-study .tf-pair{display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between;align-items:start}
+#threefold-study .tf-vitals{min-width:130px;font-size:12px}
+#threefold-study .tf-bar{height:5px;background:var(--tf-line);margin:4px 0 8px}
+#threefold-study .tf-bar span{display:block;height:100%;background:var(--tf-green)}
+#threefold-study .tf-bar.tf-mana span{background:var(--tf-blue)}
+#threefold-study .tf-scene{position:relative;min-height:235px;margin:15px 0;background:repeating-linear-gradient(0deg,transparent 0 30px,color-mix(in srgb,var(--tf-line) 20%,transparent) 30px 31px),repeating-linear-gradient(90deg,transparent 0 30px,color-mix(in srgb,var(--tf-line) 20%,transparent) 30px 31px);border:1px dashed var(--tf-line);padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center}
+#threefold-study .tf-marker{padding:8px;border-left:3px solid var(--tf-green);background:var(--tf-bg);font-size:12px}
+#threefold-study .tf-marker.tf-enemy{border-color:var(--tf-gold)}
+#threefold-study .tf-marker.tf-player{border-color:var(--tf-blue)}
+#threefold-study .tf-scene-label{grid-column:1/-1;text-align:center;color:var(--tf-dim);font-size:11px;letter-spacing:1px}
+#threefold-study .tf-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+#threefold-study .tf-abilities{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;padding:12px 16px;border-top:1px solid var(--tf-line)}
+#threefold-study .tf-abilities button{padding:7px;font-size:11px;overflow-wrap:anywhere;min-height:53px}
+#threefold-study .tf-key{display:block;color:var(--tf-gold);font-size:12px;margin-bottom:2px}
+#threefold-study .tf-footer{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--tf-line);padding:10px 16px;color:var(--tf-dim);font-size:11px}
+#threefold-study .tf-list{display:grid;gap:9px;margin:14px 0}
+#threefold-study .tf-list button{width:100%;display:block}
+#threefold-study .tf-list button small{display:block;color:var(--tf-dim);font-size:12px;margin-top:4px}
+#threefold-study .tf-rule{border:0;border-top:1px solid var(--tf-line);margin:20px 0}
+#threefold-study .tf-realms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+#threefold-study .tf-route{border-top:2px solid var(--tf-line);padding-top:10px;min-width:0}
+#threefold-study .tf-route button{margin:6px 0;width:100%;font-size:12px;padding:8px}
+#threefold-study .tf-hub{display:block;margin:16px auto 0;text-align:center}
+#threefold-study .tf-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+#threefold-study .tf-slot{padding:12px;border:1px solid var(--tf-line);font-size:12px}
+#threefold-study .tf-slot small{display:block;color:var(--tf-dim)}
+#threefold-study .tf-status{font-size:13px;color:var(--tf-dim);margin:10px 0;min-height:60px}
+#threefold-study .tf-tag{color:var(--tf-gold);font-size:12px}
+@media(max-width:700px){#threefold-study .tf-body{grid-template-columns:1fr}#threefold-study .tf-side{border-left:0;border-top:1px solid var(--tf-line)}#threefold-study .tf-main{padding:16px}#threefold-study .tf-realms{grid-template-columns:1fr}#threefold-study .tf-route{display:grid;grid-template-columns:1fr 1fr;gap:6px}#threefold-study .tf-route>div{grid-column:1/-1}#threefold-study .tf-abilities{grid-template-columns:repeat(3,minmax(0,1fr))}#threefold-study .tf-scene{grid-template-columns:1fr;min-height:0}}
+@media(pointer:coarse){#threefold-study button{min-height:44px}}
+</style>
+<div class="tf-shell">
+  <div class="tf-header"><div class="tf-brand">THREEFOLD</div><div class="tf-caption">Screen layout study · scenery and values are illustrative</div></div>
+  <nav class="tf-nav" aria-label="Inspect proposed game screens">
+    <button class="cursor-interaction" type="button" data-screen="explore" aria-pressed="true">Explore</button>
+    <button class="cursor-interaction" type="button" data-screen="atlas" aria-pressed="false">Atlas</button>
+    <button class="cursor-interaction" type="button" data-screen="guild" aria-pressed="false">Guild</button>
+    <button class="cursor-interaction" type="button" data-screen="journal" aria-pressed="false">Journal</button>
+    <button class="cursor-interaction" type="button" data-screen="gear" aria-pressed="false">Equipment</button>
+  </nav>
+  <div class="tf-body">
+    <div class="tf-main" id="tf-content">
+      <div class="tf-pair"><div><p class="tf-eyebrow">Fantasy · The Briar March</p><p class="tf-title">The Bellkeeper's Road</p></div><div class="tf-vitals">Knight · Level 8<div class="tf-bar"><span style="width:82%"></span></div>Health 410 / 500<div class="tf-bar tf-mana"><span style="width:65%"></span></div>Resolve 65 / 100</div></div>
+      <div class="tf-scene" aria-label="Schematic of the world viewport"><div class="tf-marker">Ruined bell tower<br>Inspect · Listen · Use item</div><div class="tf-marker tf-enemy">Briar Sentinel<br>Elite · Winding up a charge</div><div class="tf-marker tf-player">You + party<br>Clear movement space</div><div class="tf-marker">Bellkeeper Mara<br>Talk · Ask about the bell</div><div class="tf-scene-label">3D WORLD VIEWPORT · SPATIAL PLACEHOLDERS</div></div>
+      <div class="tf-actions"><button class="cursor-interaction" type="button" data-detail="bell">Inspect the bell</button><button class="cursor-interaction" type="button" data-detail="mara">Speak to Mara</button></div>
+    </div>
+    <aside class="tf-side" aria-label="Context and selected information"><p class="tf-eyebrow" id="tf-side-label">Tracked mystery</p><p class="tf-title" id="tf-side-title">The Thirteenth Bell</p><div class="tf-status" id="tf-side-copy" aria-live="polite">The bell rings at noon, but its clapper is missing. Mara remembers one more note.</div><div id="tf-side-extra" class="tf-list"></div><hr class="tf-rule"><p class="tf-caption">Context stays beside the world. In multiplayer, opening a panel does not pause danger.</p></aside>
+  </div>
+  <div class="tf-abilities" aria-label="Example Knight ability bar">
+    <button class="cursor-interaction" type="button" data-detail="sunder"><span class="tf-key">1</span>Sunder</button>
+    <button class="cursor-interaction" type="button" data-detail="shield"><span class="tf-key">2</span>Shield Bash</button>
+    <button class="cursor-interaction" type="button" data-detail="challenge"><span class="tf-key">3</span>Challenge</button>
+    <button class="cursor-interaction" type="button" data-detail="interpose"><span class="tf-key">4</span>Interpose</button>
+    <button class="cursor-interaction" type="button" data-detail="rally"><span class="tf-key">5</span>Rally</button>
+    <button class="cursor-interaction" type="button" data-detail="oath"><span class="tf-key">R</span>Last Oath</button>
+  </div>
+  <div class="tf-footer"><span>WASD move · Space evade · E interact · Tab target</span><span>Mouse selects · Enter chat · / commands</span></div>
+</div>
+<script>
+(()=>{
+ const root=document.getElementById('threefold-study');
+ const content=root.querySelector('#tf-content');
+ const initial=content.innerHTML;
+ const sideLabel=root.querySelector('#tf-side-label'),sideTitle=root.querySelector('#tf-side-title'),sideCopy=root.querySelector('#tf-side-copy'),extra=root.querySelector('#tf-side-extra');
+ const entries={
+ bell:['Examine','A bell without a clapper','Fine scratches inside the bronze spell a sequence. Listening at the nearby stones may reveal the missing note.'],
+ mara:['Conversation','Mara, the Bellkeeper','“Everyone hears twelve. My brother always waited for the thirteenth.”'],
+ sunder:['Knight ability','Sunder','A committed sword strike. Breaks armour after a successful guard. Upgrade paths favour stagger or sustained damage.'],
+ shield:['Knight ability','Shield Bash','Interrupt a dangerous cast at close range. Its opening should be clear in both the enemy animation and cast bar.'],
+ challenge:['Knight ability','Challenge','Draw an enemy toward you. In PvP it marks the rival and reduces their damage to allies; it never takes control of their character.'],
+ interpose:['Knight ability','Interpose','Dash to an ally and absorb a limited share of the next incoming hit. Costs Resolve.'],
+ rally:['Knight ability','Rally','Create a brief area of recovery and resistance. Visible boundary, restrained gold light, clear expiration.'],
+ oath:['Knight ability','Last Oath','Spend full Resolve to resist stagger and empower your next defensive actions. A brief spectral standard marks the moment.'],
+ briar:['Fantasy · Levels 5–10','Briar March','Rain-dark woods, toll roads, talking standing stones. Discover the bell mystery, hunt pack creatures, and open the abbey route.'],
+ abbey:['Fantasy · Levels 10–16','Hollow Abbey','A ruined sanctuary and an optional crypt. The Bellbound Warden responds differently when you know the lost verse.'],
+ rust:['Science · Levels 5–10','Rustwater Verge','Flooded industrial ruins, salvage crews, and unstable machines. Power a local clinic or bring the rail lift online.'],
+ station:['Science · Levels 10–16','Station Nine','A dead transit hub with a reactor chamber. Security shutters and coolant pipes become combat tools.'],
+ fair:['Chaos · Levels 5–10','The Wrong Fair','A bright midnight carnival with crooked rules. Trade a memory, investigate a stolen shadow, and learn the masks of its performers.'],
+ theatre:['Chaos · Levels 10–16','Mirror Theatre','A stage that repeats your party’s recent actions. Win by recognising the sequence and deliberately changing your rhythm.'],
+ hub:['Shared town','Highcross','Three gates, guild halls, market, inn, arena, bank, and training yard. A familiar place to meet before every expedition.'],
+ knight:['Guild preview','The Knights','Resolve rewards well-timed defence. Heavy armour, banner magic, and ally protection. The hall contains a training arena and an oath quest.'],
+ cyborg:['Guild preview','The Cyborgs','Build Heat through pulse attacks, then vent it with intention. Implants change the same chassis into an assault or support build.'],
+ necro:['Guild preview','The Necromancers','Generate Essence, command two active spirits, and choose whether to consume or preserve them. Souls use authored summon forms.'],
+ quest:['Mystery journal','The Thirteenth Bell','Clues: a missing clapper, thirteen worn stones, and an unfinished verse. The journal records observations; optional hints reveal the next connection.'],
+ mission:['Local mission','Keep the Road Open','Defeat the pack leader and recover the tollkeeper’s seal. A short adventure rewards coins, experience, and local reputation.'],
+ crossquest:['Cross-realm quest','The Man Who Died Tomorrow','A death record appears before its subject dies. Follow a forest epitaph, a machine forecast, and a stolen carnival memory.'],
+ sword:['Named equipment','The Bellkeeper’s Blade','An earned relic. Interrupting a cast releases a small resonant burst. The item changes a decision in combat, not just a damage number.'],
+ armour:['Equipment choice','Roadwarden Plate','Strong physical protection with a slower guard recovery. Compare it against a lighter, more forgiving suit.'],
+ relic:['Utility equipment','Glass Compass','Vibrates near a previously unread inscription. Assists discovery without revealing the answer.']
+ };
+ function showDetail(key){const v=entries[key];if(!v)return;sideLabel.textContent=v[0];sideTitle.textContent=v[1];sideCopy.textContent=v[2];extra.innerHTML=key==='mara'?'<button class="cursor-interaction" type="button" data-detail="quest">Ask about the missing note</button><button class="cursor-interaction" type="button" data-detail="bell">Show her the bronze scratches</button>':'';}
+ const screens={
+ explore:()=>initial,
+ atlas:()=>'<p class="tf-eyebrow">World atlas · Proposed first chapter</p><p class="tf-title">Three gates. One home.</p><button class="tf-hub cursor-interaction" type="button" data-detail="hub">Highcross · Town and guild halls</button><div class="tf-realms"><div class="tf-route"><div>Fantasy</div><button class="cursor-interaction" type="button" data-detail="briar">Briar March<br>Level 5–10</button><button class="cursor-interaction" type="button" data-detail="abbey">Hollow Abbey<br>Level 10–16</button></div><div class="tf-route"><div>Science</div><button class="cursor-interaction" type="button" data-detail="rust">Rustwater Verge<br>Level 5–10</button><button class="cursor-interaction" type="button" data-detail="station">Station Nine<br>Level 10–16</button></div><div class="tf-route"><div>Chaos</div><button class="cursor-interaction" type="button" data-detail="fair">The Wrong Fair<br>Level 5–10</button><button class="cursor-interaction" type="button" data-detail="theatre">Mirror Theatre<br>Level 10–16</button></div></div><p class="tf-copy">Schematic routes. Discovered landmarks become travel anchors; hidden areas remain unmarked.</p>',
+ guild:()=>'<p class="tf-eyebrow">Guild hall · Choose at level 5</p><p class="tf-title">A different way to play.</p><div class="tf-list"><button class="cursor-interaction" type="button" data-detail="knight">Knight · Resolve<small>Guard, interrupt, protect. Plate and oath magic.</small></button><button class="cursor-interaction" type="button" data-detail="cyborg">Cyborg · Heat<small>Pulse weapons, vent timing, configurable implants.</small></button><button class="cursor-interaction" type="button" data-detail="necro">Necromancer · Essence<small>Spirit commands, curses, sacrifice and recovery.</small></button></div><p class="tf-copy">Guild rank advances separately from character level. A training trial previews each style before commitment.</p>',
+ journal:()=>'<p class="tf-eyebrow">Journal · Clues and discoveries</p><p class="tf-title">Follow something strange.</p><div class="tf-list"><button class="cursor-interaction" type="button" data-detail="quest">The Thirteenth Bell<small>Mystery · 3 clues discovered</small></button><button class="cursor-interaction" type="button" data-detail="mission">Keep the Road Open<small>Local mission · The Briar March</small></button><button class="cursor-interaction" type="button" data-detail="crossquest">The Man Who Died Tomorrow<small>Cross-realm mystery · First lead found</small></button></div><p class="tf-copy">Observed clues, named people, and player notes share one view. Hints are deliberate choices.</p>',
+ gear:()=>'<p class="tf-eyebrow">Character · Knight · Level 8</p><p class="tf-title">Equipment with a story.</p><div class="tf-list"><button class="cursor-interaction" type="button" data-detail="sword">The Bellkeeper’s Blade<small>Weapon · Resonant interrupt</small></button><button class="cursor-interaction" type="button" data-detail="armour">Roadwarden Plate<small>Body · Physical defence</small></button><button class="cursor-interaction" type="button" data-detail="relic">Glass Compass<small>Relic · Inscription sensing</small></button></div><div class="tf-slots"><div class="tf-slot">Character level 8<small>World experience</small></div><div class="tf-slot">Guild rank 3<small>Knight mastery</small></div><div class="tf-slot">Quest points 12<small>Completed mysteries</small></div><div class="tf-slot">Cartography 2<small>Exploration skill</small></div></div>'
+ };
+ let selected='explore';
+ function selectScreen(screen,persist=false){if(!screens[screen])return;selected=screen;content.innerHTML=screens[screen]();root.querySelectorAll('[data-screen]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.screen===screen)));showDetail({explore:'quest',atlas:'hub',guild:'knight',journal:'quest',gear:'sword'}[screen]);if(persist&&window.openai?.setWidgetState)window.openai.setWidgetState({modelContent:{selectedScreen:screen},privateContent:null}).catch(()=>{});}
+ root.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!root.contains(b))return;if(b.dataset.screen)selectScreen(b.dataset.screen,true);if(b.dataset.detail)showDetail(b.dataset.detail);});
+ const restored=window.openai?.widgetState?.modelContent?.selectedScreen;selectScreen(restored||selected);
+ window.addEventListener('openai:set_globals',e=>{const s=e.detail?.globals?.widgetState?.modelContent?.selectedScreen;if(s)selectScreen(s);});
+ const prefs={showContext:true};
+ if(globalThis.Tweak){const tweak=new Tweak({container:root,onChange:()=>{root.querySelector('.tf-side').hidden=!prefs.showContext;root.querySelector('.tf-body').style.gridTemplateColumns=prefs.showContext?'':'minmax(0,1fr)';}});tweak.addToggle(prefs,'showContext',{label:'Context panel'});}
+})();
+</script>
+</div>
+
+</body></html>

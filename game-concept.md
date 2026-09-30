@@ -340,7 +340,7 @@ Controls: **WASD** movement, mouse selection, **1–5** abilities, **R** signatu
 
 The conversation includes an interactive layout study covering exploration, atlas, guild, journal, and equipment views. It demonstrates screen relationships and contextual information, not final graphical quality.
 
-Local reference: [Threefold screen layout study](/Users/shaun/.codex/visualizations/2026/09/30/01a0f154-a52e-7ff2-b2aa-7e268f6a1d9d/threefold-screens.html).
+Preserved repository reference: [Threefold screen layout study](design/screen-layout-study.html).
 
 The study predates the expanded guild requirement and open-world PvP decision: it shows three sample guilds and does not yet show the required safe-zone/PvP HUD. This concept document is authoritative where they differ. The next visual pass must incorporate both changes.
 

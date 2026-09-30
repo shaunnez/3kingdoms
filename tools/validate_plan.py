@@ -44,6 +44,7 @@ def local_link(file, value):
     if parsed.scheme or parsed.netloc or not parsed.path:
         return
     target = (file.parent / unquote(parsed.path)).resolve()
+    check(target.is_relative_to(ROOT), f"Non-portable local link: {file.relative_to(ROOT)} -> {value}")
     check(target.exists(), f"Missing local link: {file.relative_to(ROOT)} -> {value}")
 
 

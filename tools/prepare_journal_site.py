@@ -26,7 +26,7 @@ class References(HTMLParser):
 def main():
     files = [ROOT / "game-plan.md", ROOT / "game-concept.md", ROOT / "tools/build_catalogue.py"]
     for pattern in ("devlog/index.html", "devlog/style.css", "devlog/posts/*.html",
-                    "docs/*.md", "design/*.json", "design/screens/*.png",
+                    "docs/*.md", "design/*.json", "design/*.html", "design/screens/*.png",
                     "design/prompts/*.txt"):
         files.extend(sorted(ROOT.glob(pattern)))
     # Only explicitly published media is exported. Never copy runtime saves or provider downloads.
@@ -42,10 +42,17 @@ def main():
                     raise ValueError(f"Unapproved or missing journal media: {item[key]}")
                 files.append(source)
     # Auditable, sanitized checkpoint evidence; no private receipts or credentials.
-    for pattern in ("artifacts/checkpoint/*receipts.json", "artifacts/checkpoint/build-manifest.json",
-                    "artifacts/checkpoint/gltf-validation.json", "artifacts/checkpoint/server-load-600s.json",
-                    "artifacts/checkpoint/acceptance.json", "artifacts/checkpoint/all-tests.tap"):
+    for pattern in ("artifacts/checkpoint/*.json", "artifacts/checkpoint/all-tests.tap"):
         files.extend(sorted(ROOT.glob(pattern)))
+    acceptance_path = ROOT / "artifacts/checkpoint/acceptance.json"
+    if acceptance_path.is_file():
+        for check in json.loads(acceptance_path.read_text())["checks"]:
+            for evidence in check.get("evidence", []):
+                source = (ROOT / evidence).resolve()
+                allowed = (ROOT / "artifacts/checkpoint", ROOT / "design/screens")
+                if not any(source.is_relative_to(path) for path in allowed) or not source.is_file():
+                    raise ValueError(f"Missing or unapproved checkpoint evidence: {evidence}")
+                files.append(source)
     files = sorted(set(files))
     DIST.mkdir(parents=True, exist_ok=True)
     expected = {str(path.relative_to(ROOT)) for path in files}
