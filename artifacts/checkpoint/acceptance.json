@@ -291,7 +291,7 @@
   "publication": {
     "local": "playable",
     "github": "Final game code b49c48f92d700c9347e988be0f1a03cbc7ba7b66 pushed to main; GitHub CI 36736079686 succeeded. Journal/evidence changes follow separately.",
-    "journal": "Owner-private milestone 004 remains live; local milestones 005 and 006 prepared.",
+    "journal": "Milestones 001\u2013006 are in the journal package. The actual deployed source version and owner-private audience are recorded in devlog/site.json in the repository.",
     "public_game": "not-deployed"
   }
 }

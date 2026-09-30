@@ -5,12 +5,14 @@
   "audience": "owner-private",
   "status": "succeeded",
   "url": "https://threefold-devlog.shaunnesbittuk.chatgpt.site",
-  "commit_sha": "370d4b6ec2484598d6edf831d7f0ad8aa5b5a24a",
-  "commit_signing": "unsigned; explicitly authorized for journal deployment only",
-  "version_id": "appgprj_6abcd61ba2f8819183f2a305212a0895~appgver_3431837cdf7c8191bf6f2985528832dd",
-  "deployment_id": "appgdep_6abcd9c6490c819180d89b8f8f069f7a",
-  "deployed_at": "2026-09-30T09:43:58.353512+00:00",
-  "latest_milestone": "004",
-  "journal_source_sha256": "fad70f5afd818dbac8e5e9c6e56a00b6663365c9f6bdb30e87b8c96e031e612a",
-  "verification": "Local package links validated; exact pushed source packaged; native Sites deployment succeeded. No additional live-browser QA performed."
+  "commit_sha": "1f8f60af46270234ad239e30376e480e8d8d17e2",
+  "commit_signing": "unsigned; explicitly authorized, command-scoped override",
+  "version_id": "appgprj_6abcd61ba2f8819183f2a305212a0895~appgver_e43931c087048191a8e48b0e4b1f0862",
+  "deployment_id": "appgdep_6abd2cc36dcc8191904680fa45aaac7d",
+  "deployed_at": "2026-09-30T15:38:27.395232+00:00",
+  "latest_milestone": "006",
+  "journal_source_sha256": "ae4ae25ecd9b14a04cb35b5af9ef05ce97fb78871c423260fc1ab45cd124fd76",
+  "verification": "Local desktop/mobile journal and media inspected; exported HTML/Markdown references validated; exact pushed source packaged; native Sites deployment succeeded. No deployed-site browser QA performed.",
+  "retry_note": "First source push returned HTTP 503; retry preserved and successfully pushed the same local source commit.",
+  "archive_sha256": "d88d01736d1639738eb11cbd3c54de1889ed4fb9c16310783d36ab903840f2de"
 }
