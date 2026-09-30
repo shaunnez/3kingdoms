@@ -35,6 +35,25 @@ import type {
 } from "../../../packages/contracts/game";
 import { NPCS, REFUGE } from "../../../packages/simulation/map";
 
+const LANTERNS = [
+  [-9, -6],
+  [9, -6],
+  [-9, -16],
+  [-9, -29],
+  [9, -29],
+  [-7, -0.6],
+  [7, -0.6],
+  [-6, 11],
+  [6, 14],
+  [-4, 16.4],
+  [4, 23.7],
+  [-5, 27],
+  [6, 31],
+  [11, 44],
+  [17.7, 45],
+  [10.3, 45],
+] as const;
+
 type Visual = {
   root: TransformNode;
   groups: AnimationGroup[];
@@ -112,6 +131,7 @@ export class GameScene {
   private lastFrame = performance.now();
   private eventMeshes: Mesh[] = [];
   private light: PointLight;
+  private worldLights: PointLight[] = [];
   private marker: Mesh;
   private time = 0;
   private stopResize: () => void;
@@ -125,6 +145,7 @@ export class GameScene {
   private houndStudy: Visual | null = null;
   private houndStudyStarted = 0;
   private gateOccluders: PBRMaterial[] = [];
+  private awningOccluders: PBRMaterial[] = [];
   private canopyOccluders: { material: PBRMaterial; x: number; z: number }[] =
     [];
   private studyCamera: { alpha: number; beta: number; radius: number } | null =
@@ -182,17 +203,18 @@ export class GameScene {
     this.shadow.setDarkness(0.35);
     this.light = new PointLight("traveller-lantern", new Vector3(0, 2, -14), s);
     this.light.diffuse = new Color3(1, 0.56, 0.25);
-    this.light.intensity = 2.8;
+    this.light.intensity = 14;
     this.light.range = 7;
-    for (const [x, z] of [
-      [-5, -9],
-      [7, -14],
-      [-5, -28],
-    ] as const) {
-      const l = new PointLight(`warm-${z}`, new Vector3(x, 2.6, z), s);
-      l.diffuse = new Color3(1, 0.46, 0.13);
-      l.intensity = 8;
-      l.range = 11;
+    for (let i = 0; i < 3; i++) {
+      const l = new PointLight(
+        `nearby-lantern-${i}`,
+        new Vector3(0, 2.6, 0),
+        s,
+      );
+      l.diffuse = new Color3(1, 0.52, 0.2);
+      l.intensity = 115;
+      l.range = 14;
+      this.worldLights.push(l);
     }
     const size = 32;
     const faces: Uint8Array[] = [];
@@ -315,6 +337,15 @@ export class GameScene {
           this.gateOccluders.push(material);
         }
         const canopy = /occluder-canopy\.(-?\d+)\.(-?\d+)\./.exec(mesh.name);
+        if (
+          mesh.name.includes("occluder-awning.") &&
+          mesh.material instanceof PBRMaterial
+        ) {
+          const material = mesh.material.clone(`${mesh.name}-fade`);
+          material.transparencyMode = PBRMaterial.PBRMATERIAL_ALPHABLEND;
+          mesh.material = material;
+          this.awningOccluders.push(material);
+        }
         if (canopy && mesh.material instanceof PBRMaterial) {
           const material = mesh.material.clone(`${mesh.name}-fade`);
           material.transparencyMode = PBRMaterial.PBRMATERIAL_ALPHABLEND;
@@ -332,7 +363,7 @@ export class GameScene {
       }
       for (const m of this.scene.materials)
         if (m instanceof PBRMaterial) {
-          m.maxSimultaneousLights = 5;
+          m.maxSimultaneousLights = 6;
           if (m.name.startsWith("leaf")) m.backFaceCulling = false;
         }
       this.loadingReport.push("environment:loaded");
@@ -354,6 +385,8 @@ export class GameScene {
         `${name}.glb`,
         this.scene,
       );
+      for (const material of container.materials)
+        if (material instanceof PBRMaterial) material.maxSimultaneousLights = 6;
       this.containers.set(name, container);
       this.loadingReport.push(`${name}:loaded`);
     } catch {
@@ -590,10 +623,22 @@ export class GameScene {
         true, // Follow the traveller while preserving the player's orbit and zoom.
       );
       this.light.position.set(me.x, 2, me.z - 1);
+      const nearby = [...LANTERNS].sort(
+        (a, b) =>
+          Math.hypot(a[0] - me.x, a[1] - me.z) -
+          Math.hypot(b[0] - me.x, b[1] - me.z),
+      );
+      this.worldLights.forEach((light, i) =>
+        light.position.set(nearby[i][0], 2.6, nearby[i][1]),
+      );
       const archAlpha =
         Math.abs(me.x) < 7 && Math.abs(me.z - 5) < 12 ? 0.14 : 1;
       for (const material of this.gateOccluders)
         material.alpha += (archAlpha - material.alpha) * Math.min(1, dt * 6);
+      const awningAlpha =
+        Math.abs(me.x - 7.5) < 3.5 && Math.abs(me.z + 15) < 5 ? 0.16 : 1;
+      for (const material of this.awningOccluders)
+        material.alpha += (awningAlpha - material.alpha) * Math.min(1, dt * 6);
       for (const canopy of this.canopyOccluders) {
         const alpha =
           Math.abs(me.x - canopy.x) < 12 && Math.abs(me.z - canopy.z) < 12

@@ -60,6 +60,20 @@
       "sha256": "deb046f8ead8dad0bfabd2edf173250434055c46cd7610e303b95f57cb37d8ab",
       "bytes": 34528421,
       "local_archive": "artifacts/private/recording-originals/2026-09-30T13-13-37-886Z-3e8f4318.webm"
+    },
+    {
+      "original_name": "2026-09-30T14-14-06-232Z-13f3a2f0.webm",
+      "sha256": "3f74593d319e86b9acc5ab124c9eab7330c48c8714f861165afb7136404b6097",
+      "bytes": 34387938,
+      "local_archive": "artifacts/private/recording-originals/2026-09-30T14-14-06-232Z-13f3a2f0.webm",
+      "source_fingerprint": "185eb7351621d5c9a24cf6215ddfcc5a7ba8cd0c915aa77939e52d9ed7d52bbb"
+    },
+    {
+      "original_name": "2026-09-30T14-12-06-730Z-431a024c.webm",
+      "sha256": "6977498cb0811eb0b6a628770cf29ebf6125f3a8e111c95b1f19806b4ac3e0e6",
+      "bytes": 35051655,
+      "local_archive": "artifacts/private/recording-originals/2026-09-30T14-12-06-730Z-431a024c.webm",
+      "source_fingerprint": "185eb7351621d5c9a24cf6215ddfcc5a7ba8cd0c915aa77939e52d9ed7d52bbb"
     }
   ]
 }

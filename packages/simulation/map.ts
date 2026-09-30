@@ -2,10 +2,11 @@ import type { Vec2 } from "../contracts/game";
 export const MAP = { minX: -20, maxX: 20, minZ: -40, maxZ: 60, safeZ: 0 };
 export const REFUGE = { x: 14, z: 45, radius: 4 };
 export const OBSTACLES = [
-  { x: -15, z: -23, w: 9, d: 16 },
-  { x: 15, z: -24, w: 9, d: 14 },
-  { x: -14, z: -8, w: 9, d: 8 },
-  { x: 15, z: -9, w: 7, d: 8 },
+  // Match the four scaled 6.5m house footprints in build_environment.py.
+  { x: -13, z: -24, w: 6.825, d: 6.825 },
+  { x: 13, z: -25, w: 6.24, d: 6.24 },
+  { x: -13, z: -9, w: 6.5, d: 6.5 },
+  { x: 13, z: -9, w: 6.305, d: 6.305 },
   { x: -11, z: 5, w: 10, d: 1.8 },
   { x: 9, z: 5, w: 7, d: 1.8 },
   { x: -13, z: 31, w: 6, d: 6 },

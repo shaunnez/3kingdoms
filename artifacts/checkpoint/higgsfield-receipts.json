@@ -142,9 +142,20 @@
       "estimated_credits": 2.75,
       "sha256": "fdb9f8e3700925d07f0f7cdaf26b33b8d0977ab6173dbb1863313cdc4b1dc78f",
       "bytes": 10217929
+    },
+    {
+      "name": "merchant-house",
+      "job_id": "aadedd8c-efa5-42bc-b8d1-3a29d7e50f7f",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/merchant-house.png",
+      "prompt": "design/prompts/p2-merchant-house.txt",
+      "estimated_credits": 2.75,
+      "sha256": "f010b5e15b6239abcb244fbeb9310fe4201ff0883afb13a5a83d31ae4e1d326f",
+      "bytes": 7211525
     }
   ],
-  "estimated_credits": 35.75,
+  "estimated_credits": 38.5,
   "actual_charged_credits": null,
-  "note": "13 completed GPT Image 2.5 high-quality 2K references. Estimates are not a provider invoice. Job recovery IDs are retained; private media URLs are excluded."
+  "note": "14 completed GPT Image 2.5 high-quality 2K references. Estimates are not a provider invoice. Job recovery IDs retained; private media URLs excluded."
 }

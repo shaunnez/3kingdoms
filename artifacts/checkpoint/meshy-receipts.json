@@ -135,8 +135,17 @@
       "status": "SUCCEEDED",
       "consumed_credits": 3,
       "private_receipt_sha256": "c47953d5fc92cc13b51f378b36cf38beb72a09ec66f1cfadc996cb84a951a5e4"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f291-7497-73cf-a2c4-958706ec4817",
+      "resource": "image-to-3d",
+      "asset": "merchant-house",
+      "status": "SUCCEEDED",
+      "consumed_credits": 30,
+      "private_receipt_sha256": "ae34cd956237b65d87ea96028269f89c70ad907616347f2721ee12dc7f10db5b"
     }
   ],
-  "verified_credits": 194,
+  "verified_credits": 224,
   "failed_submission": "One original Cyborg rig upload was rejected before a task ID was returned; no provider charge receipt is available for that request. Successful follow-up used reduced geometry."
 }

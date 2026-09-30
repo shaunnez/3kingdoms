@@ -1,4 +1,4 @@
-"""Author the Briar Gate modular environment in Blender; deterministic, no external assets.
+"""Assemble the Briar Gate in Blender from authored geometry and a saved house library.
 
 Run with Blender --background --python tools/build_environment.py. Blender coordinates
 are (world x, -world z, height); the glTF exporter makes runtime Y-up and +Z north.
@@ -10,7 +10,7 @@ import random
 from pathlib import Path
 import bpy
 import numpy as np
-from mathutils import Vector
+from mathutils import Matrix, Vector
 
 ROOT = Path(__file__).resolve().parents[1]
 random.seed(1847)
@@ -143,18 +143,43 @@ def tree(x:float,z:float,size:float=1)->None:
         a=random.random()*math.tau;bh=h*(.45+i*.08);ex=x+math.cos(a)*2.5*size;ez=z+math.sin(a)*2.5*size
         beam('timber',(x+lean*.4,bh,z),(ex,bh+1.5*size,ez),.16*size,7,.03)
         GROUP = canopy_group
-        for _ in range(100):
-            lx=ex+random.uniform(-1.9,1.9)*size;lz=ez+random.uniform(-1.9,1.9)*size;lh=bh+random.uniform(.3,2.8)*size
-            angle=random.random()*math.tau;length=random.uniform(.13,.32)*size;width=length*.45
-            vx,vz=math.cos(angle)*length,math.sin(angle)*length
-            wx,wz=-math.sin(angle)*width,math.cos(angle)*width
-            geom(random.choice(['leaf','leaf-dark','leaf-gold']),[(lx-vx,lh,lz-vz),(lx+wx,lh+.035,lz+wz),(lx+vx,lh+.08,lz+vz),(lx-wx,lh+.035,lz-wz)],[(0,1,2),(0,2,3)])
+        # Dense, small leaves follow visible twigs instead of floating like confetti.
+        for twig in range(8):
+            angle=twig*2.39996+a;reach=random.uniform(.4,2.0)*size
+            tx=ex+math.cos(angle)*reach;tz=ez+math.sin(angle)*reach
+            th=bh+1.5*size+random.uniform(-.3,1.4)*size
+            GROUP = ''
+            beam('timber',(ex,bh+1.4*size,ez),(tx,th,tz),.017*size,5,.003*size)
+            GROUP = canopy_group
+            for step in range(6):
+                f=.25+step*.11
+                for side in (-1,1):
+                    lx=ex+(tx-ex)*f;lz=ez+(tz-ez)*f;lh=bh+1.4*size+(th-bh-1.4*size)*f
+                    leaf('leaf-dark' if random.random()<.32 else 'leaf-gold' if random.random()<.08 else 'leaf',lx,lz,lh,angle+side*.85,random.uniform(.10,.18)*size)
         GROUP = ''
     for i in range(4):
         a=i*math.pi/2;beam('timber',(x,.15,z),(x+math.cos(a)*1.2*size,0,z+math.sin(a)*1.2*size),.2*size,6,.04)
 
+def leaf(mat:str,x:float,z:float,h:float,angle:float,length:float)->None:
+    direction=Vector((math.cos(angle),.32,math.sin(angle)))
+    across=Vector((-math.sin(angle),0,math.cos(angle)))
+    base=Vector((x,h,z));tip=base+direction*length*2
+    mid=base+direction*length
+    # Two triangles retain the leaf silhouette at the ordinary gameplay camera.
+    points=[base,mid+across*length*.38,tip,mid-across*length*.38]
+    geom(mat,[tuple(p) for p in points],[(0,1,2),(0,2,3)])
+
+def fern(x:float,z:float,size:float=1)->None:
+    for frond in range(5):
+        angle=frond*math.tau/5+random.uniform(-.15,.15)
+        reach=random.uniform(.45,.8)*size
+        for step in range(5):
+            f=(step+1)/6;px=x+math.cos(angle)*reach*f;pz=z+math.sin(angle)*reach*f
+            hh=(math.sin(f*math.pi)*.36+.08)*size
+            for side in (-1,1):leaf('leaf-dark' if frond%3==0 else 'leaf',px,pz,hh,angle+side*1.05,(1-f)*.14*size+.015)
+
 # Terrain and the wet town plaza.
-box('earth',0,10,-.42,40,100,.7)
+box('earth',0,10,-.42,90,130,.7)
 box('waterbed',0,20,-.35,40,6,.5)
 for z in range(-38,0):
     for col in range(-18,19):
@@ -170,8 +195,18 @@ for z in range(0,60):
 for z in (-34,-30,-26,-22,-18,-14,-10,-6,-2):
     for x in (-9.8,9.8):box('stone-dark',x,z,.10,.38,3.92,.25)
 
-building(-15,-23,9,16,5.2);building(15,-24,9,14,5.6)
-building(-14,-8,9,8,4.7);building(15,-9,7,8,4.9)
+# The house library is a reviewed representative prop, reused within the town kit.
+house_library = ROOT/'assets/source/merchant-house.blend'
+if not house_library.is_file():
+    raise FileNotFoundError('Finish the merchant-house source with prepare_house.py first')
+with bpy.data.libraries.load(str(house_library), link=False) as (available, loaded):
+    loaded.objects = [name for name in available.objects if name.startswith('house.merchant.')]
+for x,z,scale in [(-13,-24,1.05),(13,-25,.96),(-13,-9,1.0),(13,-9,.97)]:
+    for original in loaded.objects:
+        obj=original.copy();obj.data=original.data
+        obj.name=f'env.house.{x}.{z}.{original.name}'
+        bpy.context.collection.objects.link(obj)
+        obj.matrix_world=Matrix.Translation((x,-z,0)) @ Matrix.Rotation(math.pi/2 if x<0 else -math.pi/2,4,'Z') @ Matrix.Scale(scale,4)
 
 # Towered north gate. The actual player safety line is at z=0, marked by lantern posts.
 for x in (-5.6,5.6):
@@ -208,11 +243,22 @@ for r in (2.7,3.1,4):ring('brass',-5,-28,.044,r,.035)
 for i in range(12):
     a=i*math.tau/12;box('brass',-5+math.cos(a)*3.6,-28+math.sin(a)*3.6,.046,.035,.58,.025,-a)
 
+# A worn three-realm compass gives the open plaza a readable centre.
+for r in (3.8,4.05):ring('brass',0,-10,.06,r,.025)
+for i in range(12):
+    a=i*math.tau/12
+    beam('brass',(math.cos(a)*3.3,.063,-10+math.sin(a)*3.3),(math.cos(a)*3.65,.063,-10+math.sin(a)*3.65),.018,4)
+for i in range(3):
+    a=i*math.tau/3+math.pi/2
+    ring('brass',math.cos(a)*2.5,-10+math.sin(a)*2.5,.064,.43,.026)
+
 # Merchant canopy and practical market dressing.
 for x in (6,9):
     for z in (-17,-13):beam('timber',(x,0,z),(x,3,z),.07)
+GROUP = 'occluder-awning'
 for i in range(6):
     x=5.8+i*.58;geom('teal' if i%2==0 else 'cream',[(x,2.8,-17.2),(x+.58,2.8,-17.2),(x+.58,2.45,-12.6),(x,2.45,-12.6)],[(0,1,2,3)])
+GROUP = ''
 box('wood',7.5,-15,1.0,2.8,.8,.12)
 for x in (6.4,8.5):box('timber',x,-15,.5,.12,.5,1)
 for i in range(12):rock('flower' if i%2 else 'leaf-gold',6.4+(i%6)*.36,-15+(i//6)*.2,1.2,.12,.12,.13)
@@ -256,7 +302,7 @@ for _ in range(78):
 for _ in range(350):
     x=random.uniform(-19,19);z=random.uniform(1,59)
     if abs(x)<5 or 16<z<24 or math.hypot(x-14,z-45)<5:continue
-    rock(random.choice(['leaf','leaf-dark','moss']),x,z,.22,random.uniform(.2,.7),random.uniform(.2,.5),random.uniform(.2,.6))
+    fern(x,z,random.uniform(.65,1.3))
 for _ in range(130):
     x=random.uniform(-19,19);z=random.uniform(0,60)
     if abs(x)<5 or 16<z<24 or math.hypot(x-14,z-45)<5:continue
@@ -337,8 +383,8 @@ for name,(vertices,faces) in buffers.items():
 bpy.context.scene.world.color=(.18,.22,.28)
 out=ROOT/'assets/source/private/runtime-unoptimized/briar-gate.glb';out.parent.mkdir(parents=True,exist_ok=True)
 source=ROOT/'assets/source/briar-gate.blend';source.parent.mkdir(parents=True,exist_ok=True)
-bpy.ops.wm.save_as_mainfile(filepath=str(source))
+bpy.ops.wm.save_as_mainfile(filepath=str(source),compress=True)
 bpy.ops.export_scene.gltf(filepath=str(out),export_format='GLB',export_apply=True,export_yup=True,export_cameras=False,export_lights=False,export_tangents=True)
-stats={'source':'tools/build_environment.py','seed':1847,'blender':bpy.app.version_string,'objects':len(bpy.data.objects),'vertices_before_modifiers':sum(len(o.data.vertices) for o in bpy.data.objects if o.type=='MESH'),'bytes':out.stat().st_size,'note':'Original authored environment. Runtime lighting, water, weather and VFX are added by Babylon.'}
+stats={'source':'tools/build_environment.py','seed':1847,'blender':bpy.app.version_string,'objects':len(bpy.data.objects),'vertices_before_modifiers':sum(len(o.data.vertices) for o in bpy.data.objects if o.type=='MESH'),'bytes':out.stat().st_size,'note':'Blender assembly: generated merchant house plus original terrain, props and foliage. Runtime lighting, water and VFX are added by Babylon.'}
 (ROOT/'artifacts/checkpoint/environment.json').write_text(json.dumps(stats,indent=2)+'\n')
 print(json.dumps(stats))

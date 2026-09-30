@@ -1,0 +1,16 @@
+{
+  "failure": "A late-hit transport test stopped movement after 150ms wall time and asserted safety without observing that the target had entered town.",
+  "observed_failed_fixture": {
+    "target_z": 0.05000000000000003,
+    "safe_boundary_z": 0,
+    "target_hp": 704,
+    "starting_hp": 768
+  },
+  "conclusion": "The victim remained outside safety, so this hit did not establish a gameplay protection failure.",
+  "repair": "Wait for the authoritative target.safe snapshot before issuing stop; preserve unchanged-health and red-aggressor assertions.",
+  "evidence": [
+    "artifacts/checkpoint/network-boundary-fixture-before-fix.tap",
+    "artifacts/checkpoint/all-tests.tap"
+  ],
+  "private_evidence": "Original test-only save retained under .local; no identity credentials published."
+}

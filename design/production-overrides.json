@@ -120,5 +120,29 @@
     "verified_in_browser": false,
     "limitations": "Higgsfield calibration reference; does not certify final anatomy, complete multi-view production sheets or real-time rendering.",
     "source_job": "cb2740da-3ada-4ebb-97c3-cb584e62c185"
+  },
+  "scene.highcross": {
+    "status": "prototype",
+    "prototype_output": "assets/runtime/models/briar-gate.glb",
+    "source_hash": "993edfd04d36fcdfa54d107e4c2bf3816a27ff7296d95989f6431e326d4f95e4",
+    "verified_in_browser": true,
+    "limitations": "Shared checkpoint environment only: one Highcross corner and one Briar route. The full map, scene logic, encounter set, streaming and final art remain.",
+    "evidence": [
+      "artifacts/checkpoint/captures/2026-09-30T14-26-31-442Z-07cd5623.png",
+      "artifacts/checkpoint/captures/briar-return-revised.mp4",
+      "artifacts/checkpoint/environment-repair.json"
+    ]
+  },
+  "scene.briar-march": {
+    "status": "prototype",
+    "prototype_output": "assets/runtime/models/briar-gate.glb",
+    "source_hash": "993edfd04d36fcdfa54d107e4c2bf3816a27ff7296d95989f6431e326d4f95e4",
+    "verified_in_browser": true,
+    "limitations": "Shared checkpoint environment only: one Highcross corner and one Briar route. The full map, scene logic, encounter set, streaming and final art remain.",
+    "evidence": [
+      "artifacts/checkpoint/captures/2026-09-30T14-26-31-442Z-07cd5623.png",
+      "artifacts/checkpoint/captures/briar-return-revised.mp4",
+      "artifacts/checkpoint/environment-repair.json"
+    ]
   }
 }

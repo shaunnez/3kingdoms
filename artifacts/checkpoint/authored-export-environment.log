@@ -1,0 +1,147 @@
+00:01.098  blend            | Read blend: "/Users/shaun/new-game/assets/source/briar-gate.blend"
+INFO Draco is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_draco_bridge.dylib
+INFO MeshOptimizer is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_meshopt_bridge.dylib
+03:25:33 | INFO: Starting glTF 2.0 export
+03:25:33 | INFO: Extracting primitive: brass
+03:25:33 | WARNING: brass: Could not calculate tangents. Please try to triangulate the mesh first.
+03:25:33 | INFO: Primitives created: 1
+03:25:33 | INFO: Extracting primitive: copper
+03:25:33 | WARNING: copper: Could not calculate tangents. Please try to triangulate the mesh first.
+03:25:33 | INFO: Primitives created: 1
+03:25:33 | INFO: Extracting primitive: earth
+03:25:33 | INFO: Primitives created: 1
+03:25:33 | INFO: Extracting primitive: flower
+03:25:33 | INFO: Primitives created: 1
+03:25:33 | INFO: Extracting primitive: glow
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: Mesh_0
+03:25:34 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: iron
+03:25:34 | WARNING: iron: Could not calculate tangents. Please try to triangulate the mesh first.
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: mud
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-awning.cream
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-awning.teal
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.4.leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.4.leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.4.leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.12.leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.12.leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.12.leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.28.leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.28.leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.28.leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.36.leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.36.leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.36.leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.52.leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.52.leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.52.leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.60.leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.60.leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.14.60.leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.4.leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.4.leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.4.leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.12.leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.12.leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.12.leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.28.leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.28.leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.28.leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.36.leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.36.leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.36.leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.44.leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.44.leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.44.leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.52.leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.52.leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.52.leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.60.leaf
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.60.leaf-dark
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-canopy.-14.60.leaf-gold
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-gate.stone
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: occluder-gate.stone-light
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: stone
+03:25:34 | WARNING: stone: Could not calculate tangents. Please try to triangulate the mesh first.
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: stone-dark
+03:25:34 | WARNING: stone-dark: Could not calculate tangents. Please try to triangulate the mesh first.
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: stone-light
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: teal
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: timber
+03:25:34 | WARNING: timber: Could not calculate tangents. Please try to triangulate the mesh first.
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: waterbed
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Extracting primitive: wood
+03:25:34 | WARNING: wood: Could not calculate tangents. Please try to triangulate the mesh first.
+03:25:34 | INFO: Primitives created: 1
+03:25:34 | INFO: Finished glTF 2.0 export in 0.8272030353546143 s
+
+Warning: brass: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: copper: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: iron: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: stone: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: stone-dark: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: wood: Could not calculate tangents. Please try to triangulate the mesh first.
+Exported briar-gate: 52478244 bytes to /Users/shaun/new-game/assets/source/private/authored-exports/briar-gate.glb
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 01:35:57)
+
+Blender quit

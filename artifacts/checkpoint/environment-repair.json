@@ -1,0 +1,82 @@
+{
+  "scope": "One representative merchant house and local environment lighting/material repair; not bulk production",
+  "status": "visibility-repair-observed; performance-requalification-in-progress",
+  "higgsfield": {
+    "job_id": "aadedd8c-efa5-42bc-b8d1-3a29d7e50f7f",
+    "model": "gpt_image_2_5",
+    "prompt": "design/prompts/p2-merchant-house.txt",
+    "estimated_credits": 2.75,
+    "name": "merchant-house",
+    "status": "completed",
+    "image": "design/calibration/merchant-house.png",
+    "sha256": "f010b5e15b6239abcb244fbeb9310fe4201ff0883afb13a5a83d31ae4e1d326f",
+    "bytes": 7211525
+  },
+  "baseline_build": "5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c",
+  "meshy": {
+    "task_id": "01a0f291-7497-73cf-a2c4-958706ec4817",
+    "resource": "image-to-3d",
+    "estimated_credits": 30,
+    "project": "assets/source/private/meshy/20261001_024718_merchant-house_01a0f291",
+    "status": "SUCCEEDED",
+    "consumed_credits": 30,
+    "source_triangles": 2143102,
+    "source_glb_bytes": 97937144,
+    "source_sha256": "b9d4985b9a39b486a1833a6ecea149c40d6e7ffed04cb97d2c7dcdfcf69e0f5e",
+    "preview": "artifacts/checkpoint/merchant-house-provider-preview.png"
+  },
+  "candidate_build": "19f52fbc4ae879b22026c7bee1d7e07cead8f8463915c1fec1a06103ca5eae9a",
+  "baseline_frame": "artifacts/checkpoint/captures/2026-09-30T14-00-15-210Z-94321d74.png",
+  "first_candidate_frame": "artifacts/checkpoint/captures/2026-09-30T14-07-13-194Z-bf22fe9b.png",
+  "revised_frame": "artifacts/checkpoint/captures/2026-09-30T14-10-16-801Z-6e43be2c.png",
+  "house_route_build": "185eb7351621d5c9a24cf6215ddfcc5a7ba8cd0c915aa77939e52d9ed7d52bbb",
+  "merchant_obstruction_frame": "artifacts/checkpoint/captures/2026-09-30T14-14-58-476Z-dbb0309c.png",
+  "source_reexport": "Final checked-in briar-gate.blend exported successfully with Blender 5.2.1, 52,478,244 bytes. A sandboxed launch crashed before file load; normal local Blender launch succeeded.",
+  "merchant_repaired_frame": "artifacts/checkpoint/captures/2026-09-30T14-22-49-311Z-08419026.png",
+  "visual_review": {
+    "verified": "Ordinary follow camera shows player and Nemi through the faded awning. House proportions, foliage and lantern pools improved.",
+    "remaining": "House topology and melted surface detail, repetitive paving, sparse scenery and prototype acting remain below reference quality. Bulk production gate remains open."
+  },
+  "crowd_preflight": {
+    "trace": "artifacts/checkpoint/captures/2026-09-30T14-23-56-818Z-dfce6f31.json",
+    "fingerprint": "0394c4f20f582bf88878b602bf30e73cd685d90f50f5381fccf6277271b4717e",
+    "active_triangles": 1503335,
+    "target": 1500000,
+    "result": "exceeded; simplified tiny leaves from four triangles to two before sustained requalification",
+    "scope": "single sample, not a sustained performance pass"
+  },
+  "merchant_repair_source_fingerprint": "0394c4f20f582bf88878b602bf30e73cd685d90f50f5381fccf6277271b4717e",
+  "final_frame": "artifacts/checkpoint/captures/2026-09-30T14-26-31-442Z-07cd5623.png",
+  "final_runtime": {
+    "name": "briar-gate",
+    "sourceBytes": 52478244,
+    "repairedTangents": 3,
+    "runtimeBytes": 15942328,
+    "sha256": "993edfd04d36fcdfa54d107e4c2bf3816a27ff7296d95989f6431e326d4f95e4",
+    "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+  },
+  "final_frame_location": {
+    "player_x": -5.3,
+    "player_z": -9.9,
+    "camera_alpha": -1.7507963267948965,
+    "camera_beta": 0.72,
+    "camera_radius": 22,
+    "note": "Ordinary follow camera; different location from the central-plaza matched before/after pair."
+  },
+  "render_qualified_fingerprint": "9fea75ee27735dca2a78824dc5076df62909e6ec41b2317647e29ddff486fe6c",
+  "collision_alignment": {
+    "change": "Server house footprints now match the four scaled 6.5m Blender house placements.",
+    "regression": "Facade entry and cross-house line-of-sight blocked; outer lanes remain walkable.",
+    "evidence": "artifacts/checkpoint/collision-regression.tap",
+    "client_equivalence": "artifacts/checkpoint/client-collision-equivalence.json",
+    "browser_observation": {
+      "input": "Ordinary right-click toward the visible front house",
+      "stopped_position": {
+        "x": -9.3,
+        "z": -7.7
+      },
+      "frame": "artifacts/checkpoint/captures/2026-09-30T14-42-13-657Z-c407f813.png",
+      "result": "Player remained outside the -9.75m facade with the 0.4m collision radius; did not enter the house."
+    }
+  }
+}

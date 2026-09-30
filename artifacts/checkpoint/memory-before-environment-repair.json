@@ -1,0 +1,64 @@
+{
+  "trace": "artifacts/checkpoint/captures/2026-09-30T13-59-47-935Z-0db2d7dd.json",
+  "trace_sha256": "cdb98cb3f1e07c4213c0691ed320f5efa6e1e2006bcdfcbdf3b44fcbc0bde228",
+  "manifest": "artifacts/checkpoint/build-manifest-pre-environment-repair.json",
+  "fingerprint": "5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c",
+  "build_association": "Operator-associated frozen preview; source fingerprint is not embedded in the browser trace.",
+  "duration_seconds": 1800.0891000000238,
+  "hidden_samples": 0,
+  "unloaded_phases": 15,
+  "resources": {
+    "meshes": {
+      "baseline": 128,
+      "unloaded_min": 128,
+      "unloaded_max": 128,
+      "last_unloaded": 128,
+      "last_growth_percent": 0.0
+    },
+    "textures": {
+      "baseline": 67,
+      "unloaded_min": 67,
+      "unloaded_max": 67,
+      "last_unloaded": 67,
+      "last_growth_percent": 0.0
+    },
+    "materials": {
+      "baseline": 73,
+      "unloaded_min": 73,
+      "unloaded_max": 73,
+      "last_unloaded": 73,
+      "last_growth_percent": 0.0
+    },
+    "skeletons": {
+      "baseline": 9,
+      "unloaded_min": 9,
+      "unloaded_max": 9,
+      "last_unloaded": 9,
+      "last_growth_percent": 0.0
+    },
+    "animationGroups": {
+      "baseline": 32,
+      "unloaded_min": 32,
+      "unloaded_max": 32,
+      "last_unloaded": 32,
+      "last_growth_percent": 0.0
+    }
+  },
+  "heap_mib": {
+    "min": 330.0358934402466,
+    "max": 517.3304719924927,
+    "median": 494.17644214630127,
+    "p95": 511.89246368408203,
+    "first_unloaded": 352.87559032440186,
+    "last_unloaded": 357.04904651641846
+  },
+  "retained_count_check": "passed",
+  "heap_300mib_target": "exceeded",
+  "limitations": [
+    "Synthetic crowd creation/disposal, not six real zone round trips.",
+    "Chromium performance.memory heap samples are not GPU memory measurements.",
+    "performance.memory is a legacy estimate that can include shared heaps or omit separate heaps; this is not isolated process-memory attribution.",
+    "No forced garbage collection; peaks and settled resource counts are both retained."
+  ],
+  "measurement_reference": "https://developer.mozilla.org/en-US/docs/Web/API/Performance/memory"
+}

@@ -43,8 +43,8 @@
       "C2": 271
     },
     "by_status": {
-      "planned": 2181,
-      "prototype": 13
+      "planned": 2179,
+      "prototype": 15
     }
   },
   "assets": [
@@ -30564,7 +30564,7 @@
       "kind": "scene",
       "owner": "highcross",
       "chapter": "C1",
-      "status": "planned",
+      "status": "prototype",
       "brief": "assembled geometry, lighting, navmesh, collision, safe polygons, spawn and encounter data",
       "dependencies": [
         "layout.highcross",
@@ -30576,9 +30576,16 @@
       "output": "assets/scene/scene.highcross.json",
       "acceptance": "docs/asset-bible.md",
       "source_job": null,
-      "source_hash": null,
+      "source_hash": "993edfd04d36fcdfa54d107e4c2bf3816a27ff7296d95989f6431e326d4f95e4",
       "license_evidence": null,
-      "verified_in_browser": false
+      "verified_in_browser": true,
+      "prototype_output": "assets/runtime/models/briar-gate.glb",
+      "limitations": "Shared checkpoint environment only: one Highcross corner and one Briar route. The full map, scene logic, encounter set, streaming and final art remain.",
+      "evidence": [
+        "artifacts/checkpoint/captures/2026-09-30T14-26-31-442Z-07cd5623.png",
+        "artifacts/checkpoint/captures/briar-return-revised.mp4",
+        "artifacts/checkpoint/environment-repair.json"
+      ]
     },
     {
       "id": "map.highcross",
@@ -30938,7 +30945,7 @@
       "kind": "scene",
       "owner": "briar-march",
       "chapter": "C1",
-      "status": "planned",
+      "status": "prototype",
       "brief": "assembled geometry, lighting, navmesh, collision, safe polygons, spawn and encounter data",
       "dependencies": [
         "layout.briar-march",
@@ -30950,9 +30957,16 @@
       "output": "assets/scene/scene.briar-march.json",
       "acceptance": "docs/asset-bible.md",
       "source_job": null,
-      "source_hash": null,
+      "source_hash": "993edfd04d36fcdfa54d107e4c2bf3816a27ff7296d95989f6431e326d4f95e4",
       "license_evidence": null,
-      "verified_in_browser": false
+      "verified_in_browser": true,
+      "prototype_output": "assets/runtime/models/briar-gate.glb",
+      "limitations": "Shared checkpoint environment only: one Highcross corner and one Briar route. The full map, scene logic, encounter set, streaming and final art remain.",
+      "evidence": [
+        "artifacts/checkpoint/captures/2026-09-30T14-26-31-442Z-07cd5623.png",
+        "artifacts/checkpoint/captures/briar-return-revised.mp4",
+        "artifacts/checkpoint/environment-repair.json"
+      ]
     },
     {
       "id": "map.briar-march",

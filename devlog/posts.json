@@ -1,11 +1,78 @@
 [
   {
+    "number": "006",
+    "slug": "timber-stone-and-lamplight",
+    "date": "2026-10-01",
+    "title": "Timber, stone and lamplight.",
+    "category": "Environment and browser craft",
+    "status": "Playable checkpoint · art acceptance remains open",
+    "summary": "The first road works. Now the town needs to feel inhabited—and remain readable when you actually play.",
+    "paragraphs": [
+      "The first playable scene exposed a gap that static references could not: the interface and character silhouettes had a direction, but the town still looked coarse. I kept the work inside the representative checkpoint and made one merchant-house reference with Higgsfield, converted it with Meshy, then finished and assembled it in Blender.",
+      "The generated house arrived with more than two million triangles and compressed proportions. The local preparation reduces it to 18,000 triangles, restores a 6.5-metre square footprint and retains a steep 8.2-metre roofline. Four copies form the town edge. The original candidate and the unsuccessful narrow version are kept for comparison; this is a reusable prototype, not a finished architecture kit.",
+      "The environment pass puts small leaves on branches, replaces angular shrub shapes with ferns, adds the three-realm compass to the plaza and places warm light at actual lanterns. Three nearby lantern lights share a fixed budget, with a fourth light following the traveller. A crowd preflight exceeded the visible-triangle target, so tiny leaves were simplified from four triangles to two before the sustained rerun.",
+      "Walking to Nemi caught another defect: the market awning hid both people. It now fades near the traveller, as the gate arch and nearby canopies already do. I checked the ordinary gameplay camera and opened Nemi's dialogue after the repair. The earlier obstructed frame remains in the evidence.",
+      "The last integration review found that the house positions and the server's old collision boxes no longer agreed. The boxes now follow the scaled building footprints. A regression test checks blocked facades, blocked cross-house sightlines and open outer lanes. The full suite also exposed a test that stopped a fleeing player just outside town; it now waits for the authoritative safe-zone state before checking protection.",
+      "The new 75-second recording follows the return from the epitaph across the river and into town. It contains the actual browser world, live HUD and synthesized game sound. The character had already completed the clue. This recording precedes the final awning and leaf changes; its exact source fingerprint is retained instead of labelling it as footage of a later build.",
+      "The first full thirty-minute load/unload trace retained the same mesh, texture, material, skeleton and animation-group counts across fifteen unload phases. Its JavaScript heap nevertheless reached 517 MiB against a 300 MiB target. Both findings matter. Recording cleanup now releases its temporary canvases explicitly, but that change alone does not establish the cause or resolve the memory budget.",
+      "This bounded repair adds one Higgsfield job estimated at 2.75 credits and one completed Meshy task charged at 30 credits. The checkpoint totals are now fourteen Higgsfield jobs at 38.5 estimated credits and eighteen completed Meshy tasks at 224 verified consumed credits. Higgsfield billing is not independently verified; no currency conversion is claimed."
+    ],
+    "verified": "Current combined source fingerprint 19f52fbc4ae879b22026c7bee1d7e07cead8f8463915c1fec1a06103ca5eae9a. All 31 rule/transport checks pass. Six GLBs validate with zero errors and eleven warnings; the environment re-exports from Blender. The ten-minute renderer trace on 9fea75ee… reports 108.58 median fps, 10.30 ms p95 and 11.10 ms p99, 202 p95 draws and 1,468,177 maximum visible triangles on Apple M5/Chromium 154 at 1080p. Its 312.80 ms worst stall is retained. All 266 production client files are byte-identical after the server-only collision correction; these synthetic fixtures do not qualify a live raid.",
+    "limitations": "The visual target is still not met: house details need cleaner construction, the paving repeats, scenery is sparse and acting remains preliminary. Bulk generation stays behind that quality gate. Synthetic renderer traces do not qualify a live multiplayer battle, lower-end hardware or human enjoyment. All twelve complete guilds remain required; this scene offers two practice kits.",
+    "media": [
+      {
+        "path": "../artifacts/checkpoint/captures/2026-09-30T14-26-31-442Z-07cd5623.png",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Knight beside Mara in the revised Highcross plaza with warm lanterns and a timber house",
+        "caption": "In-engine capture · final environment build 9fea75ee… · ordinary follow camera, Chromium 154, Apple M5, WebGL2, 1920×1080. Prototype art, not the original concept image."
+      },
+      {
+        "type": "video",
+        "path": "../artifacts/checkpoint/captures/briar-return-revised.mp4",
+        "poster": "../artifacts/checkpoint/captures/briar-return-revised-poster.png",
+        "captions": "../artifacts/checkpoint/captures/briar-return-revised.vtt",
+        "mime": "video/mp4",
+        "alt": "Actual browser return from the epitaph through Briar March to the Highcross market",
+        "caption": "Gameplay video · 75 seconds uncut, actual HUD sampled at 2Hz and game audio. Build 185eb735…; predates the final awning fade and leaf simplification. QA route commands use ordinary server inputs; the quest is already completed."
+      },
+      {
+        "path": "../artifacts/checkpoint/captures/2026-09-30T14-00-15-210Z-94321d74.png",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Earlier central-plaza view with procedural houses and dim lantern pools",
+        "caption": "In-engine comparison, before · build 5267608d… · player near −1.6, −9.6; ordinary camera."
+      },
+      {
+        "path": "../artifacts/checkpoint/captures/2026-09-30T14-10-16-801Z-6e43be2c.png",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Matched central-plaza view after the timber-house, compass, foliage and lantern pass",
+        "caption": "In-engine comparison, after · build 185eb735… · matched player position and camera. This precedes the final leaf and awning fixes."
+      },
+      {
+        "path": "../artifacts/checkpoint/captures/2026-09-30T14-22-49-311Z-08419026.png",
+        "width": 1920,
+        "height": 1080,
+        "alt": "The merchant awning fades so Nemi and the Knight remain visible",
+        "caption": "In-engine visibility repair · build 0394c4f2… · actual merchant location, ordinary camera. The final build retains this repair and simplifies leaf geometry."
+      },
+      {
+        "path": "../design/calibration/merchant-house.png",
+        "width": 2048,
+        "height": 2048,
+        "alt": "Isolated fantasy timber merchant-house reference with blue slate roof",
+        "caption": "Concept reference · Higgsfield GPT Image 2.5. Input to the Meshy/Blender workflow, not a screenshot of the game."
+      }
+    ]
+  },
+  {
     "number": "005",
     "slug": "the-first-road-is-playable",
     "date": "2026-10-01",
     "title": "The first road is playable.",
     "category": "Browser production checkpoint",
-    "status": "Local playable build \u00b7 visual acceptance still open",
+    "status": "Local playable build · visual acceptance still open",
     "summary": "A real journey through the Briar Gate: generated characters, live combat, two-player loot and the first recorded browser expedition.",
     "paragraphs": [
       "THREEFOLD now runs as a local multiplayer browser game. A Knight or Cyborg can walk out of Highcross, speak to Mara, fight Briar Hounds, read a ruined epitaph and bring its clue home. The footage below comes from the running game, with its actual HUD and synthesized audio. It is a production checkpoint, and its environment still falls short of the original visual target.",
@@ -13,10 +80,11 @@
       "The first motion and camera reviews found problems worth keeping in the record: stretched hound weights, poor equipment clearance, a camera that changed its orbit during travel, an obstructing gate and forest canopies. These received specific repairs and another browser inspection. They are reasons for testing a small representative scene before ordering hundreds of assets.",
       "Two independent browser sessions exercised the PvP rules. Town attacks were refused. Outside town, aggression marked the Cyborg red; guards pursued him and Nemi refused trade. A clean victim exposed one item. When the red player died, the lawful attacker claimed two different items, both clients received receipts, and the shared allowance reached zero. Dying retained the outlaw timer and respawn led to an unpatrolled refuge.",
       "Thirty automated checks cover the local rules and real WebSocket transport, including replayed claims, reconnect ownership, capacity and identity races. The sixteen-client server load ran for ten minutes: tick p95 was 10.32ms and p99 13.13ms. That workload uses eighty AI-cost fixtures, including thirty-two summon proxies. It is separate from the browser rendering crowd and is not a complete networked raid.",
-      "The renderer and repeated load/unload results are being attached to this exact build. All twelve full guilds remain required; the current Knight and Cyborg are practice kits, and the Elemental silhouettes are only a material study. The separate 48-hour build has not started. Human playtesting, richer art, lower-end hardware, public accounts and production persistence remain ahead.",
+      "The first ten-minute renderer trace recorded a median 116.10fps, uncapped frame p95 9.70ms and p99 10.40ms on an Apple M5 at 1920×1080. Its longest frame was 358.10ms, so that stall is retained rather than hidden by the average. The crowd is synthetic, and lower-end hardware remains unqualified. All twelve full guilds remain required; the current Knight and Cyborg are practice kits, and the Elemental silhouettes are only a material study. The separate 48-hour build has not started.",
+      "The thirty-minute load/unload baseline retained exactly the same mesh, texture, material and rig counts across fifteen unloaded phases. Its JavaScript heap still ranged from 330.04 to 517.33MiB, exceeding the 300MiB target. That budget miss remains visible in the report; stable object counts alone are not a memory-budget pass.",
       "Recorded consumption: 194 Meshy credits across seventeen completed tasks. Higgsfield returned estimates totaling 35.75 credits for thirteen references; actual billing was not independently verified. A failed oversized rig request returned no task ID, so its charge remains unknown. No currency total is invented."
     ],
-    "verified": "Runtime source fingerprint 5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c. Local code commit and final traces will be attached before publication. Browser actions, source manifests and scoped acceptance results are retained under artifacts/checkpoint/.",
+    "verified": "First-playable runtime fingerprint 5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c, code commit c4281324c2ba6dea689cf84319b5056896bcf1b6. Portable-reference follow-up 3b5486920bd8fa9666075dcd4129feaec6ae9aef passed GitHub CI run 36722527673. Browser actions, source manifests and scoped acceptance results are retained under artifacts/checkpoint/.",
     "limitations": "This is a local engineering checkpoint, not the finished RPG. The concept-level richness is not achieved, most catalogue assets and ten playable guilds remain unbuilt, and no human has assessed fun. M1/GTX1660, Safari/Firefox, impaired-network and production-account behavior are unqualified. The journal is owner-private; the game is not hosted publicly.",
     "media": [
       {
@@ -24,7 +92,7 @@
         "width": 1920,
         "height": 1080,
         "alt": "Actual browser frame of the Knight fighting a Briar Hound beneath the fading town gate",
-        "caption": "In-engine capture \u00b7 Chromium 154 / Apple M5 / WebGL2 / 1920\u00d71080. Frame from the uncut checkpoint rehearsal; prototype environment and motion."
+        "caption": "In-engine capture · Chromium 154 / Apple M5 / WebGL2 / 1920×1080. Frame from the uncut checkpoint rehearsal; prototype environment and motion."
       },
       {
         "type": "video",
@@ -33,42 +101,42 @@
         "captions": "../artifacts/checkpoint/captures/briar-gate-expedition.vtt",
         "mime": "video/mp4",
         "alt": "Seventy-five second uncut browser expedition from Mara to the epitaph and back",
-        "caption": "Gameplay video \u00b7 75 seconds, uncut; real-time canvas, actual HUD sampled at 2Hz, synthesized game audio. Field tools send ordinary movement/attack inputs. This character revisits an already-completed quest."
+        "caption": "Gameplay video · 75 seconds, uncut; real-time canvas, actual HUD sampled at 2Hz, synthesized game audio. Field tools send ordinary movement/attack inputs. This character revisits an already-completed quest."
       },
       {
         "type": "video",
         "path": "../artifacts/checkpoint/captures/outlaw-two-item-claim.mp4",
         "mime": "video/mp4",
         "alt": "The lawful attacker defeats an outlaw and claims an amber shard and a copper ring",
-        "caption": "Gameplay verification \u00b7 75 seconds, attacker view. Two item transfers commit, allowance reaches zero. Recorded before the canopy fade repair, so foliage obscures part of the fight."
+        "caption": "Gameplay verification · 75 seconds, attacker view. Two item transfers commit, allowance reaches zero. Recorded before the canopy fade repair, so foliage obscures part of the fight."
       },
       {
         "type": "video",
         "path": "../artifacts/checkpoint/captures/outlaw-victim-view.mp4",
         "mime": "video/mp4",
         "alt": "The second actual browser client sees the outlaw death and both item-transfer receipts",
-        "caption": "Gameplay verification \u00b7 75 seconds, independent victim session, 1280\u00d7720. Same two-item encounter; no synthetic network actor."
+        "caption": "Gameplay verification · 75 seconds, independent victim session, 1280×720. Same two-item encounter; no synthetic network actor."
       },
       {
         "path": "../artifacts/checkpoint/captures/2026-09-30T13-07-49-832Z-d574227f.png",
         "width": 1280,
         "height": 720,
         "alt": "Nemi refuses to trade with the red player while the guard enforces town law",
-        "caption": "In-engine capture \u00b7 the refusal arrived while the red player was alive; the frame was saved just after the pursuing guard killed him. Purchase remains disabled."
+        "caption": "In-engine capture · the refusal arrived while the red player was alive; the frame was saved just after the pursuing guard killed him. Purchase remains disabled."
       },
       {
         "type": "video",
         "path": "../artifacts/checkpoint/captures/hound-motion-study.mp4",
         "mime": "video/mp4",
         "alt": "A close browser study cycling the custom hound idle, walk, run, attack, dodge and death motions",
-        "caption": "In-engine rig study \u00b7 18-second excerpt from a real browser recording. Inspection camera and prototype motion; not a playable Changeling transformation."
+        "caption": "In-engine rig study · 18-second excerpt from a real browser recording. Inspection camera and prototype motion; not a playable Changeling transformation."
       },
       {
         "path": "../design/calibration/knight.png",
         "width": 2048,
         "height": 2048,
         "alt": "Higgsfield Knight identity reference used for the Meshy and Blender pipeline",
-        "caption": "Concept reference \u00b7 Higgsfield GPT Image 2.5. A source for production, not an in-engine image or a promise of current gameplay fidelity."
+        "caption": "Concept reference · Higgsfield GPT Image 2.5. A source for production, not an in-engine image or a promise of current gameplay fidelity."
       }
     ]
   },
@@ -78,7 +146,7 @@
     "date": "2026-09-30",
     "title": "The price of a red name.",
     "category": "Combat and world rules",
-    "status": "PvP direction agreed \u00b7 supporting defaults proposed",
+    "status": "PvP direction agreed · supporting defaults proposed",
     "summary": "One item for a kill. Two from an outlaw. Town guards and merchants now make aggression matter beyond the fight.",
     "paragraphs": [
       "The PvP design now puts real possessions at stake. A player kill allows one eligible item to be looted; a red-name victim exposes two. This replaces the original proposal that all equipment stayed safe on death.",
@@ -93,7 +161,7 @@
       {
         "path": "../design/screens/02-wilderness-pvp.png",
         "alt": "Existing concept of a Knight and Cyborg facing one another outside a safe zone",
-        "caption": "Earlier concept art \u00b7 built-in image generation. The red-name timer and corpse-loot interface are not depicted."
+        "caption": "Earlier concept art · built-in image generation. The red-name timer and corpse-loot interface are not depicted."
       }
     ]
   },
@@ -103,7 +171,7 @@
     "date": "2026-09-30",
     "title": "A world with a production plan.",
     "category": "Production design",
-    "status": "Specification \u00b7 awaiting review",
+    "status": "Specification · awaiting review",
     "summary": "Twelve guilds, three realms, and a concrete path from concept art to a playable browser world.",
     "paragraphs": [
       "THREEFOLD now has a production specification covering the guilds, quests, maps, interface, combat rules, assets, sound and multiplayer architecture. Every guild stays in the first complete chapter. The starting Adventurer remains a separate introduction to the world.",
@@ -117,7 +185,7 @@
       {
         "path": "../design/screens/01-highcross.png",
         "alt": "Concept of the Highcross town plaza with three realm gates and a safe-town HUD",
-        "caption": "Concept art \u00b7 built-in image generation. A visual target, not a running game."
+        "caption": "Concept art · built-in image generation. A visual target, not a running game."
       }
     ]
   },
@@ -127,7 +195,7 @@
     "date": "2026-09-30",
     "title": "Light, danger and identity.",
     "category": "Visual direction",
-    "status": "Concept art \u00b7 awaiting review",
+    "status": "Concept art · awaiting review",
     "summary": "A warm home, a dangerous road, and the first full view of a Knight establish the visual target.",
     "paragraphs": [
       "The three initial screen concepts explore Highcross, an encounter in Briar March and the guild selection screen. Warm brass and lantern light meet blue dusk, wet stone and weathered materials. The world is elaborate, but the character and attack lane must remain readable.",
@@ -140,12 +208,12 @@
       {
         "path": "../design/screens/02-wilderness-pvp.png",
         "alt": "Knight facing a hostile Cyborg's visible attack lane in Briar March",
-        "caption": "Concept art \u00b7 the hostile lane stays visible beneath the effects."
+        "caption": "Concept art · the hostile lane stays visible beneath the effects."
       },
       {
         "path": "../design/screens/03-guild-selection.png",
         "alt": "All twelve guild choices beside a detailed Knight preview",
-        "caption": "Concept art \u00b7 twelve choices, with Knight selected. The UI is not implemented."
+        "caption": "Concept art · twelve choices, with Knight selected. The UI is not implemented."
       }
     ]
   },

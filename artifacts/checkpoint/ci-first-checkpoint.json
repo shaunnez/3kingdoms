@@ -1,0 +1,14 @@
+{
+  "repository": "shaunnez/3kingdoms",
+  "commit": "3b5486920bd8fa9666075dcd4129feaec6ae9aef",
+  "runtime_commit": "c4281324c2ba6dea689cf84319b5056896bcf1b6",
+  "runtime_fingerprint": "5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c",
+  "run_id": 36722527673,
+  "url": "https://github.com/shaunnez/3kingdoms/actions/runs/36722527673",
+  "status": "completed",
+  "conclusion": "success",
+  "completed_at": "2026-09-30T13:34:37Z",
+  "checks": ["npm ci", "typecheck", "format", "30 tests", "build", "GLB validation", "catalogue/journal generation", "plan validation", "deterministic generated documents"],
+  "earlier_failed_run": 36722191906,
+  "repair": "Replaced a historical absolute local layout link with a preserved in-repository copy."
+}

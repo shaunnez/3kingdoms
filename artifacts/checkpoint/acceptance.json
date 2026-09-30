@@ -1,6 +1,6 @@
 {
   "build": "0.1.0-briar-gate",
-  "fingerprint": "5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c",
+  "fingerprint": "19f52fbc4ae879b22026c7bee1d7e07cead8f8463915c1fec1a06103ca5eae9a",
   "manifest": "artifacts/checkpoint/build-manifest.json",
   "recorded_local_date": "2026-10-01",
   "scope": "P1/P2 local representative checkpoint; not the complete game or a 48-hour build",
@@ -25,10 +25,12 @@
       "id": "rules-and-transport",
       "status": "passed",
       "evidence": [
-        "artifacts/checkpoint/all-tests.tap"
+        "artifacts/checkpoint/all-tests.tap",
+        "artifacts/checkpoint/network-boundary-fixture.json"
       ],
-      "result": "30 automated checks: 29 simulation behaviors and one real multi-client WebSocket integration suite. Reconnect, identity reservation race, capacity and durable claim receipts included.",
-      "limit": "Loopback; no packet impairment, database transaction or production-account claim."
+      "result": "31 automated checks: 30 simulation behaviors and one real multi-client WebSocket integration suite. Includes revised house facade/lane collision, reconnect, identity reservation, capacity and durable claims.",
+      "limit": "Loopback; no packet impairment, database transaction or production-account claim.",
+      "source_fingerprint": "19f52fbc4ae879b22026c7bee1d7e07cead8f8463915c1fec1a06103ca5eae9a"
     },
     {
       "id": "runtime-models",
@@ -125,7 +127,8 @@
         "artifacts/checkpoint/captures/briar-gate-expedition.mp4"
       ],
       "result": "Follow preserves orbit/radius; gate arch and nearby canopy groups fade around the traveller.",
-      "limit": "Further environment composition and obstruction review remains for later maps."
+      "limit": "Further environment composition and obstruction review remains for later maps.",
+      "source_fingerprint": "5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c"
     },
     {
       "id": "server-stress",
@@ -135,21 +138,29 @@
         "artifacts/checkpoint/server-load-before-event-cursor.json"
       ],
       "result": "600.45 seconds, 16 actual SDK connections, 80 AI-cost fixtures; p95 tick 10.3167 ms, p99 13.1328 ms.",
-      "limit": "48 hounds plus 32 hound-cost proxies; not complete summons. Mean decoded snapshot throughput 3252.52 kbit/s/client; wire compression/WAN bandwidth unqualified."
+      "limit": "48 hounds plus 32 hound-cost proxies; not complete summons. Mean decoded snapshot throughput 3252.52 kbit/s/client; wire compression/WAN bandwidth unqualified.",
+      "source_fingerprint": "5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c"
     },
     {
-      "id": "renderer-stress",
+      "id": "renderer-stress-before-environment-repair",
       "status": "passed-for-local-fixture-with-stall",
       "evidence": [
         "artifacts/checkpoint/captures/2026-09-30T13-25-02-469Z-d794e185.json"
       ],
       "result": "600.43s, zero hidden samples, 69918 uncapped frame intervals; median 116.10 fps, p95 9.70 ms, p99 10.40 ms, largest frame 358.10 ms; p95 208 draws, maximum 1393019 active triangles.",
-      "limit": "Apple M5, normal camera, synthetic rigs/summons. The longest stall is retained and its cause is not established by this trace. No full raid, lower-end hardware or eight-signature stress claim."
+      "limit": "Apple M5, normal camera, synthetic rigs/summons. The longest stall is retained and its cause is not established by this trace. No full raid, lower-end hardware or eight-signature stress claim.",
+      "source_fingerprint": "5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c"
     },
     {
-      "id": "memory-load-unload",
-      "status": "pending-final-build",
-      "evidence": []
+      "id": "memory-load-unload-before-environment-repair",
+      "status": "baseline-retained-counts-pass-heap-budget-miss",
+      "evidence": [
+        "artifacts/checkpoint/captures/2026-09-30T13-59-47-935Z-0db2d7dd.json",
+        "artifacts/checkpoint/memory-before-environment-repair.json"
+      ],
+      "result": "1800.09s, zero hidden samples, 15 unloaded phases: 128 meshes, 67 textures, 73 materials, 9 skeletons, 32 animation groups retained with zero count growth. Heap 330.04\u2013517.33 MiB; 300 MiB target exceeded.",
+      "limit": "Synthetic crowd cycles and Chromium JS heap, not real zone round trips or GPU-memory measurements. This is the pre-environment-repair build; the new build requires its own trace.",
+      "source_fingerprint": "5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c"
     },
     {
       "id": "dependency-advisories",
@@ -164,11 +175,13 @@
       "id": "visual-reference-match",
       "status": "not-accepted",
       "evidence": [
-        "artifacts/checkpoint/captures/briar-gate-expedition-poster.png",
+        "artifacts/checkpoint/captures/2026-09-30T14-26-31-442Z-07cd5623.png",
+        "artifacts/checkpoint/environment-repair.json",
         "design/screens/01-highcross.png"
       ],
-      "result": "HUD, material direction and representative bodies work. Environment architecture, foliage, lighting richness and motion are visibly below the target.",
-      "limit": "Blocks a production-art acceptance claim and expansion into bulk asset production."
+      "result": "One bounded house/foliage/lantern pass improves the ordinary-camera scene. Architecture detail, paving variation, scene density and acting remain below the target.",
+      "limit": "Blocks a production-art acceptance claim and expansion into bulk asset production.",
+      "source_fingerprint": "9fea75ee27735dca2a78824dc5076df62909e6ec41b2317647e29ddff486fe6c"
     },
     {
       "id": "human-fun",
@@ -181,6 +194,49 @@
       "status": "not-run",
       "evidence": [],
       "result": "M1/GTX1660, Safari/Firefox, latency/jitter/loss and throttled first-load targets remain unqualified."
+    },
+    {
+      "id": "merchant-awning-visibility",
+      "status": "repaired-and-observed",
+      "source_fingerprint": "0394c4f20f582bf88878b602bf30e73cd685d90f50f5381fccf6277271b4717e",
+      "evidence": [
+        "artifacts/checkpoint/captures/2026-09-30T14-14-58-476Z-dbb0309c.png",
+        "artifacts/checkpoint/captures/2026-09-30T14-22-49-311Z-08419026.png",
+        "artifacts/checkpoint/environment-repair.json"
+      ],
+      "result": "Before/after merchant view shows both characters after awning fade; ordinary dialogue opens and clean-player purchase is offered. The final environment retains this repair.",
+      "limit": "Still-image visibility and observed dialogue, not a complete occlusion/accessibility certification."
+    },
+    {
+      "id": "renderer-stress",
+      "status": "passed-for-local-fixture-with-stall",
+      "source_fingerprint": "9fea75ee27735dca2a78824dc5076df62909e6ec41b2317647e29ddff486fe6c",
+      "evidence": [
+        "artifacts/checkpoint/captures/2026-09-30T14-36-48-785Z-86427edb.json",
+        "artifacts/checkpoint/build-manifest-render-qualified.json",
+        "artifacts/checkpoint/client-collision-equivalence.json"
+      ],
+      "result": "600.38s, zero hidden samples, 65023 uncapped frame intervals; median 108.58 fps, p95 10.30 ms, p99 11.10 ms, largest frame 312.80 ms; p95 202 draws, maximum 1468177 active triangles.",
+      "limit": "Apple M5, normal camera near Mara (-5.3,-9.9), synthetic rigs/summons. Longest stall cause unestablished. All 266 production client files remain byte-identical after the server-only collision correction. Not a full live raid or lower-end hardware qualification."
+    },
+    {
+      "id": "house-collision-alignment",
+      "status": "passed-in-simulation-and-browser",
+      "source_fingerprint": "19f52fbc4ae879b22026c7bee1d7e07cead8f8463915c1fec1a06103ca5eae9a",
+      "evidence": [
+        "artifacts/checkpoint/collision-regression.tap",
+        "artifacts/checkpoint/client-collision-equivalence.json",
+        "artifacts/checkpoint/captures/2026-09-30T14-42-13-657Z-c407f813.png"
+      ],
+      "result": "Updated four house footprints; movement/line-of-sight stop at facades while outer lanes are open. Ordinary browser click toward the front house stopped at x=-9.3, outside the facade.",
+      "limit": "Conservative box footprints; no interior navigation."
+    },
+    {
+      "id": "memory-load-unload",
+      "status": "running",
+      "source_fingerprint": "19f52fbc4ae879b22026c7bee1d7e07cead8f8463915c1fec1a06103ca5eae9a",
+      "evidence": [],
+      "result": "Final thirty-minute trace started after server collision alignment; no result claimed until completion."
     }
   ],
   "remaining_game_scope": [
@@ -192,18 +248,18 @@
     "human playtesting and balance"
   ],
   "spend": {
-    "higgsfield_completed_jobs": 13,
-    "higgsfield_estimated_credits": 35.75,
+    "higgsfield_completed_jobs": 14,
+    "higgsfield_estimated_credits": 38.5,
     "higgsfield_verified_billed_credits": null,
-    "meshy_completed_jobs": 17,
-    "meshy_verified_consumed_credits": 194,
+    "meshy_completed_jobs": 18,
+    "meshy_verified_consumed_credits": 224,
     "currency_total": null,
     "failed_oversized_cyborg_rig_charge": "unknown; no task ID returned"
   },
   "publication": {
     "local": "playable",
-    "github": "pending",
-    "journal": "existing owner-private milestone 004; update pending",
+    "github": "First playable c428132 plus document repair 3b548692 pushed; CI 36722527673 passed. Environment follow-up pending.",
+    "journal": "Owner-private milestone 004 remains live; local milestones 005 and 006 prepared.",
     "public_game": "not-deployed"
   }
 }

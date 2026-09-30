@@ -1,15 +1,15 @@
 ❯ dedup
-✔ dedup                4ms
+✔ dedup                6ms
 ❯ weld
-✔ weld                 59ms
+✔ weld                 125ms
 ❯ resample
 ✔ resample             0ms
 ❯ prune
-✔ prune                53ms
+✔ prune                109ms
 ❯ sparse
-✔ sparse               21ms
+✔ sparse               38ms
 ❯ textureCompress
-✔ textureCompress      181ms
+✔ textureCompress      621ms
 ❯ quantize
 warn: quantize: Skipping TEXCOORD_0; out of [0,1] range.
 warn: quantize: Skipping TEXCOORD_0; out of [0,1] range.
@@ -25,8 +25,6 @@ warn: quantize: Skipping TEXCOORD_0; out of [0,1] range.
 warn: quantize: Skipping TEXCOORD_0; out of [0,1] range.
 warn: quantize: Skipping TEXCOORD_0; out of [0,1] range.
 warn: quantize: Skipping TEXCOORD_0; out of [0,1] range.
-warn: quantize: Skipping TEXCOORD_0; out of [0,1] range.
-warn: quantize: Skipping TEXCOORD_0; out of [0,1] range.
-✔ quantize             129ms
+✔ quantize             214ms
 
-info: briar-gate-validated.glb (31.66 MB) → briar-gate.glb (11.36 MB)
+info: briar-gate-validated.glb (52.47 MB) → briar-gate.glb (15.94 MB)

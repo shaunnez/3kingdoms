@@ -14,31 +14,31 @@
         "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
         "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
         "severity": 1,
-        "pointer": "/meshes/47/primitives/0/material"
+        "pointer": "/meshes/54/primitives/0/material"
       },
       {
         "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
         "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
         "severity": 1,
-        "pointer": "/meshes/48/primitives/0/material"
+        "pointer": "/meshes/55/primitives/0/material"
       },
       {
         "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
         "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
         "severity": 1,
-        "pointer": "/meshes/51/primitives/0/material"
+        "pointer": "/meshes/58/primitives/0/material"
       },
       {
         "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
         "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
         "severity": 1,
-        "pointer": "/meshes/53/primitives/0/material"
+        "pointer": "/meshes/60/primitives/0/material"
       },
       {
         "code": "ACCESSOR_INDEX_TRIANGLE_DEGENERATE",
         "message": "Indices accessor contains 704 degenerate triangles (out of 8664).",
         "severity": 2,
-        "pointer": "/meshes/7/primitives/0/indices"
+        "pointer": "/meshes/6/primitives/0/indices"
       }
     ]
   },

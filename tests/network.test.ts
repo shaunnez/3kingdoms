@@ -222,7 +222,10 @@ test(
       const hp = f.snapshot!.actors.find((p) => p.id === ids[5])!.hp;
       e.send({ type: "ability", key: "basic", target: ids[5] });
       f.send({ type: "move", x: 0, z: -1 });
-      await sleep(150);
+      await until(
+        () => f.snapshot!.actors.find((p) => p.id === ids[5])!.safe,
+        "The late-hit fixture target did not enter town",
+      );
       f.send({ type: "move", x: 0, z: 0 });
       await sleep(400);
       assert.equal(

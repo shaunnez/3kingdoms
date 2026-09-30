@@ -1,7 +1,7 @@
 {
   "checkpoint": "P1-P2 Briar Gate",
   "authorization": "User explicitly authorized P1/P2 and full Higgsfield/Meshy use, then instructed continued work while asleep. Bulk production follows the representative browser checkpoint; the separate 48-hour experiment has not started.",
-  "status": "in-progress",
+  "status": "local-engineering-checkpoint; art-and-qualification-open",
   "scope": [
     "Highcross gate corner",
     "Briar route",
@@ -161,15 +161,26 @@
       "estimated_credits": 2.75,
       "sha256": "fdb9f8e3700925d07f0f7cdaf26b33b8d0977ab6173dbb1863313cdc4b1dc78f",
       "bytes": 10217929
+    },
+    {
+      "name": "merchant-house",
+      "job_id": "aadedd8c-efa5-42bc-b8d1-3a29d7e50f7f",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/merchant-house.png",
+      "prompt": "design/prompts/p2-merchant-house.txt",
+      "estimated_credits": 2.75,
+      "sha256": "f010b5e15b6239abcb244fbeb9310fe4201ff0883afb13a5a83d31ae4e1d326f",
+      "bytes": 7211525
     }
   ],
   "models": [
     {
       "name": "briar-gate",
-      "sourceBytes": 31672496,
-      "repairedTangents": 0,
-      "runtimeBytes": 11359300,
-      "sha256": "f0b5505005ca98a803cb04c45f5a613caf53d1cf03a3c93bec62d825dc97566f",
+      "sourceBytes": 52478244,
+      "repairedTangents": 3,
+      "runtimeBytes": 15942328,
+      "sha256": "993edfd04d36fcdfa54d107e4c2bf3816a27ff7296d95989f6431e326d4f95e4",
       "compression": "KHR_mesh_quantization and WebP; no remote decoder"
     },
     {
@@ -214,19 +225,19 @@
     }
   ],
   "spend": {
-    "higgsfield_completed_jobs": 13,
-    "higgsfield_estimated_credits": 35.75,
+    "higgsfield_completed_jobs": 14,
+    "higgsfield_estimated_credits": 38.5,
     "higgsfield_actual_billed_credits": null,
-    "meshy_completed_jobs": 17,
-    "meshy_actual_consumed_credits": 194,
+    "meshy_completed_jobs": 18,
+    "meshy_actual_consumed_credits": 224,
     "currency_conversion": null
   },
   "gates": {
     "references": "reviewed calibration; generated references remain concept art",
-    "rigging": "exported; final in-browser motion inspection pending",
-    "browser": "running; final walkthrough capture pending",
-    "multiplayer": "automated transport/rules pass; two browser views pending",
-    "performance": "1080p renderer baseline completed; memory trace and optimized server trace running",
+    "rigging": "Humanoid and custom quadruped clips reviewed in browser; production acting remains open.",
+    "browser": "Playable route captured in uncut videos; final environment quality remains below reference.",
+    "multiplayer": "30 automated checks and two actual browser sessions verify scoped rules and durable claims.",
+    "performance": "Final ten-minute renderer passes local frame/draw/triangle targets with one retained 313ms stall; final thirty-minute memory trace running. Prior heap target miss retained.",
     "human_fun": "not-run"
   }
 }

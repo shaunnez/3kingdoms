@@ -50,6 +50,19 @@
         "Stream #0:0[0x1](eng): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt709/bt709/iec61966-2-1, progressive), 1280x720 [SAR 1:1 DAR 16:9], 164 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
         "Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 95 kb/s (default)"
       ]
+    },
+    {
+      "path": "artifacts/checkpoint/captures/briar-return-revised.mp4",
+      "bytes": 20158927,
+      "sha256": "fdf137866e933cbc841fb42e6de0742a3d314c42d2d84872af79b69136829ce1",
+      "duration": "00:01:15.04",
+      "streams": [
+        "Stream #0:0[0x1](eng): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt709/bt709/iec61966-2-1, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 2045 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+        "Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 95 kb/s (default)"
+      ],
+      "decode": "Complete decode succeeded",
+      "source_fingerprint": "185eb7351621d5c9a24cf6215ddfcc5a7ba8cd0c915aa77939e52d9ed7d52bbb",
+      "limitation": "Uncut clue-to-town revisit with live HUD/audio; quest already completed. Predates the final awning fade."
     }
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "source_task": "01a0f291-7497-73cf-a2c4-958706ec4817",
+  "source_resource": "image-to-3d",
+  "source": "source.glb",
+  "output": "assets/source/merchant-house.blend",
+  "triangles_before": 2143102,
+  "triangles_after": 18000,
+  "height_metres": 8.2,
+  "dimensions_metres": [
+    6.5,
+    6.5,
+    8.2
+  ],
+  "proportion_repair": "Provider model compressed the gable width; restored the reference house proportions.",
+  "textures_max": 2048,
+  "blender": "5.2.1 LTS",
+  "review": "Candidate; browser review required before acceptance"
+}

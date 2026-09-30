@@ -1,0 +1,83 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'artifacts/checkpoint/captures/briar-return-revised.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf60.3.100
+  Duration: 00:01:15.04, start: 0.000000, bitrate: 2149 kb/s
+  Stream #0:0[0x1](eng): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt709/bt709/iec61966-2-1, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 2045 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.3.100 libx264
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 95 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+Stream mapping:
+  Stream #0:0 -> #0:0 (h264 (native) -> png (native))
+Press [q] to stop, [?] for help
+[swscaler @ 0x130f70000] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x130f70000] [swscaler @ 0x138bc8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x130f70000] [swscaler @ 0x149648000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x130f70000] [swscaler @ 0x149658000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x130f70000] [swscaler @ 0x149668000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x130f70000] [swscaler @ 0x149678000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x130f70000] [swscaler @ 0x149688000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x130f70000] [swscaler @ 0x149698000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x130f70000] [swscaler @ 0x1496a8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x130f70000] [swscaler @ 0x1496b8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x130f70000] [swscaler @ 0x1496c8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x130f70000] [swscaler @ 0x1496d8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x138bc8000] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x138bc8000] [swscaler @ 0x1584b8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x138bc8000] [swscaler @ 0x1584c8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x138bc8000] [swscaler @ 0x1584d8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x138bc8000] [swscaler @ 0x1584e8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x138bc8000] [swscaler @ 0x1584f8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x138bc8000] [swscaler @ 0x158508000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x138bc8000] [swscaler @ 0x158518000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x138bc8000] [swscaler @ 0x158528000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x138bc8000] [swscaler @ 0x158538000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x138bc8000] [swscaler @ 0x158548000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x138bc8000] [swscaler @ 0x158558000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x150280000] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x150280000] [swscaler @ 0x138bc8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x150280000] [swscaler @ 0x139058000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x150280000] [swscaler @ 0x139068000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x150280000] [swscaler @ 0x139078000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x150280000] [swscaler @ 0x139088000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x150280000] [swscaler @ 0x139098000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x150280000] [swscaler @ 0x1390a8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x150280000] [swscaler @ 0x1390b8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x150280000] [swscaler @ 0x1390c8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x150280000] [swscaler @ 0x170470000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x150280000] [swscaler @ 0x170480000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x1496d8000] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x1496d8000] [swscaler @ 0x148070000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x1496d8000] [swscaler @ 0x148080000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x1496d8000] [swscaler @ 0x148090000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x1496d8000] [swscaler @ 0x148e88000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x1496d8000] [swscaler @ 0x148e98000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x1496d8000] [swscaler @ 0x148ea8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x1496d8000] [swscaler @ 0x148eb8000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x1496d8000] [swscaler @ 0x149648000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x1496d8000] [swscaler @ 0x170480000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x1496d8000] [swscaler @ 0x170470000] No accelerated colorspace conversion found from yuv420p to rgb24.
+[swscaler @ 0x1496d8000] [swscaler @ 0x149658000] No accelerated colorspace conversion found from yuv420p to rgb24.
+Output #0, image2, to 'artifacts/checkpoint/captures/briar-return-revised-poster.png':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf60.3.100
+  Stream #0:0(eng): Video: png, rgb24(pc, gbr/bt709/iec61966-2-1, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 200 kb/s, 30 fps, 30 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.3.100 png
+frame=    0 fps=0.0 q=-0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x
+[image2 @ 0x142906410] The specified filename 'artifacts/checkpoint/captures/briar-return-revised-poster.png' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x142906410] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+frame=    1 fps=0.0 q=-0.0 Lsize=N/A time=00:00:00.00 bitrate=N/A speed=   0x
+video:3510kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown

@@ -51,19 +51,21 @@ The [build manifest](../artifacts/checkpoint/build-manifest.json) hashes runtime
 
 | Gate | Current evidence | Limit |
 | --- | --- | --- |
-| Generation recovery | 13 Higgsfield references and 17 completed Meshy tasks; sanitized recovery IDs and hashes retained | Provider completion does not certify game-ready quality |
+| Generation recovery | 14 Higgsfield references and 18 completed Meshy tasks; sanitized recovery IDs and hashes retained | Provider completion does not certify game-ready quality |
 | GLB validity | Six runtime files, zero Khronos errors and eleven retained warnings | Imported skin roots and decorative tangent issues still need visual review |
-| Rules and transport | 30 checks passed, including independent real WebSockets, durable item claims, reconnect, capacity and identity races | Loopback, not impaired internet or production database |
+| Rules and transport | 31 checks passed, including independent real WebSockets, durable item claims, reconnect, capacity and identity races | Loopback, not impaired internet or production database |
 | Two actual browser clients | Town rejection, red aggression, guard pursuit, clean victim one-item transfer, red victim two-item transfer, lawful hunter stays clean, merchant refusal, refuge respawn | Two tabs in one Chromium instance; full guild/party/summon matrix is later work |
 | Uncut expedition | [75-second actual browser recording](../artifacts/checkpoint/captures/briar-gate-expedition.mp4), including town, combat, bridge, clue and return | Field tools send ordinary inputs; this character revisits an already-completed quest |
 | Custom wolf motion | Six clips inspected live; [18-second study excerpt](../artifacts/checkpoint/captures/hound-motion-study.mp4) and deformed bounds retained | Prototype weighting/acting; not a playable Changeling transformation |
 | Elemental surfaces | [Four materials in the browser](../artifacts/checkpoint/captures/2026-09-30T13-14-34-125Z-38faf925.png): emission, water, air and opaque earth | Deliberately simple silhouettes, not finished guild art |
-| Sustained renderer | 600.43s: median 116.10fps; uncapped frame p95 9.70ms / p99 10.40ms; 208 p95 draws, 1,393,019 maximum active triangles; no hidden samples | Apple M5 / Chromium 154 / WebGL2, synthetic crowd. Worst frame 358.10ms, cause unestablished. Not M1 qualification or a full networked battle |
+| Sustained renderer | 600.38s: median 108.58fps; uncapped frame p95 10.30ms / p99 11.10ms; 202 p95 draws, 1,468,177 maximum active triangles; no hidden samples | Apple M5 / Chromium 154 / WebGL2, synthetic crowd. Worst frame 312.80ms, cause unestablished. Not M1 qualification or a full networked battle |
 | Repeated load/unload | Final-build thirty-minute trace pending; earlier baseline retained | Count/heap stability is not a GPU-memory measurement or real zone transition test |
-| Visual target | Follow camera, equipment grounding, HUD portrait capture, gate fade and canopy obstruction repaired | Environment richness and motion remain below the approved image targets; no final art acceptance |
+| Visual target | Follow camera, equipment grounding, HUD portrait capture, gate/canopy/awning obstruction repaired; house/foliage/light pass inspected | Environment richness and motion remain below the approved image targets; no final art acceptance |
 | Human fun and readability | Not run | Requires a person playing without developer guidance |
 
 Detailed scoped results and build associations are recorded in [acceptance.json](../artifacts/checkpoint/acceptance.json). The engineering slice is playable; P2 art acceptance remains open. This does not authorize a completed P2 quality claim or bulk generation.
+
+Heap readings use Chromium's legacy `performance.memory` estimate. It can include shared heaps or omit separate ones, so these readings are useful for comparison but are not isolated game-process or GPU-memory attribution. The reported budget miss remains visible; resource-count stability alone does not resolve it. See the [API's documented measurement limits](https://developer.mozilla.org/en-US/docs/Web/API/Performance/memory).
 
 ## Architecture choices and limits
 
@@ -77,9 +79,9 @@ The transport benchmark completed 600.45 seconds with 16 clients and 80 AI-cost 
 
 The actual browser PvP recordings show [the attacker](../artifacts/checkpoint/captures/outlaw-two-item-claim.mp4) and [the victim](../artifacts/checkpoint/captures/outlaw-victim-view.mp4) in the same encounter. Two items were transferred through the ordinary three-second claim channel; both clients received matching receipts and the quota reached zero. Those recordings precede the canopy fade repair and retain the obstruction that motivated it. [Nemi's refusal](../artifacts/checkpoint/captures/2026-09-30T13-07-49-832Z-d574227f.png) was received while Vex was alive; the captured frame was saved just after the guard killed him.
 
-Current build fingerprint: `5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c`. The normal camera is alpha -1.7508, beta 0.72, radius 22; follow now preserves those values. Render fixture captures and ordinary gameplay are labelled separately. The prototype cannot be approved against a cinematic camera alone.
+Current build fingerprint: `19f52fbc4ae879b22026c7bee1d7e07cead8f8463915c1fec1a06103ca5eae9a`. The renderer report uses source `9fea75ee…`; [all 266 delivered client files are byte-identical](../artifacts/checkpoint/client-collision-equivalence.json) after the server-only collision alignment. The normal camera is alpha -1.7508, beta 0.72, radius 22; follow now preserves those values. Render fixture captures and ordinary gameplay are labelled separately. The prototype cannot be approved against a cinematic camera alone.
 
-The local production preview's resource timing reported approximately 11.58 MiB across unique observed transfers and assets ready about 1.16 seconds after navigation. This includes local capture code subsequently requested and is not the specified 25Mbps/50ms cold-cache experiment. The preview serves gzip and measures the actual delivered bytes; public cache/CDN behavior is untested. Runtime dependency advisory audit reported zero known vulnerabilities at this checkpoint, which is not a security certification.
+The earlier `5267608d…` production preview's resource timing reported approximately 11.58 MiB across unique observed transfers and assets ready about 1.16 seconds after navigation. This includes local capture code subsequently requested and is not the specified 25Mbps/50ms cold-cache experiment. The preview serves gzip and measures the actual delivered bytes; public cache/CDN behavior is untested. That first-load observation predates the larger merchant-house environment and does not qualify the revised package. Runtime dependency advisory audit reported zero known vulnerabilities at this checkpoint, which is not a security certification.
 
 ## Remaining game work
 
@@ -87,16 +89,24 @@ Neither practice kit implements its full exploration utility, mastery, trials or
 
 The hound is a quadruped pipeline representative, not a playable Changeling transformation. The four-material Elemental preview is a material/alpha study, not a finished body. Most of the 2,194 required asset units remain planned. All 25 scenes, 44 quests and 117 actions retain their specified identity and acceptance requirements.
 
-The next art repair should improve the town composition and lighting, replace the coarse vegetation language, and give attacks/recovery more convincing motion. Keep the same ordinary camera and compare a matched frame before expanding the asset batch. The art still needs more convincing architecture, foliage, surface variation and grounded motion. Generic bloom, generated textures or an attractive still cannot substitute for readable fighting and a coherent world at the ordinary gameplay camera. Key remapping, a complete accessibility pass and unsupported-browser handling also remain.
+The bounded environment repair adds a generated merchant-house library, corrects its proportions, improves the lantern placement, replaces floating leaves/shrub rocks with branch leaves/ferns and adds a brass plaza inlay. A matched central-plaza pair and the ordinary-camera merchant visit are retained in the [repair record](../artifacts/checkpoint/environment-repair.json). The merchant awning now fades so the player and NPC stay visible. Server collision boxes now match the scaled house footprints; facade entry and the open outer lanes have a regression test. Tiny leaf geometry was reduced after a preflight exceeded the triangle target. The [return video](../artifacts/checkpoint/captures/briar-return-revised.mp4) shows the house/lighting pass before those final awning/leaf changes. Continue at the same ordinary camera before expanding the asset batch. The art still needs more convincing architecture, foliage, surface variation and grounded motion. Generic bloom, generated textures or an attractive still cannot substitute for readable fighting and a coherent world at the ordinary gameplay camera. Key remapping, a complete accessibility pass and unsupported-browser handling also remain.
 
 ## Consumption and provenance
 
-Higgsfield: 13 completed reference jobs, estimated at 2.75 credits each, **35.75 credits estimated**. This is the returned per-job estimate, not a verified billing ledger. Meshy: **194 consumed credits** across 17 completed jobs, taken from provider receipts. Idle animation action 0 is charged at three credits; it was not free. An initial oversized Cyborg rig request failed before returning a task ID; no unverified zero-charge claim is made for that failed request.
+Higgsfield: 14 completed reference jobs, estimated at 2.75 credits each, **38.5 credits estimated**. This is the returned per-job estimate, not a verified billing ledger. Meshy: **224 consumed credits** across 18 completed jobs, taken from provider receipts. Idle animation action 0 is charged at three credits; it was not free. An initial oversized Cyborg rig request failed before returning a task ID; no unverified zero-charge claim is made for that failed request.
 
 See the [Higgsfield receipts](../artifacts/checkpoint/higgsfield-receipts.json), [Meshy receipts](../artifacts/checkpoint/meshy-receipts.json) and [production pipeline](asset-production.md). No account balances, credentials or signed download URLs belong in public evidence. No verified currency conversion is available.
 
 ## Delivery state
 
-Local source, local checks, GitHub publication and ChatGPT Sites publication are independent outcomes. The journal retains its owner-private audience. Its deployed source version is recorded in [devlog/site.json](../devlog/site.json). A local game URL is not an internet deployment of the game.
+Local source, local checks, GitHub publication and ChatGPT Sites publication are independent outcomes. The first playable source and portable-document repair are pushed to `main`; [CI 36722527673](https://github.com/shaunnez/3kingdoms/actions/runs/36722527673) passed on `3b5486920bd8fa9666075dcd4129feaec6ae9aef`. The subsequent environment repair requires a separate final commit and CI receipt. The journal retains its owner-private audience. Its deployed source version is recorded in [the repository publication receipt](https://github.com/shaunnez/3kingdoms/blob/main/devlog/site.json). A local game URL is not an internet deployment of the game.
 
 The next production decision follows the completed browser and rigging evidence. Any failed quality or correctness category gets a concrete repair and rerun before expanding the asset batch. Human playtesting remains necessary to decide whether the combat and equipment risk are enjoyable.
+
+## First human session
+
+Use the normal game URL without `?lab=1`; a new tab creates a fresh character. Try Knight first, then a second tab as Cyborg for the two-player rules. Start with Mara's clue expedition, use the visible controls to fight and return, then examine the inventory and twelve-guild codex. Both practice kits start at level five to expose their representative controls; this is not the planned level-one introduction or guild trial.
+
+Record where you needed help, whether attacks felt responsive and readable, whether retreat worked, and whether you wanted another expedition. For PvP, bring an eligible ordinary item, cross the visible town boundary and inspect the one-item claim; then defeat a red character and inspect the two-item allowance and timer consequences. The protected starter gear is intentionally excluded. Repeat a return to town as an outlaw to see the guard and merchant response.
+
+This first session can guide repairs. It does not replace the five-novice and four-client party acceptance rows in the full plan. Remaining blockers are the reference-level art gap, memory/hardware/network qualification, full content implementation and observed human fun.

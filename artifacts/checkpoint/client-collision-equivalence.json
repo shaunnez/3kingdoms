@@ -1,0 +1,8 @@
+{
+  "before_fingerprint": "9fea75ee27735dca2a78824dc5076df62909e6ec41b2317647e29ddff486fe6c",
+  "after_fingerprint": "19f52fbc4ae879b22026c7bee1d7e07cead8f8463915c1fec1a06103ca5eae9a",
+  "runtime_client_files": 266,
+  "all_runtime_client_files_identical": true,
+  "changed_runtime_files": [],
+  "scope": "Byte-for-byte production client comparison after server-only collision alignment. Source map files are excluded; runtime scripts/styles/models/textures are included. Rendering trace uses the preceding fingerprint; memory trace will use the restarted final server."
+}

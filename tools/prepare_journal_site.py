@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Export only the public journal and planning documents to the Sites checkout."""
+"""Export only sanitized journal evidence and planning documents to the Sites checkout."""
 import hashlib
 import json
+import re
 import shutil
 from html.parser import HTMLParser
 from pathlib import Path
@@ -80,6 +81,16 @@ def main():
             if not target.is_relative_to(DIST.resolve()) or not target.is_file():
                 raise ValueError(f"Broken or out-of-package link: {path.name}: {link}")
             checked += 1
+    markdown_checked = 0
+    for path in DIST.rglob("*.md"):
+        for link in re.findall(r"\]\(([^\s)]+)\)", path.read_text()):
+            parsed = urlsplit(link.strip("<>"))
+            if parsed.scheme or parsed.netloc or not parsed.path:
+                continue
+            target = (path.parent / unquote(parsed.path)).resolve()
+            if not target.is_relative_to(DIST.resolve()) or not target.is_file():
+                raise ValueError(f"Broken exported Markdown link: {path.name}: {link}")
+            markdown_checked += 1
     digest = hashlib.sha256((ROOT / "devlog/posts.json").read_bytes()).hexdigest()
     (DIST / "publication.json").write_text(json.dumps({
         "journal_source_sha256": digest,
@@ -92,7 +103,9 @@ def main():
         "Run tools/build_devlog.py and tools/prepare_journal_site.py in that checkout. "
         "Do not edit exported pages directly. dist/publication.json records source and file hashes.\n")
     print(json.dumps({"checkout": str(SITE), "exported_files": len(list(DIST.rglob("*.*"))),
-                      "local_html_references_checked": checked, "journal_source_sha256": digest}))
+                      "local_html_references_checked": checked,
+                      "local_markdown_references_checked": markdown_checked,
+                      "journal_source_sha256": digest}))
 
 
 if __name__ == "__main__":

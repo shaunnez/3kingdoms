@@ -1,7 +1,13 @@
 import { strict as assert } from "node:assert";
 import { test } from "node:test";
 import { World, type Actor } from "../packages/simulation/world";
-import { isSafe, move, REFUGE } from "../packages/simulation/map";
+import {
+  isSafe,
+  move,
+  walkable,
+  lineOfSight,
+  REFUGE,
+} from "../packages/simulation/map";
 import { distance } from "../packages/contracts/game";
 
 test("a fresh traveller can complete the Briar expedition with ordinary movement and combat", () => {
@@ -334,6 +340,32 @@ test("movement cannot tunnel through walls or leave the authored world", () => {
   assert.ok(p.x <= 10.11);
   assert.ok(p.x >= 0);
   assert.ok(move({ x: 0, z: 59 }, 0, 100).z < 60);
+});
+test("the revised house facades block entry while the outer town lanes remain open", () => {
+  for (const facade of [
+    { x: -10, z: -24 },
+    { x: 10, z: -25 },
+    { x: -10, z: -9 },
+    { x: 10.2, z: -9 },
+  ]) {
+    assert.equal(walkable(facade), false);
+    assert.equal(
+      lineOfSight(
+        { x: 0, z: facade.z },
+        { x: Math.sign(facade.x) * 18, z: facade.z },
+      ),
+      false,
+    );
+    const stopped = move({ x: 0, z: facade.z }, facade.x, 0);
+    assert.ok(Math.abs(stopped.x) < Math.abs(facade.x));
+  }
+  for (const lane of [
+    { x: -18, z: -24 },
+    { x: 18, z: -25 },
+    { x: -18, z: -9 },
+    { x: 18, z: -9 },
+  ])
+    assert.equal(walkable(lane), true);
 });
 test("guards attack a visible outlaw in town but ignore clean bystanders", () => {
   const { w, a, b } = fixture();

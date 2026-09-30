@@ -55,7 +55,7 @@ for (const name of names) {
       "--texture-compress",
       "webp",
       "--texture-size",
-      name === "briar-gate" ? "512" : "1024",
+      name === "briar-gate" ? "2048" : "1024",
       "--simplify",
       "false",
       "--palette",

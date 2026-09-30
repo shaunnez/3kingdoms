@@ -30,13 +30,17 @@ async function hudFrame(includeWorld: boolean) {
 
 export async function saveFrame() {
   const canvas = await hudFrame(true);
-  const blob = await new Promise<Blob>((resolve, reject) =>
-    canvas.toBlob(
-      (b) => (b ? resolve(b) : reject(new Error("Empty screenshot"))),
-      "image/png",
-    ),
-  );
-  return upload("frame", blob);
+  try {
+    const blob = await new Promise<Blob>((resolve, reject) =>
+      canvas.toBlob(
+        (b) => (b ? resolve(b) : reject(new Error("Empty screenshot"))),
+        "image/png",
+      ),
+    );
+    return await upload("frame", blob);
+  } finally {
+    canvas.width = canvas.height = 0;
+  }
 }
 
 /** Records the live WebGL canvas and actual DOM HUD; no reconstructed gameplay. */
@@ -55,7 +59,8 @@ export async function recordPlay(
   let hud = await hudFrame(false),
     running = true,
     refreshing = false,
-    lastHud = performance.now();
+    lastHud = performance.now(),
+    frameRequest = 0;
   const stream = canvas.captureStream(30);
   audioTracks.forEach((track) => stream.addTrack(track));
   const recorder = new MediaRecorder(stream, {
@@ -76,14 +81,17 @@ export async function recordPlay(
       lastHud = performance.now();
       void hudFrame(false)
         .then((c) => {
-          hud = c;
+          if (running) {
+            hud.width = hud.height = 0;
+            hud = c;
+          } else c.width = c.height = 0;
         })
         .catch((error) => console.warn("HUD recording sample failed", error))
         .finally(() => {
           refreshing = false;
         });
     }
-    requestAnimationFrame(draw);
+    frameRequest = requestAnimationFrame(draw);
   };
   draw();
   recorder.start(1000);
@@ -94,14 +102,26 @@ export async function recordPlay(
       ),
     1000,
   );
-  await new Promise<void>((resolve) => {
-    recorder.onstop = () => resolve();
-    setTimeout(() => recorder.stop(), seconds * 1000);
-  });
-  running = false;
-  clearInterval(interval);
-  stream.getTracks().forEach((track) => track.stop());
-  return upload("video", new Blob(chunks, { type: "video/webm" }));
+  let stopTimer = 0;
+  try {
+    await new Promise<void>((resolve, reject) => {
+      recorder.onstop = () => resolve();
+      recorder.onerror = () => reject(new Error("Browser recording failed"));
+      stopTimer = window.setTimeout(() => recorder.stop(), seconds * 1000);
+    });
+    running = false;
+    return await upload("video", new Blob(chunks, { type: "video/webm" }));
+  } finally {
+    running = false;
+    cancelAnimationFrame(frameRequest);
+    clearInterval(interval);
+    clearTimeout(stopTimer);
+    if (recorder.state !== "inactive") recorder.stop();
+    recorder.onstop = recorder.ondataavailable = recorder.onerror = null;
+    stream.getTracks().forEach((track) => track.stop());
+    chunks.length = 0;
+    hud.width = hud.height = canvas.width = canvas.height = 0;
+  }
 }
 
 export async function saveMetrics(scene: GameScene) {
