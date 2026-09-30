@@ -1,7 +1,7 @@
 {
   "build": "0.1.0-briar-gate",
-  "recordedAt": "2026-09-30T15:15:30.235Z",
-  "fingerprint": "41e30695fe06c0c86733c42820b896d714472ff80497a27256d3783ed9926c67",
+  "recordedAt": "2026-09-30T14:37:30.859Z",
+  "fingerprint": "19f52fbc4ae879b22026c7bee1d7e07cead8f8463915c1fec1a06103ca5eae9a",
   "files": {
     "apps/client/index.html": "a515f47cd892143c87eddfad4226d722b76a5df4e50a2eb5e53bf889aaa21551",
     "apps/client/src/App.tsx": "3303b656e77784d57d52d603035fffb65ff4a72a3da373230e285d80e757dec0",
@@ -27,7 +27,7 @@
     "package-lock.json": "135a54c795a83a4f1b5abc70be350e517d318edacb429fd26cbe6e3025f7441d",
     "package.json": "fc9688be8f1baef5e8437508fea0bfe69a21e5374473f00ceab1d44c8c5d7614",
     "packages/contracts/game.ts": "7c9eb669785f21fd75902bdc188bee2606221d2bebf3bdb0f312cf5429bd171e",
-    "packages/simulation/map.ts": "f752c6bdf19f2316e1e2231f999d423de597fcb5a046b9f799f11eb733729302",
+    "packages/simulation/map.ts": "46d7abe57f09003b933c2d0610ddd4a57be8ef2749a470ff30dd4afebffa590a",
     "packages/simulation/world.ts": "e3ce5903cf6fab92bcffc7c7ec8d5649164bf91a24d5c4818921383aaa190673",
     "tsconfig.json": "0c56c950101ba87ab1775fd28db3b7e4acdc872520438b31b9aed1e51010dea6"
   }

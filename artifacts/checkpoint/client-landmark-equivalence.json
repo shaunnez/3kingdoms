@@ -1,0 +1,8 @@
+{
+  "before_fingerprint": "9fea75ee27735dca2a78824dc5076df62909e6ec41b2317647e29ddff486fe6c",
+  "after_fingerprint": "41e30695fe06c0c86733c42820b896d714472ff80497a27256d3783ed9926c67",
+  "runtime_client_files": 266,
+  "all_runtime_client_files_identical": true,
+  "changed_runtime_files": [],
+  "scope": "Byte-for-byte runtime client comparison after house and landmark collision alignment. Excludes debug source maps; scripts, styles, models and textures included. Renderer and memory traces retain their original source associations."
+}

@@ -367,6 +367,25 @@ test("the revised house facades block entry while the outer town lanes remain op
   ])
     assert.equal(walkable(lane), true);
 });
+test("solid landmarks block entry without closing the gate or the paths around the astrolabe", () => {
+  for (const x of [-5.6, 5.6]) {
+    assert.equal(walkable({ x, z: 5 }), false);
+    assert.ok(move({ x, z: 0 }, 0, 8).z < 2.8);
+    assert.equal(lineOfSight({ x, z: 0 }, { x, z: 10 }), false);
+  }
+  assert.ok(Math.abs(move({ x: 0, z: 0 }, 0, 10).z - 10) < 1e-10);
+  assert.equal(lineOfSight({ x: 0, z: 0 }, { x: 0, z: 10 }), true);
+  assert.equal(walkable({ x: -5, z: -28 }), false);
+  assert.ok(move({ x: -5, z: -34 }, 0, 12).z <= -30.5);
+  assert.equal(lineOfSight({ x: 0, z: -28 }, { x: -9, z: -28 }), false);
+  for (const point of [
+    { x: -2.4, z: -28 },
+    { x: -7.6, z: -28 },
+    { x: -3, z: -26 },
+    { x: -7, z: -30 },
+  ])
+    assert.equal(walkable(point), true);
+});
 test("guards attack a visible outlaw in town but ignore clean bystanders", () => {
   const { w, a, b } = fixture();
   const guard = w.actors.get("guard")!;

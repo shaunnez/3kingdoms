@@ -3,201 +3,207 @@
 > node --import tsx --test tests/*.test.ts
 
 TAP version 13
-# Room connection was closed unexpectedly (4002):
-# Room connection was closed unexpectedly (4002):
-# Room connection was closed unexpectedly (4002):
+# Room connection was closed unexpectedly (4002): 
+# Room connection was closed unexpectedly (4002): 
+# Room connection was closed unexpectedly (4002): 
 # Subtest: real WebSocket clients enforce safety, loot quotas, replay protection and reconnect ownership
 ok 1 - real WebSocket clients enforce safety, loot quotas, replay protection and reconnect ownership
   ---
-  duration_ms: 14936.953083
+  duration_ms: 14852.917791
   type: 'test'
   ...
 # Subtest: a fresh traveller can complete the Briar expedition with ordinary movement and combat
 ok 2 - a fresh traveller can complete the Briar expedition with ordinary movement and combat
   ---
-  duration_ms: 5.385834
+  duration_ms: 6.168041
   type: 'test'
   ...
 # Subtest: quest experience levels immediately and cannot be awarded twice
 ok 3 - quest experience levels immediately and cannot be awarded twice
   ---
-  duration_ms: 0.20075
+  duration_ms: 0.415125
   type: 'test'
   ...
 # Subtest: a broadcast event cursor avoids replay while retaining authoritative state
 ok 4 - a broadcast event cursor avoids replay while retaining authoritative state
   ---
-  duration_ms: 1.24675
+  duration_ms: 1.846667
   type: 'test'
   ...
 # Subtest: both directions of player damage are refused if either player is safe
 ok 5 - both directions of player damage are refused if either player is safe
   ---
-  duration_ms: 0.190834
+  duration_ms: 0.1155
   type: 'test'
   ...
 # Subtest: a cast cannot land player damage after its target crosses the safe boundary
 ok 6 - a cast cannot land player damage after its target crosses the safe boundary
   ---
-  duration_ms: 0.215125
+  duration_ms: 0.162834
   type: 'test'
   ...
 # Subtest: an unlawful attempted attack turns its owner red even when the victim evades
 ok 7 - an unlawful attempted attack turns its owner red even when the victim evades
   ---
-  duration_ms: 0.210125
+  duration_ms: 0.169375
   type: 'test'
   ...
 # Subtest: self defence does not flag the defender or clear the aggressor
 ok 8 - self defence does not flag the defender or clear the aggressor
   ---
-  duration_ms: 0.170625
+  duration_ms: 0.148167
   type: 'test'
   ...
 # Subtest: an unlawful kill exposes exactly one item allowance and protects starter gear
 ok 9 - an unlawful kill exposes exactly one item allowance and protects starter gear
   ---
-  duration_ms: 0.187
+  duration_ms: 0.169
   type: 'test'
   ...
 # Subtest: killing a red player exposes two items and remains lawful for the hunter
 ok 10 - killing a red player exposes two items and remains lawful for the hunter
   ---
-  duration_ms: 0.314917
+  duration_ms: 0.27375
   type: 'test'
   ...
 # Subtest: a downed body has no corpse; final death creates the claim
 ok 11 - a downed body has no corpse; final death creates the claim
   ---
-  duration_ms: 0.5255
+  duration_ms: 0.6355
   type: 'test'
   ...
 # Subtest: replayed claims cannot exceed the global quota or duplicate an item
 ok 12 - replayed claims cannot exceed the global quota or duplicate an item
   ---
-  duration_ms: 0.381875
+  duration_ms: 0.315
   type: 'test'
   ...
 # Subtest: moving cancels a corpse channel without losing property
 ok 13 - moving cancels a corpse channel without losing property
   ---
-  duration_ms: 0.3825
+  duration_ms: 0.207125
   type: 'test'
   ...
 # Subtest: expiry releases every unclaimed item, including when the claimant disconnects
 ok 14 - expiry releases every unclaimed item, including when the claimant disconnects
   ---
-  duration_ms: 2.10875
+  duration_ms: 1.945875
   type: 'test'
   ...
 # Subtest: full bags refuse a claim without destroying or consuming its quota
 ok 15 - full bags refuse a claim without destroying or consuming its quota
   ---
-  duration_ms: 0.133458
+  duration_ms: 0.152125
   type: 'test'
   ...
 # Subtest: offline time and restart preserve red status and ownership escrow
 ok 16 - offline time and restart preserve red status and ownership escrow
   ---
-  duration_ms: 1.259667
+  duration_ms: 1.776041
   type: 'test'
   ...
 # Subtest: dead outlaws respawn in an unpatrolled safe refuge without clearing their timer
 ok 17 - dead outlaws respawn in an unpatrolled safe refuge without clearing their timer
   ---
-  duration_ms: 0.09325
+  duration_ms: 0.40025
   type: 'test'
   ...
 # Subtest: merchant refusal is checked at purchase time, even after a clean conversation
 ok 18 - merchant refusal is checked at purchase time, even after a clean conversation
   ---
-  duration_ms: 0.059125
+  duration_ms: 0.090042
   type: 'test'
   ...
 # Subtest: the quest reward can be collected once, including after save and reconnect
 ok 19 - the quest reward can be collected once, including after save and reconnect
   ---
-  duration_ms: 0.129292
+  duration_ms: 0.15775
   type: 'test'
   ...
 # Subtest: malformed and forged movement inputs cannot move a player or change safety
 ok 20 - malformed and forged movement inputs cannot move a player or change safety
   ---
-  duration_ms: 0.075166
+  duration_ms: 0.095375
   type: 'test'
   ...
 # Subtest: movement cannot tunnel through walls or leave the authored world
 ok 21 - movement cannot tunnel through walls or leave the authored world
   ---
-  duration_ms: 0.557417
+  duration_ms: 1.485042
   type: 'test'
   ...
 # Subtest: the revised house facades block entry while the outer town lanes remain open
 ok 22 - the revised house facades block entry while the outer town lanes remain open
   ---
-  duration_ms: 0.158958
+  duration_ms: 0.744125
+  type: 'test'
+  ...
+# Subtest: solid landmarks block entry without closing the gate or the paths around the astrolabe
+ok 23 - solid landmarks block entry without closing the gate or the paths around the astrolabe
+  ---
+  duration_ms: 0.261709
   type: 'test'
   ...
 # Subtest: guards attack a visible outlaw in town but ignore clean bystanders
-ok 23 - guards attack a visible outlaw in town but ignore clean bystanders
+ok 24 - guards attack a visible outlaw in town but ignore clean bystanders
   ---
-  duration_ms: 0.307417
+  duration_ms: 0.216958
   type: 'test'
   ...
 # Subtest: evade has two charges, recharges one at a time, and respects roots
-ok 24 - evade has two charges, recharges one at a time, and respects roots
+ok 25 - evade has two charges, recharges one at a time, and respects roots
   ---
-  duration_ms: 0.876167
+  duration_ms: 0.592208
   type: 'test'
   ...
 # Subtest: break free removes crowd control during a stun and cannot be repeated for 45 seconds
-ok 25 - break free removes crowd control during a stun and cannot be repeated for 45 seconds
+ok 26 - break free removes crowd control during a stun and cannot be repeated for 45 seconds
   ---
-  duration_ms: 1.199333
+  duration_ms: 1.097875
   type: 'test'
   ...
 # Subtest: cancelling during windup keeps the resource and cooldown, but keeps unlawful aggression
-ok 26 - cancelling during windup keeps the resource and cooldown, but keeps unlawful aggression
+ok 27 - cancelling during windup keeps the resource and cooldown, but keeps unlawful aggression
   ---
-  duration_ms: 0.198584
+  duration_ms: 0.188125
   type: 'test'
   ...
 # Subtest: a travelling pulse can be dodged sideways after it is committed
-ok 27 - a travelling pulse can be dodged sideways after it is committed
+ok 28 - a travelling pulse can be dodged sideways after it is committed
   ---
-  duration_ms: 0.300583
+  duration_ms: 0.58225
   type: 'test'
   ...
 # Subtest: an in-flight pulse cannot damage a player who reaches sanctuary
-ok 28 - an in-flight pulse cannot damage a player who reaches sanctuary
+ok 29 - an in-flight pulse cannot damage a player who reaches sanctuary
   ---
-  duration_ms: 0.111917
+  duration_ms: 0.188041
   type: 'test'
   ...
 # Subtest: competing loot requests are exclusive to the owning claimant
-ok 29 - competing loot requests are exclusive to the owning claimant
+ok 30 - competing loot requests are exclusive to the owning claimant
   ---
-  duration_ms: 0.194833
+  duration_ms: 0.277375
   type: 'test'
   ...
 # Subtest: a downed traveller can crawl and another player can revive them once
-ok 30 - a downed traveller can crawl and another player can revive them once
+ok 31 - a downed traveller can crawl and another player can revive them once
   ---
-  duration_ms: 0.258333
+  duration_ms: 0.567583
   type: 'test'
   ...
 # Subtest: moving during a revive interrupts it; helping an outlaw in combat flags the helper
-ok 31 - moving during a revive interrupts it; helping an outlaw in combat flags the helper
+ok 32 - moving during a revive interrupts it; helping an outlaw in combat flags the helper
   ---
-  duration_ms: 0.202042
+  duration_ms: 0.307083
   type: 'test'
   ...
-1..31
-# tests 31
+1..32
+# tests 32
 # suites 0
-# pass 31
+# pass 32
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 17187.017042
+# duration_ms 17052.684375

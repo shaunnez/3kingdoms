@@ -1,12 +1,15 @@
 import type { Vec2 } from "../contracts/game";
 export const MAP = { minX: -20, maxX: 20, minZ: -40, maxZ: 60, safeZ: 0 };
 export const REFUGE = { x: 14, z: 45, radius: 4 };
+const ASTROLABE = { x: -5, z: -28, radius: 2.1 };
 export const OBSTACLES = [
   // Match the four scaled 6.5m house footprints in build_environment.py.
   { x: -13, z: -24, w: 6.825, d: 6.825 },
   { x: 13, z: -25, w: 6.24, d: 6.24 },
   { x: -13, z: -9, w: 6.5, d: 6.5 },
   { x: 13, z: -9, w: 6.305, d: 6.305 },
+  { x: -5.6, z: 5, w: 2.7, d: 3.7 },
+  { x: 5.6, z: 5, w: 2.7, d: 3.7 },
   { x: -11, z: 5, w: 10, d: 1.8 },
   { x: 9, z: 5, w: 7, d: 1.8 },
   { x: -13, z: 31, w: 6, d: 6 },
@@ -24,6 +27,8 @@ export function distanceSquared(a: Vec2, b: Vec2): number {
   return (a.x - b.x) ** 2 + (a.z - b.z) ** 2;
 }
 export function walkable(p: Vec2, radius = 0.4): boolean {
+  if (distanceSquared(p, ASTROLABE) < (ASTROLABE.radius + radius) ** 2)
+    return false;
   if (
     p.x < MAP.minX + radius ||
     p.x > MAP.maxX - radius ||
@@ -66,6 +71,8 @@ export function lineOfSight(a: Vec2, b: Vec2): boolean {
   for (let i = 1; i < n; i++) {
     const x = a.x + ((b.x - a.x) * i) / n,
       z = a.z + ((b.z - a.z) * i) / n;
+    if (distanceSquared({ x, z }, ASTROLABE) < ASTROLABE.radius ** 2)
+      return false;
     if (
       OBSTACLES.some(
         (o) => Math.abs(x - o.x) < o.w / 2 && Math.abs(z - o.z) < o.d / 2,
