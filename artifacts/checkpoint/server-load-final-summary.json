@@ -1,0 +1,14 @@
+{
+  "source_fingerprint": "41e30695fe06c0c86733c42820b896d714472ff80497a27256d3783ed9926c67",
+  "source_commit": "b49c48f92d700c9347e988be0f1a03cbc7ba7b66",
+  "trace": "artifacts/checkpoint/server-load-600s.json",
+  "trace_sha256": "f606eda475fb6e17c585b3256c787bbb282897e8b1e850288cc6929126577288",
+  "duration_seconds": 600.542592917,
+  "clients": 16,
+  "ai_cost_fixtures": 80,
+  "tick_p95_ms": 7.870583000010811,
+  "tick_p99_ms": 9.133125000051223,
+  "mean_decoded_snapshot_kbit_per_second_per_client": 3246.192458274869,
+  "max_arrival_p99_ms": 107.61766600000556,
+  "scope": "Loopback CPU/transport workload with artificial health and hound-cost summon proxies. Browser/journal review ran concurrently. Decoded JSON size is not measured compressed wire bandwidth; no impaired-network or production-throughput qualification."
+}

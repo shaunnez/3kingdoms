@@ -1,0 +1,30 @@
+{
+  "source_fingerprint": "41e30695fe06c0c86733c42820b896d714472ff80497a27256d3783ed9926c67",
+  "input": "Ordinary browser right-click movement and field-route buttons that submit normal server commands. No teleport or state grant.",
+  "central_arch": "Traversed north to z=7.1 and returned to Mara through the centre; ordinary movement remains open.",
+  "tower": {
+    "stopped_x": -3.8,
+    "stopped_z": 5.3,
+    "solid_east_edge_x": -4.25,
+    "player_radius": 0.4,
+    "frame": "artifacts/checkpoint/captures/2026-09-30T15-24-51-826Z-25f46007.png",
+    "observation": "Alive character stopped outside the tower. The saved frame was captured after the idle character was killed by a hound; this is not an image of the earlier alive state.",
+    "remaining_visual_issue": "Tower edge can still partly obscure the character. Gate-arch fading does not fade every solid tower face."
+  },
+  "astrolabe": {
+    "stopped_x": -5.0,
+    "stopped_z": -25.4,
+    "centre": {
+      "x": -5,
+      "z": -28
+    },
+    "pedestal_radius": 2.1,
+    "player_radius": 0.4,
+    "frame": "artifacts/checkpoint/captures/2026-09-30T15-27-23-867Z-bc7ca505.png",
+    "observation": "Alive character remains outside the circular pedestal after a click toward its centre. Camera yaw rotated 180 degrees through normal bracket controls; pitch and distance unchanged."
+  },
+  "checks": [
+    "artifacts/checkpoint/landmark-collision-before-fix.tap",
+    "artifacts/checkpoint/landmark-collision-regression.tap"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "repository": "shaunnez/3kingdoms",
+  "head_sha": "5f0ff3f8bae392d13287bb45fa3ff9453ac7599a",
+  "run_id": 36731536802,
+  "status": "completed",
+  "conclusion": "success",
+  "url": "https://github.com/shaunnez/3kingdoms/actions/runs/36731536802",
+  "scope": "Remote Checkpoint checks workflow: typecheck, formatting, tests, build, runtime GLB validation, planning and deterministic document checks. This is not a browser performance, art or human fun pass.",
+  "recorded_at": "2026-09-30T14:51:07.742863+00:00"
+}

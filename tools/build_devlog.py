@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Build the static development journal from its small explicit content file."""
 import html
+import hashlib
 import json
 from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BLOG = ROOT / "devlog"
+STYLE_VERSION = hashlib.sha256((BLOG / "style.css").read_bytes()).hexdigest()[:12]
 
 
 def esc(value: object) -> str:
@@ -22,7 +24,7 @@ def page(title: str, content: str, depth: int = 0) -> str:
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="THREEFOLD development journal: design, art and the journey toward a browser RPG.">
-<title>{esc(title)} · THREEFOLD</title><link rel="stylesheet" href="{prefix}style.css"></head>
+<title>{esc(title)} · THREEFOLD</title><link rel="stylesheet" href="{prefix}style.css?v={STYLE_VERSION}"></head>
 <body><a class="skip" href="#main">Skip to content</a><div class="shell">
 <header><a class="brand" href="{prefix}index.html">THREEFOLD<span>THE HIGHCROSS JOURNAL</span></a><nav aria-label="Main navigation"><a href="{prefix}index.html">Journal</a><a href="{prefix}../game-plan.md">Production plan (Markdown) ↗</a><a href="https://github.com/shaunnez/3kingdoms">Repository ↗</a></nav></header>
 <main id="main">{content}</main><footer><span>Three worlds. One way home.</span><span>A browser RPG in development · Playable local checkpoint</span></footer>
@@ -49,8 +51,8 @@ def build() -> None:
         content = f'<a class="back" href="../index.html">← All field notes</a><article class="article"><div class="eyebrow">{esc(post["number"])} / {esc(post["date"])} / {esc(post["category"])}</div><h1>{esc(post["title"])}</h1><p class="lead">{esc(post["summary"])}</p><span class="status">{esc(post["status"])}</span>'
         for i, paragraph in enumerate(post["paragraphs"]):
             content += f'<p>{esc(paragraph)}</p>'
-            if i == 0:
-                content += "".join(media(item, 1) for item in post["media"])
+            content += "".join(media(item, 1) for item in post["media"]
+                               if item.get("after_paragraph", 0) == i)
         content += f'<aside class="evidence"><h2>What we can verify</h2><p>{esc(post["verified"])}</p><h2>Still ahead</h2><p>{esc(post["limitations"])}</p></aside></article>'
         (BLOG / "posts" / f'{post["slug"]}.html').write_text(page(post["title"], content, 1))
     latest = posts[0]

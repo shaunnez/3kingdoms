@@ -26,7 +26,7 @@ python3 tools/validate_plan.py
 python3 -m http.server 4173 --bind 127.0.0.1
 ```
 
-Open `http://127.0.0.1:4173/devlog/` to read the local journal. The server exposes this project directory on loopback only. The [hosted journal](https://threefold-devlog.shaunnesbittuk.chatgpt.site) is deployed on ChatGPT Sites with owner-private access. The exact deployed source and version are recorded in [devlog/site.json](devlog/site.json); GitHub source publication and game hosting remain separate outcomes. The first playable source is pushed to this repository, with [a successful CI run](https://github.com/shaunnez/3kingdoms/actions/runs/36722527673). The game itself runs locally.
+Open `http://127.0.0.1:4173/devlog/` to read the local journal. The server exposes this project directory on loopback only. The [hosted journal](https://threefold-devlog.shaunnesbittuk.chatgpt.site) is deployed on ChatGPT Sites with owner-private access. The exact deployed source and version are recorded in [devlog/site.json](devlog/site.json); GitHub source publication and game hosting remain separate outcomes. The playable source and environment repair are pushed to this repository, with [a successful CI run](https://github.com/shaunnez/3kingdoms/actions/runs/36736079686). The game itself runs locally.
 
 The catalogue source is `tools/build_catalogue.py`; it expands named content into JSON manifests and an ability reference. `devlog/posts.json` is the journal content source. Generated HTML/Markdown/JSON outputs are checked in so the specification can be read without running tools. Rebuild after changing source, then validate.
 

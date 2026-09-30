@@ -1,6 +1,6 @@
 {
   "scope": "One representative merchant house and local environment lighting/material repair; not bulk production",
-  "status": "visibility-repair-observed; performance-requalification-in-progress",
+  "status": "local-rendering-measured; heap-budget-and-reference-art-remain-open",
   "higgsfield": {
     "job_id": "aadedd8c-efa5-42bc-b8d1-3a29d7e50f7f",
     "model": "gpt_image_2_5",
@@ -25,7 +25,7 @@
     "source_sha256": "b9d4985b9a39b486a1833a6ecea149c40d6e7ffed04cb97d2c7dcdfcf69e0f5e",
     "preview": "artifacts/checkpoint/merchant-house-provider-preview.png"
   },
-  "candidate_build": "19f52fbc4ae879b22026c7bee1d7e07cead8f8463915c1fec1a06103ca5eae9a",
+  "candidate_build": "41e30695fe06c0c86733c42820b896d714472ff80497a27256d3783ed9926c67",
   "baseline_frame": "artifacts/checkpoint/captures/2026-09-30T14-00-15-210Z-94321d74.png",
   "first_candidate_frame": "artifacts/checkpoint/captures/2026-09-30T14-07-13-194Z-bf22fe9b.png",
   "revised_frame": "artifacts/checkpoint/captures/2026-09-30T14-10-16-801Z-6e43be2c.png",
@@ -78,5 +78,8 @@
       "frame": "artifacts/checkpoint/captures/2026-09-30T14-42-13-657Z-c407f813.png",
       "result": "Player remained outside the -9.75m facade with the 0.4m collision radius; did not enter the house."
     }
-  }
+  },
+  "memory_summary": "artifacts/checkpoint/memory-environment-repair.json",
+  "client_equivalence": "artifacts/checkpoint/client-landmark-equivalence.json",
+  "landmark_collision": "Gate towers and 2.1m-radius astrolabe pedestal now block ordinary movement and sightlines; centre arch and circular bypass remain open in the regression."
 }

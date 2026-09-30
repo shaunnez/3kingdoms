@@ -236,8 +236,8 @@
     "references": "reviewed calibration; generated references remain concept art",
     "rigging": "Humanoid and custom quadruped clips reviewed in browser; production acting remains open.",
     "browser": "Playable route captured in uncut videos; final environment quality remains below reference.",
-    "multiplayer": "30 automated checks and two actual browser sessions verify scoped rules and durable claims.",
-    "performance": "Final ten-minute renderer passes local frame/draw/triangle targets with one retained 313ms stall; final thirty-minute memory trace running. Prior heap target miss retained.",
+    "multiplayer": "32 automated checks and two actual browser sessions verify scoped rules and durable claims.",
+    "performance": "Ten-minute renderer meets local frame/draw/triangle targets with a retained 313ms stall. Thirty-minute memory trace: retained-count growth at most 1.25%; approximate heap peaks at 559.35 MiB, exceeding 300 MiB target. Same 266 client runtime files after server-only landmark repair.",
     "human_fun": "not-run"
   }
 }

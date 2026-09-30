@@ -14,7 +14,12 @@ manifest = json.loads(manifest_path.read_text())
 if trace['mode'] != 'memory':
     raise ValueError('Expected a memory load/unload trace')
 samples = trace['samples']
-unloaded = [sample for sample in samples if sample['phase'] == 'unloaded']
+first_loaded = next((i for i, sample in enumerate(samples) if sample['phase'] == 'loaded'), None)
+if first_loaded is None:
+    raise ValueError('No loaded samples; this trace cannot establish disposal behavior')
+# Sampling precedes the phase switch. Exclude the one pre-load transition sample.
+post_load_samples = samples[first_loaded + 1:]
+unloaded = [sample for sample in post_load_samples if sample['phase'] == 'unloaded']
 if not unloaded:
     raise ValueError('No unloaded samples; this trace cannot establish resource retention')
 resources = {}
@@ -29,8 +34,9 @@ for key in ['meshes', 'textures', 'materials', 'skeletons', 'animationGroups']:
         'last_growth_percent': (last-baseline)/max(1,baseline)*100,
     }
 heap = sorted(sample['heapBytes'] for sample in samples if sample['heapBytes'] is not None)
-groups = sum(sample['phase'] == 'unloaded' and (i == 0 or samples[i-1]['phase'] != 'unloaded')
-             for i, sample in enumerate(samples))
+groups = sum(sample['phase'] == 'unloaded' and
+             (i == 0 or post_load_samples[i-1]['phase'] != 'unloaded')
+             for i, sample in enumerate(post_load_samples))
 result = {
     'trace': str(trace_path),
     'trace_sha256': hashlib.sha256(trace_path.read_bytes()).hexdigest(),
@@ -40,6 +46,7 @@ result = {
     'duration_seconds': trace['durationSeconds'],
     'hidden_samples': trace['summary']['hiddenSamples'],
     'unloaded_phases': groups,
+    'unloaded_phase_definition': 'Consecutive unloaded samples after the first measured loaded phase. Excludes the pre-load transition sample; final cleanup after recording has no subsequent sample.',
     'resources': resources,
     'heap_mib': {
         'min': min(heap)/2**20, 'max': max(heap)/2**20,

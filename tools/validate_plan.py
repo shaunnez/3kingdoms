@@ -154,6 +154,11 @@ def main():
             check(bool(image.get("alt")), f"Missing image alt: {file.name}")
     posts = json.loads((ROOT / "devlog/posts.json").read_text())
     check({p.stem for p in (ROOT / "devlog/posts").glob("*.html")} == {p["slug"] for p in posts}, "Journal article set does not match source entries")
+    for post in posts:
+        for item in post["media"]:
+            position = item.get("after_paragraph", 0)
+            check(isinstance(position, int) and 0 <= position < len(post["paragraphs"]),
+                  f"Journal media has no valid paragraph: {post['slug']}: {item['path']}")
     if errors:
         raise SystemExit("\n".join(errors))
     print(f"PASS: 12 full guilds + Adventurer; 117 actions; {len(assets)} tracked asset units; 25 maps; 44 quests; 3 unchanged reference PNGs; {checked_links} local/external link references inspected.")

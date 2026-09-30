@@ -1,0 +1,5 @@
+
+> threefold@0.1.0 benchmark:server
+> node --import tsx tools/benchmark-server.ts 600
+
+{"path":"artifacts/checkpoint/server-load-600s.json","durationSeconds":600.542592917,"clients":16,"lastSample":{"elapsedSeconds":600.5424853339999,"build":"0.1.0-briar-gate","ticks":12010,"samples":12000,"tickP95Ms":7.870583000010811,"tickP99Ms":9.133125000051223,"players":16}}
