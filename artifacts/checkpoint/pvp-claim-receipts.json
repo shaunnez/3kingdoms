@@ -1,0 +1,28 @@
+{
+  "exported_at": "2026-09-30T13:27:19.195101+00:00",
+  "source": "Sanitized extraction from the local authoritative save; no identity tokens or full character save included.",
+  "receipts": [
+    {
+      "receipt": "corpse-447:item-88",
+      "item_id": "item-88",
+      "item_name": "Briar-forged brooch",
+      "current_owner": "Vex",
+      "protected": false
+    },
+    {
+      "receipt": "corpse-659:item-177",
+      "item_id": "item-177",
+      "item_name": "Amber shard",
+      "current_owner": "Thorne",
+      "protected": false
+    },
+    {
+      "receipt": "corpse-659:item-178",
+      "item_id": "item-178",
+      "item_name": "Weathered copper ring",
+      "current_owner": "Thorne",
+      "protected": false
+    }
+  ],
+  "note": "First receipt is the one-item clean death; the final two share the red-victim corpse. These persisted after death, respawn and browser reconnect."
+}

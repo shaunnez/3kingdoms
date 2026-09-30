@@ -1,0 +1,16 @@
+❯ dedup
+✔ dedup                4ms
+❯ weld
+✔ weld                 24ms
+❯ resample
+✔ resample             11ms
+❯ prune
+✔ prune                92ms
+❯ sparse
+✔ sparse               8ms
+❯ textureCompress
+✔ textureCompress      171ms
+❯ quantize
+✔ quantize             107ms
+
+info: nemi-validated.glb (5.44 MB) → nemi.glb (860.62 KB)

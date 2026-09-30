@@ -1,0 +1,4386 @@
+{
+  "version": 2,
+  "date": "2026-09-30",
+  "status": "proposed-specification",
+  "guilds": [
+    {
+      "id": "knight",
+      "name": "Knight",
+      "resource": "Resolve",
+      "resource_rule": "100; +12 on block, +6 on basic hit; starts at 30",
+      "rig": "humanoid",
+      "appearance": "plate, teal cloth, cream tabard; bronze shield; short gold oath strokes",
+      "audio": "guarded metal strike / low choir",
+      "mastery_choice": "Bulwark: Interpose protects two nearby allies at half strength; Duelist: Sunder gains 20% damage after a successful defence",
+      "identity": "Resolve on defence makes positioning valuable; ranged kiting punishes overcommitment",
+      "abilities": [
+        "ability.knight.sunder",
+        "ability.knight.shield-bash",
+        "ability.knight.challenge",
+        "ability.knight.interpose",
+        "ability.knight.rally",
+        "ability.knight.last-oath",
+        "ability.knight.measured-cut",
+        "ability.knight.brace",
+        "ability.knight.oath-sight"
+      ],
+      "full_guild": true
+    },
+    {
+      "id": "cyborg",
+      "name": "Cyborg",
+      "resource": "Heat",
+      "resource_rule": "0\u2013100; actions add heat; cool 8/s after 2s without spending; at 100 offence locks until 50",
+      "rig": "humanoid",
+      "appearance": "human face, ceramic limbs, exposed copper mechanisms; cyan coils",
+      "audio": "capacitor whine / pressure vent",
+      "mastery_choice": "Insulator: Coolant Burst leaves 15% ranged-damage cover for 3s; Shatter: cooled enemies take 20% more Pulse Lance damage once",
+      "identity": "Manage heat bursts and vent timing; interrupts and pressure during cooling punish greed",
+      "abilities": [
+        "ability.cyborg.pulse-lance",
+        "ability.cyborg.mag-clamp",
+        "ability.cyborg.arc-mine",
+        "ability.cyborg.coolant-burst",
+        "ability.cyborg.repair-drone",
+        "ability.cyborg.overclock",
+        "ability.cyborg.pulse-tap",
+        "ability.cyborg.reactive-plating",
+        "ability.cyborg.diagnostic-scan"
+      ],
+      "full_guild": true
+    },
+    {
+      "id": "necromancer",
+      "name": "Necromancer",
+      "resource": "Essence",
+      "resource_rule": "100; regenerates 7/s; enemy defeat restores 10 once per eligible creature",
+      "rig": "humanoid",
+      "appearance": "bone and bronze ornaments, layered black robes; pale blue spirits and violet curses",
+      "audio": "breath / brittle chime / hollow resonance",
+      "mastery_choice": "Keeper: Echo lasts 8s longer but Consume heals 25% less; Reaper: Consume detonates for 0.6P within 2m",
+      "identity": "Choose spirit survival or sacrifice; cleansing and summon focus disrupt setup",
+      "abilities": [
+        "ability.necromancer.grave-bolt",
+        "ability.necromancer.wither",
+        "ability.necromancer.raise-echo",
+        "ability.necromancer.soul-tether",
+        "ability.necromancer.consume",
+        "ability.necromancer.procession",
+        "ability.necromancer.ash-touch",
+        "ability.necromancer.veil-of-dust",
+        "ability.necromancer.speak-with-remnants"
+      ],
+      "full_guild": true
+    },
+    {
+      "id": "mage",
+      "name": "Mage",
+      "resource": "Mana",
+      "resource_rule": "100; regenerates 8/s; last two elements determine next combination",
+      "rig": "humanoid",
+      "appearance": "layered indigo cloth, geometric staff head, restrained elemental forms",
+      "audio": "glass harmonics / air crack / small ignition",
+      "mastery_choice": "Evoker: mixed-element hit gains 15% damage; Scholar: successful combination refunds 10 Mana once per 6s",
+      "identity": "Prepare a sequence then cash it in; interrupt long casts and move before combinations land",
+      "abilities": [
+        "ability.mage.ember-sigil",
+        "ability.mage.rime-shard",
+        "ability.mage.arc-thread",
+        "ability.mage.spell-weave",
+        "ability.mage.runic-ward",
+        "ability.mage.convergence",
+        "ability.mage.wand-spark",
+        "ability.mage.phase-step",
+        "ability.mage.read-the-weave"
+      ],
+      "full_guild": true
+    },
+    {
+      "id": "monk",
+      "name": "Monk",
+      "resource": "Flow",
+      "resource_rule": "0\u2013100; +12 on alternating basics/skills, -10 for repeating same skill; decays 5/s out of combat",
+      "rig": "humanoid",
+      "appearance": "sand wraps, charcoal travel clothes, beads; clean physical silhouettes",
+      "audio": "cloth snap / breath / wooden block",
+      "mastery_choice": "Crane: successful Palm Counter gives 1s of 20% speed; Tiger: third alternating hit adds 0.35P damage",
+      "identity": "Alternate actions and time counters; feints and range deny Flow",
+      "abilities": [
+        "ability.monk.tiger-palm",
+        "ability.monk.crane-step",
+        "ability.monk.palm-counter",
+        "ability.monk.sweeping-reed",
+        "ability.monk.still-breath",
+        "ability.monk.hundred-hands",
+        "ability.monk.open-hand",
+        "ability.monk.slip",
+        "ability.monk.stillness"
+      ],
+      "full_guild": true
+    },
+    {
+      "id": "priest",
+      "name": "Priest",
+      "resource": "Grace",
+      "resource_rule": "100; regenerates 7/s; maintain one vow: Shelter reduces own damage 10% and increases healing 10%, Judgment reverses",
+      "rig": "humanoid",
+      "appearance": "ivory stole, practical bronze mail, open sun emblem; warm protective planes",
+      "audio": "bell / breath choir / soft bronze",
+      "mastery_choice": "Shelter: ward expiry heals 0.3P; Judgment: Smite against condemned target grants 0.4P self shield",
+      "identity": "Vow trades healing for pressure; interrupts, spread pressure and anti-heal counter sustain",
+      "abilities": [
+        "ability.priest.smite",
+        "ability.priest.mend",
+        "ability.priest.sanctuary-ward",
+        "ability.priest.absolve",
+        "ability.priest.condemn",
+        "ability.priest.dawn-covenant",
+        "ability.priest.pilgrim-strike",
+        "ability.priest.votive-shield",
+        "ability.priest.consecrate-memory"
+      ],
+      "full_guild": true
+    },
+    {
+      "id": "bard",
+      "name": "Bard",
+      "resource": "Resonance",
+      "resource_rule": "0\u2013100; +10 per basic beat; songs spend per second; two concurrent songs maximum",
+      "rig": "humanoid",
+      "appearance": "rust-red coat, compact lyre and curved blade; thin rhythmic ribbons",
+      "audio": "plucked strings / hand drum / restrained chord",
+      "mastery_choice": "Conductor: song radius +2m; Duelist: ending two songs grants next Cadenza 0.4P damage",
+      "identity": "Layer and release songs without losing position; interrupts and separation deny group value",
+      "abilities": [
+        "ability.bard.cadenza",
+        "ability.bard.march-of-embers",
+        "ability.bard.quiet-refrain",
+        "ability.bard.discord",
+        "ability.bard.borrowed-courage",
+        "ability.bard.finale",
+        "ability.bard.backbeat",
+        "ability.bard.dancers-turn",
+        "ability.bard.remembered-tune"
+      ],
+      "full_guild": true
+    },
+    {
+      "id": "changeling",
+      "name": "Changeling",
+      "resource": "Instinct",
+      "resource_rule": "100; regenerates 8/s; forms Wolf, Raven, Beetle; combat uses ground movement for all",
+      "rig": "quadruped",
+      "appearance": "wolf with pale crest, ground-skimming raven, plated beetle; constant amber eye motif",
+      "audio": "bone shift / wing cloth / claw rhythm",
+      "mastery_choice": "Hunter: Wolf Pounce marks prey for 10% bonus basic damage 3s; Wanderer: form change restores 10 Instinct once per 8s",
+      "identity": "Form determines reach and escape; predict swaps, use sustained pressure during transformation",
+      "abilities": [
+        "ability.changeling.rending-pounce",
+        "ability.changeling.raven-shift",
+        "ability.changeling.beetle-shift",
+        "ability.changeling.wild-return",
+        "ability.changeling.borrowed-hide",
+        "ability.changeling.primal-chorus",
+        "ability.changeling.instinct-strike",
+        "ability.changeling.feral-sidestep",
+        "ability.changeling.borrowed-passage"
+      ],
+      "full_guild": true
+    },
+    {
+      "id": "elemental",
+      "name": "Elemental",
+      "resource": "Stability",
+      "resource_rule": "100; regenerates 6/s; Fire, Water, Earth, Air; swapping costs Stability",
+      "rig": "elemental",
+      "appearance": "four humanoid masses with different outline crowns; feet always readable",
+      "audio": "stone / steam / wind / water in matching register",
+      "mastery_choice": "Anchor: Earth reduces displacement 50%; Tempest: cycling three elements empowers next basic by 0.6P",
+      "identity": "Each element commits to a function; punish repeated swapping and forecast delayed zones",
+      "abilities": [
+        "ability.elemental.ember-body",
+        "ability.elemental.tidal-body",
+        "ability.elemental.stone-body",
+        "ability.elemental.gale-body",
+        "ability.elemental.elemental-surge",
+        "ability.elemental.worldheart",
+        "ability.elemental.elemental-reach",
+        "ability.elemental.coalesce",
+        "ability.elemental.shape-the-way"
+      ],
+      "full_guild": true
+    },
+    {
+      "id": "psion",
+      "name": "Psion",
+      "resource": "Focus",
+      "resource_rule": "100; regenerates 8/s; interrupted casts remove additional 10 Focus",
+      "rig": "humanoid",
+      "appearance": "dark tailored coat, suspended crystal halo fragments; lilac line distortions",
+      "audio": "tuned hum / soft glass / low pressure click",
+      "mastery_choice": "Anchor: Mind Bulwark returns 10 Focus on full absorption; Vector: successful displacement empowers Thought Spike by 20%",
+      "identity": "Control space through anticipated lines; interrupts and cover deny setup",
+      "abilities": [
+        "ability.psion.thought-spike",
+        "ability.psion.vector-push",
+        "ability.psion.gravity-knot",
+        "ability.psion.mind-bulwark",
+        "ability.psion.echo-step",
+        "ability.psion.still-horizon",
+        "ability.psion.mental-needle",
+        "ability.psion.mental-slip",
+        "ability.psion.surface-memory"
+      ],
+      "full_guild": true
+    },
+    {
+      "id": "symbiont",
+      "name": "Symbiont",
+      "resource": "Bond",
+      "resource_rule": "100; regenerates 7/s; host adaptations Guardian, Stalker, Mender share HP and cooldowns",
+      "rig": "humanoid",
+      "appearance": "recognizable human host with amber resin tendrils, bark plates and distinct limb attachments",
+      "audio": "wet fibre / hollow wood / heartbeat",
+      "mastery_choice": "Mutualist: Mender heals grant 0.2P shield; Predator: Stalker attacks on marked targets restore 4 Bond once per second",
+      "identity": "Trade armour, reach and healing through adaptations; focus exposed host during swaps",
+      "abilities": [
+        "ability.symbiont.thorn-lash",
+        "ability.symbiont.guardian-graft",
+        "ability.symbiont.stalker-graft",
+        "ability.symbiont.mender-graft",
+        "ability.symbiont.spore-covenant",
+        "ability.symbiont.perfect-union",
+        "ability.symbiont.host-strike",
+        "ability.symbiont.reflex-husk",
+        "ability.symbiont.living-interface"
+      ],
+      "full_guild": true
+    },
+    {
+      "id": "powered-armour",
+      "name": "Powered Armour",
+      "resource": "Capacitor",
+      "resource_rule": "100; regenerates 6/s when not firing; Assault, Bastion, Support configurations selected in town",
+      "rig": "heavy",
+      "appearance": "broad industrial suit, visible pilot viewport, orange warning marks and massive readable feet",
+      "audio": "heavy servo / cartridge slam / grounded recoil",
+      "mastery_choice": "Bastion: Brace Projector lasts 1s longer; Assault: Siege Round splash +0.3P but cooldown +2s",
+      "identity": "Manage power and firing commitment; flanks and line-of-sight breaks beat frontal strength",
+      "abilities": [
+        "ability.powered-armour.siege-round",
+        "ability.powered-armour.anchor-shot",
+        "ability.powered-armour.brace-projector",
+        "ability.powered-armour.servo-rush",
+        "ability.powered-armour.field-patch",
+        "ability.powered-armour.fortress-protocol",
+        "ability.powered-armour.repeater",
+        "ability.powered-armour.hard-lock",
+        "ability.powered-armour.heavy-access"
+      ],
+      "full_guild": true
+    },
+    {
+      "id": "adventurer",
+      "name": "Adventurer",
+      "resource": "Stamina",
+      "resource_rule": "100; regenerates 10/s; starter guild levels 1\u20135",
+      "rig": "humanoid",
+      "appearance": "weathered linen coat, practical leather, simple iron weapon",
+      "audio": "leather / iron / breath",
+      "mastery_choice": "No mastery branch; choose a full guild at level five",
+      "identity": "Learn movement, readable danger and interaction before specialization",
+      "abilities": [
+        "ability.adventurer.heavy-cut",
+        "ability.adventurer.dust-throw",
+        "ability.adventurer.field-dressing",
+        "ability.adventurer.spot-weakness",
+        "ability.adventurer.stone-toss",
+        "ability.adventurer.second-wind",
+        "ability.adventurer.strike",
+        "ability.adventurer.guard",
+        "ability.adventurer.careful-examine"
+      ],
+      "full_guild": false
+    }
+  ],
+  "abilities": [
+    {
+      "id": "ability.knight.sunder",
+      "guild": "knight",
+      "name": "Sunder",
+      "role": "slot1",
+      "cost": "15",
+      "cooldown_seconds": 5.0,
+      "windup_seconds": 0.45,
+      "range_metres": "2.5",
+      "effect": "1.4P physical; armour reduced 15% for 5s",
+      "visual_cue": "overhead diagonal cut; split brass arc",
+      "counterplay": "evade the committed swing",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.knight.shield-bash",
+      "guild": "knight",
+      "name": "Shield Bash",
+      "role": "slot2",
+      "cost": "20",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.35,
+      "range_metres": "2",
+      "effect": "0.5P; interrupt and 0.7s stun",
+      "visual_cue": "shield draw-back; blue edge snap",
+      "counterplay": "bait then step beyond reach",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.knight.challenge",
+      "guild": "knight",
+      "name": "Challenge",
+      "role": "slot3",
+      "cost": "10",
+      "cooldown_seconds": 14.0,
+      "windup_seconds": 0.3,
+      "range_metres": "10",
+      "effect": "PvE taunt 3s; PvP target deals 15% less damage to other allies for 4s",
+      "visual_cue": "raised sword; thin gold tether",
+      "counterplay": "attack Knight or disengage; never forced targeting",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.knight.interpose",
+      "guild": "knight",
+      "name": "Interpose",
+      "role": "slot4",
+      "cost": "25",
+      "cooldown_seconds": 16.0,
+      "windup_seconds": 0.2,
+      "range_metres": "8",
+      "effect": "dash to ally; redirect 30% damage for 3s, capped at 20% own max HP",
+      "visual_cue": "shield forward dash; linked shield outlines",
+      "counterplay": "separate allies; interrupt before link",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.knight.rally",
+      "guild": "knight",
+      "name": "Rally",
+      "role": "slot5",
+      "cost": "30",
+      "cooldown_seconds": 22.0,
+      "windup_seconds": 0.7,
+      "range_metres": "4",
+      "effect": "ground field heals 0.25P/s for 4s; maximum four allies",
+      "visual_cue": "plant banner; low amber pulse",
+      "counterplay": "leave or interrupt cast",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.knight.last-oath",
+      "guild": "knight",
+      "name": "Last Oath",
+      "role": "signature",
+      "cost": "60",
+      "cooldown_seconds": 75.0,
+      "windup_seconds": 0.6,
+      "range_metres": "self",
+      "effect": "6s stagger resistance; defence restores 0.4P HP once per second maximum",
+      "visual_cue": "kneeling oath then rising shield crest",
+      "counterplay": "disengage; resistance grants no damage immunity",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.knight.measured-cut",
+      "guild": "knight",
+      "name": "Measured Cut",
+      "role": "basic",
+      "cost": "0",
+      "cooldown_seconds": 1.1,
+      "windup_seconds": 0.3,
+      "range_metres": "2.5",
+      "effect": "1.0P physical basic",
+      "visual_cue": "compact waist-height blade trail",
+      "counterplay": "maintain distance",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.knight.brace",
+      "guild": "knight",
+      "name": "Brace",
+      "role": "defence",
+      "cost": "0",
+      "cooldown_seconds": 8.0,
+      "windup_seconds": 0.1,
+      "range_metres": "self",
+      "effect": "0.8s front guard reduces incoming damage 60%; no movement",
+      "visual_cue": "shield lock and sparks",
+      "counterplay": "flank or delay",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.knight.oath-sight",
+      "guild": "knight",
+      "name": "Oath Sight",
+      "role": "utility",
+      "cost": "0",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 6.0,
+      "range_metres": "6",
+      "effect": "reveal oath marks and sworn mechanisms while channeling out of combat",
+      "visual_cue": "small bronze glyph; no through-wall player detection",
+      "counterplay": "taking damage cancels interaction",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.cyborg.pulse-lance",
+      "guild": "cyborg",
+      "name": "Pulse Lance",
+      "role": "slot1",
+      "cost": "+24",
+      "cooldown_seconds": 4.0,
+      "windup_seconds": 0.65,
+      "range_metres": "16",
+      "effect": "1.6P piercing lane, 1m wide; enemies beyond first take half",
+      "visual_cue": "coils gather; narrow orange lane then cyan shot",
+      "counterplay": "sidestep visible lane",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.cyborg.mag-clamp",
+      "guild": "cyborg",
+      "name": "Mag Clamp",
+      "role": "slot2",
+      "cost": "+18",
+      "cooldown_seconds": 14.0,
+      "windup_seconds": 0.5,
+      "range_metres": "10",
+      "effect": "0.3P; root 1s, boss slow 20%",
+      "visual_cue": "magnet prongs; ground brackets",
+      "counterplay": "cleanse or evade projectile",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.cyborg.arc-mine",
+      "guild": "cyborg",
+      "name": "Arc Mine",
+      "role": "slot3",
+      "cost": "+16",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.5,
+      "range_metres": "6",
+      "effect": "one visible mine, 12s life; 0.8P and 30% slow 2s",
+      "visual_cue": "crouch deploy; crackling ring",
+      "counterplay": "destroy from range; arm time 1s",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.cyborg.coolant-burst",
+      "guild": "cyborg",
+      "name": "Coolant Burst",
+      "role": "slot4",
+      "cost": "-45",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.4,
+      "range_metres": "3",
+      "effect": "vent heat; 25% slow 2s",
+      "visual_cue": "shoulder vent; transparent ice spray",
+      "counterplay": "keep beyond short radius",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.cyborg.repair-drone",
+      "guild": "cyborg",
+      "name": "Repair Drone",
+      "role": "slot5",
+      "cost": "+20",
+      "cooldown_seconds": 24.0,
+      "windup_seconds": 0.6,
+      "range_metres": "self",
+      "effect": "one drone heals 0.3P/s for 5s; destroyable",
+      "visual_cue": "release drone; quiet cyan repair beam",
+      "counterplay": "kill drone or interrupt launch",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.cyborg.overclock",
+      "guild": "cyborg",
+      "name": "Overclock",
+      "role": "signature",
+      "cost": "+8/s",
+      "cooldown_seconds": 75.0,
+      "windup_seconds": 0.4,
+      "range_metres": "self",
+      "effect": "6s; 25% faster basic attacks and +15% damage; normal heat cap still applies",
+      "visual_cue": "core opens; rising pulse rate",
+      "counterplay": "pressure cooling window",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.cyborg.pulse-tap",
+      "guild": "cyborg",
+      "name": "Pulse Tap",
+      "role": "basic",
+      "cost": "+4",
+      "cooldown_seconds": 1.0,
+      "windup_seconds": 0.2,
+      "range_metres": "12",
+      "effect": "0.8P ranged basic",
+      "visual_cue": "small blue muzzle pulse",
+      "counterplay": "line of sight",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.cyborg.reactive-plating",
+      "guild": "cyborg",
+      "name": "Reactive Plating",
+      "role": "defence",
+      "cost": "+8",
+      "cooldown_seconds": 10.0,
+      "windup_seconds": 0.1,
+      "range_metres": "self",
+      "effect": "45% damage reduction for 1s",
+      "visual_cue": "ceramic shutters close",
+      "counterplay": "wait out short plate window",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.cyborg.diagnostic-scan",
+      "guild": "cyborg",
+      "name": "Diagnostic Scan",
+      "role": "utility",
+      "cost": "0",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 6.0,
+      "range_metres": "6",
+      "effect": "read machines and hidden maintenance labels out of combat",
+      "visual_cue": "fine cyan scan grid",
+      "counterplay": "damage cancels; no player reveal",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.necromancer.grave-bolt",
+      "guild": "necromancer",
+      "name": "Grave Bolt",
+      "role": "slot1",
+      "cost": "12",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 0.5,
+      "range_metres": "14",
+      "effect": "1.1P spectral projectile",
+      "visual_cue": "lantern draws inward; thin blue bolt",
+      "counterplay": "cover or evade",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.necromancer.wither",
+      "guild": "necromancer",
+      "name": "Wither",
+      "role": "slot2",
+      "cost": "20",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.4,
+      "range_metres": "12",
+      "effect": "0.25P/s for 5s and 15% healing reduction",
+      "visual_cue": "pinch gesture; violet rib glyph",
+      "counterplay": "cleanse; only one Wither per caster/target",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.necromancer.raise-echo",
+      "guild": "necromancer",
+      "name": "Raise Echo",
+      "role": "slot3",
+      "cost": "30",
+      "cooldown_seconds": 20.0,
+      "windup_seconds": 0.8,
+      "range_metres": "5",
+      "effect": "one wolf spirit for 16s; 0.25P attack per 1.5s; 1.5P HP",
+      "visual_cue": "lantern kneel; blue pawprints assemble",
+      "counterplay": "interrupt or destroy summon",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.necromancer.soul-tether",
+      "guild": "necromancer",
+      "name": "Soul Tether",
+      "role": "slot4",
+      "cost": "15",
+      "cooldown_seconds": 10.0,
+      "windup_seconds": 0.3,
+      "range_metres": "12",
+      "effect": "command Echo to target; 20% slow 2s, line of sight required",
+      "visual_cue": "point; fine visible tether",
+      "counterplay": "break distance beyond 16m",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.necromancer.consume",
+      "guild": "necromancer",
+      "name": "Consume",
+      "role": "slot5",
+      "cost": "0",
+      "cooldown_seconds": 18.0,
+      "windup_seconds": 0.4,
+      "range_metres": "12",
+      "effect": "sacrifice own Echo; heal self 1.1P",
+      "visual_cue": "beckon spirit; inward lantern spiral",
+      "counterplay": "force early sacrifice",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.necromancer.procession",
+      "guild": "necromancer",
+      "name": "Procession",
+      "role": "signature",
+      "cost": "50",
+      "cooldown_seconds": 75.0,
+      "windup_seconds": 1.0,
+      "range_metres": "12",
+      "effect": "three ghost fronts move along 3m lane; total 2.4P, one hit per front",
+      "visual_cue": "staff sweep; marching silhouettes",
+      "counterplay": "leave lane during wind-up",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.necromancer.ash-touch",
+      "guild": "necromancer",
+      "name": "Ash Touch",
+      "role": "basic",
+      "cost": "0",
+      "cooldown_seconds": 1.2,
+      "windup_seconds": 0.3,
+      "range_metres": "11",
+      "effect": "0.65P ranged basic; +4 Essence on hit",
+      "visual_cue": "finger smoke thread",
+      "counterplay": "line of sight",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.necromancer.veil-of-dust",
+      "guild": "necromancer",
+      "name": "Veil of Dust",
+      "role": "defence",
+      "cost": "15",
+      "cooldown_seconds": 10.0,
+      "windup_seconds": 0.1,
+      "range_metres": "self",
+      "effect": "45% damage reduction 1s; no invisibility",
+      "visual_cue": "robe fold; thin dust veil",
+      "counterplay": "wait or follow visible feet",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.necromancer.speak-with-remnants",
+      "guild": "necromancer",
+      "name": "Speak with Remnants",
+      "role": "utility",
+      "cost": "0",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 6.0,
+      "range_metres": "4",
+      "effect": "read authored memory remnants, optional clue route",
+      "visual_cue": "lantern held to remnant",
+      "counterplay": "combat cancels; base clue alternative always exists",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.mage.ember-sigil",
+      "guild": "mage",
+      "name": "Ember Sigil",
+      "role": "slot1",
+      "cost": "15",
+      "cooldown_seconds": 4.0,
+      "windup_seconds": 0.6,
+      "range_metres": "14",
+      "effect": "1.0P fire; marks Ember for 4s",
+      "visual_cue": "draw triangle; orange spark",
+      "counterplay": "dodge projectile",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.mage.rime-shard",
+      "guild": "mage",
+      "name": "Rime Shard",
+      "role": "slot2",
+      "cost": "15",
+      "cooldown_seconds": 5.0,
+      "windup_seconds": 0.6,
+      "range_metres": "14",
+      "effect": "0.8P frost; 20% slow 2s; marks Rime",
+      "visual_cue": "draw diamond; blue shard",
+      "counterplay": "cover or cleanse slow",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.mage.arc-thread",
+      "guild": "mage",
+      "name": "Arc Thread",
+      "role": "slot3",
+      "cost": "18",
+      "cooldown_seconds": 7.0,
+      "windup_seconds": 0.5,
+      "range_metres": "12",
+      "effect": "0.9P lightning; chains once within 3m for 0.4P; marks Arc",
+      "visual_cue": "two fingers; narrow branching line",
+      "counterplay": "spread apart",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.mage.spell-weave",
+      "guild": "mage",
+      "name": "Spell Weave",
+      "role": "slot4",
+      "cost": "25",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.8,
+      "range_metres": "12",
+      "effect": "consume two distinct marks: Ember/Rime 1.8P steam disk; Rime/Arc 1.2P plus 0.7s root; Ember/Arc 2P lane",
+      "visual_cue": "two glyphs orbit then combine",
+      "counterplay": "watch shape; interrupt; no marks means disabled",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.mage.runic-ward",
+      "guild": "mage",
+      "name": "Runic Ward",
+      "role": "slot5",
+      "cost": "20",
+      "cooldown_seconds": 18.0,
+      "windup_seconds": 0.4,
+      "range_metres": "self",
+      "effect": "absorb 1.0P damage for 4s",
+      "visual_cue": "hexagonal floor outline and hand ward",
+      "counterplay": "sustained pressure",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.mage.convergence",
+      "guild": "mage",
+      "name": "Convergence",
+      "role": "signature",
+      "cost": "45",
+      "cooldown_seconds": 75.0,
+      "windup_seconds": 1.0,
+      "range_metres": "12",
+      "effect": "three delayed 2m blasts, 0.8P each over 3s",
+      "visual_cue": "staff raised; three sequential sigils",
+      "counterplay": "move between marked blasts",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.mage.wand-spark",
+      "guild": "mage",
+      "name": "Wand Spark",
+      "role": "basic",
+      "cost": "0",
+      "cooldown_seconds": 1.1,
+      "windup_seconds": 0.25,
+      "range_metres": "12",
+      "effect": "0.65P arcane basic",
+      "visual_cue": "small point flash",
+      "counterplay": "cover",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.mage.phase-step",
+      "guild": "mage",
+      "name": "Phase Step",
+      "role": "defence",
+      "cost": "15",
+      "cooldown_seconds": 10.0,
+      "windup_seconds": 0.1,
+      "range_metres": "4",
+      "effect": "short collision-checked blink; no walls or boundary bypass",
+      "visual_cue": "narrow split silhouette",
+      "counterplay": "predict arrival point",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.mage.read-the-weave",
+      "guild": "mage",
+      "name": "Read the Weave",
+      "role": "utility",
+      "cost": "0",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 6.0,
+      "range_metres": "5",
+      "effect": "decode arcane inscriptions and optional rune shortcuts",
+      "visual_cue": "fine floating annotation",
+      "counterplay": "combat cancels; clues have alternate method",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.monk.tiger-palm",
+      "guild": "monk",
+      "name": "Tiger Palm",
+      "role": "slot1",
+      "cost": "10",
+      "cooldown_seconds": 4.0,
+      "windup_seconds": 0.25,
+      "range_metres": "2",
+      "effect": "1.15P physical; +10 Flow if following another action",
+      "visual_cue": "hip-driven palm; small air cone",
+      "counterplay": "step out of melee",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.monk.crane-step",
+      "guild": "monk",
+      "name": "Crane Step",
+      "role": "slot2",
+      "cost": "15",
+      "cooldown_seconds": 9.0,
+      "windup_seconds": 0.2,
+      "range_metres": "5",
+      "effect": "dash to ground; next basic gains 0.3P within 2s",
+      "visual_cue": "low pivot then glide",
+      "counterplay": "predict destination",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.monk.palm-counter",
+      "guild": "monk",
+      "name": "Palm Counter",
+      "role": "slot3",
+      "cost": "20",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.1,
+      "range_metres": "self",
+      "effect": "0.7s guard; first melee hit countered for 0.8P and interrupted",
+      "visual_cue": "open palm stillness",
+      "counterplay": "feint or use range",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.monk.sweeping-reed",
+      "guild": "monk",
+      "name": "Sweeping Reed",
+      "role": "slot4",
+      "cost": "25",
+      "cooldown_seconds": 14.0,
+      "windup_seconds": 0.5,
+      "range_metres": "3",
+      "effect": "0.7P arc and 0.8s knockdown",
+      "visual_cue": "leg draws circle; dust arc",
+      "counterplay": "backstep; CC limits apply",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.monk.still-breath",
+      "guild": "monk",
+      "name": "Still Breath",
+      "role": "slot5",
+      "cost": "0",
+      "cooldown_seconds": 20.0,
+      "windup_seconds": 2.0,
+      "range_metres": "self",
+      "effect": "channel heals 0.4P/s and gains 10 Flow/s; movement cancels",
+      "visual_cue": "kneel, measured expanding ring",
+      "counterplay": "interrupt",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.monk.hundred-hands",
+      "guild": "monk",
+      "name": "Hundred Hands",
+      "role": "signature",
+      "cost": "60",
+      "cooldown_seconds": 75.0,
+      "windup_seconds": 0.6,
+      "range_metres": "3",
+      "effect": "five strikes over 2s, total 2.5P; can move slowly, interruptible",
+      "visual_cue": "five distinct arm beats",
+      "counterplay": "leave reach or interrupt",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.monk.open-hand",
+      "guild": "monk",
+      "name": "Open Hand",
+      "role": "basic",
+      "cost": "0",
+      "cooldown_seconds": 0.9,
+      "windup_seconds": 0.2,
+      "range_metres": "2",
+      "effect": "0.7P physical; alternate hands",
+      "visual_cue": "compact left/right punches",
+      "counterplay": "kite",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.monk.slip",
+      "guild": "monk",
+      "name": "Slip",
+      "role": "defence",
+      "cost": "0",
+      "cooldown_seconds": 8.0,
+      "windup_seconds": 0.1,
+      "range_metres": "self",
+      "effect": "0.35s evade window; 1m lateral step",
+      "visual_cue": "shoulder turn",
+      "counterplay": "delay attack",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.monk.stillness",
+      "guild": "monk",
+      "name": "Stillness",
+      "role": "utility",
+      "cost": "0",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 6.0,
+      "range_metres": "4",
+      "effect": "hear mechanical rhythms and vibration clues",
+      "visual_cue": "settled stance with captioned pulses",
+      "counterplay": "combat cancels",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.priest.smite",
+      "guild": "priest",
+      "name": "Smite",
+      "role": "slot1",
+      "cost": "12",
+      "cooldown_seconds": 4.0,
+      "windup_seconds": 0.55,
+      "range_metres": "13",
+      "effect": "1.05P radiant",
+      "visual_cue": "raise focus; falling narrow ray",
+      "counterplay": "line of sight",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.priest.mend",
+      "guild": "priest",
+      "name": "Mend",
+      "role": "slot2",
+      "cost": "22",
+      "cooldown_seconds": 8.0,
+      "windup_seconds": 0.7,
+      "range_metres": "12",
+      "effect": "heal ally or self 1.0P",
+      "visual_cue": "open palm; warm thread",
+      "counterplay": "interrupt; combat support rules apply",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.priest.sanctuary-ward",
+      "guild": "priest",
+      "name": "Sanctuary Ward",
+      "role": "slot3",
+      "cost": "25",
+      "cooldown_seconds": 18.0,
+      "windup_seconds": 0.7,
+      "range_metres": "4",
+      "effect": "4s field reduces damage 15%; does not change PvP eligibility",
+      "visual_cue": "trace sun ring at ground",
+      "counterplay": "push targets from field",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.priest.absolve",
+      "guild": "priest",
+      "name": "Absolve",
+      "role": "slot4",
+      "cost": "20",
+      "cooldown_seconds": 16.0,
+      "windup_seconds": 0.3,
+      "range_metres": "10",
+      "effect": "remove one oldest removable control and one damage-over-time",
+      "visual_cue": "bronze bell ripple",
+      "counterplay": "bait before major debuff",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.priest.condemn",
+      "guild": "priest",
+      "name": "Condemn",
+      "role": "slot5",
+      "cost": "18",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.45,
+      "range_metres": "12",
+      "effect": "0.6P and target healing received -20% for 4s",
+      "visual_cue": "broken sun mark",
+      "counterplay": "cleanse",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.priest.dawn-covenant",
+      "guild": "priest",
+      "name": "Dawn Covenant",
+      "role": "signature",
+      "cost": "45",
+      "cooldown_seconds": 75.0,
+      "windup_seconds": 1.0,
+      "range_metres": "6",
+      "effect": "heal allies 1.3P then shield 0.5P for 4s, max four",
+      "visual_cue": "raised stole; low dawn wave",
+      "counterplay": "interrupt wind-up or disengage",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.priest.pilgrim-strike",
+      "guild": "priest",
+      "name": "Pilgrim Strike",
+      "role": "basic",
+      "cost": "0",
+      "cooldown_seconds": 1.1,
+      "windup_seconds": 0.3,
+      "range_metres": "3",
+      "effect": "0.7P physical basic",
+      "visual_cue": "mace or focus tap",
+      "counterplay": "range",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.priest.votive-shield",
+      "guild": "priest",
+      "name": "Votive Shield",
+      "role": "defence",
+      "cost": "15",
+      "cooldown_seconds": 10.0,
+      "windup_seconds": 0.1,
+      "range_metres": "self",
+      "effect": "absorb 0.7P for 1.5s",
+      "visual_cue": "small sun disk",
+      "counterplay": "sustained pressure",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.priest.consecrate-memory",
+      "guild": "priest",
+      "name": "Consecrate Memory",
+      "role": "utility",
+      "cost": "0",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 6.0,
+      "range_metres": "4",
+      "effect": "restore readable text on memorials and blessed devices",
+      "visual_cue": "hand over inscription",
+      "counterplay": "combat cancels; not a safe zone",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.bard.cadenza",
+      "guild": "bard",
+      "name": "Cadenza",
+      "role": "slot1",
+      "cost": "15",
+      "cooldown_seconds": 4.0,
+      "windup_seconds": 0.4,
+      "range_metres": "12",
+      "effect": "1.0P sonic projectile; +0.2P per active song",
+      "visual_cue": "strum forward; thin visible ripple",
+      "counterplay": "cover",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.bard.march-of-embers",
+      "guild": "bard",
+      "name": "March of Embers",
+      "role": "slot2",
+      "cost": "5/s",
+      "cooldown_seconds": 8.0,
+      "windup_seconds": 0.5,
+      "range_metres": "5",
+      "effect": "toggle up to 8s; party movement +10%, damage +5%",
+      "visual_cue": "walking beat; small warm foot rings",
+      "counterplay": "split group or silence",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.bard.quiet-refrain",
+      "guild": "bard",
+      "name": "Quiet Refrain",
+      "role": "slot3",
+      "cost": "5/s",
+      "cooldown_seconds": 8.0,
+      "windup_seconds": 0.5,
+      "range_metres": "5",
+      "effect": "toggle up to 8s; allies heal 0.15P/s",
+      "visual_cue": "slow pluck; low teal rings",
+      "counterplay": "interrupt sustain; one healing song per target",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.bard.discord",
+      "guild": "bard",
+      "name": "Discord",
+      "role": "slot4",
+      "cost": "20",
+      "cooldown_seconds": 14.0,
+      "windup_seconds": 0.5,
+      "range_metres": "10",
+      "effect": "0.5P and interrupt; 1s silence",
+      "visual_cue": "sharp damped chord",
+      "counterplay": "bait cast then attack",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.bard.borrowed-courage",
+      "guild": "bard",
+      "name": "Borrowed Courage",
+      "role": "slot5",
+      "cost": "25",
+      "cooldown_seconds": 18.0,
+      "windup_seconds": 0.3,
+      "range_metres": "10",
+      "effect": "one ally gets 0.7P shield and cleansed slow",
+      "visual_cue": "instrument offered; gold thread",
+      "counterplay": "switch target",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.bard.finale",
+      "guild": "bard",
+      "name": "Finale",
+      "role": "signature",
+      "cost": "50",
+      "cooldown_seconds": 75.0,
+      "windup_seconds": 0.8,
+      "range_metres": "6",
+      "effect": "end songs; 1.2P damage to enemies and 0.8P heal to allies",
+      "visual_cue": "held breath then chord; radial staff lines",
+      "counterplay": "interrupt or leave radius",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.bard.backbeat",
+      "guild": "bard",
+      "name": "Backbeat",
+      "role": "basic",
+      "cost": "0",
+      "cooldown_seconds": 1.0,
+      "windup_seconds": 0.25,
+      "range_metres": "10",
+      "effect": "0.65P basic sonic note",
+      "visual_cue": "single string stroke",
+      "counterplay": "cover",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.bard.dancers-turn",
+      "guild": "bard",
+      "name": "Dancer's Turn",
+      "role": "defence",
+      "cost": "10",
+      "cooldown_seconds": 9.0,
+      "windup_seconds": 0.1,
+      "range_metres": "2",
+      "effect": "pivot dodge 0.35s",
+      "visual_cue": "coat turn; small cloth trail",
+      "counterplay": "track ending direction",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.bard.remembered-tune",
+      "guild": "bard",
+      "name": "Remembered Tune",
+      "role": "utility",
+      "cost": "0",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 6.0,
+      "range_metres": "5",
+      "effect": "replay learned melodies at devices; captions and symbol sequence provided",
+      "visual_cue": "quiet instrument pose",
+      "counterplay": "combat cancels; no audio-only puzzle",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.changeling.rending-pounce",
+      "guild": "changeling",
+      "name": "Rending Pounce",
+      "role": "slot1",
+      "cost": "20",
+      "cooldown_seconds": 7.0,
+      "windup_seconds": 0.5,
+      "range_metres": "6",
+      "effect": "Wolf form; leap along navigable ground, 1.2P",
+      "visual_cue": "wolf crouch; amber landing oval",
+      "counterplay": "sidestep landing",
+      "chapter": "C1",
+      "rig": "quadruped"
+    },
+    {
+      "id": "ability.changeling.raven-shift",
+      "guild": "changeling",
+      "name": "Raven Shift",
+      "role": "slot2",
+      "cost": "15",
+      "cooldown_seconds": 10.0,
+      "windup_seconds": 0.6,
+      "range_metres": "self",
+      "effect": "enter raven; basic becomes 9m feather shot at 0.6P; no flight over walls",
+      "visual_cue": "fold to black feathers",
+      "counterplay": "attack during visible shift",
+      "chapter": "C1",
+      "rig": "quadruped"
+    },
+    {
+      "id": "ability.changeling.beetle-shift",
+      "guild": "changeling",
+      "name": "Beetle Shift",
+      "role": "slot3",
+      "cost": "20",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.7,
+      "range_metres": "self",
+      "effect": "enter beetle; basics 0.7P melee, 20% armour, speed -15%",
+      "visual_cue": "shell plates close",
+      "counterplay": "kite slow form",
+      "chapter": "C1",
+      "rig": "quadruped"
+    },
+    {
+      "id": "ability.changeling.wild-return",
+      "guild": "changeling",
+      "name": "Wild Return",
+      "role": "slot4",
+      "cost": "10",
+      "cooldown_seconds": 6.0,
+      "windup_seconds": 0.4,
+      "range_metres": "self",
+      "effect": "return to Wolf, basic 0.9P melee; clear own form speed penalty",
+      "visual_cue": "crest emerges from swirl",
+      "counterplay": "predict melee arrival",
+      "chapter": "C1",
+      "rig": "quadruped"
+    },
+    {
+      "id": "ability.changeling.borrowed-hide",
+      "guild": "changeling",
+      "name": "Borrowed Hide",
+      "role": "slot5",
+      "cost": "25",
+      "cooldown_seconds": 18.0,
+      "windup_seconds": 0.2,
+      "range_metres": "self",
+      "effect": "absorb 0.8P for 3s; retain silhouette",
+      "visual_cue": "brief translucent form outline",
+      "counterplay": "wait then burst",
+      "chapter": "C1",
+      "rig": "quadruped"
+    },
+    {
+      "id": "ability.changeling.primal-chorus",
+      "guild": "changeling",
+      "name": "Primal Chorus",
+      "role": "signature",
+      "cost": "50",
+      "cooldown_seconds": 75.0,
+      "windup_seconds": 0.8,
+      "range_metres": "4",
+      "effect": "6s; next three form changes trigger 0.6P local shock, once per 1.5s",
+      "visual_cue": "three readable silhouettes",
+      "counterplay": "keep distance during swaps",
+      "chapter": "C1",
+      "rig": "quadruped"
+    },
+    {
+      "id": "ability.changeling.instinct-strike",
+      "guild": "changeling",
+      "name": "Instinct Strike",
+      "role": "basic",
+      "cost": "0",
+      "cooldown_seconds": 1.0,
+      "windup_seconds": 0.25,
+      "range_metres": "form",
+      "effect": "Wolf bite / Raven feather / Beetle mandible as specified by form",
+      "visual_cue": "form contact animation",
+      "counterplay": "respect current range",
+      "chapter": "C1",
+      "rig": "quadruped"
+    },
+    {
+      "id": "ability.changeling.feral-sidestep",
+      "guild": "changeling",
+      "name": "Feral Sidestep",
+      "role": "defence",
+      "cost": "10",
+      "cooldown_seconds": 8.0,
+      "windup_seconds": 0.1,
+      "range_metres": "3",
+      "effect": "ground evade, same 0.35s window in all forms",
+      "visual_cue": "species-specific lateral move",
+      "counterplay": "track landing",
+      "chapter": "C1",
+      "rig": "quadruped"
+    },
+    {
+      "id": "ability.changeling.borrowed-passage",
+      "guild": "changeling",
+      "name": "Borrowed Passage",
+      "role": "utility",
+      "cost": "0",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 6.0,
+      "range_metres": "2",
+      "effect": "Raven fits marked vents, Beetle lifts marked latches, Wolf tracks clues; endpoints nav-validated",
+      "visual_cue": "inspect then form gesture",
+      "counterplay": "only authored links; never cross a safe boundary unseen",
+      "chapter": "C1",
+      "rig": "quadruped"
+    },
+    {
+      "id": "ability.elemental.ember-body",
+      "guild": "elemental",
+      "name": "Ember Body",
+      "role": "slot1",
+      "cost": "15",
+      "cooldown_seconds": 6.0,
+      "windup_seconds": 0.5,
+      "range_metres": "self",
+      "effect": "enter Fire; next basic adds 0.3P burn over 3s",
+      "visual_cue": "fractured coal body ignites",
+      "counterplay": "cleanse and pressure low Stability",
+      "chapter": "C1",
+      "rig": "elemental"
+    },
+    {
+      "id": "ability.elemental.tidal-body",
+      "guild": "elemental",
+      "name": "Tidal Body",
+      "role": "slot2",
+      "cost": "15",
+      "cooldown_seconds": 6.0,
+      "windup_seconds": 0.5,
+      "range_metres": "self",
+      "effect": "enter Water; next basic restores 0.25P self HP",
+      "visual_cue": "water gathers around clear core",
+      "counterplay": "anti-heal",
+      "chapter": "C1",
+      "rig": "elemental"
+    },
+    {
+      "id": "ability.elemental.stone-body",
+      "guild": "elemental",
+      "name": "Stone Body",
+      "role": "slot3",
+      "cost": "20",
+      "cooldown_seconds": 9.0,
+      "windup_seconds": 0.65,
+      "range_metres": "self",
+      "effect": "enter Earth; +20% armour, -10% speed while active",
+      "visual_cue": "strata lock into shoulders",
+      "counterplay": "kite",
+      "chapter": "C1",
+      "rig": "elemental"
+    },
+    {
+      "id": "ability.elemental.gale-body",
+      "guild": "elemental",
+      "name": "Gale Body",
+      "role": "slot4",
+      "cost": "20",
+      "cooldown_seconds": 9.0,
+      "windup_seconds": 0.5,
+      "range_metres": "self",
+      "effect": "enter Air; +10% movement; next basic pushes 1m",
+      "visual_cue": "wind ring and suspended stone hands",
+      "counterplay": "corners and ranged pressure",
+      "chapter": "C1",
+      "rig": "elemental"
+    },
+    {
+      "id": "ability.elemental.elemental-surge",
+      "guild": "elemental",
+      "name": "Elemental Surge",
+      "role": "slot5",
+      "cost": "25",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.7,
+      "range_metres": "10",
+      "effect": "2m ground disk: Fire 1.5P; Water 0.8P heal allies; Earth 0.8P plus 0.7s root; Air 0.7P plus 2m push",
+      "visual_cue": "element-specific disk with same boundary",
+      "counterplay": "leave disk or interrupt",
+      "chapter": "C1",
+      "rig": "elemental"
+    },
+    {
+      "id": "ability.elemental.worldheart",
+      "guild": "elemental",
+      "name": "Worldheart",
+      "role": "signature",
+      "cost": "45",
+      "cooldown_seconds": 75.0,
+      "windup_seconds": 1.0,
+      "range_metres": "5",
+      "effect": "4s field pulses current element Surge at half strength twice; form locked",
+      "visual_cue": "exposed core and low concentric waves",
+      "counterplay": "exit field; no invulnerability",
+      "chapter": "C1",
+      "rig": "elemental"
+    },
+    {
+      "id": "ability.elemental.elemental-reach",
+      "guild": "elemental",
+      "name": "Elemental Reach",
+      "role": "basic",
+      "cost": "0",
+      "cooldown_seconds": 1.2,
+      "windup_seconds": 0.3,
+      "range_metres": "10",
+      "effect": "0.65P elemental basic; form bonus as above",
+      "visual_cue": "material-matched hand projectile",
+      "counterplay": "cover",
+      "chapter": "C1",
+      "rig": "elemental"
+    },
+    {
+      "id": "ability.elemental.coalesce",
+      "guild": "elemental",
+      "name": "Coalesce",
+      "role": "defence",
+      "cost": "15",
+      "cooldown_seconds": 10.0,
+      "windup_seconds": 0.1,
+      "range_metres": "self",
+      "effect": "50% damage reduction for 0.8s",
+      "visual_cue": "core closes, silhouette retained",
+      "counterplay": "delay burst",
+      "chapter": "C1",
+      "rig": "elemental"
+    },
+    {
+      "id": "ability.elemental.shape-the-way",
+      "guild": "elemental",
+      "name": "Shape the Way",
+      "role": "utility",
+      "cost": "0",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 6.0,
+      "range_metres": "4",
+      "effect": "ignite braziers, fill basins, lift stones, turn vents at marked puzzles",
+      "visual_cue": "small sustained element stream",
+      "counterplay": "combat cancels; manual alternatives exist",
+      "chapter": "C1",
+      "rig": "elemental"
+    },
+    {
+      "id": "ability.psion.thought-spike",
+      "guild": "psion",
+      "name": "Thought Spike",
+      "role": "slot1",
+      "cost": "15",
+      "cooldown_seconds": 4.0,
+      "windup_seconds": 0.5,
+      "range_metres": "14",
+      "effect": "1.0P psychic",
+      "visual_cue": "touch temple; thin lilac lance",
+      "counterplay": "cover or interrupt",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.psion.vector-push",
+      "guild": "psion",
+      "name": "Vector Push",
+      "role": "slot2",
+      "cost": "22",
+      "cooldown_seconds": 14.0,
+      "windup_seconds": 0.6,
+      "range_metres": "10",
+      "effect": "0.5P and 3m collision-checked push",
+      "visual_cue": "palm plane gathers",
+      "counterplay": "dodge line; no wall penetration",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.psion.gravity-knot",
+      "guild": "psion",
+      "name": "Gravity Knot",
+      "role": "slot3",
+      "cost": "25",
+      "cooldown_seconds": 16.0,
+      "windup_seconds": 0.8,
+      "range_metres": "12",
+      "effect": "2m disk slows 30% for 3s; 0.5P",
+      "visual_cue": "point then compress; inward lines",
+      "counterplay": "leave before knot closes",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.psion.mind-bulwark",
+      "guild": "psion",
+      "name": "Mind Bulwark",
+      "role": "slot4",
+      "cost": "20",
+      "cooldown_seconds": 18.0,
+      "windup_seconds": 0.3,
+      "range_metres": "10",
+      "effect": "ally shield 0.9P for 4s",
+      "visual_cue": "angular head-height ring",
+      "counterplay": "switch target",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.psion.echo-step",
+      "guild": "psion",
+      "name": "Echo Step",
+      "role": "slot5",
+      "cost": "18",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.2,
+      "range_metres": "5",
+      "effect": "dash along clear ground; leave harmless visible decoy for 2s",
+      "visual_cue": "two offset silhouettes",
+      "counterplay": "real player remains targetable; decoy labelled on consider",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.psion.still-horizon",
+      "guild": "psion",
+      "name": "Still Horizon",
+      "role": "signature",
+      "cost": "45",
+      "cooldown_seconds": 75.0,
+      "windup_seconds": 1.0,
+      "range_metres": "5",
+      "effect": "0.7s stun then 0.4P/s for 3s in stationary disk",
+      "visual_cue": "horizon line folds",
+      "counterplay": "leave telegraph or interrupt",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.psion.mental-needle",
+      "guild": "psion",
+      "name": "Mental Needle",
+      "role": "basic",
+      "cost": "0",
+      "cooldown_seconds": 1.0,
+      "windup_seconds": 0.25,
+      "range_metres": "12",
+      "effect": "0.65P psychic basic",
+      "visual_cue": "single glass flick",
+      "counterplay": "cover",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.psion.mental-slip",
+      "guild": "psion",
+      "name": "Mental Slip",
+      "role": "defence",
+      "cost": "15",
+      "cooldown_seconds": 10.0,
+      "windup_seconds": 0.1,
+      "range_metres": "self",
+      "effect": "remove slow and reduce next hit 40% within 1s",
+      "visual_cue": "brief outline offset",
+      "counterplay": "bait before larger hit",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.psion.surface-memory",
+      "guild": "psion",
+      "name": "Surface Memory",
+      "role": "utility",
+      "cost": "0",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 6.0,
+      "range_metres": "4",
+      "effect": "read imprints on authored objects; no mind reading player messages",
+      "visual_cue": "hand held near object",
+      "counterplay": "combat cancels",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.symbiont.thorn-lash",
+      "guild": "symbiont",
+      "name": "Thorn Lash",
+      "role": "slot1",
+      "cost": "15",
+      "cooldown_seconds": 5.0,
+      "windup_seconds": 0.45,
+      "range_metres": "8",
+      "effect": "1.0P physical line; Stalker adds 2m range",
+      "visual_cue": "arm draws tendril taut",
+      "counterplay": "sidestep line",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.symbiont.guardian-graft",
+      "guild": "symbiont",
+      "name": "Guardian Graft",
+      "role": "slot2",
+      "cost": "20",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.6,
+      "range_metres": "self",
+      "effect": "enter Guardian; +20% armour, -10% speed",
+      "visual_cue": "shoulder plates bloom",
+      "counterplay": "kite",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.symbiont.stalker-graft",
+      "guild": "symbiont",
+      "name": "Stalker Graft",
+      "role": "slot3",
+      "cost": "15",
+      "cooldown_seconds": 10.0,
+      "windup_seconds": 0.5,
+      "range_metres": "self",
+      "effect": "enter Stalker; lash +2m and movement +5%",
+      "visual_cue": "forearm thorns unfold",
+      "counterplay": "close distance after missed lash",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.symbiont.mender-graft",
+      "guild": "symbiont",
+      "name": "Mender Graft",
+      "role": "slot4",
+      "cost": "20",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.6,
+      "range_metres": "self",
+      "effect": "enter Mender; basic heals lowest-HP party member within 5m for 0.15P per hit",
+      "visual_cue": "luminescent seed pods open",
+      "counterplay": "separate party or anti-heal",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.symbiont.spore-covenant",
+      "guild": "symbiont",
+      "name": "Spore Covenant",
+      "role": "slot5",
+      "cost": "25",
+      "cooldown_seconds": 18.0,
+      "windup_seconds": 0.7,
+      "range_metres": "8",
+      "effect": "one ally receives 0.8P heal over 4s; enemies within 2m slowed 20%",
+      "visual_cue": "seed travels then low spores",
+      "counterplay": "cleanse or move away",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.symbiont.perfect-union",
+      "guild": "symbiont",
+      "name": "Perfect Union",
+      "role": "signature",
+      "cost": "45",
+      "cooldown_seconds": 75.0,
+      "windup_seconds": 0.8,
+      "range_metres": "self",
+      "effect": "6s; current adaptation bonus doubled; 0.8P shield; no new body or immunity",
+      "visual_cue": "host and parasite breath synchronize",
+      "counterplay": "disengage then punish cooldown",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.symbiont.host-strike",
+      "guild": "symbiont",
+      "name": "Host Strike",
+      "role": "basic",
+      "cost": "0",
+      "cooldown_seconds": 1.0,
+      "windup_seconds": 0.3,
+      "range_metres": "2.5",
+      "effect": "0.8P basic; Mender secondary heal as above",
+      "visual_cue": "arm strike with tendril follow-through",
+      "counterplay": "range",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.symbiont.reflex-husk",
+      "guild": "symbiont",
+      "name": "Reflex Husk",
+      "role": "defence",
+      "cost": "15",
+      "cooldown_seconds": 10.0,
+      "windup_seconds": 0.1,
+      "range_metres": "self",
+      "effect": "0.8P shield for 1s",
+      "visual_cue": "rapid bark shell",
+      "counterplay": "sustained damage",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.symbiont.living-interface",
+      "guild": "symbiont",
+      "name": "Living Interface",
+      "role": "utility",
+      "cost": "0",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 6.0,
+      "range_metres": "3",
+      "effect": "connect to marked organic machinery and growth clues",
+      "visual_cue": "root fingertips into socket",
+      "counterplay": "combat cancels; no access to enemy player data",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.powered-armour.siege-round",
+      "guild": "powered-armour",
+      "name": "Siege Round",
+      "role": "slot1",
+      "cost": "22",
+      "cooldown_seconds": 6.0,
+      "windup_seconds": 0.85,
+      "range_metres": "16",
+      "effect": "1.5P direct; 0.4P splash within 2m",
+      "visual_cue": "shoulder cannon unfolds; orange targeting lane",
+      "counterplay": "evade lane during long wind-up",
+      "chapter": "C1",
+      "rig": "heavy"
+    },
+    {
+      "id": "ability.powered-armour.anchor-shot",
+      "guild": "powered-armour",
+      "name": "Anchor Shot",
+      "role": "slot2",
+      "cost": "18",
+      "cooldown_seconds": 14.0,
+      "windup_seconds": 0.65,
+      "range_metres": "12",
+      "effect": "0.7P and 25% slow 3s",
+      "visual_cue": "recoil brace; cable-shaped tracer",
+      "counterplay": "cleanse or sidestep",
+      "chapter": "C1",
+      "rig": "heavy"
+    },
+    {
+      "id": "ability.powered-armour.brace-projector",
+      "guild": "powered-armour",
+      "name": "Brace Projector",
+      "role": "slot3",
+      "cost": "25",
+      "cooldown_seconds": 20.0,
+      "windup_seconds": 0.6,
+      "range_metres": "4",
+      "effect": "3s directional cover; incoming frontal ranged damage -30%; no physical wall",
+      "visual_cue": "deploy low shield fins",
+      "counterplay": "flank; effects still obey town rules",
+      "chapter": "C1",
+      "rig": "heavy"
+    },
+    {
+      "id": "ability.powered-armour.servo-rush",
+      "guild": "powered-armour",
+      "name": "Servo Rush",
+      "role": "slot4",
+      "cost": "20",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.4,
+      "range_metres": "5",
+      "effect": "ground dash; stop before collision, 0.5P contact once",
+      "visual_cue": "vents fire; heavy footfalls",
+      "counterplay": "sidestep endpoint",
+      "chapter": "C1",
+      "rig": "heavy"
+    },
+    {
+      "id": "ability.powered-armour.field-patch",
+      "guild": "powered-armour",
+      "name": "Field Patch",
+      "role": "slot5",
+      "cost": "25",
+      "cooldown_seconds": 24.0,
+      "windup_seconds": 1.2,
+      "range_metres": "self",
+      "effect": "heal 1.0P; movement interrupts",
+      "visual_cue": "open shoulder service hatch",
+      "counterplay": "interrupt or pressure",
+      "chapter": "C1",
+      "rig": "heavy"
+    },
+    {
+      "id": "ability.powered-armour.fortress-protocol",
+      "guild": "powered-armour",
+      "name": "Fortress Protocol",
+      "role": "signature",
+      "cost": "50",
+      "cooldown_seconds": 75.0,
+      "windup_seconds": 1.0,
+      "range_metres": "self",
+      "effect": "6s immobile; +20% damage, +25% armour; can cancel, no refund",
+      "visual_cue": "legs anchor, cannon rises",
+      "counterplay": "flank or leave line of sight",
+      "chapter": "C1",
+      "rig": "heavy"
+    },
+    {
+      "id": "ability.powered-armour.repeater",
+      "guild": "powered-armour",
+      "name": "Repeater",
+      "role": "basic",
+      "cost": "6",
+      "cooldown_seconds": 1.2,
+      "windup_seconds": 0.25,
+      "range_metres": "13",
+      "effect": "0.9P physical ranged basic",
+      "visual_cue": "compact mechanical burst",
+      "counterplay": "cover",
+      "chapter": "C1",
+      "rig": "heavy"
+    },
+    {
+      "id": "ability.powered-armour.hard-lock",
+      "guild": "powered-armour",
+      "name": "Hard Lock",
+      "role": "defence",
+      "cost": "12",
+      "cooldown_seconds": 10.0,
+      "windup_seconds": 0.1,
+      "range_metres": "self",
+      "effect": "60% frontal damage reduction for 0.8s",
+      "visual_cue": "plates interlock",
+      "counterplay": "flank",
+      "chapter": "C1",
+      "rig": "heavy"
+    },
+    {
+      "id": "ability.powered-armour.heavy-access",
+      "guild": "powered-armour",
+      "name": "Heavy Access",
+      "role": "utility",
+      "cost": "0",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 6.0,
+      "range_metres": "3",
+      "effect": "operate marked winches, pressure plates and bulkheads",
+      "visual_cue": "braced mechanical interaction",
+      "counterplay": "combat cancels; alternate manual lever route",
+      "chapter": "C1",
+      "rig": "heavy"
+    },
+    {
+      "id": "ability.adventurer.heavy-cut",
+      "guild": "adventurer",
+      "name": "Heavy Cut",
+      "role": "slot1",
+      "cost": "15",
+      "cooldown_seconds": 5.0,
+      "windup_seconds": 0.5,
+      "range_metres": "2.5",
+      "effect": "1.2P melee",
+      "visual_cue": "raised blade",
+      "counterplay": "sidestep",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.adventurer.dust-throw",
+      "guild": "adventurer",
+      "name": "Dust Throw",
+      "role": "slot2",
+      "cost": "20",
+      "cooldown_seconds": 12.0,
+      "windup_seconds": 0.4,
+      "range_metres": "4",
+      "effect": "0.3P and 20% slow 2s",
+      "visual_cue": "dust cone",
+      "counterplay": "step back",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.adventurer.field-dressing",
+      "guild": "adventurer",
+      "name": "Field Dressing",
+      "role": "slot3",
+      "cost": "25",
+      "cooldown_seconds": 20.0,
+      "windup_seconds": 1.5,
+      "range_metres": "self",
+      "effect": "heal 0.8P",
+      "visual_cue": "wrap bandage",
+      "counterplay": "interrupt",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.adventurer.spot-weakness",
+      "guild": "adventurer",
+      "name": "Spot Weakness",
+      "role": "slot4",
+      "cost": "10",
+      "cooldown_seconds": 14.0,
+      "windup_seconds": 0.3,
+      "range_metres": "10",
+      "effect": "next basic gains 0.4P within 4s",
+      "visual_cue": "point at target",
+      "counterplay": "break line of sight",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.adventurer.stone-toss",
+      "guild": "adventurer",
+      "name": "Stone Toss",
+      "role": "slot5",
+      "cost": "15",
+      "cooldown_seconds": 10.0,
+      "windup_seconds": 0.5,
+      "range_metres": "10",
+      "effect": "0.5P and interrupt",
+      "visual_cue": "overhand stone",
+      "counterplay": "dodge",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.adventurer.second-wind",
+      "guild": "adventurer",
+      "name": "Second Wind",
+      "role": "signature",
+      "cost": "40",
+      "cooldown_seconds": 60.0,
+      "windup_seconds": 0.5,
+      "range_metres": "self",
+      "effect": "heal 1P and recover 20 Stamina",
+      "visual_cue": "steady breath",
+      "counterplay": "pressure after cooldown",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.adventurer.strike",
+      "guild": "adventurer",
+      "name": "Strike",
+      "role": "basic",
+      "cost": "0",
+      "cooldown_seconds": 1.1,
+      "windup_seconds": 0.3,
+      "range_metres": "2.5",
+      "effect": "0.8P melee basic",
+      "visual_cue": "short blade swing",
+      "counterplay": "range",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.adventurer.guard",
+      "guild": "adventurer",
+      "name": "Guard",
+      "role": "defence",
+      "cost": "10",
+      "cooldown_seconds": 8.0,
+      "windup_seconds": 0.1,
+      "range_metres": "self",
+      "effect": "40% damage reduction for 1s",
+      "visual_cue": "weapon held across body",
+      "counterplay": "delay attack",
+      "chapter": "C1",
+      "rig": "humanoid"
+    },
+    {
+      "id": "ability.adventurer.careful-examine",
+      "guild": "adventurer",
+      "name": "Careful Examine",
+      "role": "utility",
+      "cost": "0",
+      "cooldown_seconds": 3.0,
+      "windup_seconds": 2.0,
+      "range_metres": "4",
+      "effect": "inspect authored clue or object; universal alternative to specialist utility",
+      "visual_cue": "lean and inspect",
+      "counterplay": "combat interrupts lengthy interactions",
+      "chapter": "C1",
+      "rig": "humanoid"
+    }
+  ],
+  "maps": [
+    {
+      "id": "highcross",
+      "name": "Highcross",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "240x220",
+      "landmarks": "Astrolabe plaza, three gates, inn, exchange, guild row",
+      "routes": "Three radial exits with two streets to each; safe bank and respawn",
+      "hero_prop": "astrolabe",
+      "guide": "Nemi"
+    },
+    {
+      "id": "understeps",
+      "name": "The Understeps",
+      "chapter": "C1",
+      "safety": "open",
+      "size_metres": "100x100",
+      "landmarks": "Sealed town stair, cistern, missing-hour chamber",
+      "routes": "Two exits beyond signed safety threshold; flooding puzzle detour",
+      "hero_prop": "cistern clock",
+      "guide": "Mara"
+    },
+    {
+      "id": "training",
+      "name": "Concord Practice Rooms",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "60x60",
+      "landmarks": "Twelve replayable guild simulations",
+      "routes": "Clearly designated safe training; PvE dummies and authored trial actors",
+      "hero_prop": "practice obelisk",
+      "guide": "Orren Vale"
+    },
+    {
+      "id": "arena",
+      "name": "Concord Arena",
+      "chapter": "C1",
+      "safety": "open",
+      "size_metres": "80x80",
+      "landmarks": "Combat floor, pillars, two ramps",
+      "routes": "Separate loading entrance from town; no safe combat-floor pocket",
+      "hero_prop": "concord gong",
+      "guide": "Arena Steward"
+    },
+    {
+      "id": "briar-march",
+      "name": "Briar March",
+      "chapter": "C1",
+      "safety": "open",
+      "size_metres": "300x240",
+      "landmarks": "Toll bridge, standing stones, lost courier path",
+      "routes": "Bridge and riverbank flank; secret inscription grove",
+      "hero_prop": "toll bridge",
+      "guide": "The Cartographer"
+    },
+    {
+      "id": "hollow-abbey",
+      "name": "Hollow Abbey",
+      "chapter": "C1",
+      "safety": "open",
+      "size_metres": "160x160",
+      "landmarks": "Bell court, flooded crypt, binding chamber",
+      "routes": "Cloister and drainage routes; lost-verse shortcut",
+      "hero_prop": "silent bell",
+      "guide": "Mara"
+    },
+    {
+      "id": "rustwater-verge",
+      "name": "Rustwater Verge",
+      "chapter": "C1",
+      "safety": "open",
+      "size_metres": "300x240",
+      "landmarks": "Salvage camp, pump spine, relay yards",
+      "routes": "Raised road and maintenance culvert; optional generator room",
+      "hero_prop": "flooded relay tower",
+      "guide": "Patch"
+    },
+    {
+      "id": "station-nine",
+      "name": "Station Nine",
+      "chapter": "C1",
+      "safety": "open",
+      "size_metres": "180x150",
+      "landmarks": "Security concourse, shutters, reactor chamber",
+      "routes": "Main corridor and vent loop; coolant bypass",
+      "hero_prop": "reactor core",
+      "guide": "Dr. Ilex"
+    },
+    {
+      "id": "wrong-fair",
+      "name": "The Wrong Fair",
+      "chapter": "C1",
+      "safety": "open",
+      "size_metres": "280x240",
+      "landmarks": "Lantern midway, shadow tents, bargain stalls",
+      "routes": "Two circular paths; concealed backstage bridge",
+      "hero_prop": "inverted carousel",
+      "guide": "The Velvet Usher"
+    },
+    {
+      "id": "mirror-theatre",
+      "name": "Mirror Theatre",
+      "chapter": "C1",
+      "safety": "open",
+      "size_metres": "160x160",
+      "landmarks": "Foyer, repeated stage, mirrored wings",
+      "routes": "Stage and backstage loops; shadow door",
+      "hero_prop": "fractured proscenium",
+      "guide": "The Velvet Usher"
+    },
+    {
+      "id": "crown-of-winter",
+      "name": "Crown of Winter",
+      "chapter": "C2",
+      "safety": "open",
+      "size_metres": "360x280",
+      "landmarks": "Snow settlement exterior, ice descent, buried city",
+      "routes": "Switchback and frozen aqueduct; settlement interiors are separately marked safe polygons",
+      "hero_prop": "icebound city gate",
+      "guide": "Tala Frostwright"
+    },
+    {
+      "id": "glass-megacity",
+      "name": "The Glass Megacity",
+      "chapter": "C2",
+      "safety": "open",
+      "size_metres": "360x280",
+      "landmarks": "Corporate plaza, synthetic quarter, elevator base",
+      "routes": "Service alleys and elevated walkways; staffed civic hall is marked safe",
+      "hero_prop": "orbital elevator",
+      "guide": "Civic Echo"
+    },
+    {
+      "id": "unwritten-sea",
+      "name": "The Unwritten Sea",
+      "chapter": "C2",
+      "safety": "open",
+      "size_metres": "360x280",
+      "landmarks": "Three islands, tide bridges, unfinished observatory",
+      "routes": "Two timed bridge circuits; dock sanctuary is marked safe",
+      "hero_prop": "empty lighthouse",
+      "guide": "The Cartographer"
+    },
+    {
+      "id": "hall-knight",
+      "name": "Knight Hall",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "24x20",
+      "landmarks": "Knight emblem, mentor station, relic display",
+      "routes": "Town doorway, visible practice portal; services usable from accessible ground floor",
+      "hero_prop": "Knight guild altar",
+      "guide": "Orren Vale"
+    },
+    {
+      "id": "hall-cyborg",
+      "name": "Cyborg Hall",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "24x20",
+      "landmarks": "Cyborg emblem, mentor station, relic display",
+      "routes": "Town doorway, visible practice portal; services usable from accessible ground floor",
+      "hero_prop": "Cyborg guild altar",
+      "guide": "Dr. Ilex"
+    },
+    {
+      "id": "hall-necromancer",
+      "name": "Necromancer Hall",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "24x20",
+      "landmarks": "Necromancer emblem, mentor station, relic display",
+      "routes": "Town doorway, visible practice portal; services usable from accessible ground floor",
+      "hero_prop": "Necromancer guild altar",
+      "guide": "Mother Sable"
+    },
+    {
+      "id": "hall-mage",
+      "name": "Mage Hall",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "24x20",
+      "landmarks": "Mage emblem, mentor station, relic display",
+      "routes": "Town doorway, visible practice portal; services usable from accessible ground floor",
+      "hero_prop": "Mage guild altar",
+      "guide": "Archivist Vey"
+    },
+    {
+      "id": "hall-monk",
+      "name": "Monk Hall",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "24x20",
+      "landmarks": "Monk emblem, mentor station, relic display",
+      "routes": "Town doorway, visible practice portal; services usable from accessible ground floor",
+      "hero_prop": "Monk guild altar",
+      "guide": "Sister Ren"
+    },
+    {
+      "id": "hall-priest",
+      "name": "Priest Hall",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "24x20",
+      "landmarks": "Priest emblem, mentor station, relic display",
+      "routes": "Town doorway, visible practice portal; services usable from accessible ground floor",
+      "hero_prop": "Priest guild altar",
+      "guide": "Keeper Sol"
+    },
+    {
+      "id": "hall-bard",
+      "name": "Bard Hall",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "24x20",
+      "landmarks": "Bard emblem, mentor station, relic display",
+      "routes": "Town doorway, visible practice portal; services usable from accessible ground floor",
+      "hero_prop": "Bard guild altar",
+      "guide": "Lark Fen"
+    },
+    {
+      "id": "hall-changeling",
+      "name": "Changeling Hall",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "24x20",
+      "landmarks": "Changeling emblem, mentor station, relic display",
+      "routes": "Town doorway, visible practice portal; services usable from accessible ground floor",
+      "hero_prop": "Changeling guild altar",
+      "guide": "Many-in-Reeds"
+    },
+    {
+      "id": "hall-elemental",
+      "name": "Elemental Hall",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "24x20",
+      "landmarks": "Elemental emblem, mentor station, relic display",
+      "routes": "Town doorway, visible practice portal; services usable from accessible ground floor",
+      "hero_prop": "Elemental guild altar",
+      "guide": "The Fourfold Ember"
+    },
+    {
+      "id": "hall-psion",
+      "name": "Psion Hall",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "24x20",
+      "landmarks": "Psion emblem, mentor station, relic display",
+      "routes": "Town doorway, visible practice portal; services usable from accessible ground floor",
+      "hero_prop": "Psion guild altar",
+      "guide": "Serin Quill"
+    },
+    {
+      "id": "hall-symbiont",
+      "name": "Symbiont Hall",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "24x20",
+      "landmarks": "Symbiont emblem, mentor station, relic display",
+      "routes": "Town doorway, visible practice portal; services usable from accessible ground floor",
+      "hero_prop": "Symbiont guild altar",
+      "guide": "Host Aster"
+    },
+    {
+      "id": "hall-powered-armour",
+      "name": "Powered Armour Hall",
+      "chapter": "C1",
+      "safety": "safe",
+      "size_metres": "24x20",
+      "landmarks": "Powered Armour emblem, mentor station, relic display",
+      "routes": "Town doorway, visible practice portal; services usable from accessible ground floor",
+      "hero_prop": "Powered Armour guild altar",
+      "guide": "Marshal Ferrum"
+    }
+  ],
+  "npcs": [
+    {
+      "id": "mara",
+      "name": "Mara",
+      "description": "Bellkeeper; bronze prosthetic hand, travel coat",
+      "map": "highcross",
+      "role": "bell and tomorrow clues",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "orren-vale",
+      "name": "Orren Vale",
+      "description": "Knight mentor; repaired plate and faded cream mantle",
+      "map": "highcross",
+      "role": "Knight trial",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "dr.-ilex",
+      "name": "Dr. Ilex",
+      "description": "Cyborg mentor; precise metal fingers and white ceramic coat",
+      "map": "highcross",
+      "role": "Cyborg trial, reactor advice",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "mother-sable",
+      "name": "Mother Sable",
+      "description": "Necromancer mentor; funerary bronze and layered veil",
+      "map": "highcross",
+      "role": "Necromancer trial",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "archivist-vey",
+      "name": "Archivist Vey",
+      "description": "Mage mentor; indigo coat, orbiting wooden glyph frame",
+      "map": "highcross",
+      "role": "Mage trial",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "sister-ren",
+      "name": "Sister Ren",
+      "description": "Monk mentor; sand wraps and one polished wooden bracer",
+      "map": "highcross",
+      "role": "Monk trial",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "keeper-sol",
+      "name": "Keeper Sol",
+      "description": "Priest mentor; pilgrim mail and split sun focus",
+      "map": "highcross",
+      "role": "Priest trial",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "lark-fen",
+      "name": "Lark Fen",
+      "description": "Bard mentor; russet coat and weathered lyre",
+      "map": "highcross",
+      "role": "Bard trial",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "many-in-reeds",
+      "name": "Many-in-Reeds",
+      "description": "Changeling mentor; crest shared with wolf and raven forms",
+      "map": "highcross",
+      "role": "Changeling trial",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "the-fourfold-ember",
+      "name": "The Fourfold Ember",
+      "description": "Elemental mentor; four slow material quadrants",
+      "map": "highcross",
+      "role": "Elemental trial",
+      "rig": "elemental",
+      "chapter": "C1"
+    },
+    {
+      "id": "serin-quill",
+      "name": "Serin Quill",
+      "description": "Psion mentor; graphite clothes and floating crystal fragments",
+      "map": "highcross",
+      "role": "Psion trial",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "host-aster",
+      "name": "Host Aster",
+      "description": "Symbiont mentor; amber root collar and visible human face",
+      "map": "highcross",
+      "role": "Symbiont trial",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "marshal-ferrum",
+      "name": "Marshal Ferrum",
+      "description": "Powered Armour mentor; retired suit, orange service marks",
+      "map": "highcross",
+      "role": "Powered Armour trial",
+      "rig": "heavy",
+      "chapter": "C1"
+    },
+    {
+      "id": "patch",
+      "name": "Patch",
+      "description": "Cheerful salvage robot; oversized pack, three-point rolling base",
+      "map": "rustwater-verge",
+      "role": "Rustwater jobs and grid repair",
+      "rig": "drone",
+      "chapter": "C1"
+    },
+    {
+      "id": "nemi",
+      "name": "Nemi",
+      "description": "Innkeeper; rolled sleeves, brass key ring, braided hair",
+      "map": "highcross",
+      "role": "intro and rumours",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "the-velvet-usher",
+      "name": "The Velvet Usher",
+      "description": "Carnival guide; porcelain mask, immaculate violet coat, detached shadow",
+      "map": "wrong-fair",
+      "role": "shadow mystery and theatre",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "the-cartographer",
+      "name": "The Cartographer",
+      "description": "Recurring explorer; map cases and weathered sea-green cloak",
+      "map": "briar-march",
+      "role": "cross-realm mystery, later sea",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "edda-forge",
+      "name": "Edda Forge",
+      "description": "Smith; soot apron, broad gloves",
+      "map": "highcross",
+      "role": "smithing merchant",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "ro-coil",
+      "name": "Ro Coil",
+      "description": "Engineer; lens goggles and copper harness",
+      "map": "highcross",
+      "role": "engineering merchant",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "ina-prism",
+      "name": "Ina Prism",
+      "description": "Enchanter; inked sleeves and prism loupe",
+      "map": "highcross",
+      "role": "enchanting merchant",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "tess-kettle",
+      "name": "Tess Kettle",
+      "description": "Cook; red scarf and heavy ladle",
+      "map": "highcross",
+      "role": "cooking and supplies",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "ledger",
+      "name": "Ledger",
+      "description": "Banker; narrow spectacles and numbered brass keys",
+      "map": "highcross",
+      "role": "bank and transactions",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "arena-steward",
+      "name": "Arena Steward",
+      "description": "Referee; striped black and bronze tabard",
+      "map": "highcross",
+      "role": "arena rules and results",
+      "rig": "humanoid",
+      "chapter": "C1"
+    },
+    {
+      "id": "tala-frostwright",
+      "name": "Tala Frostwright",
+      "description": "Ice-city surveyor; quilted blue coat and frost tools",
+      "map": "crown-of-winter",
+      "role": "winter quest pair",
+      "rig": "humanoid",
+      "chapter": "C2"
+    },
+    {
+      "id": "civic-echo",
+      "name": "Civic Echo",
+      "description": "Synthetic citizen; translucent ceramic face and office cloak",
+      "map": "glass-megacity",
+      "role": "megacity quest pair",
+      "rig": "humanoid",
+      "chapter": "C2"
+    }
+  ],
+  "creatures": [
+    {
+      "id": "gate-mite",
+      "name": "Gate Mite",
+      "chapter": "C1",
+      "map": "training",
+      "rig": "quadruped",
+      "description": "small ceramic-backed animal",
+      "behaviour": "short bite, visible lane lunge; tutorial recovery pauses",
+      "level": "1"
+    },
+    {
+      "id": "briar-hound",
+      "name": "Briar Hound",
+      "chapter": "C1",
+      "map": "briar-march",
+      "rig": "quadruped",
+      "description": "lean wet wolf with thorn crest",
+      "behaviour": "circle, flank, committed 0.8s pounce",
+      "level": "5"
+    },
+    {
+      "id": "pack-matriarch",
+      "name": "Pack Matriarch",
+      "chapter": "C1",
+      "map": "briar-march",
+      "rig": "quadruped",
+      "description": "larger hound with pale scar crest",
+      "behaviour": "howl recruits two hounds; interrupt howl",
+      "level": "8"
+    },
+    {
+      "id": "toll-shield",
+      "name": "Toll Shieldbearer",
+      "chapter": "C1",
+      "map": "briar-march",
+      "rig": "humanoid",
+      "description": "mismatched mail, road-sign shield",
+      "behaviour": "front guard then 1s bash; vulnerable behind",
+      "level": "6"
+    },
+    {
+      "id": "toll-archer",
+      "name": "Toll Archer",
+      "chapter": "C1",
+      "map": "briar-march",
+      "rig": "humanoid",
+      "description": "ochre hood and recurved bow",
+      "behaviour": "retreat behind shield; 0.8s aimed shot",
+      "level": "6"
+    },
+    {
+      "id": "abbey-revenant",
+      "name": "Abbey Revenant",
+      "chapter": "C1",
+      "map": "hollow-abbey",
+      "rig": "humanoid",
+      "description": "corroded mail, pale lantern chest",
+      "behaviour": "reforms once unless visible binding interrupted",
+      "level": "10"
+    },
+    {
+      "id": "bell-acolyte",
+      "name": "Bell Acolyte",
+      "chapter": "C1",
+      "map": "hollow-abbey",
+      "rig": "humanoid",
+      "description": "rope belt and bronze bell headgear",
+      "behaviour": "channel binding shield; prioritize interrupt",
+      "level": "11"
+    },
+    {
+      "id": "salvage-drone",
+      "name": "Salvage Drone",
+      "chapter": "C1",
+      "map": "rustwater-verge",
+      "rig": "drone",
+      "description": "three-lobed hovering repair tool",
+      "behaviour": "repairs weakest machine; fragile exposed core",
+      "level": "5"
+    },
+    {
+      "id": "scrap-stalker",
+      "name": "Scrap Stalker",
+      "chapter": "C1",
+      "map": "rustwater-verge",
+      "rig": "quadruped",
+      "description": "canine scrap limbs, sensor eye",
+      "behaviour": "tracks sound then charges marked lane",
+      "level": "7"
+    },
+    {
+      "id": "coil-sentry",
+      "name": "Coil Sentry",
+      "chapter": "C1",
+      "map": "rustwater-verge",
+      "rig": "heavy",
+      "description": "short stationary turret",
+      "behaviour": "rotating cone fire, 2s cooldown exposure",
+      "level": "8"
+    },
+    {
+      "id": "reactor-construct",
+      "name": "Reactor Construct",
+      "chapter": "C1",
+      "map": "station-nine",
+      "rig": "heavy",
+      "description": "broad ceramic shoulders, hot open core",
+      "behaviour": "heat rises visibly, vent or delayed slam",
+      "level": "11"
+    },
+    {
+      "id": "security-warden",
+      "name": "Security Warden",
+      "chapter": "C1",
+      "map": "station-nine",
+      "rig": "humanoid",
+      "description": "jointed enforcer with shutter shield",
+      "behaviour": "stun baton and ranged warning line",
+      "level": "12"
+    },
+    {
+      "id": "mask-juggler",
+      "name": "Mask Juggler",
+      "chapter": "C1",
+      "map": "wrong-fair",
+      "rig": "humanoid",
+      "description": "striped velvet, three floating masks",
+      "behaviour": "alternates throw and dash on obvious mask cue",
+      "level": "5"
+    },
+    {
+      "id": "ribbon-dancer",
+      "name": "Ribbon Dancer",
+      "chapter": "C1",
+      "map": "wrong-fair",
+      "rig": "humanoid",
+      "description": "long violet ribbons and white shoes",
+      "behaviour": "sweeping line attacks; planted feet during wind-up",
+      "level": "7"
+    },
+    {
+      "id": "ticket-mimic",
+      "name": "Ticket Mimic",
+      "chapter": "C1",
+      "map": "wrong-fair",
+      "rig": "mimic",
+      "description": "folded ticket booth with walking legs",
+      "behaviour": "false booth visibly breathes; opens to bite",
+      "level": "8"
+    },
+    {
+      "id": "mirror-double",
+      "name": "Mirror Double",
+      "chapter": "C1",
+      "map": "mirror-theatre",
+      "rig": "humanoid",
+      "description": "silver cloth, delayed reflection",
+      "behaviour": "replays last two basic/ability shapes at 70% damage using whitelisted scripts",
+      "level": "12"
+    },
+    {
+      "id": "stagehand-hollow",
+      "name": "Hollow Stagehand",
+      "chapter": "C1",
+      "map": "mirror-theatre",
+      "rig": "humanoid",
+      "description": "black coat, empty brass face",
+      "behaviour": "moves spotlights; telegraphed trap pads",
+      "level": "11"
+    },
+    {
+      "id": "frost-pilgrim",
+      "name": "Frost Pilgrim",
+      "chapter": "C2",
+      "map": "crown-of-winter",
+      "rig": "humanoid",
+      "description": "ice-choked travelling armour",
+      "behaviour": "slow spear reach and freezing path",
+      "level": "23"
+    },
+    {
+      "id": "glass-drake",
+      "name": "Glass Drake",
+      "chapter": "C2",
+      "map": "crown-of-winter",
+      "rig": "dragon",
+      "description": "small winged ice lizard",
+      "behaviour": "breath lane then vulnerable wing fold",
+      "level": "25"
+    },
+    {
+      "id": "corporate-enforcer",
+      "name": "Corporate Enforcer",
+      "chapter": "C2",
+      "map": "glass-megacity",
+      "rig": "heavy",
+      "description": "clean corporate ceramic suit",
+      "behaviour": "paired suppressing fire and flank",
+      "level": "24"
+    },
+    {
+      "id": "memory-leech",
+      "name": "Memory Leech",
+      "chapter": "C2",
+      "map": "glass-megacity",
+      "rig": "drone",
+      "description": "floating segmented silver parasite",
+      "behaviour": "drains resource channel; interruptable",
+      "level": "25"
+    },
+    {
+      "id": "ink-ray",
+      "name": "Ink Ray",
+      "chapter": "C2",
+      "map": "unwritten-sea",
+      "rig": "ray",
+      "description": "flat ink-swimming creature near ground",
+      "behaviour": "sweeps bridge with readable wake",
+      "level": "25"
+    },
+    {
+      "id": "unfinished-sailor",
+      "name": "Unfinished Sailor",
+      "chapter": "C2",
+      "map": "unwritten-sea",
+      "rig": "humanoid",
+      "description": "blank cloth body and inked limbs",
+      "behaviour": "telegraphs missing limb before it manifests",
+      "level": "26"
+    }
+  ],
+  "bosses": [
+    {
+      "id": "bellbound-warden",
+      "name": "The Bellbound Warden",
+      "chapter": "C1",
+      "map": "hollow-abbey",
+      "rig": "heavy",
+      "description": "bell-chest knight, chains, slate pauldrons",
+      "mechanics": "bell sweep; binding adds; three toll rings",
+      "counterplay": "Interrupt acolytes; learned verse delays third ring",
+      "level": "13"
+    },
+    {
+      "id": "station-nine-custodian",
+      "name": "Station Nine Custodian",
+      "chapter": "C1",
+      "map": "station-nine",
+      "rig": "heavy",
+      "description": "four-legged reactor frame with humanoid service arms",
+      "mechanics": "lane laser; shutter squeeze; overheating core",
+      "counterplay": "Route coolant; attack exposed core; vents announce reset",
+      "level": "15"
+    },
+    {
+      "id": "master-of-revels",
+      "name": "The Master of Revels",
+      "chapter": "C1",
+      "map": "mirror-theatre",
+      "rig": "humanoid",
+      "description": "towering velvet coat, porcelain rotating mask",
+      "mechanics": "spotlight chase; mirror duet; final curtain",
+      "counterplay": "Watch act placards; use shadow door to cut an add wave",
+      "level": "17"
+    },
+    {
+      "id": "white-regent",
+      "name": "The White Regent",
+      "chapter": "C2",
+      "map": "crown-of-winter",
+      "rig": "dragon",
+      "description": "ancient ice dragon with brass relics embedded in scales",
+      "mechanics": "breath sweep; falling ice; broken wing dive",
+      "counterplay": "Melt marked anchors; shelter behind durable pillars",
+      "level": "27"
+    },
+    {
+      "id": "glass-executor",
+      "name": "The Glass Executor",
+      "chapter": "C2",
+      "map": "glass-megacity",
+      "rig": "heavy",
+      "description": "corporate judgement chassis, many glass panels",
+      "mechanics": "audit beams; confiscation drones; elevator surge",
+      "counterplay": "Break declared power nodes in shown order",
+      "level": "29"
+    },
+    {
+      "id": "unwritten-captain",
+      "name": "The Unwritten Captain",
+      "chapter": "C2",
+      "map": "unwritten-sea",
+      "rig": "humanoid",
+      "description": "blank admiral outlined by a moving ink sea",
+      "mechanics": "tidal lanes; erased platforms; authored storm",
+      "counterplay": "Restore bridge names; read tide before moving",
+      "level": "30"
+    }
+  ],
+  "quests": [
+    {
+      "id": "arrival",
+      "name": "A Stall in the Storm",
+      "chapter": "C1",
+      "map": "highcross",
+      "giver": "Nemi",
+      "requires": "none",
+      "steps": "lift stall; talk to Nemi; inspect fallen token",
+      "clue": "movement and interaction",
+      "reward": "level 2, supplies",
+      "recovery": "cannot lose token; reset interaction on reload"
+    },
+    {
+      "id": "first-danger",
+      "name": "The Gate Spills",
+      "chapter": "C1",
+      "map": "training",
+      "giver": "Orren Vale",
+      "requires": "arrival",
+      "steps": "enter marked safe practice; evade mite; interrupt; return",
+      "clue": "cast timing",
+      "reward": "level 3",
+      "recovery": "repeatable practice without duplicate XP"
+    },
+    {
+      "id": "first-secret",
+      "name": "A Mark Between Hours",
+      "chapter": "C1",
+      "map": "highcross",
+      "giver": "Mara",
+      "requires": "first-danger",
+      "steps": "examine astrolabe; rotate three marked rings; present token",
+      "clue": "optional inspection clue",
+      "reward": "level 5, guild choice",
+      "recovery": "captioned clue; skip hint never removes optional reward"
+    },
+    {
+      "id": "thirteenth-bell",
+      "name": "The Thirteenth Bell",
+      "chapter": "C1",
+      "map": "briar-march,hollow-abbey",
+      "giver": "Mara",
+      "requires": "first-secret",
+      "steps": "inspect forest epitaph; copy abbey inscription; match captioned melody; open crypt; defeat or pacify Warden using verse",
+      "clue": "thirteen marks distinguish false verse",
+      "reward": "Bellkeeper's Blade, 3 quest points",
+      "recovery": "wrong melody resets rings only; alternate guild-independent route"
+    },
+    {
+      "id": "light-rustwater",
+      "name": "A Light for Rustwater",
+      "chapter": "C1",
+      "map": "rustwater-verge,station-nine",
+      "giver": "Patch",
+      "requires": "first-secret",
+      "steps": "collect relay; trace three circuits; choose clinic or pumps first; stabilize reactor",
+      "clue": "power map shows load limits",
+      "reward": "Drone Module, 3 quest points",
+      "recovery": "choice changes personal service discount or route; both paths keep main quest possible"
+    },
+    {
+      "id": "stolen-shadow",
+      "name": "The Stolen Shadow",
+      "chapter": "C1",
+      "map": "wrong-fair,mirror-theatre",
+      "giver": "The Velvet Usher",
+      "requires": "first-secret",
+      "steps": "observe three performers; compare reflected gestures; present evidence; chase shadow; enter hidden performance",
+      "clue": "shadow mismatches repeated emote",
+      "reward": "Borrowed Shadow cosmetic disguise, 3 quest points",
+      "recovery": "wrong suspect gives new observation; disguise never hides PvP identity"
+    },
+    {
+      "id": "died-tomorrow",
+      "name": "The Man Who Died Tomorrow",
+      "chapter": "C1",
+      "map": "briar-march,station-nine,wrong-fair",
+      "giver": "The Cartographer",
+      "requires": "first-secret",
+      "steps": "copy epitaph; read prediction terminal; recover carnival memory; compare timestamps; confront Usher",
+      "clue": "three timestamps refer to the same missing hour",
+      "reward": "Glass Compass, 5 quest points",
+      "recovery": "steps work in any realm order; flags individual, clues can be shared"
+    },
+    {
+      "id": "missing-hour",
+      "name": "The Missing Hour",
+      "chapter": "C1",
+      "map": "understeps",
+      "giver": "Mara",
+      "requires": "died-tomorrow,thirteenth-bell,light-rustwater,stolen-shadow",
+      "steps": "assemble four evidence pieces; turn cistern clock; expose the forged memory; choose preserve or disclose",
+      "clue": "author of sabotage is a future echo of Cartographer",
+      "reward": "chapter title, mastery token, 5 quest points",
+      "recovery": "choice affects dialogue and epilogue, never invalidates another player's world"
+    },
+    {
+      "id": "winter-ledger",
+      "name": "The Winter Ledger",
+      "chapter": "C2",
+      "map": "crown-of-winter",
+      "giver": "Tala Frostwright",
+      "requires": "missing-hour",
+      "steps": "survey three iced memorials; thaw dated tablets; identify the dragon's stolen oath; face White Regent",
+      "clue": "false date exposed by bell clue",
+      "reward": "Frost Seal relic, 4 quest points",
+      "recovery": "no irreversible tablet destruction"
+    },
+    {
+      "id": "warm-window",
+      "name": "One Warm Window",
+      "chapter": "C2",
+      "map": "crown-of-winter",
+      "giver": "Tala Frostwright",
+      "requires": "missing-hour",
+      "steps": "gather insulation; restore one safe settlement room; guide stranded scholar",
+      "clue": "smoke tells intact flue",
+      "reward": "cooking recipe, 1 quest point",
+      "recovery": "escort can be recalled; town safety polygons explicit"
+    },
+    {
+      "id": "citizen-zero",
+      "name": "Citizen Zero",
+      "chapter": "C2",
+      "map": "glass-megacity",
+      "giver": "Civic Echo",
+      "requires": "missing-hour",
+      "steps": "collect three memories; dispute synthetic citizenship audit; break Executor nodes; return records",
+      "clue": "authorship and identity are separate",
+      "reward": "Glass Warrant relic, 4 quest points",
+      "recovery": "failed audit permits evidence retry"
+    },
+    {
+      "id": "elevator-song",
+      "name": "The Elevator Song",
+      "chapter": "C2",
+      "map": "glass-megacity",
+      "giver": "Civic Echo",
+      "requires": "missing-hour",
+      "steps": "trace maintenance chime; align relays; rescue lift passengers",
+      "clue": "rhythm also shown as symbols",
+      "reward": "engineering recipe, 1 quest point",
+      "recovery": "reset elevator at checkpoint on failure"
+    },
+    {
+      "id": "shore-unwritten",
+      "name": "The Shore Unwritten",
+      "chapter": "C2",
+      "map": "unwritten-sea",
+      "giver": "The Cartographer",
+      "requires": "missing-hour",
+      "steps": "name three island anchors; follow tide map; face Unwritten Captain; reconcile future echo",
+      "clue": "names learned in prior realms rebuild bridge",
+      "reward": "Accord relic, 5 quest points, prestige eligibility",
+      "recovery": "tide recovery returns to last safe dock, no soft lock"
+    },
+    {
+      "id": "bottle-tomorrow",
+      "name": "A Bottle for Tomorrow",
+      "chapter": "C2",
+      "map": "unwritten-sea",
+      "giver": "The Cartographer",
+      "requires": "missing-hour",
+      "steps": "collect messages on three bridges; order dates; launch one reply",
+      "clue": "message dates match missing hour",
+      "reward": "cosmetic sail, 1 quest point",
+      "recovery": "letters are persistent quest flags"
+    },
+    {
+      "id": "trial-knight",
+      "name": "An Oath Without Witnesses",
+      "chapter": "C1",
+      "map": "training",
+      "giver": "Orren Vale",
+      "requires": "first-secret",
+      "steps": "protect courier instead of chasing duelist; block, interrupt, return",
+      "clue": "Mentor explains mechanics; narrated text and visual practice cues",
+      "reward": "Knight admission, starter equipment; only first joined trial grants world XP",
+      "recovery": "breaking oath triggers retry and explanation"
+    },
+    {
+      "id": "trial-cyborg",
+      "name": "The Heat Between Beats",
+      "chapter": "C1",
+      "map": "training",
+      "giver": "Dr. Ilex",
+      "requires": "first-secret",
+      "steps": "fire until warned; vent; interrupt overloaded machine; stabilize",
+      "clue": "Mentor explains mechanics; narrated text and visual practice cues",
+      "reward": "Cyborg admission, starter equipment; only first joined trial grants world XP",
+      "recovery": "overheat resets dummy, no permanent damage"
+    },
+    {
+      "id": "trial-necromancer",
+      "name": "A Name Before Service",
+      "chapter": "C1",
+      "map": "training",
+      "giver": "Mother Sable",
+      "requires": "first-secret",
+      "steps": "ask remnant its name; raise echo; command; choose preserve or consume",
+      "clue": "Mentor explains mechanics; narrated text and visual practice cues",
+      "reward": "Necromancer admission, starter equipment; only first joined trial grants world XP",
+      "recovery": "both choices viable with different mentor response"
+    },
+    {
+      "id": "trial-mage",
+      "name": "Two Truths of Fire",
+      "chapter": "C1",
+      "map": "training",
+      "giver": "Archivist Vey",
+      "requires": "first-secret",
+      "steps": "prepare two elements; combine against marked dummies; ward backlash",
+      "clue": "Mentor explains mechanics; narrated text and visual practice cues",
+      "reward": "Mage admission, starter equipment; only first joined trial grants world XP",
+      "recovery": "wrong combination shows clue"
+    },
+    {
+      "id": "trial-monk",
+      "name": "The Unstruck Bell",
+      "chapter": "C1",
+      "map": "training",
+      "giver": "Sister Ren",
+      "requires": "first-secret",
+      "steps": "alternate attacks; counter obvious strike; cross moving hazards",
+      "clue": "Mentor explains mechanics; narrated text and visual practice cues",
+      "reward": "Monk admission, starter equipment; only first joined trial grants world XP",
+      "recovery": "mistake resets rhythm only"
+    },
+    {
+      "id": "trial-priest",
+      "name": "The Weight of a Vow",
+      "chapter": "C1",
+      "map": "training",
+      "giver": "Keeper Sol",
+      "requires": "first-secret",
+      "steps": "choose vow; heal pilgrim; cleanse curse; smite ward guardian",
+      "clue": "Mentor explains mechanics; narrated text and visual practice cues",
+      "reward": "Priest admission, starter equipment; only first joined trial grants world XP",
+      "recovery": "both vows can complete through different timing"
+    },
+    {
+      "id": "trial-bard",
+      "name": "A Song for Four Feet",
+      "chapter": "C1",
+      "map": "training",
+      "giver": "Lark Fen",
+      "requires": "first-secret",
+      "steps": "layer two songs; move practice allies; interrupt; finish chord",
+      "clue": "Mentor explains mechanics; narrated text and visual practice cues",
+      "reward": "Bard admission, starter equipment; only first joined trial grants world XP",
+      "recovery": "visual beat track supports muted audio"
+    },
+    {
+      "id": "trial-changeling",
+      "name": "Three Ways Through",
+      "chapter": "C1",
+      "map": "training",
+      "giver": "Many-in-Reeds",
+      "requires": "first-secret",
+      "steps": "wolf track; raven vent; beetle latch; pounce dummy",
+      "clue": "Mentor explains mechanics; narrated text and visual practice cues",
+      "reward": "Changeling admission, starter equipment; only first joined trial grants world XP",
+      "recovery": "forms cannot leave authored practice route"
+    },
+    {
+      "id": "trial-elemental",
+      "name": "A Vessel for Weather",
+      "chapter": "C1",
+      "map": "training",
+      "giver": "The Fourfold Ember",
+      "requires": "first-secret",
+      "steps": "ignite basin; fill channel; hold plate; turn vent; surge",
+      "clue": "Mentor explains mechanics; narrated text and visual practice cues",
+      "reward": "Elemental admission, starter equipment; only first joined trial grants world XP",
+      "recovery": "all four forms used; failed puzzle resets locally"
+    },
+    {
+      "id": "trial-psion",
+      "name": "The Space Between Thoughts",
+      "chapter": "C1",
+      "map": "training",
+      "giver": "Serin Quill",
+      "requires": "first-secret",
+      "steps": "push dummy to mark; shield ally; read imprint; avoid reflected spike",
+      "clue": "Mentor explains mechanics; narrated text and visual practice cues",
+      "reward": "Psion admission, starter equipment; only first joined trial grants world XP",
+      "recovery": "displacement never crosses collision"
+    },
+    {
+      "id": "trial-symbiont",
+      "name": "Permission to Grow",
+      "chapter": "C1",
+      "map": "training",
+      "giver": "Host Aster",
+      "requires": "first-secret",
+      "steps": "hear host; switch three grafts; heal and guard practice ally",
+      "clue": "Mentor explains mechanics; narrated text and visual practice cues",
+      "reward": "Symbiont admission, starter equipment; only first joined trial grants world XP",
+      "recovery": "explicit authored host consent; no coercive reward branch"
+    },
+    {
+      "id": "trial-powered-armour",
+      "name": "The Suit Remembers",
+      "chapter": "C1",
+      "map": "training",
+      "giver": "Marshal Ferrum",
+      "requires": "first-secret",
+      "steps": "brace projectile; vent power through pause; rush; anchor cannon",
+      "clue": "Mentor explains mechanics; narrated text and visual practice cues",
+      "reward": "Powered Armour admission, starter equipment; only first joined trial grants world XP",
+      "recovery": "resource depletion recoverable without restart"
+    },
+    {
+      "id": "hounds-at-the-toll",
+      "name": "Hounds at the Toll",
+      "chapter": "C1",
+      "map": "briar-march",
+      "giver": "The Cartographer",
+      "requires": "first-secret",
+      "steps": "break pack howl, defeat matriarch",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "briar fibre",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "the-missing-courier",
+      "name": "The Missing Courier",
+      "chapter": "C1",
+      "map": "briar-march",
+      "giver": "Nemi",
+      "requires": "first-secret",
+      "steps": "find satchel, follow footprints, bring courier home",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "copper marks",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "standing-stone-weather",
+      "name": "Standing Stone Weather",
+      "chapter": "C1",
+      "map": "briar-march",
+      "giver": "Mara",
+      "requires": "first-secret",
+      "steps": "inspect and align three marked stones",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "rune chalk",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "names-under-water",
+      "name": "Names Under Water",
+      "chapter": "C1",
+      "map": "hollow-abbey",
+      "giver": "Mara",
+      "requires": "first-secret",
+      "steps": "collect three readable grave names, present record",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "abbey ash",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "bind-the-binder",
+      "name": "Bind the Binder",
+      "chapter": "C1",
+      "map": "hollow-abbey",
+      "giver": "Mother Sable",
+      "requires": "first-secret",
+      "steps": "interrupt two acolyte bindings, recover seal",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "bronze fragment",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "a-dry-way-home",
+      "name": "A Dry Way Home",
+      "chapter": "C1",
+      "map": "hollow-abbey",
+      "giver": "The Cartographer",
+      "requires": "first-secret",
+      "steps": "open drainage loop and inspect hidden reliquary",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "travel anchor",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "a-pack-for-patch",
+      "name": "A Pack for Patch",
+      "chapter": "C1",
+      "map": "rustwater-verge",
+      "giver": "Patch",
+      "requires": "first-secret",
+      "steps": "recover dropped pack and defeat scrap stalker",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "copper wire",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "unstable-component",
+      "name": "Unstable Component",
+      "chapter": "C1",
+      "map": "rustwater-verge",
+      "giver": "Ro Coil",
+      "requires": "first-secret",
+      "steps": "retrieve core, vent at two sockets, deliver",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "ceramic shard",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "the-pump-line",
+      "name": "The Pump Line",
+      "chapter": "C1",
+      "map": "rustwater-verge",
+      "giver": "Patch",
+      "requires": "first-secret",
+      "steps": "defend moving repair unit through three stops",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "coolant",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "quiet-the-alarm",
+      "name": "Quiet the Alarm",
+      "chapter": "C1",
+      "map": "station-nine",
+      "giver": "Dr. Ilex",
+      "requires": "first-secret",
+      "steps": "trace alarm source and disable three sentries",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "circuit board",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "borrowed-clearance",
+      "name": "Borrowed Clearance",
+      "chapter": "C1",
+      "map": "station-nine",
+      "giver": "Ro Coil",
+      "requires": "first-secret",
+      "steps": "find badge, compare log, open maintenance door",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "relay recipe",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "hot-work",
+      "name": "Hot Work",
+      "chapter": "C1",
+      "map": "station-nine",
+      "giver": "Patch",
+      "requires": "first-secret",
+      "steps": "cool overheated constructs and salvage cores",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "reactor glass",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "tickets-for-nobody",
+      "name": "Tickets for Nobody",
+      "chapter": "C1",
+      "map": "wrong-fair",
+      "giver": "The Velvet Usher",
+      "requires": "first-secret",
+      "steps": "spot breathing booth, defeat mimic, return real tickets",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "velvet scrap",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "the-laughing-mask",
+      "name": "The Laughing Mask",
+      "chapter": "C1",
+      "map": "wrong-fair",
+      "giver": "Nemi",
+      "requires": "first-secret",
+      "steps": "follow laugh captions, observe juggler, recover mask",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "ink vial",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "a-walk-without-feet",
+      "name": "A Walk Without Feet",
+      "chapter": "C1",
+      "map": "wrong-fair",
+      "giver": "The Cartographer",
+      "requires": "first-secret",
+      "steps": "follow independent shadow around midway loop",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "shadow thread",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "rehearsal-notes",
+      "name": "Rehearsal Notes",
+      "chapter": "C1",
+      "map": "mirror-theatre",
+      "giver": "The Velvet Usher",
+      "requires": "first-secret",
+      "steps": "observe repeat sequence and reorder stage cards",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "mirror dust",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "lights-out-please",
+      "name": "Lights Out Please",
+      "chapter": "C1",
+      "map": "mirror-theatre",
+      "giver": "The Velvet Usher",
+      "requires": "first-secret",
+      "steps": "redirect three spotlights while dodging stagehands",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "porcelain shard",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    },
+    {
+      "id": "a-better-ending",
+      "name": "A Better Ending",
+      "chapter": "C1",
+      "map": "mirror-theatre",
+      "giver": "Mara",
+      "requires": "first-secret",
+      "steps": "recover script page and perform alternate final gesture",
+      "clue": "Rumour gives landmark, local inspection gives exact object",
+      "reward": "theatre seal",
+      "recovery": "No quest item drops on death; escort or timer resets at its checkpoint; repeat reward daily reduced, first completion permanent"
+    }
+  ],
+  "equipment": [
+    {
+      "id": "sword",
+      "name": "Sword",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "shield",
+      "name": "Shield",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "pulse-arm",
+      "name": "Pulse Arm",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "lantern",
+      "name": "Lantern",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "staff",
+      "name": "Staff",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "hand-wraps",
+      "name": "Hand Wraps",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "sun-focus",
+      "name": "Sun Focus",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "lyre",
+      "name": "Lyre",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "form-totem",
+      "name": "Form Totem",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "element-core",
+      "name": "Element Core",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "psionic-focus",
+      "name": "Psionic Focus",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "graft-seed",
+      "name": "Graft Seed",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "suit-cannon",
+      "name": "Suit Cannon",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "bow",
+      "name": "Bow",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "mace",
+      "name": "Mace",
+      "chapter": "C1",
+      "type": "visible-implement",
+      "tiers": [
+        "starter",
+        "journey",
+        "relic"
+      ],
+      "appearance": "same base silhouette, three material/attachment variants"
+    },
+    {
+      "id": "bellkeepers-blade",
+      "name": "Bellkeeper's Blade",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "drone-module",
+      "name": "Drone Module",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "funerary-lantern",
+      "name": "Funerary Lantern",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "glass-compass",
+      "name": "Glass Compass",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "borrowed-shadow",
+      "name": "Borrowed Shadow",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "oath-brooch",
+      "name": "Oath Brooch",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "ember-lens",
+      "name": "Ember Lens",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "reed-beads",
+      "name": "Reed Beads",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "pilgrim-seal",
+      "name": "Pilgrim Seal",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "copper-pick",
+      "name": "Copper Pick",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "hunter-crest",
+      "name": "Hunter Crest",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "worldheart-shard",
+      "name": "Worldheart Shard",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "mind-prism",
+      "name": "Mind Prism",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "living-buckle",
+      "name": "Living Buckle",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "siege-regulator",
+      "name": "Siege Regulator",
+      "chapter": "C1",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "readable single motif; attachment or icon where not hand-held"
+    },
+    {
+      "id": "frost-seal",
+      "name": "Frost Seal",
+      "chapter": "C2",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "realm material and heraldic emblem"
+    },
+    {
+      "id": "glass-warrant",
+      "name": "Glass Warrant",
+      "chapter": "C2",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "realm material and heraldic emblem"
+    },
+    {
+      "id": "accord-relic",
+      "name": "Accord Relic",
+      "chapter": "C2",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "realm material and heraldic emblem"
+    },
+    {
+      "id": "cosmetic-sail",
+      "name": "Cosmetic Sail",
+      "chapter": "C2",
+      "type": "relic",
+      "tiers": [
+        "unique"
+      ],
+      "appearance": "realm material and heraldic emblem"
+    },
+    {
+      "id": "briar-fibre",
+      "name": "Briar Fibre",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "rune-chalk",
+      "name": "Rune Chalk",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "abbey-ash",
+      "name": "Abbey Ash",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "bronze-fragment",
+      "name": "Bronze Fragment",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "copper-wire",
+      "name": "Copper Wire",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "ceramic-shard",
+      "name": "Ceramic Shard",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "coolant",
+      "name": "Coolant",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "circuit-board",
+      "name": "Circuit Board",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "reactor-glass",
+      "name": "Reactor Glass",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "velvet-scrap",
+      "name": "Velvet Scrap",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "ink-vial",
+      "name": "Ink Vial",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "shadow-thread",
+      "name": "Shadow Thread",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "mirror-dust",
+      "name": "Mirror Dust",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "porcelain-shard",
+      "name": "Porcelain Shard",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "theatre-seal",
+      "name": "Theatre Seal",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "forage-portion",
+      "name": "Forage Portion",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "clean-water",
+      "name": "Clean Water",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "berry",
+      "name": "Berry",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "tea-leaf",
+      "name": "Tea Leaf",
+      "chapter": "C1",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "frost-thread",
+      "name": "Frost Thread",
+      "chapter": "C2",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "glass-foil",
+      "name": "Glass Foil",
+      "chapter": "C2",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "tide-ink",
+      "name": "Tide Ink",
+      "chapter": "C2",
+      "type": "material",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "trail-stew",
+      "name": "Trail Stew",
+      "chapter": "C1",
+      "type": "consumable",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "berry-tonic",
+      "name": "Berry Tonic",
+      "chapter": "C1",
+      "type": "consumable",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "ward-salt",
+      "name": "Ward Salt",
+      "chapter": "C1",
+      "type": "consumable",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "repair-kit",
+      "name": "Repair Kit",
+      "chapter": "C1",
+      "type": "consumable",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "clarity-tea",
+      "name": "Clarity Tea",
+      "chapter": "C1",
+      "type": "consumable",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    },
+    {
+      "id": "hearty-broth",
+      "name": "Hearty Broth",
+      "chapter": "C1",
+      "type": "consumable",
+      "tiers": [
+        "base"
+      ],
+      "appearance": "inventory icon; shared bag or vial for world pickup"
+    }
+  ],
+  "screens": [
+    {
+      "id": "title",
+      "name": "Title and connection"
+    },
+    {
+      "id": "characters",
+      "name": "Character selection"
+    },
+    {
+      "id": "creation",
+      "name": "Character creation"
+    },
+    {
+      "id": "intro",
+      "name": "Introduction and trial guidance"
+    },
+    {
+      "id": "exploration",
+      "name": "Exploration HUD"
+    },
+    {
+      "id": "combat",
+      "name": "Combat HUD and boss mechanics"
+    },
+    {
+      "id": "dialogue",
+      "name": "NPC conversation and evidence"
+    },
+    {
+      "id": "inventory",
+      "name": "Inventory and equipment"
+    },
+    {
+      "id": "guild",
+      "name": "Guild selection and ability loadout"
+    },
+    {
+      "id": "progression",
+      "name": "Character development"
+    },
+    {
+      "id": "atlas",
+      "name": "World atlas and local map"
+    },
+    {
+      "id": "journal",
+      "name": "Quest journal and codex"
+    },
+    {
+      "id": "merchant",
+      "name": "Merchant"
+    },
+    {
+      "id": "crafting",
+      "name": "Crafting"
+    },
+    {
+      "id": "bank",
+      "name": "Bank"
+    },
+    {
+      "id": "social",
+      "name": "Friends, party, Company and chat"
+    },
+    {
+      "id": "trade",
+      "name": "Player trade and confirmation"
+    },
+    {
+      "id": "arena",
+      "name": "Arena setup, match and results"
+    },
+    {
+      "id": "death",
+      "name": "Death and recovery"
+    },
+    {
+      "id": "corpse",
+      "name": "Corpse loot claim"
+    },
+    {
+      "id": "settings",
+      "name": "Settings, accessibility and help"
+    },
+    {
+      "id": "connection",
+      "name": "Loading, disconnect and reconnection"
+    },
+    {
+      "id": "report",
+      "name": "Mute and player report"
+    }
+  ],
+  "rigs": {
+    "humanoid": "idle walk run strafe-left strafe-right turn-left turn-right basic-1 basic-2 cast-start cast-loop cast-release block dodge hit stagger knockdown get-up death interact kneel sit talk point wave cheer revive gather craft instrument",
+    "heavy": "idle walk run turn-left turn-right fire charge brace vent hit stagger death interact deploy recover",
+    "quadruped": "idle walk run turn-left turn-right bite pounce dodge howl hit stagger death sniff shift-in shift-out",
+    "raven": "idle ground-hop glide-low peck feather-shot dodge hit death shift-in shift-out",
+    "beetle": "idle walk run turn mandible brace dodge hit death shift-in shift-out latch",
+    "elemental": "idle drift turn strike cast coalesce surge hit collapse form-change interact",
+    "drone": "idle hover move turn repair fire hit break deploy recall",
+    "mimic": "idle breathe walk open bite recoil hit death",
+    "dragon": "idle walk run wing-fold breath leap land claw hit death roar",
+    "ray": "idle glide turn dive sweep hit dissolve"
+  },
+  "environment_kits": {
+    "town": {
+      "chapter": "C1",
+      "pieces": [
+        "cobble-tile",
+        "wall-straight",
+        "wall-corner",
+        "arch",
+        "door",
+        "window",
+        "roof-straight",
+        "roof-corner",
+        "stair",
+        "balcony",
+        "chimney",
+        "inn-sign",
+        "guild-sign",
+        "market-stall",
+        "lantern",
+        "bench",
+        "table",
+        "chair",
+        "crate",
+        "barrel",
+        "fountain",
+        "bank-counter",
+        "forge",
+        "cooker",
+        "astrolabe",
+        "gate-fantasy",
+        "gate-science",
+        "gate-chaos",
+        "safe-boundary-post",
+        "practice-obelisk",
+        "arena-gong"
+      ]
+    },
+    "forest": {
+      "chapter": "C1",
+      "pieces": [
+        "ground-tile",
+        "mud-path",
+        "rock-small",
+        "rock-large",
+        "cliff",
+        "tree-oak",
+        "tree-pine",
+        "tree-dead",
+        "bush",
+        "fern",
+        "grass",
+        "log",
+        "bridge-plank",
+        "bridge-stone",
+        "fence",
+        "standing-stone",
+        "toll-barrier",
+        "courier-cart",
+        "cave-mouth"
+      ]
+    },
+    "abbey": {
+      "chapter": "C1",
+      "pieces": [
+        "floor",
+        "wall",
+        "arch",
+        "pillar",
+        "stair",
+        "crypt-door",
+        "coffin",
+        "grave-marker",
+        "bell",
+        "bell-rope",
+        "binding-pedestal",
+        "drain-grate",
+        "stained-glass",
+        "altar",
+        "rubble",
+        "water-plane",
+        "cistern-clock"
+      ]
+    },
+    "industrial": {
+      "chapter": "C1",
+      "pieces": [
+        "floor",
+        "wall",
+        "corner",
+        "doorway",
+        "shutter",
+        "catwalk",
+        "stair",
+        "railing",
+        "pipe-straight",
+        "pipe-bend",
+        "pipe-valve",
+        "pump",
+        "relay",
+        "cabinet",
+        "terminal",
+        "reactor",
+        "coolant-tank",
+        "cable",
+        "spool",
+        "vent",
+        "lift-platform",
+        "warning-sign",
+        "salvage-pile"
+      ]
+    },
+    "carnival": {
+      "chapter": "C1",
+      "pieces": [
+        "ground",
+        "booth",
+        "tent-small",
+        "tent-large",
+        "ribbon-post",
+        "lantern",
+        "mask-display",
+        "ticket-roll",
+        "carousel",
+        "stage",
+        "curtain",
+        "mirror-panel",
+        "spotlight",
+        "backstage-door",
+        "seat",
+        "prop-chest",
+        "ink-basin",
+        "bargain-counter"
+      ]
+    },
+    "winter": {
+      "chapter": "C2",
+      "pieces": [
+        "snow-tile",
+        "ice-wall",
+        "ice-arch",
+        "frozen-pillar",
+        "ice-bridge",
+        "snow-pine",
+        "brazier",
+        "insulated-door",
+        "glacier",
+        "cliff",
+        "tablet",
+        "city-gate"
+      ]
+    },
+    "city": {
+      "chapter": "C2",
+      "pieces": [
+        "glass-floor",
+        "glass-wall",
+        "glass-corner",
+        "glass-door",
+        "glass-roof",
+        "walkway",
+        "lift",
+        "transit-sign",
+        "civic-terminal",
+        "memory-rack",
+        "power-node",
+        "city-plant"
+      ]
+    },
+    "sea": {
+      "chapter": "C2",
+      "pieces": [
+        "island-small",
+        "island-large",
+        "tide-bridge",
+        "dock",
+        "rope-post",
+        "sail",
+        "mast",
+        "name-stone",
+        "blank-lighthouse",
+        "ink-water",
+        "observatory-wheel",
+        "bottle"
+      ]
+    }
+  },
+  "pvp_rules": {
+    "specification": "docs/pvp-and-outlaw-rules.md",
+    "confirmed": {
+      "normal_victim_items": 1,
+      "red_victim_items": 2,
+      "red_on_aggression": true,
+      "guards_attack_red": true,
+      "merchants_refuse_red": true
+    },
+    "proposed_defaults": {
+      "assault_seconds": 600,
+      "unlawful_kill_seconds": 3600,
+      "countdown": "connected-server-playtime",
+      "clear_on_death": false,
+      "loot_selection": "killer-choice-pending-user-preference",
+      "equipped_items_eligible": true,
+      "quest_and_starter_items_protected": true,
+      "self_defence_exempt": true,
+      "claim_seconds": 120,
+      "loot_channel_seconds": 3
+    }
+  },
+  "law_agents": [
+    {
+      "id": "concord-watch",
+      "name": "Concord Watch",
+      "chapter": "C1",
+      "rig": "humanoid",
+      "model": "model.crowd.guard",
+      "behavior": "Patrol town gates, Exchange and Guild Row; detect red players by sight; polearm strike, shield interrupt and approach dash; no collateral damage",
+      "specification": "docs/pvp-and-outlaw-rules.md"
+    }
+  ],
+  "counts": {
+    "guilds": 13,
+    "abilities": 117,
+    "maps": 25,
+    "npcs": 25,
+    "creatures": 23,
+    "bosses": 6,
+    "quests": 44,
+    "equipment": 62,
+    "screens": 23,
+    "law_agents": 1
+  }
+}

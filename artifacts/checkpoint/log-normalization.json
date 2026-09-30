@@ -1,0 +1,47 @@
+{
+  "operation": "Normalize line endings and trailing whitespace only for checked-in command output. Original bytes retained locally; no test result or diagnostic text altered.",
+  "files": [
+    {
+      "public_path": "artifacts/checkpoint/tests-before-reward-fix.tap",
+      "raw_local_path": "artifacts/private/original-command-logs/tests-before-reward-fix.tap",
+      "raw_sha256": "0fe63abf9a96cd8ee54a5b305c6b0c342578137290d7479fd0957b437103ea44",
+      "public_sha256": "386bd3c33e0dfa14bb0d822edaf360c0c5e06985d05406aee0556285eb16156a"
+    },
+    {
+      "public_path": "artifacts/checkpoint/gameplay-media-decode.log",
+      "raw_local_path": "artifacts/private/original-command-logs/gameplay-media-decode.log",
+      "raw_sha256": "23af360285809da36b651a5efc7fd6ba9a5e7fac8b3ed1c53d667073f2d6642c",
+      "public_sha256": "60ada7aeb64fe97bdd4709b0792bd3b84d6dd6360f83020d32b16c27d898fe7c"
+    },
+    {
+      "public_path": "artifacts/checkpoint/all-tests.tap",
+      "raw_local_path": "artifacts/private/original-command-logs/all-tests.tap",
+      "raw_sha256": "7e96ecd6be36c6da5c019688eec70ad464510db7a865c29558f00bafccae663d",
+      "public_sha256": "6646cd616437027e4c5295cfa7495e723619c6c3054d70cea01630e9257d38cb"
+    },
+    {
+      "public_path": "artifacts/checkpoint/client-build.log",
+      "raw_local_path": "artifacts/private/original-command-logs/client-build.log",
+      "raw_sha256": "d6c70b9b2903ecb3630c65f4e4178b5ed2ee3186dfd10b804b18b3fe11dda182",
+      "public_sha256": "f335d0493f02924e22c1db563ac053de3b51af29a92da8309deeefb22529602b"
+    },
+    {
+      "public_path": "artifacts/checkpoint/knight-inspect.txt",
+      "raw_local_path": "artifacts/private/original-command-logs/knight-inspect.txt",
+      "raw_sha256": "664be29074150c8c234ac4bff653be6689239adc51223ac6f403631f69d098ea",
+      "public_sha256": "8f38a7ddcc6c29125316c616f6b9b081f50940aba9ab2e6750b944e899853b3e"
+    },
+    {
+      "public_path": "artifacts/checkpoint/hound-video-decode.log",
+      "raw_local_path": "artifacts/private/original-command-logs/hound-video-decode.log",
+      "raw_sha256": "d74ca029fe522416852d40e6dbe333dd9ee04f13d200f205da4da7d4f3db0fb8",
+      "public_sha256": "896e47cab1f1280bf99defc94d314e04adb7f13e85a1d718bad79b814e7fc295"
+    },
+    {
+      "public_path": "artifacts/checkpoint/build.log",
+      "raw_local_path": "artifacts/private/original-command-logs/build.log",
+      "raw_sha256": "07b63bb337f8a5a8fc4ec501de1157235cc725c05848549586b3cb33964fff31",
+      "public_sha256": "4dfc1fad706e151f255bfaa920a7949869afda370dc014788e0a415e3db355bb"
+    }
+  ]
+}

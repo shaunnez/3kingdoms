@@ -1,0 +1,16 @@
+{
+  "project_id": "appgprj_6abcd61ba2f8819183f2a305212a0895",
+  "slug": "threefold-devlog",
+  "checkout": ".sites/journal",
+  "audience": "owner-private",
+  "status": "succeeded",
+  "url": "https://threefold-devlog.shaunnesbittuk.chatgpt.site",
+  "commit_sha": "370d4b6ec2484598d6edf831d7f0ad8aa5b5a24a",
+  "commit_signing": "unsigned; explicitly authorized for journal deployment only",
+  "version_id": "appgprj_6abcd61ba2f8819183f2a305212a0895~appgver_3431837cdf7c8191bf6f2985528832dd",
+  "deployment_id": "appgdep_6abcd9c6490c819180d89b8f8f069f7a",
+  "deployed_at": "2026-09-30T09:43:58.353512+00:00",
+  "latest_milestone": "004",
+  "journal_source_sha256": "fad70f5afd818dbac8e5e9c6e56a00b6663365c9f6bdb30e87b8c96e031e612a",
+  "verification": "Local package links validated; exact pushed source packaged; native Sites deployment succeeded. No additional live-browser QA performed."
+}

@@ -1,0 +1,28 @@
+Input #0, matroska,webm, from 'artifacts/checkpoint/captures/2026-09-30T12-35-34-526Z-76553b83.webm':
+  Metadata:
+    encoder         : Chrome
+  Duration: N/A, start: 0.000000, bitrate: N/A
+  Stream #0:0(eng): Video: vp9 (Profile 0), yuv420p(pc, bt709/bt709/iec61966-2-1), 1920x1080, SAR 1:1 DAR 16:9, 1k tbr, 1k tbn (default)
+    Metadata:
+      alpha_mode      : 1
+  Stream #0:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
+Stream mapping:
+  Stream #0:0 -> #0:0 (vp9 (native) -> wrapped_avframe (native))
+  Stream #0:1 -> #0:1 (opus (native) -> pcm_s16le (native))
+Press [q] to stop, [?] for help
+Output #0, null, to 'pipe:':
+  Metadata:
+    encoder         : Lavf60.3.100
+  Stream #0:0(eng): Video: wrapped_avframe, yuv420p(pc, bt709/bt709/iec61966-2-1, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 200 kb/s, 1k fps, 1k tbn (default)
+    Metadata:
+      alpha_mode      : 1
+      encoder         : Lavc60.3.100 wrapped_avframe
+  Stream #0:1(eng): Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s (default)
+    Metadata:
+      encoder         : Lavc60.3.100 pcm_s16le
+frame=    0 fps=0.0 q=-0.0 size=N/A time=00:00:00.33 bitrate=N/A speed=66.8x
+frame=  593 fps=0.0 q=-0.0 size=N/A time=00:00:20.85 bitrate=N/A speed=41.2x
+frame= 1213 fps=1202 q=-0.0 size=N/A time=00:00:42.57 bitrate=N/A speed=42.2x
+frame= 1805 fps=1195 q=-0.0 size=N/A time=00:01:03.51 bitrate=N/A speed=42.1x
+frame= 2144 fps=1189 q=-0.0 Lsize=N/A time=00:01:14.97 bitrate=N/A speed=41.6x
+video:1005kB audio:14062kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown

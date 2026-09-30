@@ -1,0 +1,49 @@
+{
+  "name": "threefold",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node tools/dev.mjs",
+    "dev:client": "vite --config apps/client/vite.config.ts --host 127.0.0.1",
+    "dev:server": "tsx apps/server/main.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "build": "tsc --noEmit && vite build --config apps/client/vite.config.ts",
+    "validate:plan": "python3 tools/validate_plan.py",
+    "preview": "node tools/preview.mjs",
+    "validate:assets": "node tools/validate-runtime.mjs",
+    "format:check": "prettier --check apps packages tests tools/*.mjs tools/benchmark-server.ts package.json tsconfig.json",
+    "benchmark:server": "node --import tsx tools/benchmark-server.ts 600"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "dependencies": {
+    "@babylonjs/core": "9.28.0",
+    "@babylonjs/loaders": "9.28.0",
+    "@colyseus/core": "0.18.18",
+    "@colyseus/sdk": "0.18.4",
+    "@colyseus/ws-transport": "0.18.4",
+    "express": "5.2.1",
+    "html2canvas": "1.4.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@gltf-transform/cli": "4.5.1",
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/extensions": "4.5.1",
+    "@playwright/test": "1.63.0",
+    "@types/express": "5.0.6",
+    "@types/node": "26.6.3",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "gltf-validator": "2.0.0-dev.3.10",
+    "prettier": "3.9.9",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vite": "8.3.1"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "model": "cyborg",
+  "triangles": 23991,
+  "bones": 24,
+  "animations": [
+    "idle",
+    "run",
+    "attack",
+    "dodge",
+    "death"
+  ],
+  "bytes": 6751132,
+  "root_motion": "horizontal travel removed; server owns movement",
+  "equipment": "Generated ceramic body and pulse forearm"
+}

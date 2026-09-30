@@ -1,0 +1,124 @@
+{
+  "model.guild.knight": {
+    "status": "prototype",
+    "prototype_output": "assets/runtime/models/knight.glb",
+    "source_hash": "d121e43474cbc1333a2bfe2a44639c7d8783e5c0786a791d5c3f647261f14a64",
+    "verified_in_browser": true,
+    "limitations": "One practice body and outfit; mastery variants, full action-specific clips and both shared builds remain.",
+    "evidence": [
+      "artifacts/checkpoint/captures/briar-gate-expedition.mp4",
+      "artifacts/checkpoint/knight-motion-bounds.json"
+    ],
+    "source_job": "01a0f1f0-58f5-70b2-af4c-338b00d0c7c4"
+  },
+  "model.guild.cyborg": {
+    "status": "prototype",
+    "prototype_output": "assets/runtime/models/cyborg.glb",
+    "source_hash": "42ba7791cfa8a7340fdd146195a2875e1dcb73e752425d13fd7371306bf26fba",
+    "verified_in_browser": true,
+    "limitations": "One practice body; exploration utility, full drone AI and mastery are not complete.",
+    "evidence": [
+      "artifacts/checkpoint/captures/outlaw-victim-view.mp4",
+      "artifacts/checkpoint/cyborg-motion-bounds.json"
+    ],
+    "source_job": "01a0f1db-789d-75bc-a18f-331cca3eb611"
+  },
+  "model.form.changeling-wolf": {
+    "status": "prototype",
+    "prototype_output": "assets/runtime/models/wolf.glb",
+    "source_hash": "ead53e803ec1797579086795e7ad3f0700ad50a0930f44f8872a66e29bb49334",
+    "verified_in_browser": true,
+    "limitations": "Quadruped pipeline prototype reused as a hound. Playable Changeling transformations are not implemented.",
+    "evidence": [
+      "artifacts/checkpoint/captures/hound-motion-study.mp4",
+      "artifacts/checkpoint/wolf-motion-bounds.json"
+    ],
+    "source_job": "01a0f1e1-cf65-7427-b77c-41e3172b16ca"
+  },
+  "model.npc.mara": {
+    "status": "prototype",
+    "prototype_output": "assets/runtime/models/mara.glb",
+    "source_hash": "8829beb1243c8ceb97d30b2e1c274358d02c0f3f99a610edf3d7cbf7009d446d",
+    "verified_in_browser": true,
+    "limitations": "Quest NPC prototype; complete dialogue tree, voice and gesture set remain.",
+    "evidence": [
+      "artifacts/checkpoint/captures/briar-gate-expedition.mp4"
+    ],
+    "source_job": "01a0f213-1894-7275-8e17-fabed4e18814"
+  },
+  "model.npc.nemi": {
+    "status": "prototype",
+    "prototype_output": "assets/runtime/models/nemi.glb",
+    "source_hash": "ab147c2d31a3dfb1b329ba025d597a53e230c69bf399d311e33c3c19b753cd68",
+    "verified_in_browser": true,
+    "limitations": "Merchant NPC prototype; complete economy, voice and gesture set remain.",
+    "evidence": [
+      "artifacts/checkpoint/captures/2026-09-30T13-07-49-832Z-d574227f.png"
+    ],
+    "source_job": "01a0f213-1735-77ac-aecb-8503b2cea72c"
+  },
+  "ref.guild.knight": {
+    "status": "prototype",
+    "prototype_output": "design/calibration/knight.png",
+    "source_hash": "afdf90c3e63538978048baf5bdaf7ff67fbf76d59b84fc9704111767b752c4b3",
+    "verified_in_browser": false,
+    "limitations": "Higgsfield calibration reference; does not certify final anatomy, complete multi-view production sheets or real-time rendering.",
+    "source_job": "cc38cb1c-6479-4ca7-928f-ee306ccf8609"
+  },
+  "ref.guild.cyborg": {
+    "status": "prototype",
+    "prototype_output": "design/calibration/cyborg.png",
+    "source_hash": "215d79ed11250996e6e2b720199e557ff964fe9ceb254b47948f8e47f1493c6f",
+    "verified_in_browser": false,
+    "limitations": "Higgsfield calibration reference; does not certify final anatomy, complete multi-view production sheets or real-time rendering.",
+    "source_job": "b60b6b3d-4918-47a8-9154-e31065f2c414"
+  },
+  "ref.form.changeling-wolf": {
+    "status": "prototype",
+    "prototype_output": "design/calibration/wolf.png",
+    "source_hash": "da5e0d23fa158b146555230d79d9119db1d32b3ea05e23299a5dacfd70e9ea53",
+    "verified_in_browser": false,
+    "limitations": "Higgsfield calibration reference; does not certify final anatomy, complete multi-view production sheets or real-time rendering.",
+    "source_job": "54387967-5df9-4e53-a669-d76103d9dd79"
+  },
+  "ref.guild.elemental": {
+    "status": "prototype",
+    "prototype_output": "design/calibration/elemental.png",
+    "source_hash": "c99e081f985b6bb618ef834e3a84c7c0fbdd0ac91db6793b89633f0cca7ae5e5",
+    "verified_in_browser": false,
+    "limitations": "Higgsfield calibration reference; does not certify final anatomy, complete multi-view production sheets or real-time rendering.",
+    "source_job": "bb079064-9eec-40d0-b7ba-7e0166bc4e8a"
+  },
+  "ref.npc.mara": {
+    "status": "prototype",
+    "prototype_output": "design/calibration/mara.png",
+    "source_hash": "18298b3980115274f4a3cfbb83fa0a9499de12fb807bc8c98b293c1970cdc5b2",
+    "verified_in_browser": false,
+    "limitations": "Higgsfield calibration reference; does not certify final anatomy, complete multi-view production sheets or real-time rendering.",
+    "source_job": "f60a7b9b-5d9c-47bd-be5b-e701605d8ffd"
+  },
+  "ref.npc.nemi": {
+    "status": "prototype",
+    "prototype_output": "design/calibration/nemi.png",
+    "source_hash": "ca361699f4c67ac2bc79f2d93c9d588a87af09b41d66040d1846d87e7cf5ef97",
+    "verified_in_browser": false,
+    "limitations": "Higgsfield calibration reference; does not certify final anatomy, complete multi-view production sheets or real-time rendering.",
+    "source_job": "7052d723-7c54-4661-a3b9-1b532cbe093a"
+  },
+  "vista.highcross": {
+    "status": "prototype",
+    "prototype_output": "design/calibration/highcross.png",
+    "source_hash": "fe3f661ef939e20877c046383a3e157611fb4a1b657ff0a988c97a1887fd7974",
+    "verified_in_browser": false,
+    "limitations": "Higgsfield calibration reference; does not certify final anatomy, complete multi-view production sheets or real-time rendering.",
+    "source_job": "e3e05999-49e1-451a-aff8-0b5730f33d36"
+  },
+  "vista.briar-march": {
+    "status": "prototype",
+    "prototype_output": "design/calibration/briar.png",
+    "source_hash": "8dfff8bf07ee36c28ee785a9c3f13fc8d37049f6871751639dc6671370f96ae0",
+    "verified_in_browser": false,
+    "limitations": "Higgsfield calibration reference; does not certify final anatomy, complete multi-view production sheets or real-time rendering.",
+    "source_job": "cb2740da-3ada-4ebb-97c3-cb584e62c185"
+  }
+}

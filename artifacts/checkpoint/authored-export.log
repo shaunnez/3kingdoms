@@ -1,0 +1,174 @@
+00:00.971  blend            | Read blend: "/Users/shaun/new-game/assets/source/briar-gate.blend"
+INFO Draco is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_draco_bridge.dylib
+INFO MeshOptimizer is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_meshopt_bridge.dylib
+02:25:43 | INFO: Starting glTF 2.0 export
+02:25:43 | INFO: Extracting primitive: brass
+02:25:43 | WARNING: brass: Could not calculate tangents. Please try to triangulate the mesh first.
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: copper
+02:25:43 | WARNING: copper: Could not calculate tangents. Please try to triangulate the mesh first.
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: cream
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: earth
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: flower
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: glass
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: glow
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: iron
+02:25:43 | WARNING: iron: Could not calculate tangents. Please try to triangulate the mesh first.
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: leaf
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: leaf-dark
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: leaf-gold
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: moss
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: mud
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.12.leaf
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.12.leaf-dark
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.12.leaf-gold
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.28.leaf
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.28.leaf-dark
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.28.leaf-gold
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.36.leaf
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.36.leaf-dark
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.36.leaf-gold
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.52.leaf
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.52.leaf-dark
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.52.leaf-gold
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.60.leaf
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.60.leaf-dark
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.14.60.leaf-gold
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.12.leaf
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.12.leaf-dark
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.12.leaf-gold
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.28.leaf
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.28.leaf-dark
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.28.leaf-gold
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.36.leaf
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.36.leaf-dark
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.36.leaf-gold
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.44.leaf
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.44.leaf-dark
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.44.leaf-gold
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.52.leaf
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.52.leaf-dark
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-canopy.-14.52.leaf-gold
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-gate.stone
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: occluder-gate.stone-light
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: plaster
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: slate
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: stone
+02:25:43 | WARNING: stone: Could not calculate tangents. Please try to triangulate the mesh first.
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: stone-dark
+02:25:43 | WARNING: stone-dark: Could not calculate tangents. Please try to triangulate the mesh first.
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: stone-light
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: teal
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: timber
+02:25:43 | WARNING: timber: Could not calculate tangents. Please try to triangulate the mesh first.
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: waterbed
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: wood
+02:25:43 | WARNING: wood: Could not calculate tangents. Please try to triangulate the mesh first.
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Finished glTF 2.0 export in 0.5631930828094482 s
+00:01.742  blend            | Read blend: "/Users/shaun/new-game/assets/source/knight.blend"
+
+Warning: brass: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: copper: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: iron: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: stone: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: stone-dark: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: wood: Could not calculate tangents. Please try to triangulate the mesh first.
+Exported briar-gate: 31672496 bytes to /Users/shaun/new-game/assets/source/private/authored-exports/briar-gate.glb
+02:25:43 | INFO: Starting glTF 2.0 export
+02:25:43 | INFO: Extracting primitive: char1
+02:25:43 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+02:25:43 | INFO: Primitives created: 1
+02:25:43 | INFO: Extracting primitive: Longsword grip
+02:25:43 | INFO: Primitives created: 1
+02:25:44 | INFO: Finished glTF 2.0 export in 0.40634608268737793 s
+00:02.209  blend            | Read blend: "/Users/shaun/new-game/assets/source/cyborg.blend"
+
+Exported knight: 7602200 bytes to /Users/shaun/new-game/assets/source/private/authored-exports/knight.glb
+02:25:44 | INFO: Starting glTF 2.0 export
+02:25:44 | INFO: Extracting primitive: char1
+02:25:44 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+02:25:44 | INFO: Primitives created: 1
+02:25:44 | INFO: Finished glTF 2.0 export in 0.38507890701293945 s
+00:02.661  blend            | Read blend: "/Users/shaun/new-game/assets/source/wolf.blend"
+
+Exported cyborg: 6751132 bytes to /Users/shaun/new-game/assets/source/private/authored-exports/cyborg.glb
+02:25:44 | INFO: Starting glTF 2.0 export
+02:25:44 | INFO: Extracting primitive: Mesh_0
+02:25:44 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+02:25:44 | INFO: Primitives created: 1
+02:25:45 | INFO: Finished glTF 2.0 export in 0.26558589935302734 s
+00:02.962  blend            | Read blend: "/Users/shaun/new-game/assets/source/mara.blend"
+
+Exported wolf: 6723708 bytes to /Users/shaun/new-game/assets/source/private/authored-exports/wolf.glb
+02:25:45 | INFO: Starting glTF 2.0 export
+02:25:45 | INFO: Extracting primitive: char1
+02:25:45 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+02:25:45 | INFO: Primitives created: 1
+02:25:45 | INFO: Finished glTF 2.0 export in 0.24569082260131836 s
+00:03.241  blend            | Read blend: "/Users/shaun/new-game/assets/source/nemi.blend"
+
+Exported mara: 5663372 bytes to /Users/shaun/new-game/assets/source/private/authored-exports/mara.glb
+02:25:45 | INFO: Starting glTF 2.0 export
+02:25:45 | INFO: Extracting primitive: char1
+02:25:45 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+02:25:45 | INFO: Primitives created: 1
+02:25:45 | INFO: Finished glTF 2.0 export in 0.2484750747680664 s
+
+Exported nemi: 5447100 bytes to /Users/shaun/new-game/assets/source/private/authored-exports/nemi.glb
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 01:35:57)
+
+Blender quit

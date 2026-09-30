@@ -1,0 +1,209 @@
+{
+  "build": "0.1.0-briar-gate",
+  "fingerprint": "5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c",
+  "manifest": "artifacts/checkpoint/build-manifest.json",
+  "recorded_local_date": "2026-10-01",
+  "scope": "P1/P2 local representative checkpoint; not the complete game or a 48-hour build",
+  "overall": "engineering behaviors verified; final visual acceptance, target hardware and human fun remain open",
+  "bulk_asset_production": "not-started; visual-quality acceptance remains open",
+  "environment": {
+    "os": "macOS 26.4",
+    "gpu": "Apple M5 via ANGLE Metal",
+    "browser": "Chromium 154 in Codex in-app browser",
+    "render_api": "WebGL2",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "pixel_ratio": 1,
+    "node": "22.23.2",
+    "blender": "5.2.1 LTS",
+    "python": "3.14.6"
+  },
+  "checks": [
+    {
+      "id": "rules-and-transport",
+      "status": "passed",
+      "evidence": [
+        "artifacts/checkpoint/all-tests.tap"
+      ],
+      "result": "30 automated checks: 29 simulation behaviors and one real multi-client WebSocket integration suite. Reconnect, identity reservation race, capacity and durable claim receipts included.",
+      "limit": "Loopback; no packet impairment, database transaction or production-account claim."
+    },
+    {
+      "id": "runtime-models",
+      "status": "passed-with-warnings",
+      "evidence": [
+        "artifacts/checkpoint/gltf-validation.json"
+      ],
+      "result": "Six GLBs, zero errors, eleven retained warnings.",
+      "limit": "Validity is separate from visual acceptance."
+    },
+    {
+      "id": "real-browser-town-safety",
+      "status": "passed",
+      "evidence": [
+        "artifacts/checkpoint/captures/2026-09-30T12-50-18-916Z-70580727.png"
+      ],
+      "result": "Two independent browser sessions attempted attacks in town. Health and red state did not change; the safety rejection was visible.",
+      "source_fingerprint": "1633bf5a655fb55632b8b773e56c69fd6114ac9d83f31b4d51e22e0eb5f947b0"
+    },
+    {
+      "id": "real-browser-one-item",
+      "status": "passed",
+      "evidence": [
+        "artifacts/checkpoint/captures/clean-victim-one-item.mp4",
+        "artifacts/checkpoint/pvp-claim-receipts.json"
+      ],
+      "result": "Cyborg Vex killed clean Knight Thorne outside safety, received a player-killer timer, and claimed one Briar-forged brooch. Both clients displayed the receipt.",
+      "source_manifest": "artifacts/checkpoint/build-manifest-first-pvp.json",
+      "limit": "Hounds also participated in this field encounter. Claim ownership and quota were observed in the actual clients."
+    },
+    {
+      "id": "real-browser-two-items",
+      "status": "passed",
+      "evidence": [
+        "artifacts/checkpoint/captures/outlaw-two-item-claim.mp4",
+        "artifacts/checkpoint/captures/outlaw-victim-view.mp4",
+        "artifacts/checkpoint/pvp-claim-receipts.json"
+      ],
+      "result": "Clean Thorne killed red Vex in the wilderness, remained clean and claimed Amber shard then Weathered copper ring. Both client receipts agreed. Quota reached zero and the corpse claim window closed.",
+      "source_manifest": "artifacts/checkpoint/build-manifest-two-client.json",
+      "limit": "Recorded before canopy fading repair; the foliage obscures parts of the actors. The loot HUD remains readable."
+    },
+    {
+      "id": "real-browser-outlaw-law",
+      "status": "passed",
+      "evidence": [
+        "artifacts/checkpoint/captures/2026-09-30T12-52-16-857Z-0bcf457a.png",
+        "artifacts/checkpoint/captures/2026-09-30T13-07-49-832Z-d574227f.png"
+      ],
+      "result": "Guard acquired and killed a red player; Nemi refused service and disabled purchase. Death retained the timer and offered the unpatrolled refuge respawn.",
+      "limit": "The refusal screenshot was saved immediately after the guard killed the player; the live refusal was received while alive. Bank enforcement is not implemented because this slice has no bank.",
+      "source_builds": {
+        "guard_screenshot": "1633bf5a655fb55632b8b773e56c69fd6114ac9d83f31b4d51e22e0eb5f947b0",
+        "merchant_screenshot": "1da47b970a329d711a2d84112929fa6ce42628376670ae5b1a9624a22fe85d0d"
+      }
+    },
+    {
+      "id": "browser-expedition",
+      "status": "passed-for-slice",
+      "evidence": [
+        "artifacts/checkpoint/captures/briar-gate-expedition.mp4",
+        "artifacts/checkpoint/captures/briar-gate-expedition.vtt"
+      ],
+      "result": "Uncut 75-second browser rehearsal: Mara, safety boundary, two hound encounters, bridge, epitaph and return to Highcross. Camera orbit and gate fade remain readable.",
+      "source_fingerprint": "5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c",
+      "limit": "The recorded character revisits an already-completed clue. Earlier browser execution and automated tests verify the single-use reward. QA controls send ordinary commands; this is not a human fun test."
+    },
+    {
+      "id": "quadruped-motion",
+      "status": "passed-for-prototype",
+      "evidence": [
+        "artifacts/checkpoint/captures/hound-motion-study.mp4",
+        "artifacts/checkpoint/captures/hound-recording-death-review.png",
+        "artifacts/checkpoint/wolf-motion-bounds.json"
+      ],
+      "result": "Idle, walk, run, attack, dodge and death inspected in the live browser. Repaired continuous weights remove the earlier gross tail/belly spikes.",
+      "limit": "An 18-second excerpt cycles the six clips; motion style still needs polish. Not a playable Changeling."
+    },
+    {
+      "id": "elemental-materials",
+      "status": "passed-for-study",
+      "evidence": [
+        "artifacts/checkpoint/captures/2026-09-30T13-14-34-125Z-38faf925.png"
+      ],
+      "result": "Fire emission, water transparency, air transparency and opaque earth viewed together in the game renderer.",
+      "source_fingerprint": "5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c",
+      "limit": "Simple rotating material proxies, not finished Elemental anatomy or gameplay."
+    },
+    {
+      "id": "camera-occlusion",
+      "status": "repaired-and-reviewed",
+      "evidence": [
+        "artifacts/checkpoint/captures/2026-09-30T13-11-37-590Z-78303e5e.png",
+        "artifacts/checkpoint/captures/briar-gate-expedition.mp4"
+      ],
+      "result": "Follow preserves orbit/radius; gate arch and nearby canopy groups fade around the traveller.",
+      "limit": "Further environment composition and obstruction review remains for later maps."
+    },
+    {
+      "id": "server-stress",
+      "status": "passed-for-loopback-fixture",
+      "evidence": [
+        "artifacts/checkpoint/server-load-600s.json",
+        "artifacts/checkpoint/server-load-before-event-cursor.json"
+      ],
+      "result": "600.45 seconds, 16 actual SDK connections, 80 AI-cost fixtures; p95 tick 10.3167 ms, p99 13.1328 ms.",
+      "limit": "48 hounds plus 32 hound-cost proxies; not complete summons. Mean decoded snapshot throughput 3252.52 kbit/s/client; wire compression/WAN bandwidth unqualified."
+    },
+    {
+      "id": "renderer-stress",
+      "status": "passed-for-local-fixture-with-stall",
+      "evidence": [
+        "artifacts/checkpoint/captures/2026-09-30T13-25-02-469Z-d794e185.json"
+      ],
+      "result": "600.43s, zero hidden samples, 69918 uncapped frame intervals; median 116.10 fps, p95 9.70 ms, p99 10.40 ms, largest frame 358.10 ms; p95 208 draws, maximum 1393019 active triangles.",
+      "limit": "Apple M5, normal camera, synthetic rigs/summons. The longest stall is retained and its cause is not established by this trace. No full raid, lower-end hardware or eight-signature stress claim."
+    },
+    {
+      "id": "memory-load-unload",
+      "status": "pending-final-build",
+      "evidence": []
+    },
+    {
+      "id": "dependency-advisories",
+      "status": "passed",
+      "evidence": [
+        "artifacts/checkpoint/dependency-audit.json"
+      ],
+      "result": "npm runtime-dependency audit reported zero known vulnerabilities on 2026-10-01.",
+      "limit": "Advisory snapshot, not a security certification."
+    },
+    {
+      "id": "visual-reference-match",
+      "status": "not-accepted",
+      "evidence": [
+        "artifacts/checkpoint/captures/briar-gate-expedition-poster.png",
+        "design/screens/01-highcross.png"
+      ],
+      "result": "HUD, material direction and representative bodies work. Environment architecture, foliage, lighting richness and motion are visibly below the target.",
+      "limit": "Blocks a production-art acceptance claim and expansion into bulk asset production."
+    },
+    {
+      "id": "human-fun",
+      "status": "not-run",
+      "evidence": [],
+      "result": "No human novice, readability or retention test has been conducted."
+    },
+    {
+      "id": "hardware-and-network-matrix",
+      "status": "not-run",
+      "evidence": [],
+      "result": "M1/GTX1660, Safari/Firefox, latency/jitter/loss and throttled first-load targets remain unqualified."
+    }
+  ],
+  "remaining_game_scope": [
+    "all twelve full guild kits, trials and mastery",
+    "complete world and quest catalogue",
+    "party/chat/trade/bank/craft",
+    "production authentication and transactional persistence",
+    "full accessibility, art and audio acceptance",
+    "human playtesting and balance"
+  ],
+  "spend": {
+    "higgsfield_completed_jobs": 13,
+    "higgsfield_estimated_credits": 35.75,
+    "higgsfield_verified_billed_credits": null,
+    "meshy_completed_jobs": 17,
+    "meshy_verified_consumed_credits": 194,
+    "currency_total": null,
+    "failed_oversized_cyborg_rig_charge": "unknown; no task ID returned"
+  },
+  "publication": {
+    "local": "playable",
+    "github": "pending",
+    "journal": "existing owner-private milestone 004; update pending",
+    "public_game": "not-deployed"
+  }
+}

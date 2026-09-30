@@ -1,0 +1,16 @@
+❯ dedup
+✔ dedup                5ms
+❯ weld
+✔ weld                 16ms
+❯ resample
+✔ resample             6ms
+❯ prune
+✔ prune                52ms
+❯ sparse
+✔ sparse               11ms
+❯ textureCompress
+✔ textureCompress      170ms
+❯ quantize
+✔ quantize             104ms
+
+info: mara-validated.glb (5.66 MB) → mara.glb (926.35 KB)

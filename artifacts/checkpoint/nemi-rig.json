@@ -1,0 +1,12 @@
+{
+  "model": "nemi",
+  "triangles": 11990,
+  "bones": 24,
+  "animations": [
+    "idle",
+    "death"
+  ],
+  "bytes": 5447100,
+  "root_motion": "horizontal travel removed; server owns movement",
+  "equipment": "Town clothing; no equipped props"
+}

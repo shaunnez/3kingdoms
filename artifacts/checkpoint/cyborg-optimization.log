@@ -1,0 +1,16 @@
+❯ dedup
+✔ dedup                9ms
+❯ weld
+✔ weld                 23ms
+❯ resample
+✔ resample             11ms
+❯ prune
+✔ prune                29ms
+❯ sparse
+✔ sparse               11ms
+❯ textureCompress
+✔ textureCompress      136ms
+❯ quantize
+✔ quantize             99ms
+
+info: cyborg-validated.glb (6.74 MB) → cyborg.glb (1.49 MB)

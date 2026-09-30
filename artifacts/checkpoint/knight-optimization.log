@@ -1,0 +1,16 @@
+❯ dedup
+✔ dedup                8ms
+❯ weld
+✔ weld                 25ms
+❯ resample
+✔ resample             12ms
+❯ prune
+✔ prune                36ms
+❯ sparse
+✔ sparse               11ms
+❯ textureCompress
+✔ textureCompress      134ms
+❯ quantize
+✔ quantize             103ms
+
+info: knight-validated.glb (7.59 MB) → knight.glb (1.71 MB)

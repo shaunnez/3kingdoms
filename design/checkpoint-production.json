@@ -1,0 +1,232 @@
+{
+  "checkpoint": "P1-P2 Briar Gate",
+  "authorization": "User explicitly authorized P1/P2 and full Higgsfield/Meshy use, then instructed continued work while asleep. Bulk production follows the representative browser checkpoint; the separate 48-hour experiment has not started.",
+  "status": "in-progress",
+  "scope": [
+    "Highcross gate corner",
+    "Briar route",
+    "Knight",
+    "Cyborg",
+    "custom wolf rig",
+    "Elemental material preview",
+    "twelve-guild identity reference",
+    "HUD",
+    "authoritative two-client combat",
+    "one/two-item corpse claims",
+    "red-name timer",
+    "guards",
+    "merchant refusal",
+    "browser evidence"
+  ],
+  "references": [
+    {
+      "name": "knight",
+      "job_id": "cc38cb1c-6479-4ca7-928f-ee306ccf8609",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/knight.png",
+      "prompt": "design/prompts/p1-knight.txt",
+      "estimated_credits": 2.75,
+      "sha256": "afdf90c3e63538978048baf5bdaf7ff67fbf76d59b84fc9704111767b752c4b3",
+      "bytes": 5247261
+    },
+    {
+      "name": "cyborg",
+      "job_id": "b60b6b3d-4918-47a8-9154-e31065f2c414",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/cyborg.png",
+      "prompt": "design/prompts/p1-cyborg.txt",
+      "estimated_credits": 2.75,
+      "sha256": "215d79ed11250996e6e2b720199e557ff964fe9ceb254b47948f8e47f1493c6f",
+      "bytes": 4857907
+    },
+    {
+      "name": "wolf",
+      "job_id": "54387967-5df9-4e53-a669-d76103d9dd79",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/wolf.png",
+      "prompt": "design/prompts/p1-wolf.txt",
+      "estimated_credits": 2.75,
+      "sha256": "da5e0d23fa158b146555230d79d9119db1d32b3ea05e23299a5dacfd70e9ea53",
+      "bytes": 6010233
+    },
+    {
+      "name": "elemental",
+      "job_id": "bb079064-9eec-40d0-b7ba-7e0166bc4e8a",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/elemental.png",
+      "prompt": "design/prompts/p1-elemental.txt",
+      "estimated_credits": 2.75,
+      "sha256": "c99e081f985b6bb618ef834e3a84c7c0fbdd0ac91db6793b89633f0cca7ae5e5",
+      "bytes": 6183791
+    },
+    {
+      "name": "highcross",
+      "job_id": "e3e05999-49e1-451a-aff8-0b5730f33d36",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/highcross.png",
+      "prompt": "design/prompts/p1-highcross.txt",
+      "estimated_credits": 2.75,
+      "sha256": "fe3f661ef939e20877c046383a3e157611fb4a1b657ff0a988c97a1887fd7974",
+      "bytes": 8904228
+    },
+    {
+      "name": "briar",
+      "job_id": "cb2740da-3ada-4ebb-97c3-cb584e62c185",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/briar.png",
+      "prompt": "design/prompts/p1-briar.txt",
+      "estimated_credits": 2.75,
+      "sha256": "8dfff8bf07ee36c28ee785a9c3f13fc8d37049f6871751639dc6671370f96ae0",
+      "bytes": 8797009
+    },
+    {
+      "name": "guilds",
+      "job_id": "17485205-0434-4028-92ef-3b1101981843",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/guilds.png",
+      "prompt": "design/prompts/p1-guilds.txt",
+      "estimated_credits": 2.75,
+      "sha256": "28d5e3dddd91436774ae0bd3fda6cfe0cfad031284d2db002a1c38d32b89379c",
+      "bytes": 6165314
+    },
+    {
+      "name": "icons",
+      "job_id": "313af1e6-d7a2-4045-b639-83e954ec6e68",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/icons.png",
+      "prompt": "design/prompts/p1-icons.txt",
+      "estimated_credits": 2.75,
+      "sha256": "42e64a2c8f69ee5ab5882ca0c27196fb55718e918a26581a215f851787b7c7a7",
+      "bytes": 5356109
+    },
+    {
+      "name": "mara",
+      "job_id": "f60a7b9b-5d9c-47bd-be5b-e701605d8ffd",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/mara.png",
+      "prompt": "design/prompts/p1-mara.txt",
+      "estimated_credits": 2.75,
+      "sha256": "18298b3980115274f4a3cfbb83fa0a9499de12fb807bc8c98b293c1970cdc5b2",
+      "bytes": 3721612
+    },
+    {
+      "name": "nemi",
+      "job_id": "7052d723-7c54-4661-a3b9-1b532cbe093a",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/nemi.png",
+      "prompt": "design/prompts/p1-nemi.txt",
+      "estimated_credits": 2.75,
+      "sha256": "ca361699f4c67ac2bc79f2d93c9d588a87af09b41d66040d1846d87e7cf5ef97",
+      "bytes": 3803318
+    },
+    {
+      "name": "material-stone",
+      "job_id": "d25d98c8-13b8-4173-85b6-8e8f7accc522",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/material-stone.png",
+      "prompt": "design/prompts/p1-material-stone.txt",
+      "estimated_credits": 2.75,
+      "sha256": "195d32b5e943e1fba059ccee8f7d1c192177a7f2871914f42c285de48389da18",
+      "bytes": 11571945
+    },
+    {
+      "name": "material-wood",
+      "job_id": "64ae64af-8aaf-4684-936d-90e36745b1dc",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/material-wood.png",
+      "prompt": "design/prompts/p1-material-wood.txt",
+      "estimated_credits": 2.75,
+      "sha256": "04abfd7af97a06e9d0f348d13a7075a2ababab045ff45c145537631af385898c",
+      "bytes": 9424594
+    },
+    {
+      "name": "material-soil",
+      "job_id": "e8dcf8b9-d2f4-486d-942b-8168783471fe",
+      "model": "gpt_image_2_5",
+      "status": "completed",
+      "image": "design/calibration/material-soil.png",
+      "prompt": "design/prompts/p1-material-soil.txt",
+      "estimated_credits": 2.75,
+      "sha256": "fdb9f8e3700925d07f0f7cdaf26b33b8d0977ab6173dbb1863313cdc4b1dc78f",
+      "bytes": 10217929
+    }
+  ],
+  "models": [
+    {
+      "name": "briar-gate",
+      "sourceBytes": 31672496,
+      "repairedTangents": 0,
+      "runtimeBytes": 11359300,
+      "sha256": "f0b5505005ca98a803cb04c45f5a613caf53d1cf03a3c93bec62d825dc97566f",
+      "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+    },
+    {
+      "name": "knight",
+      "sourceBytes": 7602200,
+      "repairedTangents": 0,
+      "runtimeBytes": 1706116,
+      "sha256": "d121e43474cbc1333a2bfe2a44639c7d8783e5c0786a791d5c3f647261f14a64",
+      "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+    },
+    {
+      "name": "cyborg",
+      "sourceBytes": 6751132,
+      "repairedTangents": 2,
+      "runtimeBytes": 1487312,
+      "sha256": "42ba7791cfa8a7340fdd146195a2875e1dcb73e752425d13fd7371306bf26fba",
+      "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+    },
+    {
+      "name": "wolf",
+      "sourceBytes": 6723708,
+      "repairedTangents": 0,
+      "runtimeBytes": 1391828,
+      "sha256": "ead53e803ec1797579086795e7ad3f0700ad50a0930f44f8872a66e29bb49334",
+      "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+    },
+    {
+      "name": "mara",
+      "sourceBytes": 5663372,
+      "repairedTangents": 0,
+      "runtimeBytes": 926348,
+      "sha256": "8829beb1243c8ceb97d30b2e1c274358d02c0f3f99a610edf3d7cbf7009d446d",
+      "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+    },
+    {
+      "name": "nemi",
+      "sourceBytes": 5447100,
+      "repairedTangents": 2,
+      "runtimeBytes": 860616,
+      "sha256": "ab147c2d31a3dfb1b329ba025d597a53e230c69bf399d311e33c3c19b753cd68",
+      "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+    }
+  ],
+  "spend": {
+    "higgsfield_completed_jobs": 13,
+    "higgsfield_estimated_credits": 35.75,
+    "higgsfield_actual_billed_credits": null,
+    "meshy_completed_jobs": 17,
+    "meshy_actual_consumed_credits": 194,
+    "currency_conversion": null
+  },
+  "gates": {
+    "references": "reviewed calibration; generated references remain concept art",
+    "rigging": "exported; final in-browser motion inspection pending",
+    "browser": "running; final walkthrough capture pending",
+    "multiplayer": "automated transport/rules pass; two browser views pending",
+    "performance": "1080p renderer baseline completed; memory trace and optimized server trace running",
+    "human_fun": "not-run"
+  }
+}

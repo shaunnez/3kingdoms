@@ -1,0 +1,55 @@
+{
+  "transcode": "H.264 4:2:0, 30fps, AAC, faststart; no time cuts except the labelled hound study excerpt. Source recordings remain retained locally.",
+  "files": [
+    {
+      "path": "artifacts/checkpoint/captures/briar-gate-expedition.mp4",
+      "bytes": 22412069,
+      "sha256": "ac34d650623fa7fc25c1b6ad15a1e008a80f4af9625b5112ae7d46a1587c80e1",
+      "duration": "00:01:15.03",
+      "streams": [
+        "Stream #0:0[0x1](eng): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt709/bt709/iec61966-2-1, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 2285 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+        "Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 95 kb/s (default)"
+      ]
+    },
+    {
+      "path": "artifacts/checkpoint/captures/clean-victim-one-item.mp4",
+      "bytes": 2910924,
+      "sha256": "1e3016f57960e24bdb9963114f9c8c5f8ebbc0856c4c0455e68759042764efd7",
+      "duration": "00:01:15.03",
+      "streams": [
+        "Stream #0:0[0x1](eng): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt709/bt709/iec61966-2-1, progressive), 1280x720 [SAR 1:1 DAR 16:9], 205 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+        "Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 95 kb/s (default)"
+      ]
+    },
+    {
+      "path": "artifacts/checkpoint/captures/hound-motion-study.mp4",
+      "bytes": 5983587,
+      "sha256": "945e0dbdd23634f2a5f21f4b75fea4587b9a472b7e44a74c9a06684f18019bf6",
+      "duration": "00:00:18.00",
+      "streams": [
+        "Stream #0:0[0x1](eng): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt709/bt709/iec61966-2-1, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 2553 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+        "Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 95 kb/s (default)"
+      ]
+    },
+    {
+      "path": "artifacts/checkpoint/captures/outlaw-two-item-claim.mp4",
+      "bytes": 5376991,
+      "sha256": "e6d5dd92ba28a4e6b0af0a19b7fe895fb93eb661bb45c94552877afa03b9b730",
+      "duration": "00:01:15.03",
+      "streams": [
+        "Stream #0:0[0x1](eng): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt709/bt709/iec61966-2-1, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 467 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+        "Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 95 kb/s (default)"
+      ]
+    },
+    {
+      "path": "artifacts/checkpoint/captures/outlaw-victim-view.mp4",
+      "bytes": 2535584,
+      "sha256": "290520062d03baff9301a64b3455c380b5880bdc3f7e562bd3185a8e1c56b3bc",
+      "duration": "00:01:15.03",
+      "streams": [
+        "Stream #0:0[0x1](eng): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt709/bt709/iec61966-2-1, progressive), 1280x720 [SAR 1:1 DAR 16:9], 164 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+        "Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 95 kb/s (default)"
+      ]
+    }
+  ]
+}

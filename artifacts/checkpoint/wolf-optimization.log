@@ -1,0 +1,16 @@
+❯ dedup
+✔ dedup                2ms
+❯ weld
+✔ weld                 14ms
+❯ resample
+✔ resample             3ms
+❯ prune
+✔ prune                20ms
+❯ sparse
+✔ sparse               7ms
+❯ textureCompress
+✔ textureCompress      89ms
+❯ quantize
+✔ quantize             62ms
+
+info: wolf-validated.glb (6.72 MB) → wolf.glb (1.39 MB)

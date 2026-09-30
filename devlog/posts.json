@@ -1,0 +1,169 @@
+[
+  {
+    "number": "005",
+    "slug": "the-first-road-is-playable",
+    "date": "2026-10-01",
+    "title": "The first road is playable.",
+    "category": "Browser production checkpoint",
+    "status": "Local playable build \u00b7 visual acceptance still open",
+    "summary": "A real journey through the Briar Gate: generated characters, live combat, two-player loot and the first recorded browser expedition.",
+    "paragraphs": [
+      "THREEFOLD now runs as a local multiplayer browser game. A Knight or Cyborg can walk out of Highcross, speak to Mara, fight Briar Hounds, read a ruined epitaph and bring its clue home. The footage below comes from the running game, with its actual HUD and synthesized audio. It is a production checkpoint, and its environment still falls short of the original visual target.",
+      "The asset pipeline is real now. Thirteen Higgsfield reference jobs informed five Meshy bodies, while Blender supplied the environment, equipment, cleanup and a custom eighteen-bone quadruped rig. Six packaged models pass glTF validation with no errors. Editable Blender sources, prompts, recovery IDs and rejected production evidence are retained. Thirteen catalogue entries have prototype outputs; the full catalogue still tracks 2,194 required units.",
+      "The first motion and camera reviews found problems worth keeping in the record: stretched hound weights, poor equipment clearance, a camera that changed its orbit during travel, an obstructing gate and forest canopies. These received specific repairs and another browser inspection. They are reasons for testing a small representative scene before ordering hundreds of assets.",
+      "Two independent browser sessions exercised the PvP rules. Town attacks were refused. Outside town, aggression marked the Cyborg red; guards pursued him and Nemi refused trade. A clean victim exposed one item. When the red player died, the lawful attacker claimed two different items, both clients received receipts, and the shared allowance reached zero. Dying retained the outlaw timer and respawn led to an unpatrolled refuge.",
+      "Thirty automated checks cover the local rules and real WebSocket transport, including replayed claims, reconnect ownership, capacity and identity races. The sixteen-client server load ran for ten minutes: tick p95 was 10.32ms and p99 13.13ms. That workload uses eighty AI-cost fixtures, including thirty-two summon proxies. It is separate from the browser rendering crowd and is not a complete networked raid.",
+      "The renderer and repeated load/unload results are being attached to this exact build. All twelve full guilds remain required; the current Knight and Cyborg are practice kits, and the Elemental silhouettes are only a material study. The separate 48-hour build has not started. Human playtesting, richer art, lower-end hardware, public accounts and production persistence remain ahead.",
+      "Recorded consumption: 194 Meshy credits across seventeen completed tasks. Higgsfield returned estimates totaling 35.75 credits for thirteen references; actual billing was not independently verified. A failed oversized rig request returned no task ID, so its charge remains unknown. No currency total is invented."
+    ],
+    "verified": "Runtime source fingerprint 5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c. Local code commit and final traces will be attached before publication. Browser actions, source manifests and scoped acceptance results are retained under artifacts/checkpoint/.",
+    "limitations": "This is a local engineering checkpoint, not the finished RPG. The concept-level richness is not achieved, most catalogue assets and ten playable guilds remain unbuilt, and no human has assessed fun. M1/GTX1660, Safari/Firefox, impaired-network and production-account behavior are unqualified. The journal is owner-private; the game is not hosted publicly.",
+    "media": [
+      {
+        "path": "../artifacts/checkpoint/captures/briar-gate-expedition-poster.png",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Actual browser frame of the Knight fighting a Briar Hound beneath the fading town gate",
+        "caption": "In-engine capture \u00b7 Chromium 154 / Apple M5 / WebGL2 / 1920\u00d71080. Frame from the uncut checkpoint rehearsal; prototype environment and motion."
+      },
+      {
+        "type": "video",
+        "path": "../artifacts/checkpoint/captures/briar-gate-expedition.mp4",
+        "poster": "../artifacts/checkpoint/captures/briar-gate-expedition-poster.png",
+        "captions": "../artifacts/checkpoint/captures/briar-gate-expedition.vtt",
+        "mime": "video/mp4",
+        "alt": "Seventy-five second uncut browser expedition from Mara to the epitaph and back",
+        "caption": "Gameplay video \u00b7 75 seconds, uncut; real-time canvas, actual HUD sampled at 2Hz, synthesized game audio. Field tools send ordinary movement/attack inputs. This character revisits an already-completed quest."
+      },
+      {
+        "type": "video",
+        "path": "../artifacts/checkpoint/captures/outlaw-two-item-claim.mp4",
+        "mime": "video/mp4",
+        "alt": "The lawful attacker defeats an outlaw and claims an amber shard and a copper ring",
+        "caption": "Gameplay verification \u00b7 75 seconds, attacker view. Two item transfers commit, allowance reaches zero. Recorded before the canopy fade repair, so foliage obscures part of the fight."
+      },
+      {
+        "type": "video",
+        "path": "../artifacts/checkpoint/captures/outlaw-victim-view.mp4",
+        "mime": "video/mp4",
+        "alt": "The second actual browser client sees the outlaw death and both item-transfer receipts",
+        "caption": "Gameplay verification \u00b7 75 seconds, independent victim session, 1280\u00d7720. Same two-item encounter; no synthetic network actor."
+      },
+      {
+        "path": "../artifacts/checkpoint/captures/2026-09-30T13-07-49-832Z-d574227f.png",
+        "width": 1280,
+        "height": 720,
+        "alt": "Nemi refuses to trade with the red player while the guard enforces town law",
+        "caption": "In-engine capture \u00b7 the refusal arrived while the red player was alive; the frame was saved just after the pursuing guard killed him. Purchase remains disabled."
+      },
+      {
+        "type": "video",
+        "path": "../artifacts/checkpoint/captures/hound-motion-study.mp4",
+        "mime": "video/mp4",
+        "alt": "A close browser study cycling the custom hound idle, walk, run, attack, dodge and death motions",
+        "caption": "In-engine rig study \u00b7 18-second excerpt from a real browser recording. Inspection camera and prototype motion; not a playable Changeling transformation."
+      },
+      {
+        "path": "../design/calibration/knight.png",
+        "width": 2048,
+        "height": 2048,
+        "alt": "Higgsfield Knight identity reference used for the Meshy and Blender pipeline",
+        "caption": "Concept reference \u00b7 Higgsfield GPT Image 2.5. A source for production, not an in-engine image or a promise of current gameplay fidelity."
+      }
+    ]
+  },
+  {
+    "number": "004",
+    "slug": "the-price-of-a-red-name",
+    "date": "2026-09-30",
+    "title": "The price of a red name.",
+    "category": "Combat and world rules",
+    "status": "PvP direction agreed \u00b7 supporting defaults proposed",
+    "summary": "One item for a kill. Two from an outlaw. Town guards and merchants now make aggression matter beyond the fight.",
+    "paragraphs": [
+      "The PvP design now puts real possessions at stake. A player kill allows one eligible item to be looted; a red-name victim exposes two. This replaces the original proposal that all equipment stayed safe on death.",
+      "Starting unlawful aggression turns a name red. Guards pursue visible red players, and merchants refuse their business. Towns still prevent player damage, while guard NPCs can enforce the law. Existing realm shrines provide unpatrolled refuges so an outlaw can respawn without an endless guard death loop.",
+      "The proposed timer is ten minutes after aggression and sixty minutes after an unlawful kill, measured in connected playtime. Logging out pauses it, and dying does not clear it. Self-defence and hunting an already-red player are proposed lawful actions.",
+      "Equipped gear is included in the proposed loot pool, with quest essentials and basic starter equipment protected. Killer-selected loot is the provisional selection rule. The server must enforce a single corpse allowance and durable ownership transfers, including interrupted claims and reconnects.",
+      "The broader game direction is accepted. Quality and fun guide the next stage: consistent visual references, then real browser proof before bulk production. No paid asset generation or game build has started."
+    ],
+    "verified": "Concept, production rules, guard and corpse-screen asset requirements, and acceptance criteria were revised together. Planning validation checks the required one/two-item split and law-enforcement coverage.",
+    "limitations": "Timer values, loot selection and supporting exceptions are proposed defaults. No PvP, guards or item transfers are implemented or playtested yet. The accompanying image predates the new outlaw HUD.",
+    "media": [
+      {
+        "path": "../design/screens/02-wilderness-pvp.png",
+        "alt": "Existing concept of a Knight and Cyborg facing one another outside a safe zone",
+        "caption": "Earlier concept art \u00b7 built-in image generation. The red-name timer and corpse-loot interface are not depicted."
+      }
+    ]
+  },
+  {
+    "number": "003",
+    "slug": "a-world-with-a-production-plan",
+    "date": "2026-09-30",
+    "title": "A world with a production plan.",
+    "category": "Production design",
+    "status": "Specification \u00b7 awaiting review",
+    "summary": "Twelve guilds, three realms, and a concrete path from concept art to a playable browser world.",
+    "paragraphs": [
+      "THREEFOLD now has a production specification covering the guilds, quests, maps, interface, combat rules, assets, sound and multiplayer architecture. Every guild stays in the first complete chapter. The starting Adventurer remains a separate introduction to the world.",
+      "The first chapter, The Missing Hour, follows three realm adventures from Highcross. A later chapter reaches the Crown of Winter, Glass Megacity and Unwritten Sea. Both are visible in the catalogue, so a delivery checkpoint cannot quietly erase the larger world.",
+      "The next practical test is deliberately small: a town corner, a wilderness route, live controls and HUD, and humanoid, mechanical and nonhuman bodies running in the browser. That scene must demonstrate the intended lighting, animation, combat readability and multiplayer safety before asset production expands.",
+      "The plan records costs in provider credits and treats the proposed 48-hour build as an experiment. Neither paid generation nor that build has started. The current images are targets; no gameplay footage exists yet."
+    ],
+    "verified": "The approved concept and three local reference images were inspected. Planning manifests are checked for unique IDs, valid dependencies, full guild coverage and local links.",
+    "limitations": "Game performance, gameplay quality, balance and the final art direction remain unverified. Public blog hosting is not configured.",
+    "media": [
+      {
+        "path": "../design/screens/01-highcross.png",
+        "alt": "Concept of the Highcross town plaza with three realm gates and a safe-town HUD",
+        "caption": "Concept art \u00b7 built-in image generation. A visual target, not a running game."
+      }
+    ]
+  },
+  {
+    "number": "002",
+    "slug": "light-danger-and-identity",
+    "date": "2026-09-30",
+    "title": "Light, danger and identity.",
+    "category": "Visual direction",
+    "status": "Concept art \u00b7 awaiting review",
+    "summary": "A warm home, a dangerous road, and the first full view of a Knight establish the visual target.",
+    "paragraphs": [
+      "The three initial screen concepts explore Highcross, an encounter in Briar March and the guild selection screen. Warm brass and lantern light meet blue dusk, wet stone and weathered materials. The world is elaborate, but the character and attack lane must remain readable.",
+      "Town protection appears as a shield and the words SAFE TOWN. Outside it, OPEN PVP and a hostile-player cast make the rules visible. The next production pass must preserve that clarity when four players and several enemies use abilities together.",
+      "The guild screen includes all twelve disciplines. Only the Knight has a complete full-body design so far; the other models, forms and animation sets remain production work. Ability icons also need one consistent mapping across screens."
+    ],
+    "verified": "All three PNGs were visually inspected. Guild names and safe/open-PvP labels are present; dimensions and hashes are recorded in the art-direction manifest.",
+    "limitations": "Static images cannot prove movement, hit timing, playable interface states or browser frame rate. These images were generated with built-in image generation, not Higgsfield.",
+    "media": [
+      {
+        "path": "../design/screens/02-wilderness-pvp.png",
+        "alt": "Knight facing a hostile Cyborg's visible attack lane in Briar March",
+        "caption": "Concept art \u00b7 the hostile lane stays visible beneath the effects."
+      },
+      {
+        "path": "../design/screens/03-guild-selection.png",
+        "alt": "All twelve guild choices beside a detailed Knight preview",
+        "caption": "Concept art \u00b7 twelve choices, with Knight selected. The UI is not implemented."
+      }
+    ]
+  },
+  {
+    "number": "001",
+    "slug": "three-roads-out-of-highcross",
+    "date": "2026-09-30",
+    "title": "Three roads out of Highcross.",
+    "category": "Game concept",
+    "status": "Approved concept baseline",
+    "summary": "A shared home connects Fantasy, Science and Chaos. What you discover in one realm can change how you understand another.",
+    "paragraphs": [
+      "The starting idea comes from 3 Kingdoms MUD: a familiar social home, wildly different realms, guilds that change how you play, and mysteries that reward attention. THREEFOLD translates that structure into an original, cinematic isometric browser RPG.",
+      "An abandoned bell remembers being a machine. A prediction terminal describes a death that has not happened. A carnival performer wears someone else's shadow. These connections are the reason to keep exploring, beyond the next level or item.",
+      "Two requirements are fixed: all twelve guilds belong in the game, and players can fight one another anywhere outside towns and designated safe zones. Exploration, preparation, retreat and returning home all have consequences."
+    ],
+    "verified": "The concept baseline records the full guild roster and the user's open-PvP rule.",
+    "limitations": "This is a design milestone. A playable world and production assets have not been built.",
+    "media": []
+  }
+]

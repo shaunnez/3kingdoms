@@ -1,0 +1,51 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'artifacts/checkpoint/captures/briar-gate-expedition.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf60.3.100
+  Duration: 00:01:15.03, start: 0.000000, bitrate: 2389 kb/s
+  Stream #0:0[0x1](eng): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt709/bt709/iec61966-2-1, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 2285 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.3.100 libx264
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 95 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+Stream mapping:
+  Stream #0:0 -> #0:0 (h264 (native) -> wrapped_avframe (native))
+  Stream #0:1 -> #0:1 (aac (native) -> pcm_s16le (native))
+Press [q] to stop, [?] for help
+Output #0, null, to 'pipe:':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf60.3.100
+  Stream #0:0(eng): Video: wrapped_avframe, yuvj420p(pc, bt709/bt709/iec61966-2-1, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 200 kb/s, 30 fps, 30 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.3.100 wrapped_avframe
+  Stream #0:1(eng): Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.3.100 pcm_s16le
+frame=    0 fps=0.0 q=-0.0 size=N/A time=00:00:00.31 bitrate=N/A speed=11.2x
+frame= 1189 fps=0.0 q=-0.0 size=N/A time=00:00:39.94 bitrate=N/A speed=75.4x
+frame= 2249 fps=0.0 q=-0.0 Lsize=N/A time=00:01:15.02 bitrate=N/A speed=75.1x
+video:1054kB audio:14068kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+[Parsed_volumedetect_0 @ 0x150f1ba10] n_samples: 7202816
+[Parsed_volumedetect_0 @ 0x150f1ba10] mean_volume: -39.4 dB
+[Parsed_volumedetect_0 @ 0x150f1ba10] max_volume: -19.3 dB
+[Parsed_volumedetect_0 @ 0x150f1ba10] histogram_19db: 36
+[Parsed_volumedetect_0 @ 0x150f1ba10] histogram_20db: 74
+[Parsed_volumedetect_0 @ 0x150f1ba10] histogram_21db: 245
+[Parsed_volumedetect_0 @ 0x150f1ba10] histogram_22db: 517
+[Parsed_volumedetect_0 @ 0x150f1ba10] histogram_23db: 899
+[Parsed_volumedetect_0 @ 0x150f1ba10] histogram_24db: 1227
+[Parsed_volumedetect_0 @ 0x150f1ba10] histogram_25db: 2290
+[Parsed_volumedetect_0 @ 0x150f1ba10] histogram_26db: 3489

@@ -1,0 +1,35 @@
+00:16:00 | INFO: Data are loaded, start creating Blender stuff
+00:16:00 | INFO: Blender create Mesh node char1
+00:16:00 | INFO: glTF import finished in 0.07s
+00:16:00 | INFO: Data are loaded, start creating Blender stuff
+00:16:00 | INFO: Blender create Mesh node char1
+00:16:00 | INFO: glTF import finished in 0.06s
+00:16:00 | INFO: Data are loaded, start creating Blender stuff
+00:16:00 | INFO: Blender create Mesh node char1
+00:16:00 | INFO: glTF import finished in 0.06s
+00:16:00 | INFO: Data are loaded, start creating Blender stuff
+00:16:00 | INFO: Blender create Mesh node char1
+00:16:01 | INFO: glTF import finished in 0.06s
+Info: Saved as "knight.blend"
+INFO Draco is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_draco_bridge.dylib
+INFO MeshOptimizer is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_meshopt_bridge.dylib
+00:16:01 | INFO: Starting glTF 2.0 export
+00:16:01 | INFO: Extracting primitive: char1
+00:16:01 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+00:16:01 | INFO: Primitives created: 1
+00:16:01 | INFO: Extracting primitive: Heater shield face
+00:16:01 | INFO: Primitives created: 1
+00:16:01 | INFO: Extracting primitive: Heater shield rim
+00:16:01 | INFO: Primitives created: 1
+00:16:01 | INFO: Extracting primitive: Longsword blade
+00:16:01 | INFO: Primitives created: 1
+00:16:01 | INFO: Extracting primitive: Longsword crossguard
+00:16:01 | INFO: Primitives created: 1
+00:16:01 | INFO: Extracting primitive: Longsword grip
+00:16:01 | INFO: Primitives created: 1
+00:16:01 | INFO: Finished glTF 2.0 export in 0.28648996353149414 s
+
+{"model": "knight", "triangles": 24039, "bones": 24, "animations": ["idle", "run", "attack", "dodge", "death"], "bytes": 7090340, "root_motion": "horizontal travel removed; server owns movement", "equipment": "Original Blender sword and shield"}
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 01:35:57)
+
+Blender quit

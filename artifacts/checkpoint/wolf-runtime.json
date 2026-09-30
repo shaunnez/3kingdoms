@@ -1,0 +1,8 @@
+{
+  "name": "wolf",
+  "sourceBytes": 6723708,
+  "repairedTangents": 0,
+  "runtimeBytes": 1391828,
+  "sha256": "ead53e803ec1797579086795e7ad3f0700ad50a0930f44f8872a66e29bb49334",
+  "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+}

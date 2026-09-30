@@ -1,0 +1,16 @@
+{
+  "model": "wolf",
+  "triangles": 18000,
+  "bones": 18,
+  "animations": [
+    "idle",
+    "walk",
+    "run",
+    "attack",
+    "dodge",
+    "death"
+  ],
+  "height_m": 1.1,
+  "bytes": 6723708,
+  "rig": "Original Blender quadruped; spatial skin weights; needs in-browser deformation review"
+}

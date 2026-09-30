@@ -1,0 +1,65 @@
+{
+  "note": "Original browser recordings preserved locally, outside Git to avoid hundreds of megabytes of duplicate video. Curated H.264 derivatives remain in captures/. Includes rejected and earlier builds; not all are acceptance evidence.",
+  "recordings": [
+    {
+      "original_name": "2026-09-30T12-30-50-358Z-703c4cf3.webm",
+      "sha256": "1bd5ec67e8149f7a1384459054a45a46c4d75ed75cc8f15683fcf2a235d908be",
+      "bytes": 33697207,
+      "local_archive": "artifacts/private/recording-originals/2026-09-30T12-30-50-358Z-703c4cf3.webm"
+    },
+    {
+      "original_name": "2026-09-30T12-35-34-526Z-76553b83.webm",
+      "sha256": "7ef6492e09488d790ab3a0c18039a4e8441de9077f907566799eae0bac0278fb",
+      "bytes": 40552206,
+      "local_archive": "artifacts/private/recording-originals/2026-09-30T12-35-34-526Z-76553b83.webm"
+    },
+    {
+      "original_name": "2026-09-30T12-42-43-905Z-221221e8.webm",
+      "sha256": "eaf9130b0d414d02529bdc90ee8f7c08740e58d7a6feeb62a31229062501398d",
+      "bytes": 41082504,
+      "local_archive": "artifacts/private/recording-originals/2026-09-30T12-42-43-905Z-221221e8.webm"
+    },
+    {
+      "original_name": "2026-09-30T12-51-18-377Z-cdbec53e.webm",
+      "sha256": "236538b0e8a80a029dd9d9eae071d9dd9483b6b7e36e43bc8215182d02921d1e",
+      "bytes": 27883584,
+      "local_archive": "artifacts/private/recording-originals/2026-09-30T12-51-18-377Z-cdbec53e.webm"
+    },
+    {
+      "original_name": "2026-09-30T12-56-46-425Z-33677f2c.webm",
+      "sha256": "3f872092ace14231ffb4349ec1576d965aa667881ed02a7a8800a2d1df5cc72f",
+      "bytes": 20165649,
+      "local_archive": "artifacts/private/recording-originals/2026-09-30T12-56-46-425Z-33677f2c.webm"
+    },
+    {
+      "original_name": "2026-09-30T12-57-04-135Z-9657014b.webm",
+      "sha256": "4dafe55f646e890cd1d308f9c1d691b776927ae117a86240c2ce7e686fcda5b9",
+      "bytes": 31207988,
+      "local_archive": "artifacts/private/recording-originals/2026-09-30T12-57-04-135Z-9657014b.webm"
+    },
+    {
+      "original_name": "2026-09-30T13-05-29-746Z-6cb942e6.webm",
+      "sha256": "05613b653aec9eb64c1866848c8301a37b0ab9c3a79dda0f3a23969f46d5899b",
+      "bytes": 28009183,
+      "local_archive": "artifacts/private/recording-originals/2026-09-30T13-05-29-746Z-6cb942e6.webm"
+    },
+    {
+      "original_name": "2026-09-30T13-05-41-140Z-63c6dff5.webm",
+      "sha256": "731698d2d63665b013d19f39899ab3b83f28772e1842b0d9328dec53c7a1f87a",
+      "bytes": 19188822,
+      "local_archive": "artifacts/private/recording-originals/2026-09-30T13-05-41-140Z-63c6dff5.webm"
+    },
+    {
+      "original_name": "2026-09-30T13-07-24-631Z-4eb7ed6a.webm",
+      "sha256": "4dafcb0d941038469015fa8c21f017f9e3189554147cbe58731d14ce80c33558",
+      "bytes": 29377905,
+      "local_archive": "artifacts/private/recording-originals/2026-09-30T13-07-24-631Z-4eb7ed6a.webm"
+    },
+    {
+      "original_name": "2026-09-30T13-13-37-886Z-3e8f4318.webm",
+      "sha256": "deb046f8ead8dad0bfabd2edf173250434055c46cd7610e303b95f57cb37d8ab",
+      "bytes": 34528421,
+      "local_archive": "artifacts/private/recording-originals/2026-09-30T13-13-37-886Z-3e8f4318.webm"
+    }
+  ]
+}

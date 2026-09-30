@@ -1,0 +1,166 @@
+TAP version 13
+# Subtest: both directions of player damage are refused if either player is safe
+ok 1 - both directions of player damage are refused if either player is safe
+  ---
+  duration_ms: 0.782291
+  type: 'test'
+  ...
+# Subtest: a cast cannot land player damage after its target crosses the safe boundary
+ok 2 - a cast cannot land player damage after its target crosses the safe boundary
+  ---
+  duration_ms: 0.733291
+  type: 'test'
+  ...
+# Subtest: an unlawful attempted attack turns its owner red even when the victim evades
+ok 3 - an unlawful attempted attack turns its owner red even when the victim evades
+  ---
+  duration_ms: 0.191
+  type: 'test'
+  ...
+# Subtest: self defence does not flag the defender or clear the aggressor
+ok 4 - self defence does not flag the defender or clear the aggressor
+  ---
+  duration_ms: 0.151166
+  type: 'test'
+  ...
+# Subtest: an unlawful kill exposes exactly one item allowance and protects starter gear
+ok 5 - an unlawful kill exposes exactly one item allowance and protects starter gear
+  ---
+  duration_ms: 0.257666
+  type: 'test'
+  ...
+# Subtest: killing a red player exposes two items and remains lawful for the hunter
+ok 6 - killing a red player exposes two items and remains lawful for the hunter
+  ---
+  duration_ms: 0.095167
+  type: 'test'
+  ...
+# Subtest: a downed body has no corpse; final death creates the claim
+ok 7 - a downed body has no corpse; final death creates the claim
+  ---
+  duration_ms: 0.365417
+  type: 'test'
+  ...
+# Subtest: replayed claims cannot exceed the global quota or duplicate an item
+ok 8 - replayed claims cannot exceed the global quota or duplicate an item
+  ---
+  duration_ms: 0.827792
+  type: 'test'
+  ...
+# Subtest: moving cancels a corpse channel without losing property
+ok 9 - moving cancels a corpse channel without losing property
+  ---
+  duration_ms: 0.664208
+  type: 'test'
+  ...
+# Subtest: expiry releases every unclaimed item, including when the claimant disconnects
+ok 10 - expiry releases every unclaimed item, including when the claimant disconnects
+  ---
+  duration_ms: 2.777875
+  type: 'test'
+  ...
+# Subtest: full bags refuse a claim without destroying or consuming its quota
+ok 11 - full bags refuse a claim without destroying or consuming its quota
+  ---
+  duration_ms: 0.217875
+  type: 'test'
+  ...
+# Subtest: offline time and restart preserve red status and ownership escrow
+ok 12 - offline time and restart preserve red status and ownership escrow
+  ---
+  duration_ms: 1.474875
+  type: 'test'
+  ...
+# Subtest: dead outlaws respawn in an unpatrolled safe refuge without clearing their timer
+ok 13 - dead outlaws respawn in an unpatrolled safe refuge without clearing their timer
+  ---
+  duration_ms: 0.09725
+  type: 'test'
+  ...
+# Subtest: merchant refusal is checked at purchase time, even after a clean conversation
+ok 14 - merchant refusal is checked at purchase time, even after a clean conversation
+  ---
+  duration_ms: 0.108708
+  type: 'test'
+  ...
+# Subtest: the quest reward can be collected once, including after save and reconnect
+ok 15 - the quest reward can be collected once, including after save and reconnect
+  ---
+  duration_ms: 0.071708
+  type: 'test'
+  ...
+# Subtest: malformed and forged movement inputs cannot move a player or change safety
+ok 16 - malformed and forged movement inputs cannot move a player or change safety
+  ---
+  duration_ms: 0.081792
+  type: 'test'
+  ...
+# Subtest: movement cannot tunnel through walls or leave the authored world
+ok 17 - movement cannot tunnel through walls or leave the authored world
+  ---
+  duration_ms: 0.801292
+  type: 'test'
+  ...
+# Subtest: guards attack a visible outlaw in town but ignore clean bystanders
+ok 18 - guards attack a visible outlaw in town but ignore clean bystanders
+  ---
+  duration_ms: 0.291333
+  type: 'test'
+  ...
+# Subtest: evade has two charges, recharges one at a time, and respects roots
+ok 19 - evade has two charges, recharges one at a time, and respects roots
+  ---
+  duration_ms: 0.671167
+  type: 'test'
+  ...
+# Subtest: break free removes crowd control during a stun and cannot be repeated for 45 seconds
+ok 20 - break free removes crowd control during a stun and cannot be repeated for 45 seconds
+  ---
+  duration_ms: 1.297875
+  type: 'test'
+  ...
+# Subtest: cancelling during windup keeps the resource and cooldown, but keeps unlawful aggression
+ok 21 - cancelling during windup keeps the resource and cooldown, but keeps unlawful aggression
+  ---
+  duration_ms: 0.156625
+  type: 'test'
+  ...
+# Subtest: a travelling pulse can be dodged sideways after it is committed
+ok 22 - a travelling pulse can be dodged sideways after it is committed
+  ---
+  duration_ms: 0.305833
+  type: 'test'
+  ...
+# Subtest: an in-flight pulse cannot damage a player who reaches sanctuary
+ok 23 - an in-flight pulse cannot damage a player who reaches sanctuary
+  ---
+  duration_ms: 0.11125
+  type: 'test'
+  ...
+# Subtest: competing loot requests are exclusive to the owning claimant
+ok 24 - competing loot requests are exclusive to the owning claimant
+  ---
+  duration_ms: 0.186542
+  type: 'test'
+  ...
+# Subtest: a downed traveller can crawl and another player can revive them once
+ok 25 - a downed traveller can crawl and another player can revive them once
+  ---
+  duration_ms: 0.24575
+  type: 'test'
+  ...
+# Subtest: moving during a revive interrupts it; helping an outlaw in combat flags the helper
+ok 26 - moving during a revive interrupts it; helping an outlaw in combat flags the helper
+  ---
+  duration_ms: 0.173791
+  type: 'test'
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 26
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 154.263666

@@ -1,0 +1,147 @@
+{
+  "blender": "5.2.1 LTS",
+  "command": "tools/export_authored.py -- briar-gate knight cyborg wolf mara nemi",
+  "status": "exported-six-sources-without-provider-calls",
+  "outputs": [
+    {
+      "name": "briar-gate",
+      "bytes": 31672496,
+      "sha256": "c4fd1c1ec71f11cb97960c5513f6eef57ecdeef16b0ea0899dfe8894bc73df4a",
+      "source": "assets/source/briar-gate.blend",
+      "animations": [],
+      "skins": 0,
+      "images": 42
+    },
+    {
+      "name": "cyborg",
+      "bytes": 6751132,
+      "sha256": "d650607d148c9f52330cb1b0d6858c773e8fb3f58e24159c283072667025de0e",
+      "source": "assets/source/cyborg.blend",
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.9833333333333334
+        },
+        {
+          "name": "run",
+          "duration": 0.7833333333333333
+        },
+        {
+          "name": "attack",
+          "duration": 0.7833333333333333
+        },
+        {
+          "name": "dodge",
+          "duration": 0.6166666666666667
+        },
+        {
+          "name": "death",
+          "duration": 1.0166666666666666
+        }
+      ],
+      "skins": 1,
+      "images": 3
+    },
+    {
+      "name": "knight",
+      "bytes": 7602200,
+      "sha256": "f78f47eb00a4462782ab5feaa61e29d0cc133e3adb646aaf6867c17ba98d9a34",
+      "source": "assets/source/knight.blend",
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.9833333333333334
+        },
+        {
+          "name": "run",
+          "duration": 0.7833333333333333
+        },
+        {
+          "name": "attack",
+          "duration": 0.7833333333333333
+        },
+        {
+          "name": "dodge",
+          "duration": 0.6166666666666667
+        },
+        {
+          "name": "death",
+          "duration": 1.0166666666666666
+        }
+      ],
+      "skins": 1,
+      "images": 3
+    },
+    {
+      "name": "mara",
+      "bytes": 5663372,
+      "sha256": "21017d843a6d525e3df40c70a4f06776856a0e9075806bac3093aaf203d200c2",
+      "source": "assets/source/mara.blend",
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.9833333333333334
+        },
+        {
+          "name": "death",
+          "duration": 1.0166666666666666
+        }
+      ],
+      "skins": 1,
+      "images": 3
+    },
+    {
+      "name": "nemi",
+      "bytes": 5447100,
+      "sha256": "ba5b37f9da53a08a94aaa047cf6ea27ef8562134ca046d7493d2b29961250238",
+      "source": "assets/source/nemi.blend",
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.9833333333333334
+        },
+        {
+          "name": "death",
+          "duration": 1.0166666666666666
+        }
+      ],
+      "skins": 1,
+      "images": 3
+    },
+    {
+      "name": "wolf",
+      "bytes": 6723708,
+      "sha256": "b4703e86a7172776ac4612f4d2feb5f4f79a6c29159b804bb924f3c69fa0bf3d",
+      "source": "assets/source/wolf.blend",
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 3
+        },
+        {
+          "name": "walk",
+          "duration": 1.2
+        },
+        {
+          "name": "run",
+          "duration": 0.7333333333333333
+        },
+        {
+          "name": "attack",
+          "duration": 0.7666666666666667
+        },
+        {
+          "name": "dodge",
+          "duration": 0.6
+        },
+        {
+          "name": "death",
+          "duration": 1
+        }
+      ],
+      "skins": 1,
+      "images": 3
+    }
+  ],
+  "limit": "Review candidates only; accepted runtime assets were not replaced."
+}

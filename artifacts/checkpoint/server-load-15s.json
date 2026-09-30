@@ -1,0 +1,261 @@
+{
+  "build": "0.1.0-briar-gate",
+  "recordedAt": "2026-09-30T11:57:05.377Z",
+  "durationSeconds": 15.076400166,
+  "clients": 16,
+  "aiActors": 80,
+  "aiFixture": "48 hound AI plus 32 hound-cost summon proxies. Summon behavior is not implemented.",
+  "transport": "16 independent real loopback Colyseus WebSocket clients; normal input protocol; production room tick and persistence path",
+  "artificialHealth": true,
+  "samples": [
+    {
+      "elapsedSeconds": 1.0038340000000001,
+      "build": "0.1.0-briar-gate",
+      "ticks": 21,
+      "samples": 21,
+      "tickP95Ms": 6.419125000000008,
+      "tickP99Ms": 12.45641599999999,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 2.0077278749999996,
+      "build": "0.1.0-briar-gate",
+      "ticks": 41,
+      "samples": 41,
+      "tickP95Ms": 6.419125000000008,
+      "tickP99Ms": 12.45641599999999,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 3.0115627910000002,
+      "build": "0.1.0-briar-gate",
+      "ticks": 61,
+      "samples": 61,
+      "tickP95Ms": 5.966707999999926,
+      "tickP99Ms": 12.45641599999999,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 4.014531083,
+      "build": "0.1.0-briar-gate",
+      "ticks": 81,
+      "samples": 81,
+      "tickP95Ms": 6.202708000000712,
+      "tickP99Ms": 12.45641599999999,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 5.0180521659999995,
+      "build": "0.1.0-briar-gate",
+      "ticks": 101,
+      "samples": 101,
+      "tickP95Ms": 6.419125000000008,
+      "tickP99Ms": 9.685291000000234,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 6.021150375,
+      "build": "0.1.0-briar-gate",
+      "ticks": 121,
+      "samples": 121,
+      "tickP95Ms": 6.419125000000008,
+      "tickP99Ms": 9.685291000000234,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 7.025081749999999,
+      "build": "0.1.0-briar-gate",
+      "ticks": 141,
+      "samples": 141,
+      "tickP95Ms": 6.202708000000712,
+      "tickP99Ms": 9.685291000000234,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 8.029339665999998,
+      "build": "0.1.0-briar-gate",
+      "ticks": 161,
+      "samples": 161,
+      "tickP95Ms": 6.202708000000712,
+      "tickP99Ms": 9.685291000000234,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 9.033664416,
+      "build": "0.1.0-briar-gate",
+      "ticks": 181,
+      "samples": 181,
+      "tickP95Ms": 6.17083300000013,
+      "tickP99Ms": 9.685291000000234,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 10.037633041000001,
+      "build": "0.1.0-briar-gate",
+      "ticks": 201,
+      "samples": 201,
+      "tickP95Ms": 6.143125000000509,
+      "tickP99Ms": 9.078290999999808,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 11.039843833,
+      "build": "0.1.0-briar-gate",
+      "ticks": 221,
+      "samples": 221,
+      "tickP95Ms": 6.17083300000013,
+      "tickP99Ms": 9.685291000000234,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 12.0428715,
+      "build": "0.1.0-briar-gate",
+      "ticks": 241,
+      "samples": 241,
+      "tickP95Ms": 6.143125000000509,
+      "tickP99Ms": 9.685291000000234,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 13.045542041000001,
+      "build": "0.1.0-briar-gate",
+      "ticks": 262,
+      "samples": 262,
+      "tickP95Ms": 6.202708000000712,
+      "tickP99Ms": 9.685291000000234,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 14.073472083,
+      "build": "0.1.0-briar-gate",
+      "ticks": 282,
+      "samples": 282,
+      "tickP95Ms": 6.394334000000526,
+      "tickP99Ms": 9.685291000000234,
+      "players": 16
+    },
+    {
+      "elapsedSeconds": 15.0763675,
+      "build": "0.1.0-briar-gate",
+      "ticks": 302,
+      "samples": 302,
+      "tickP95Ms": 7.053750000000946,
+      "tickP99Ms": 16.896958999999697,
+      "players": 16
+    }
+  ],
+  "peers": [
+    {
+      "messages": 152,
+      "decodedBytes": 10297348,
+      "decodedKbitPerSecond": 5464.08844903036,
+      "arrivalP95Ms": 102.10854199999994,
+      "arrivalP99Ms": 103.77479099999982
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10295923,
+      "decodedKbitPerSecond": 5463.332300355975,
+      "arrivalP95Ms": 102.11579200000051,
+      "arrivalP99Ms": 104.3739170000008
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10297347,
+      "decodedKbitPerSecond": 5464.087918399711,
+      "arrivalP95Ms": 102.38083300000017,
+      "arrivalP99Ms": 105.38320799999929
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10300770,
+      "decodedKbitPerSecond": 5465.904267110178,
+      "arrivalP95Ms": 102.42937499999971,
+      "arrivalP99Ms": 106.2534169999999
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10297958,
+      "decodedKbitPerSecond": 5464.41213372606,
+      "arrivalP95Ms": 102.51700000000073,
+      "arrivalP99Ms": 107.09304100000008
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10297777,
+      "decodedKbitPerSecond": 5464.316089578648,
+      "arrivalP95Ms": 103.04541599999902,
+      "arrivalP99Ms": 107.76974999999948
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10300008,
+      "decodedKbitPerSecond": 5465.499926555875,
+      "arrivalP95Ms": 102.19845899999927,
+      "arrivalP99Ms": 103.6752919999999
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10309447,
+      "decodedKbitPerSecond": 5470.508549248864,
+      "arrivalP95Ms": 102.71095799999966,
+      "arrivalP99Ms": 103.91583399999945
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10310112,
+      "decodedKbitPerSecond": 5470.861418630243,
+      "arrivalP95Ms": 102.82720900000095,
+      "arrivalP99Ms": 104.42075000000023
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10313571,
+      "decodedKbitPerSecond": 5472.696870044063,
+      "arrivalP95Ms": 103.26487500000076,
+      "arrivalP99Ms": 104.57920800000011
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10310747,
+      "decodedKbitPerSecond": 5471.198369092162,
+      "arrivalP95Ms": 103.3233339999997,
+      "arrivalP99Ms": 105.38054199999988
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10310564,
+      "decodedKbitPerSecond": 5471.101263683451,
+      "arrivalP95Ms": 103.3606249999998,
+      "arrivalP99Ms": 105.27429200000006
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10312790,
+      "decodedKbitPerSecond": 5472.282447507437,
+      "arrivalP95Ms": 103.38175000000001,
+      "arrivalP99Ms": 105.24150000000009
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10311326,
+      "decodedKbitPerSecond": 5471.505604237753,
+      "arrivalP95Ms": 103.80679200000122,
+      "arrivalP99Ms": 105.51104100000066
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10311982,
+      "decodedKbitPerSecond": 5471.853697943295,
+      "arrivalP95Ms": 103.84520900000098,
+      "arrivalP99Ms": 105.59945900000093
+    },
+    {
+      "messages": 152,
+      "decodedBytes": 10315190,
+      "decodedKbitPerSecond": 5473.555961064293,
+      "arrivalP95Ms": 103.9052499999998,
+      "arrivalP99Ms": 105.96604200000002
+    }
+  ]
+}

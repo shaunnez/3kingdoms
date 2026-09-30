@@ -1,0 +1,8 @@
+{
+  "name": "cyborg",
+  "sourceBytes": 6751132,
+  "repairedTangents": 2,
+  "runtimeBytes": 1487312,
+  "sha256": "42ba7791cfa8a7340fdd146195a2875e1dcb73e752425d13fd7371306bf26fba",
+  "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+}

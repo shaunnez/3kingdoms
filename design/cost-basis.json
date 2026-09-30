@@ -1,0 +1,24 @@
+{
+  "checked_on": "2026-09-30",
+  "status": "estimates-only-no-jobs-submitted",
+  "higgsfield": {
+    "source": "higgsfield_estimate_image_cost read-only preflight",
+    "parameters": {"model": "nano_banana_pro", "resolution": "2k", "aspect_ratio": "16:9", "count": 1, "use_unlim": false},
+    "result": {"credits": 2, "credits_exact": 2},
+    "note": "No media supplied or uploaded. No generation job submitted. Requote actual batch parameters before spending."
+  },
+  "meshy": {
+    "source": "https://docs.meshy.ai/en/api/pricing",
+    "textured_image_to_3d_2k_4k_meshy6_or_7_1": 30,
+    "auto_rig": 5,
+    "animation_per_action": 3,
+    "remesh": 5,
+    "retexture_2k_4k": 10,
+    "note": "Published API credit prices, not a web subscription allowance. Pin live model and CLI parameters before production."
+  },
+  "currency_conversion": null,
+  "currency_note": "Current subscription/top-up exchange rates and tax not verified; no USD/NZD total claimed.",
+  "new_paid_jobs_this_task": 0,
+  "new_generation_charges_this_task": 0,
+  "prior_builtin_image_cost": "not measured here"
+}

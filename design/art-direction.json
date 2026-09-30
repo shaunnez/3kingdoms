@@ -1,0 +1,178 @@
+{
+  "project": "THREEFOLD",
+  "status": "direction accepted; browser calibration in progress",
+  "source_of_truth": "../game-concept.md",
+  "generation": {
+    "mode": "built-in image generation",
+    "deliverables": "Three complementary game screen concepts in one visual direction",
+    "not_evidence_of": [
+      "implemented gameplay",
+      "real-time rendering performance",
+      "production-ready 3D assets"
+    ]
+  },
+  "camera": {
+    "type": "elevated isometric three-quarter",
+    "target_downward_angle_degrees": 50,
+    "target_player_height_fraction": 0.09,
+    "screen_target": "1920 x 1080, 16:9",
+    "note": "Composition targets; actual generated image dimensions must be inspected."
+  },
+  "rendering": {
+    "style": "Mature semi-realistic 3D with authored, tactile materials",
+    "lighting": "Warm amber pools against blue dusk, controlled atmospheric depth",
+    "materials": [
+      "wet slate",
+      "aged limestone",
+      "dark timber",
+      "oxidised copper",
+      "weathered steel",
+      "woven cloth"
+    ],
+    "avoid": [
+      "unreadable bloom",
+      "opaque combat effects",
+      "cartoon proportions",
+      "glossy mobile-game UI",
+      "tiny player silhouettes"
+    ]
+  },
+  "ui": {
+    "surface": "Charcoal and blackened bronze",
+    "text": "Parchment",
+    "accents": "Restrained warm brass",
+    "typography": {
+      "locations_and_guild_names": "Readable elegant serif",
+      "functional_labels": "Clean readable sans-serif"
+    },
+    "hud": {
+      "upper_left": "Portrait, health, guild resource and party",
+      "upper_centre": "Location or selected target and cast",
+      "upper_right": "Minimap and explicit safe-zone or open-PvP status",
+      "bottom_centre": "Five equipped abilities, signature ability, separate evade action",
+      "bottom_left": "Collapsible chat",
+      "side": "Context and compact tracked quest"
+    },
+    "accessibility": [
+      "Status text plus symbol, not colour alone",
+      "Enemy telegraphs remain visible",
+      "All key controls remappable",
+      "Exact in-game font size to be tested in implementation"
+    ]
+  },
+  "screens": [
+    {
+      "id": "highcross",
+      "prompt": "prompts/01-highcross.txt",
+      "purpose": "Establish environment quality, player scale, exploration HUD and safe-town state",
+      "required_text": [
+        "HIGHCROSS",
+        "The Three Gates",
+        "SAFE TOWN",
+        "The Thirteenth Bell"
+      ],
+      "image": "screens/01-highcross.png",
+      "refinement_prompt": "prompts/01-highcross-refinement.txt",
+      "actual_dimensions": [
+        1672,
+        941
+      ],
+      "visual_review": {
+        "checked": [
+          "Elevated view and readable town movement space",
+          "Three visually distinct realm gates",
+          "Explicit SAFE TOWN shield label",
+          "Six ability slots and separate evade action",
+          "Health and Resolve bars"
+        ],
+        "known_limitations": [
+          "Minor decorative text may differ from production copy",
+          "Displayed player level and numbers are illustrative",
+          "Image is a design target, not a tested real-time scene"
+        ]
+      },
+      "sha256": "b0161ea1f311e71d4e1531ae6ecee7a7e15345cce84c6fea80566a31ef7d3b26"
+    },
+    {
+      "id": "wilderness-pvp",
+      "prompt": "prompts/02-wilderness-pvp.txt",
+      "purpose": "Establish ordinary wilderness PvP, hostile-player targeting and readable combat effects",
+      "required_text": [
+        "BRIAR MARCH",
+        "OPEN PVP",
+        "HOSTILE PLAYER",
+        "Pulse Lance"
+      ],
+      "forbidden_states": [
+        "PvP opt-in",
+        "duel consent required",
+        "ordinary wilderness immunity"
+      ],
+      "image": "screens/02-wilderness-pvp.png",
+      "refinement_prompt": "prompts/02-wilderness-pvp-refinement.txt",
+      "visual_review": {
+        "checked": [
+          "Explicit OPEN PVP and Outside safe zones labels",
+          "VEX identified as HOSTILE PLAYER",
+          "Readable Pulse Lance cast and ground attack lane",
+          "Friendly player and spirit visually distinct",
+          "Town safety shield removed from wilderness location label",
+          "Consistent main HUD positions and character style"
+        ],
+        "known_limitations": [
+          "Telegraphs, targeting, damage and combat are depicted only",
+          "Ability icon artwork remains provisional and requires consistent final mapping across screens",
+          "The image does not establish a rendering performance budget"
+        ]
+      },
+      "actual_dimensions": [
+        1672,
+        941
+      ],
+      "sha256": "07524d048ede4b2aa1e00cfd22b5e923826124261b045fc94254d0fbf2a2c166"
+    },
+    {
+      "id": "guild-selection",
+      "prompt": "prompts/03-guild-selection.txt",
+      "purpose": "Show all twelve full guilds, distinct emblems, character quality and a guild trial preview",
+      "guilds": [
+        "Knight",
+        "Cyborg",
+        "Necromancer",
+        "Mage",
+        "Monk",
+        "Priest",
+        "Bard",
+        "Changeling",
+        "Elemental",
+        "Psion",
+        "Symbiont",
+        "Powered Armour"
+      ],
+      "starter": "Adventurer",
+      "selected": "Knight",
+      "primary_action": "Begin Trial",
+      "image": "screens/03-guild-selection.png",
+      "actual_dimensions": [
+        1672,
+        941
+      ],
+      "visual_review": {
+        "checked": [
+          "All twelve full guild names visible and spelled correctly",
+          "Adventurer shown separately as starting guild",
+          "Knight selected with matching plate, teal cloth and cream tabard",
+          "All six Knight ability names visible",
+          "Begin Trial action present",
+          "Explicit SAFE TOWN state"
+        ],
+        "known_limitations": [
+          "Only the Knight full-body appearance is depicted; other guild models remain to be designed",
+          "Guild emblems and ability icons are concept treatments, not exported UI assets",
+          "Static screen; no selection or trial interaction is implemented"
+        ]
+      },
+      "sha256": "c01029455bb63257f0ebc62bd0144ed4b49cc67b94cec7ac51914dfd3d0a9c72"
+    }
+  ]
+}

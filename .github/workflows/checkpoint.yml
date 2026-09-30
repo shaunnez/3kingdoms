@@ -1,0 +1,29 @@
+name: Checkpoint checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run format:check
+      - run: npm test
+      - run: npm run build
+      - run: npm run validate:assets
+      - run: python3 tools/build_catalogue.py && python3 tools/build_devlog.py
+      - run: npm run validate:plan
+      - name: Check deterministic generated documents
+        run: git diff --exit-code -- design/asset-manifest.json design/content-catalogue.json docs/catalogue-totals.md docs/guild-ability-catalogue.md devlog/index.html devlog/posts/

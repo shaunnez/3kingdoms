@@ -1,0 +1,8 @@
+{
+  "name": "knight",
+  "sourceBytes": 7602200,
+  "repairedTangents": 0,
+  "runtimeBytes": 1706116,
+  "sha256": "d121e43474cbc1333a2bfe2a44639c7d8783e5c0786a791d5c3f647261f14a64",
+  "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+}

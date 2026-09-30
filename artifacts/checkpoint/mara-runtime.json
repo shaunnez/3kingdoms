@@ -1,0 +1,8 @@
+{
+  "name": "mara",
+  "sourceBytes": 5663372,
+  "repairedTangents": 0,
+  "runtimeBytes": 926348,
+  "sha256": "8829beb1243c8ceb97d30b2e1c274358d02c0f3f99a610edf3d7cbf7009d446d",
+  "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+}

@@ -1,0 +1,142 @@
+{
+  "jobs": [
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f1db-789d-75bc-a18f-331cca3eb611",
+      "asset": "cyborg",
+      "status": "SUCCEEDED",
+      "consumed_credits": 30,
+      "private_receipt_sha256": "0adc3df5a59b709003096d48747c46da28ec97bc8dcb803cb822934156ffbf94"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f1eb-bd9a-7124-82fa-fb199c2b5c4d",
+      "asset": "cyborg",
+      "status": "SUCCEEDED",
+      "consumed_credits": 5,
+      "private_receipt_sha256": "8be12e770be4384a3b661a21a62ae9fd329b36c8d8326f16370a40b426ac55e7"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f1f5-2a33-752e-b3f4-c1407fe6653c",
+      "asset": "cyborg",
+      "status": "SUCCEEDED",
+      "consumed_credits": 3,
+      "private_receipt_sha256": "5f75dcd8abaf8b52a714ddde638b7df37a43ba0073fccf0dc0b777142d1ad03e"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f1f6-7de8-7044-9645-425788213287",
+      "asset": "cyborg",
+      "status": "SUCCEEDED",
+      "consumed_credits": 3,
+      "private_receipt_sha256": "b1b809584104be7c57e6fda4f985d6c6a558bab2db2ffe38959638262100f049"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f1f9-079b-7639-9458-365eef9c5243",
+      "asset": "cyborg",
+      "status": "SUCCEEDED",
+      "consumed_credits": 3,
+      "private_receipt_sha256": "3f1822063f002a37ee091e71209595eb2b0636fd60964333162e8c15fbb73beb"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f1e1-cf65-7427-b77c-41e3172b16ca",
+      "asset": "wolf",
+      "status": "SUCCEEDED",
+      "consumed_credits": 30,
+      "private_receipt_sha256": "f05ab824e76470e0db6812d68263bf3b7415ba6b73f87baeae8b4cb913a419bd"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f1f0-58f5-70b2-af4c-338b00d0c7c4",
+      "asset": "knight",
+      "status": "SUCCEEDED",
+      "consumed_credits": 30,
+      "private_receipt_sha256": "603de9960da45e41be338466413736539b0e4a995eda78d7e58e21bc3c27837b"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f1f6-677c-770f-8f0a-ec84fc2d3b2e",
+      "asset": "knight",
+      "status": "SUCCEEDED",
+      "consumed_credits": 5,
+      "private_receipt_sha256": "aed70cf957b032260304da8334ab7c3ddd45db03522d5f3cc722b086fff0a012"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f1f9-a44b-737b-95ba-ff249e3e8b4d",
+      "asset": "knight",
+      "status": "SUCCEEDED",
+      "consumed_credits": 3,
+      "private_receipt_sha256": "a0b4b377e2a56d178b3b2cf34c2ac22c99d0f8206b13811443aa343c5111aac8"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f1f9-c54d-759f-8ebc-99e3bd2f3452",
+      "asset": "knight",
+      "status": "SUCCEEDED",
+      "consumed_credits": 3,
+      "private_receipt_sha256": "c754770ac167fd4c85f2a69ebc4c5320caaeb71f14cdffb10f30e1a1408a6a6b"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f1f9-d743-7292-a85b-7710fda88cad",
+      "asset": "knight",
+      "status": "SUCCEEDED",
+      "consumed_credits": 3,
+      "private_receipt_sha256": "0db1106ed4eefcf438e648d472cfd30fffead0ec1cb1dfd003db182c24a4dbff"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f213-1894-7275-8e17-fabed4e18814",
+      "asset": "mara",
+      "status": "SUCCEEDED",
+      "consumed_credits": 30,
+      "private_receipt_sha256": "3789372c1974e98f4897dbe9bb080e103da164625f82965f0cc688745858b487"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f217-5032-7507-a046-1404e9a30ec1",
+      "asset": "mara",
+      "status": "SUCCEEDED",
+      "consumed_credits": 5,
+      "private_receipt_sha256": "6f11009f9d41a597b7d7d5a8b1e80ab5145638594429a66c5550e5f2f4259246"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f219-5d47-7723-879f-9a4f7eaa7b0f",
+      "asset": "mara",
+      "status": "SUCCEEDED",
+      "consumed_credits": 3,
+      "private_receipt_sha256": "772a36bff4f9745c81d46b2e6e4b2a421ca03747cbdcdc12edd97fb01363b234"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f213-1735-77ac-aecb-8503b2cea72c",
+      "asset": "nemi",
+      "status": "SUCCEEDED",
+      "consumed_credits": 30,
+      "private_receipt_sha256": "5e04492366a44a52e8a265b21078de2f3c123e3efb16b87a9e49149b3de3e653"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f217-4c75-7499-a60c-039353aaaa97",
+      "asset": "nemi",
+      "status": "SUCCEEDED",
+      "consumed_credits": 5,
+      "private_receipt_sha256": "6a1ec7fbfb504eb4c74adb918a247f961e83c523ff17ff3c2ae62fe7d35a8245"
+    },
+    {
+      "provider": "Meshy",
+      "task_id": "01a0f219-5d69-75af-a54f-3e06dfe8f1d7",
+      "asset": "nemi",
+      "status": "SUCCEEDED",
+      "consumed_credits": 3,
+      "private_receipt_sha256": "c47953d5fc92cc13b51f378b36cf38beb72a09ec66f1cfadc996cb84a951a5e4"
+    }
+  ],
+  "verified_credits": 194,
+  "failed_submission": "One original Cyborg rig upload was rejected before a task ID was returned; no provider charge receipt is available for that request. Successful follow-up used reduced geometry."
+}

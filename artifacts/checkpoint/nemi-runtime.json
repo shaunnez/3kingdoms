@@ -1,0 +1,8 @@
+{
+  "name": "nemi",
+  "sourceBytes": 5447100,
+  "repairedTangents": 2,
+  "runtimeBytes": 860616,
+  "sha256": "ab147c2d31a3dfb1b329ba025d597a53e230c69bf399d311e33c3c19b753cd68",
+  "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+}

@@ -1,0 +1,16 @@
+23:55:17 | INFO: Data are loaded, start creating Blender stuff
+23:55:17 | INFO: Blender create Mesh node Mesh_0
+23:55:17 | INFO: glTF import finished in 0.04s
+Info: Saved as "wolf.blend"
+INFO Draco is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_draco_bridge.dylib
+INFO MeshOptimizer is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_meshopt_bridge.dylib
+23:55:18 | INFO: Starting glTF 2.0 export
+23:55:18 | INFO: Extracting primitive: Mesh_0
+23:55:18 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+23:55:18 | INFO: Primitives created: 1
+23:55:18 | INFO: Finished glTF 2.0 export in 0.21931695938110352 s
+
+{"model": "wolf", "triangles": 18000, "bones": 18, "animations": ["idle", "walk", "run", "attack", "dodge", "death"], "height_m": 1.1, "bytes": 6333636, "rig": "Original Blender quadruped; spatial skin weights; needs in-browser deformation review"}
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 01:35:57)
+
+Blender quit
