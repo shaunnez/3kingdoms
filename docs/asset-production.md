@@ -53,6 +53,17 @@ The checked-in `.blend` files can also be exported directly, without the private
 
 This writes review candidates under `assets/source/private/authored-exports/` and leaves the accepted runtime files intact. Compare animation names, durations, materials and motion before promoting a candidate into `runtime-unoptimized/` and packing it. Exporting is not a new paid generation request.
 
+The combat repair adds `tools/refine_knight.py`: fitted hand equipment and thirteen baked clips on the original 24-bone rig. Its input is the retained pre-repair Blender file. On a fresh checkout, recover that exact input from history before running it:
+
+```sh
+mkdir -p artifacts/private/combat-before
+git show 3bb45c4aa63b67734314833db414c4721719d3df:assets/source/knight.blend > artifacts/private/combat-before/knight.blend
+/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --python-exit-code 1 --python tools/refine_knight.py
+node tools/pack_assets.mjs knight
+```
+
+Do not overwrite an existing private recovery file. The new source and runtime are checked in; this recovery recipe is only needed to repeat the authoring process. The original has no finger bones, so the sword grip uses a local hand-mesh adjustment. The thirteen clips are prototype acting, not final motion-capture quality. See the [combat repair record](../artifacts/checkpoint/combat-repair.json).
+
 The placeholder paths above must be replaced with known local files. The humanoid folder contains `rig-input.blend`, `idle.glb`, `run.glb`, `attack.glb` and `dodge.glb`; NPC assembly needs only source material and idle. `collect_meshy.py` polls/downloads already-submitted jobs; it does not create new paid tasks.
 
 After an export changes, update the production override hashes, run `python3 tools/build_catalogue.py`, rebuild the browser and record a fresh `node tools/record-build.mjs` manifest. A changed model or material invalidates related visual/performance evidence until it is rerun. Keep rejected exports and the reason privately; never overwrite the only raw source.

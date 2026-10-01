@@ -1,6 +1,6 @@
 {
   "build": "0.1.0-briar-gate",
-  "fingerprint": "41e30695fe06c0c86733c42820b896d714472ff80497a27256d3783ed9926c67",
+  "fingerprint": "03698a82f0c180cd1777c21df1c83bf04174b40acca79365af772d809ad8fc27",
   "manifest": "artifacts/checkpoint/build-manifest.json",
   "recorded_local_date": "2026-10-01",
   "scope": "P1/P2 local representative checkpoint; not the complete game or a 48-hour build",
@@ -269,6 +269,27 @@
       "result": "600.54 seconds, 16 actual SDK connections, 80 AI-cost fixtures; tick p95 7.8706 ms, p99 9.1331 ms.",
       "source_fingerprint": "41e30695fe06c0c86733c42820b896d714472ff80497a27256d3783ed9926c67",
       "limit": "Loopback CPU/transport workload with artificial health and hound-cost summon proxies. Browser/journal review ran concurrently. Decoded JSON size is not measured compressed wire bandwidth; no impaired-network or production-throughput qualification."
+    },
+    {
+      "id": "combat-and-quest-repair",
+      "status": "repaired-and-observed",
+      "source_fingerprint": "03698a82f0c180cd1777c21df1c83bf04174b40acca79365af772d809ad8fc27",
+      "evidence": [
+        "artifacts/checkpoint/combat-repair.json",
+        "artifacts/checkpoint/combat-repair/before-manifest.json",
+        "artifacts/checkpoint/combat-repair/motion-browser-manifest.json",
+        "artifacts/checkpoint/combat-repair/knight-authoring.json",
+        "artifacts/checkpoint/combat-repair/knight-motion.json",
+        "artifacts/checkpoint/combat-repair/tests.tap",
+        "artifacts/checkpoint/captures/knight-final-expedition.mp4",
+        "artifacts/checkpoint/captures/knight-final-expedition-poster.png",
+        "artifacts/checkpoint/captures/knight-final-expedition.vtt",
+        "artifacts/checkpoint/captures/knight-combat-repair.mp4",
+        "artifacts/checkpoint/captures/2026-10-01T04-57-58-611Z-aeca6221.png",
+        "artifacts/checkpoint/captures/2026-10-01T04-58-29-902Z-19e27de3.json"
+      ],
+      "result": "Hand-fitted equipment; thirteen action/locomotion clips; confirmed-hit VFX/audio; retreat and visibility cleanup; coherent memorial quest, observed final return reward and repeated-reward rejection. All 37 local checks pass. Post-combat cosmetic counts return to zero.",
+      "limit": "Developer rehearsal, not independent fun testing. Acting and reference-level environment art still require work; no new long-memory or lower-end hardware qualification."
     }
   ],
   "remaining_game_scope": [

@@ -1,0 +1,12 @@
+
+> threefold@0.1.0 validate:assets
+> node tools/validate-runtime.mjs
+
+[
+  { name: 'briar-gate', errors: 0, warnings: 5 },
+  { name: 'knight', errors: 0, warnings: 2 },
+  { name: 'cyborg', errors: 0, warnings: 1 },
+  { name: 'wolf', errors: 0, warnings: 1 },
+  { name: 'mara', errors: 0, warnings: 1 },
+  { name: 'nemi', errors: 0, warnings: 1 }
+]

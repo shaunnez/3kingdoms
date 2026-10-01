@@ -120,6 +120,9 @@ export class World {
       for (const p of saved.players) {
         p.evadeCharges ??= 2;
         p.evadeRecoverAt ??= 0;
+        p.returning = false;
+        p.oath = false;
+        p.protectedBy = null;
         p.connected = false;
         p.active = false;
         p.move = { x: 0, z: 0 };
@@ -169,6 +172,9 @@ export class World {
       stunned: false,
       healing: false,
       controlRemaining: 0,
+      returning: false,
+      oath: false,
+      protectedBy: null,
       resource: guild === "knight" ? 60 : 0,
       xp: 0,
       marks: 35,
@@ -288,6 +294,7 @@ export class World {
     target: Actor,
     key: string,
     amount = 0,
+    presentation: Pick<CombatEvent, "blocked" | "aim"> = {},
   ) {
     this.events.push({
       id: ++this.counter,
@@ -297,6 +304,7 @@ export class World {
       target: target.id,
       key,
       amount,
+      ...presentation,
       x: target.x,
       z: target.z,
     });
@@ -376,7 +384,7 @@ export class World {
         p.moveUntil = this.now + 0.25;
         if (length > 0.1) {
           p.channel = null;
-          if (p.cast && p.cast.key !== "basic") p.cast = null;
+          p.cast = null;
         }
         return true;
       }
@@ -455,11 +463,12 @@ export class World {
     if (
       !a ||
       (p.stunUntil > this.now && key !== "c") ||
-      p.cast ||
+      (p.cast && key !== "space" && key !== "c") ||
       (p.cooldowns[key] ?? 0) > this.now
     )
       return false;
     if (key === "c") {
+      p.cast = null;
       p.stunUntil = p.rootUntil = 0;
       p.cooldowns.c = this.now + 45;
       this.event("dodge", p, p, key);
@@ -468,6 +477,7 @@ export class World {
     if (key === "space") {
       if (p.evadeCharges <= 0) return false;
       if (p.rootUntil > this.now) return false;
+      p.cast = null;
       const dir =
         Math.hypot(p.move.x, p.move.z) > 0.1
           ? p.move
@@ -559,6 +569,7 @@ export class World {
       target: targetId,
       aim: { x: validAim.x, z: validAim.z },
     };
+    p.move = { x: 0, z: 0 };
     p.channel = null;
     this.event("cast", p, t ?? p, key);
     return true;
@@ -583,6 +594,7 @@ export class World {
         (c.key === "basic" && p.overclockUntil > this.now ? 0.75 : 1);
     const t = this.actors.get(c.target);
     const power = 40 + 6 * (p.level - 1);
+    this.event("resolve", p, t ?? p, c.key, 0, { aim: c.aim });
     if (c.key === "q") {
       p.braceUntil = this.now + (p.guild === "knight" ? 0.8 : 1);
       if (p.guild === "knight") p.resource = Math.min(100, p.resource + 8);
@@ -720,9 +732,11 @@ export class World {
       a.challenge.owner !== b.id
     )
       damage *= 0.85;
+    let blocked = false;
     if (b.braceUntil > this.now) {
       const facing = Math.cos(b.heading - Math.atan2(a.x - b.x, a.z - b.z));
       if (b.guild === "cyborg" || facing > 0.2) {
+        blocked = true;
         damage *= b.guild === "knight" ? 0.4 : 0.55;
         if (b.oathUntil > this.now) this.heal(b, b, 25);
       }
@@ -752,7 +766,7 @@ export class World {
     if (a.kind === "player" && b.kind === "player")
       b.retaliation[a.id] = this.now + 30;
     b.hp = Math.max(0, b.hp - damage);
-    this.event("hit", a, b, key, damage);
+    this.event("hit", a, b, key, damage, blocked ? { blocked: true } : {});
     if (b.hp === 0) {
       if (
         b.kind === "player" &&
@@ -940,7 +954,7 @@ export class World {
       if (p.quest === "accepted") p.quest = "inspected";
       this.say(
         p.id,
-        "Thirteen cuts in the stone. Twelve for the bells we hear. The last for the hour that was taken. You copy the marks into your journal.",
+        "Under the moss: “Elian Voss, bridge keeper. Lost between the twelfth bell and dawn.” Beneath it, thirteen tally marks. The last is cut across the others, with the words: “We heard him answer.” You copy the name, the marks and the inscription into your journal.",
         "dialogue",
         "Weathered epitaph",
       );
@@ -972,7 +986,7 @@ export class World {
         p.quest = "accepted";
         this.say(
           p.id,
-          "The bell rang thirteen times last night. Past the bridge, a stone remembers why. Copy its marks for me. Beyond the gate, other travellers can attack you. Keep a way home.",
+          "I keep the gate bell. Last night it rang thirteen times, though its wheel has only twelve teeth. My father's ledger mentions the same thing when a bridge keeper vanished. His memorial is across the Briar bridge, beside the ruined arch on the left. Bring me the name and inscription; I want to check the ledger, not start a panic. Hounds haunt that road, and other travellers can attack beyond the town lanterns.",
           "dialogue",
           "Mara",
         );
@@ -990,7 +1004,7 @@ export class World {
         else p.recovery.push(item);
         this.say(
           p.id,
-          "The thirteenth mark… someone has stolen an hour. Hollow Abbey holds the next verse. For now, take this. You have earned it. +40 marks · +220 XP · Hourglass charm.",
+          "Elian Voss. Here he is in the ledger: the search party heard him answer after the thirteenth toll, but the bridge was empty. Your copy confirms that last night was no broken bell. I will have the Watch check the bridge at dusk. You have done what I asked; take this charm and your pay.\n\nExpedition complete · +40 marks · +220 XP · Mara’s hourglass charm.",
           "dialogue",
           "Mara",
         );
@@ -998,8 +1012,8 @@ export class World {
         this.say(
           p.id,
           p.quest === "complete"
-            ? "The Abbey awaits in the next expedition. Keep the copied verse safe."
-            : "Follow the Briar road across the bridge. The inscribed stone stands beside the ruined arch.",
+            ? "I have your copy beside the ledger. The Watch knows to listen at the bridge tonight. Thank you for bringing me evidence, not another rumour. Your work here is done."
+            : "Go through the north gate and cross the wooden bridge. Turn left at the ruined arch. Copy the bridge keeper's name and the words on his memorial, then bring them back to me.",
           "dialogue",
           "Mara",
         );
@@ -1086,6 +1100,7 @@ export class World {
         if (p.kind === "player") this.resolve(p);
         else {
           const target = this.actors.get(p.cast.target);
+          this.event("resolve", p, target ?? p, p.cast.key);
           p.cast = null;
           if (target && distance(p, target) < 2.8)
             this.hit(p, target, p.kind === "guard" ? 150 : 30, "basic");
@@ -1208,6 +1223,11 @@ export class World {
   }
   private ai(p: Actor, dt: number) {
     if (p.stunUntil > this.now || p.rootUntil > this.now || p.cast) return;
+    // Finish a retreat before reacquiring: the old leash oscillated at its edge.
+    if (p.returning) {
+      this.returnHome(p, dt);
+      return;
+    }
     const limit = p.kind === "guard" ? 20 : 8;
     const candidates = [...this.actors.values()].filter(
       (t) =>
@@ -1250,18 +1270,22 @@ export class World {
       }
     } else {
       p.target = null;
-      const d = distance(p, p.home);
-      if (d > 0.2)
-        Object.assign(
-          p,
-          move(
-            p,
-            ((p.home.x - p.x) / d) * dt * 2,
-            ((p.home.z - p.z) / d) * dt * 2,
-          ),
-        );
-      if (d < 0.5 && p.combatUntil <= this.now) p.hp = p.maxHp;
+      p.returning = distance(p, p.home) > 0.2;
+      this.returnHome(p, dt);
     }
+  }
+  private returnHome(p: Actor, dt: number) {
+    const d = distance(p, p.home);
+    p.target = null;
+    if (d > 0.2) {
+      p.heading = Math.atan2(p.home.x - p.x, p.home.z - p.z);
+      const step = Math.min(d, dt * 2);
+      Object.assign(
+        p,
+        move(p, ((p.home.x - p.x) / d) * step, ((p.home.z - p.z) / d) * step),
+      );
+    } else p.returning = false;
+    if (d < 0.5 && p.combatUntil <= this.now) p.hp = p.maxHp;
   }
   private inRefuge(p: Vec2) {
     return distance(p, REFUGE) <= REFUGE.radius + 1;
@@ -1315,6 +1339,12 @@ export class World {
           connected: a.connected,
           stunned: a.stunned,
           healing: a.healing,
+          returning: a.returning,
+          oath: a.oathUntil > this.now,
+          protectedBy:
+            a.interpose && a.interpose.until > this.now
+              ? a.interpose.owner
+              : null,
           controlRemaining: Math.max(
             0,
             a.stunUntil - this.now,

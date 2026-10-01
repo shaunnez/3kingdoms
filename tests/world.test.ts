@@ -101,6 +101,71 @@ test("a broadcast event cursor avoids replay while retaining authoritative state
 const advance = (w: World, seconds: number) => {
   for (let i = 0; i < Math.ceil(seconds / 0.05); i++) w.step(0.05);
 };
+
+test("movement or evade cancels a sword windup without a false impact or spent ability", () => {
+  for (const interrupt of ["move", "evade"]) {
+    const { w, a, b } = fixture();
+    const resource = a.resource;
+    command(w, a, { type: "ability", key: "1", target: b.id });
+    advance(w, 0.1);
+    if (interrupt === "move") command(w, a, { type: "move", x: 1, z: 0 });
+    else command(w, a, { type: "ability", key: "space" });
+    advance(w, 0.5);
+    assert.equal(b.hp, b.maxHp);
+    assert.equal(a.resource, resource);
+    assert.equal(a.cooldowns["1"], undefined);
+    assert.equal(
+      w.events.some(
+        (e) => e.source === a.id && e.type === "resolve" && e.key === "1",
+      ),
+      false,
+    );
+    assert.ok(
+      a.red > 0,
+      "cancelling aggression must not clear outlaw consequences",
+    );
+  }
+});
+
+test("a retreating hound faces home and finishes its retreat before reacquiring", () => {
+  const w = new World(),
+    p = w.join("runner", "Runner", "knight"),
+    hound = w.actors.get("wolf-1")!;
+  Object.assign(hound, { x: 1, z: 27 });
+  Object.assign(p, { x: 1, z: 29 });
+  advance(w, 0.05);
+  assert.equal(hound.returning, true);
+  assert.equal(hound.target, null);
+  assert.ok(Math.abs(Math.abs(hound.heading) - Math.PI) < 0.001);
+  const firstZ = hound.z;
+  advance(w, 1);
+  assert.ok(hound.z < firstZ);
+  assert.equal(hound.returning, true);
+  assert.equal(hound.cast, null);
+  assert.equal(
+    w.snapshot(p.id).actors.find((a) => a.id === hound.id)?.returning,
+    true,
+  );
+});
+
+test("only a frontal Brace reports a blocked contact and the impact event follows commit", () => {
+  for (const frontal of [true, false]) {
+    const { w, a, b } = fixture();
+    b.heading = frontal ? Math.PI : 0;
+    command(w, b, { type: "ability", key: "q" });
+    advance(w, 0.15);
+    command(w, a, { type: "ability", key: "basic", target: b.id });
+    advance(w, 0.35);
+    const hit = w.events.find((e) => e.source === a.id && e.type === "hit")!;
+    const commit = w.events.find(
+      (e) => e.source === a.id && e.type === "resolve",
+    )!;
+    assert.ok(hit && commit);
+    assert.equal(Boolean(hit.blocked), frontal);
+    assert.equal(hit.at, commit.at);
+    assert.equal(hit.amount, frontal ? 26 : 64);
+  }
+});
 function fixture() {
   const w = new World();
   for (const p of w.actors.values())

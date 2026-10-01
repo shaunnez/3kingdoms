@@ -34,6 +34,9 @@ export type ActorView = Vec2 & {
   stunned: boolean;
   healing: boolean;
   controlRemaining: number;
+  returning: boolean;
+  oath: boolean;
+  protectedBy: string | null;
 };
 export type Item = {
   id: string;
@@ -69,13 +72,24 @@ export type SelfView = {
 export type CombatEvent = {
   id: number;
   at: number;
-  type: "hit" | "miss" | "cast" | "death" | "loot" | "heal" | "dodge" | "level";
+  type:
+    | "hit"
+    | "miss"
+    | "cast"
+    | "resolve"
+    | "death"
+    | "loot"
+    | "heal"
+    | "dodge"
+    | "level";
   source: string;
   target: string;
   amount: number;
   key: string;
   x: number;
   z: number;
+  blocked?: boolean;
+  aim?: Vec2;
 };
 export type ProjectileView = Vec2 & {
   id: number;
@@ -274,7 +288,7 @@ export const KITS: Record<Guild, Ability[]> = {
       4,
       0,
       30,
-      "Plant a field of restorative light for 4 seconds.",
+      "Rally for 4 seconds, restoring your health. Taking damage ends the recovery.",
     ),
     ability(
       "r",

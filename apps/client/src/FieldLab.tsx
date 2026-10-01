@@ -8,6 +8,7 @@ import {
 } from "../../../packages/contracts/game";
 import { saveFrame, recordPlay, saveMetrics } from "./capture";
 import { benchmark } from "./benchmark";
+import { canDisplayTarget } from "./combat-presentation";
 
 type Props = {
   scene: () => GameScene | null;
@@ -49,7 +50,18 @@ export function FieldLab({
         return;
       }
       const point = route.current[0];
-      if (point) {
+      const target = fight.current
+        ? s.actors
+            .filter(
+              (a) =>
+                a.kind === "wolf" &&
+                a.life === "alive" &&
+                canDisplayTarget(a, p) &&
+                distance(a, p) < (p.guild === "knight" ? 2.5 : 12),
+            )
+            .sort((a, b) => distance(a, p) - distance(b, p))[0]
+        : undefined;
+      if (point && !target) {
         const d = distance(p, point);
         if (d < 0.35) {
           route.current.shift();
@@ -62,20 +74,26 @@ export function FieldLab({
             z: (point.z - p.z) / d,
           });
       }
-      if (fight.current) {
-        const target = s.actors
-          .filter(
-            (a) =>
-              a.kind === "wolf" && a.life === "alive" && distance(a, p) < 12,
-          )
-          .sort((a, b) => distance(a, p) - distance(b, p))[0];
-        if (target) {
-          select(target.id);
-          connection.send({ type: "ability", key: "basic", target: target.id });
-          if (p.guild === "knight" && distance(p, target) < 2.5)
-            connection.send({ type: "ability", key: "1", target: target.id });
-          if (p.guild === "cyborg")
-            connection.send({ type: "ability", key: "4", target: target.id });
+      if (target) {
+        connection.send({ type: "move", x: 0, z: 0 });
+        select(target.id);
+        if (!p.cast) {
+          const ready = (key: "1" | "2" | "4") =>
+            (s.self.cooldowns[key] ?? 0) <= s.now;
+          const key =
+            p.guild === "knight"
+              ? target.cast &&
+                ready("2") &&
+                s.self.resource >= 20 &&
+                distance(p, target) <= 2
+                ? "2"
+                : ready("1") && s.self.resource >= 15
+                  ? "1"
+                  : "basic"
+              : s.self.resource > 55 && ready("4")
+                ? "4"
+                : "basic";
+          connection.send({ type: "ability", key, target: target.id });
         }
       }
       if (pvp.current && selectedRef.current)

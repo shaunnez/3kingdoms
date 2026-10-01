@@ -1,4 +1,8 @@
-import type { CombatEvent } from "../../../packages/contracts/game";
+import {
+  distance,
+  type ActorView,
+  type CombatEvent,
+} from "../../../packages/contracts/game";
 
 /** Original synthesized checkpoint audio. No external samples or runtime generation service. */
 export class Soundscape {
@@ -8,14 +12,29 @@ export class Soundscape {
   private recording: MediaStreamAudioDestinationNode | null = null;
   enabled = false;
   private last = 0;
+  private voices = new Set<AudioScheduledSourceNode>();
+  private pan = 0;
+  private attenuation = 1;
+  private noiseBuffer: AudioBuffer | null = null;
   async unlock() {
     if (!this.context) {
       this.context = new AudioContext();
       this.master = this.context.createGain();
       this.master.gain.value = 0.3;
-      this.master.connect(this.context.destination);
+      const limiter = this.context.createDynamicsCompressor();
+      limiter.threshold.value = -10;
+      limiter.knee.value = 6;
+      limiter.ratio.value = 8;
+      this.master.connect(limiter).connect(this.context.destination);
       this.recording = this.context.createMediaStreamDestination();
-      this.master.connect(this.recording);
+      limiter.connect(this.recording);
+      this.noiseBuffer = this.context.createBuffer(
+        1,
+        this.context.sampleRate,
+        this.context.sampleRate,
+      );
+      const noise = this.noiseBuffer.getChannelData(0);
+      for (let i = 0; i < noise.length; i++) noise[i] = Math.random() * 2 - 1;
       this.ambience = this.context.createGain();
       this.ambience.gain.value = 0.12;
       this.ambience.connect(this.master);
@@ -70,7 +89,13 @@ export class Soundscape {
     volume = 0.15,
     slide = 0,
   ) {
-    if (!this.context || !this.master || !this.enabled) return;
+    if (
+      !this.context ||
+      !this.master ||
+      !this.enabled ||
+      this.voices.size >= 24
+    )
+      return;
     const t = this.context.currentTime,
       o = this.context.createOscillator(),
       g = this.context.createGain();
@@ -82,53 +107,133 @@ export class Soundscape {
         t + duration,
       );
     g.gain.setValueAtTime(0, t);
-    g.gain.linearRampToValueAtTime(volume, t + 0.012);
+    g.gain.linearRampToValueAtTime(volume * this.attenuation, t + 0.012);
     g.gain.exponentialRampToValueAtTime(0.001, t + duration);
-    o.connect(g).connect(this.master);
+    const pan = this.context.createStereoPanner();
+    pan.pan.value = this.pan;
+    o.connect(g).connect(pan).connect(this.master);
+    this.voices.add(o);
     o.start(t);
     o.stop(t + duration + 0.02);
     o.onended = () => {
       o.disconnect();
       g.disconnect();
+      pan.disconnect();
+      this.voices.delete(o);
     };
   }
-  noise(duration: number, frequency: number, volume = 0.2) {
-    if (!this.context || !this.master || !this.enabled) return;
+  noise(
+    duration: number,
+    frequency: number,
+    volume = 0.2,
+    endFrequency = frequency,
+  ) {
+    if (
+      !this.context ||
+      !this.master ||
+      !this.enabled ||
+      !this.noiseBuffer ||
+      this.voices.size >= 24
+    )
+      return;
     const c = this.context,
       t = c.currentTime;
-    const buffer = c.createBuffer(
-        1,
-        Math.ceil(c.sampleRate * duration),
-        c.sampleRate,
-      ),
-      data = buffer.getChannelData(0);
-    for (let i = 0; i < data.length; i++)
-      data[i] = (Math.random() * 2 - 1) * (1 - i / data.length) ** 2;
     const source = c.createBufferSource();
-    source.buffer = buffer;
+    source.buffer = this.noiseBuffer;
     const filter = c.createBiquadFilter();
     filter.type = "bandpass";
-    filter.frequency.value = frequency;
+    filter.frequency.setValueAtTime(frequency, t);
+    filter.frequency.exponentialRampToValueAtTime(
+      Math.max(40, endFrequency),
+      t + duration,
+    );
+    filter.Q.value = 0.65;
     const gain = c.createGain();
-    gain.gain.value = volume;
-    source.connect(filter).connect(gain).connect(this.master);
+    gain.gain.setValueAtTime(0, t);
+    gain.gain.linearRampToValueAtTime(volume * this.attenuation, t + 0.008);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + duration);
+    const pan = c.createStereoPanner();
+    pan.pan.value = this.pan;
+    source.connect(filter).connect(gain).connect(pan).connect(this.master);
+    this.voices.add(source);
     source.start();
+    source.stop(t + duration + 0.01);
     source.onended = () => {
       source.disconnect();
       filter.disconnect();
       gain.disconnect();
+      pan.disconnect();
+      this.voices.delete(source);
     };
   }
-  events(events: CombatEvent[]) {
+  events(events: CombatEvent[], actors: ActorView[], self: string) {
+    const me = actors.find((a) => a.id === self);
     for (const e of events) {
       if (e.id <= this.last) continue;
       this.last = e.id;
+      const source = actors.find((a) => a.id === e.source),
+        target = actors.find((a) => a.id === e.target);
+      if (!source || !me) continue;
+      const origin = e.type === "hit" && target ? target : source;
+      const range = distance(me, origin);
+      if (range > 27) continue;
+      this.attenuation = 1 / (1 + range * 0.1);
+      this.pan = Math.max(-0.75, Math.min(0.75, (origin.x - me.x) / 12));
+      const knight = source.guild === "knight" && source.kind !== "wolf";
       if (e.type === "cast") {
-        this.noise(0.16, 1500, 0.15);
-        if (e.key === "1") this.tone(220, 0.35, "sine", 0.08, 500);
+        if (source.kind === "wolf") {
+          this.noise(0.35, 160, 0.15, 340);
+          this.tone(72, 0.25, "triangle", 0.06, -20);
+        } else if (knight) {
+          this.noise(0.12, 1800, 0.1, 800);
+          if (e.key === "1") this.noise(0.3, 500, 0.12, 1500);
+          if (e.key === "q" || e.key === "2")
+            this.tone(640, 0.13, "triangle", 0.035, -240);
+        } else {
+          this.tone(
+            e.key === "1" ? 190 : 360,
+            e.key === "1" ? 0.5 : 0.15,
+            "sine",
+            0.05,
+            500,
+          );
+        }
+      } else if (e.type === "resolve") {
+        if (source.kind === "wolf") this.noise(0.13, 900, 0.1, 250);
+        else if (knight) {
+          if (e.key === "basic" || e.key === "1")
+            this.noise(
+              e.key === "1" ? 0.24 : 0.16,
+              2400,
+              e.key === "1" ? 0.3 : 0.2,
+              350,
+            );
+          else if (e.key === "2") this.noise(0.13, 380, 0.23, 110);
+          else if (e.key === "3") {
+            this.tone(196, 0.3, "triangle", 0.07);
+            this.tone(294, 0.28, "sine", 0.05);
+          } else if (e.key === "5" || e.key === "r") {
+            this.tone(196, 0.7, "sine", 0.07);
+            this.tone(392, 0.55, "sine", 0.045);
+            this.tone(e.key === "r" ? 588 : 494, 0.8, "sine", 0.035);
+          }
+        } else if (e.key === "basic" || e.key === "1") {
+          this.tone(e.key === "1" ? 800 : 1100, 0.18, "triangle", 0.1, -650);
+          this.noise(0.12, 2400, 0.15, 500);
+        } else if (e.key === "4") this.noise(0.55, 3200, 0.2, 900);
       } else if (e.type === "hit") {
-        this.noise(0.18, 600, 0.35);
-        this.tone(100, 0.12, "triangle", 0.2, -40);
+        const heavy = e.key === "1" || e.key === "2";
+        this.noise(
+          heavy ? 0.21 : 0.14,
+          e.blocked ? 2200 : 600,
+          heavy ? 0.3 : 0.23,
+          200,
+        );
+        this.tone(heavy ? 88 : 115, 0.13, "triangle", 0.14, -45);
+        if (e.blocked || e.key === "2") {
+          this.tone(713, 0.19, "sine", 0.08, -55);
+          this.tone(1147, 0.11, "sine", 0.04, -130);
+        }
       } else if (e.type === "dodge") this.noise(0.3, 1700, 0.25);
       else if (e.type === "death") {
         this.tone(130, 0.8, "sine", 0.18, -70);
@@ -138,6 +243,8 @@ export class Soundscape {
         setTimeout(() => this.tone(660, 0.5, "sine", 0.08), 120);
       } else if (e.type === "heal") this.tone(520, 0.4, "sine", 0.04, 140);
     }
+    this.pan = 0;
+    this.attenuation = 1;
   }
   step() {
     this.noise(0.055, 280, 0.14);
@@ -149,6 +256,8 @@ export class Soundscape {
     this.ambience = null;
     this.enabled = false;
     this.recording = null;
+    this.noiseBuffer = null;
+    this.voices.clear();
     if (context && context.state !== "closed")
       void context
         .close()

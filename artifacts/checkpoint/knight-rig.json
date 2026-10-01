@@ -1,15 +1,25 @@
 {
   "model": "knight",
-  "triangles": 24089,
+  "triangles": 24155,
   "bones": 24,
   "animations": [
     "idle",
     "run",
-    "attack",
     "dodge",
-    "death"
+    "death",
+    "cut",
+    "sunder",
+    "bash",
+    "challenge",
+    "interpose",
+    "rally",
+    "oath",
+    "guard",
+    "hit"
   ],
-  "bytes": 7602200,
   "root_motion": "horizontal travel removed; server owns movement",
-  "equipment": "Original Blender sword and shield"
+  "equipment": "Rigid hand binding fitted in ready pose; solid heater shield, rear grip, tree crest and longsword",
+  "runtime_bytes": 1722740,
+  "runtime_sha256": "751aa8b52cbf7cbd2e96eaf2ed6f522fa8de51eb3799e493a47ce453767534c6",
+  "authoring_report": "artifacts/checkpoint/combat-repair/knight-authoring.json"
 }

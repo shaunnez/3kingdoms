@@ -1,0 +1,48 @@
+{
+  "source": "preserved pre-repair knight.blend",
+  "fps": 30,
+  "bones": 24,
+  "clips": {
+    "idle": {
+      "seconds": 3.0
+    },
+    "run": {
+      "seconds": 0.8
+    },
+    "dodge": {
+      "seconds": 0.6
+    },
+    "death": {
+      "seconds": 1.0
+    },
+    "cut": {
+      "seconds": 0.6666666666666666
+    },
+    "sunder": {
+      "seconds": 0.9
+    },
+    "bash": {
+      "seconds": 0.6666666666666666
+    },
+    "challenge": {
+      "seconds": 0.6333333333333333
+    },
+    "interpose": {
+      "seconds": 0.5
+    },
+    "rally": {
+      "seconds": 1.0666666666666667
+    },
+    "oath": {
+      "seconds": 1.0
+    },
+    "guard": {
+      "seconds": 0.9
+    },
+    "hit": {
+      "seconds": 0.26666666666666666
+    }
+  },
+  "equipment": "Rigid hand binding fitted in ready pose; solid heater shield, rear grip, tree crest and longsword",
+  "review": "Requires browser motion review; authoring is not acceptance"
+}

@@ -33,7 +33,10 @@ import type {
   Snapshot,
   Vec2,
 } from "../../../packages/contracts/game";
+import { KITS, type AbilityKey } from "../../../packages/contracts/game";
 import { NPCS, REFUGE } from "../../../packages/simulation/map";
+import { actionPhase, KNIGHT_MOTION } from "./combat-presentation";
+import { CombatEffects } from "./combat-effects";
 
 const LANTERNS = [
   [-9, -6],
@@ -64,16 +67,21 @@ type Visual = {
   dead: boolean;
   model: string;
   ownsMaterials: boolean;
-  actionUntil: number;
   castStarted: number;
-};
-type Effect = {
-  mesh: Mesh;
-  until: number;
-  start: number;
-  mode: "ring" | "spark" | "beam";
-  source?: Vector3;
-  target?: Vector3;
+  castEvent: number;
+  motion: {
+    clip: string;
+    key: AbilityKey;
+    start: number;
+    windup: number;
+    impact: number;
+    recovery: number;
+  } | null;
+  weights: Map<AnimationGroup, number>;
+  movingUntil: number;
+  hitAt: number;
+  hitHeading: number;
+  sampleFrame: number | null;
 };
 export type RenderMetrics = {
   fps: number;
@@ -94,6 +102,7 @@ export type RenderMetrics = {
   renderer: string;
   assets: string[];
   studyMotion: string | null;
+  combatEffects: ReturnType<CombatEffects["metrics"]>;
   camera: { alpha: number; beta: number; radius: number };
   actorAudit: {
     model: string;
@@ -120,7 +129,8 @@ export class GameScene {
   private actors = new Map<string, Visual>();
   private containers = new Map<string, AssetContainer>();
   private loading = new Set<string>();
-  private effects: Effect[] = [];
+  private combatFx: CombatEffects;
+  private snapshotReceived = 0;
   private lastEvent = 0;
   private snapshot: Snapshot | null = null;
   private selfId = "";
@@ -163,6 +173,10 @@ export class GameScene {
     this.engine.setHardwareScalingLevel(Math.max(1, devicePixelRatio / 1.5));
     this.scene = new Scene(this.engine);
     const s = this.scene;
+    this.combatFx = new CombatEffects(
+      s,
+      (id) => this.actors.get(id)?.root.position,
+    );
     s.useRightHandedSystem = true;
     this.instrumentation = new SceneInstrumentation(s);
     s.clearColor = new Color4(0.065, 0.11, 0.145, 1);
@@ -395,6 +409,7 @@ export class GameScene {
   }
   setSnapshot(s: Snapshot) {
     this.snapshot = s;
+    this.snapshotReceived = this.time;
     this.selfId = s.self.id;
     for (const event of s.events)
       if (event.id > this.lastEvent) {
@@ -409,6 +424,7 @@ export class GameScene {
     this.camera.alpha += (direction * Math.PI) / 2;
   }
   quality(low: boolean) {
+    this.combatFx.low = low;
     this.engine.setHardwareScalingLevel(
       low ? Math.max(1, devicePixelRatio) : Math.max(1, devicePixelRatio / 1.5),
     );
@@ -564,8 +580,7 @@ export class GameScene {
       groups = instance.animationGroups;
       groups.forEach((g) => {
         g.stop();
-        g.enableBlending = true;
-        g.blendingSpeed = 0.18;
+        g.enableBlending = false;
       });
     } else this.proxy(a, modelRoot);
     for (const mesh of modelRoot.getChildMeshes()) {
@@ -590,22 +605,36 @@ export class GameScene {
       dead: false,
       model,
       ownsMaterials: !container,
-      actionUntil: 0,
       castStarted: -1,
+      castEvent: -1,
+      motion: null,
+      weights: new Map(),
+      movingUntil: 0,
+      hitAt: -100,
+      hitHeading: 0,
+      sampleFrame: null,
     };
   }
   private clip(v: Visual, name: string, speed = 1) {
-    if (v.clip === name) return;
-    v.clip = name;
-    for (const g of v.groups) g.stop();
     const match =
       v.groups.find((g) => g.name.toLowerCase().endsWith(name)) ??
       v.groups.find((g) => g.name.toLowerCase().includes(name));
-    if (match)
-      match.start(
-        name !== "attack" && name !== "death" && name !== "dodge",
-        speed,
-      );
+    if (!match) return;
+    if (v.clip !== name) {
+      const first = !v.clip;
+      v.clip = name;
+      match.stop();
+      match.start(["idle", "walk", "run"].includes(name), speed || 1);
+      const weight = first ? 1 : 0;
+      v.weights.set(match, weight);
+      match.setWeightForAllAnimatables(weight);
+    }
+    match.speedRatio = speed || 1;
+    // Pause before sampling: zero-speed playback otherwise re-evaluates frame zero.
+    if (speed === 0 && match.isPlaying) match.pause();
+    else if (speed !== 0 && !match.isPlaying && match.isStarted)
+      match.restart();
+    return match;
   }
   private update(dt: number) {
     this.time += dt;
@@ -675,6 +704,7 @@ export class GameScene {
             Math.floor((this.time - this.houndStudyStarted) / 3) % clips.length
           ],
         );
+        this.blend(this.houndStudy, dt);
       }
     }
     const present = new Set(snapshot.actors.map((a) => a.id));
@@ -705,7 +735,9 @@ export class GameScene {
         this.actors.set(a.id, v);
       }
       const goal = new Vector3(a.x, 0, a.z);
-      const moving = Vector3.Distance(v.root.position, goal) > 0.06;
+      if (Vector3.Distance(v.root.position, goal) > 0.035)
+        v.movingUntil = this.time + 0.12;
+      const moving = this.time < v.movingUntil;
       v.root.position = Vector3.Lerp(
         v.root.position,
         goal,
@@ -728,24 +760,88 @@ export class GameScene {
       v.meshRoot.rotation.z =
         a.life === "dead" && !v.groups.length ? -Math.PI / 2 : 0;
       v.meshRoot.position.y = a.life === "downed" ? -1 : 0;
-      if (a.life === "dead") this.clip(v, "death");
-      else if (a.dodging) this.clip(v, "dodge", 1.4);
-      else if (a.cast) {
-        if (a.cast.start !== v.castStarted) {
-          v.castStarted = a.cast.start;
-          v.actionUntil = this.time + 0.6;
-          v.clip = "";
+      v.sampleFrame = null;
+      const serverNow =
+        snapshot.now + Math.min(0.1, this.time - this.snapshotReceived);
+      let castEvent: CombatEvent | undefined;
+      for (let i = snapshot.events.length - 1; i >= 0; i--) {
+        const e = snapshot.events[i];
+        if (e.source === a.id && e.type === "cast" && e.id > v.castEvent) {
+          castEvent = e;
+          break;
         }
-        this.clip(v, "attack", 1.3);
-      } else if (
-        !moving &&
-        !a.stunned &&
-        v.clip === "attack" &&
-        this.time < v.actionUntil
-      ) {
-        // Let the committed strike follow through; movement and control effects interrupt it.
-      } else if (moving) this.clip(v, "run", 1);
+      }
+      if (castEvent || (a.cast && a.cast.start !== v.castStarted)) {
+        const key = (castEvent?.key ?? a.cast!.key) as AbilityKey;
+        const start = castEvent?.at ?? a.cast!.start;
+        const motion = v.model === "knight" ? KNIGHT_MOTION[key] : undefined;
+        const windup =
+          a.cast && a.cast.start === start
+            ? a.cast.end - a.cast.start
+            : a.kind === "wolf" || a.kind === "guard"
+              ? 0.8
+              : (KITS[a.guild].find((k) => k.key === key)?.windup ?? 0.3);
+        v.castStarted = start;
+        if (castEvent) v.castEvent = castEvent.id;
+        v.motion = {
+          clip: motion?.clip ?? "attack",
+          key,
+          start,
+          windup,
+          impact: motion?.impact ?? 0.35,
+          recovery: motion?.recovery ?? 0.32,
+        };
+        if (v.clip === v.motion.clip) v.clip = "";
+      }
+      const committed =
+        v.motion &&
+        snapshot.events.some(
+          (e) =>
+            e.source === a.id &&
+            e.type === "resolve" &&
+            e.key === v.motion!.key &&
+            e.at >= v.motion!.start,
+        );
+      if (
+        v.motion &&
+        (a.life !== "alive" ||
+          a.dodging ||
+          a.stunned ||
+          (moving && !a.cast) ||
+          (!a.cast &&
+            !committed &&
+            snapshot.now < v.motion.start + v.motion.windup) ||
+          serverNow > v.motion.start + v.motion.windup + v.motion.recovery)
+      )
+        v.motion = null;
+      if (a.life === "dead") {
+        v.motion = null;
+        this.clip(v, "death");
+      } else if (a.dodging) this.clip(v, "dodge", 1.6);
+      else if (v.motion) {
+        const m = v.motion,
+          group = this.clip(v, m.clip, 0);
+        if (group)
+          v.sampleFrame =
+            group.from +
+            (group.to - group.from) *
+              actionPhase(serverNow - m.start, m.windup, m.impact, m.recovery);
+      } else if (a.guarding && v.model === "knight") {
+        const group = this.clip(v, "guard", 0);
+        if (group) v.sampleFrame = group.to;
+      } else if (moving)
+        this.clip(
+          v,
+          a.returning && v.model === "wolf" ? "walk" : "run",
+          a.returning ? 0.8 : 1,
+        );
       else this.clip(v, "idle");
+      this.blend(v, dt);
+      const reaction = Math.max(0, 1 - (this.time - v.hitAt) / 0.18);
+      v.meshRoot.position.x =
+        Math.sin(v.hitHeading - v.root.rotation.y) * reaction * 0.055;
+      v.meshRoot.position.z =
+        Math.cos(v.hitHeading - v.root.rotation.y) * reaction * 0.055;
       if (!v.groups.length && a.life === "alive")
         v.meshRoot.position.y = moving
           ? Math.sin(this.time * 14) * 0.045
@@ -753,18 +849,26 @@ export class GameScene {
     }
     this.refreshTelegraphs(snapshot);
     this.refreshPersistentEffects(snapshot);
-    for (let i = this.effects.length - 1; i >= 0; i--) {
-      const e = this.effects[i];
-      if (this.time > e.until) {
-        e.mesh.dispose(false, true);
-        this.effects.splice(i, 1);
-        continue;
+    this.combatFx.update(dt, snapshot);
+  }
+  private blend(v: Visual, dt: number) {
+    for (const [group, weight] of v.weights) {
+      const desired = group.name.toLowerCase().endsWith(v.clip) ? 1 : 0;
+      const next = weight + (desired - weight) * Math.min(1, dt * 18);
+      if (!desired && next < 0.005) {
+        group.stop();
+        v.weights.delete(group);
+      } else {
+        group.setWeightForAllAnimatables(next);
+        v.weights.set(group, next);
+        if (group.isStarted && !group.isPlaying)
+          group.goToFrame(
+            desired && v.sampleFrame !== null
+              ? v.sampleFrame
+              : group.getRetainedCurrentFrame(),
+            true,
+          );
       }
-      const age = (this.time - e.start) / (e.until - e.start);
-      e.mesh.visibility = 1 - age;
-      if (e.mode === "ring") {
-        e.mesh.scaling.setAll(1 + age * 2);
-      } else if (e.mode === "spark") e.mesh.position.y += dt * 1.3;
     }
   }
   private disposeActor(v: Visual) {
@@ -827,14 +931,7 @@ export class GameScene {
       m.scaling.setAll(mine.armed ? 1 + Math.sin(this.time * 5) * 0.08 : 0.65);
     }
     for (const a of s.actors.filter((a) => a.healing && a.life === "alive")) {
-      if (a.guild === "knight") {
-        const field = show(
-          `rally-${a.id}`,
-          () => this.ring("rally field", 2.5, "#f3d78e"),
-          new Vector3(a.x, 0.065, a.z),
-        );
-        field.visibility = 0.65 + Math.sin(this.time * 3) * 0.2;
-      } else {
+      if (a.guild === "cyborg") {
         const drone = show(
           `drone-${a.id}`,
           () => {
@@ -863,96 +960,81 @@ export class GameScene {
       }
   }
   private refreshTelegraphs(s: Snapshot) {
-    const active = new Set(
-      s.actors.filter((a) => a.cast).map((a) => `cast-${a.id}`),
+    const attacks = s.actors.filter(
+      (a) => a.cast && ["basic", "1", "2"].includes(a.cast.key),
     );
+    const active = new Set(attacks.map((a) => `cast-${a.id}`));
     for (let i = this.eventMeshes.length - 1; i >= 0; i--)
       if (!active.has(this.eventMeshes[i].name)) {
         this.eventMeshes[i].dispose(false, true);
         this.eventMeshes.splice(i, 1);
       }
-    for (const a of s.actors) {
-      if (!a.cast || this.eventMeshes.some((m) => m.name === `cast-${a.id}`))
-        continue;
-      const aim = a.cast.aim,
-        dx = aim.x - a.x,
-        dz = aim.z - a.z,
-        len = Math.hypot(dx, dz) || 1;
-      const ranged =
-        a.guild === "cyborg" &&
-        a.kind === "player" &&
-        ["1", "basic"].includes(a.cast.key);
-      const warning = MeshBuilder.CreateGround(
-        `cast-${a.id}`,
-        { width: ranged ? 1 : 2.2, height: ranged ? Math.min(16, len) : 2.2 },
-        this.scene,
+    for (const a of attacks) {
+      const cast = a.cast!,
+        lane = a.kind === "player" && a.guild === "cyborg" && cast.key === "1";
+      let mesh = this.eventMeshes.find((m) => m.name === `cast-${a.id}`);
+      if (!mesh) {
+        mesh = lane
+          ? MeshBuilder.CreateGround(
+              `cast-${a.id}`,
+              { width: 1.5, height: 16 },
+              this.scene,
+            )
+          : this.ring(
+              `cast-${a.id}`,
+              0.53,
+              a.id === this.selfId ? "#e8c990" : "#e47a48",
+            );
+        if (lane)
+          mesh.material = this.material(
+            "pulse-lance-warning",
+            a.id === this.selfId ? "#7bc9d6" : "#e47a48",
+            1,
+          );
+        const mat = mesh.material as StandardMaterial;
+        mat.alpha = 0.35;
+        mat.disableLighting = true;
+        mesh.isPickable = false;
+        this.eventMeshes.push(mesh);
+      }
+      const target = s.actors.find((t) => t.id === cast.target);
+      if (lane) {
+        const heading = Math.atan2(cast.aim.x - a.x, cast.aim.z - a.z);
+        mesh.position.set(
+          a.x + Math.sin(heading) * 8,
+          0.055,
+          a.z + Math.cos(heading) * 8,
+        );
+        mesh.rotation.y = heading;
+      } else {
+        const pos = target
+          ? this.actors.get(target.id)?.root.position
+          : undefined;
+        mesh.position.set(pos?.x ?? cast.aim.x, 0.065, pos?.z ?? cast.aim.z);
+      }
+      const progress = Math.max(
+        0,
+        Math.min(
+          1,
+          (s.now +
+            Math.min(0.1, this.time - this.snapshotReceived) -
+            cast.start) /
+            Math.max(0.01, cast.end - cast.start),
+        ),
       );
-      warning.position.set(
-        a.x + (ranged ? dx / 2 : Math.sin(a.heading)),
-        0.065,
-        a.z + (ranged ? dz / 2 : Math.cos(a.heading)),
-      );
-      warning.rotation.y = -Math.atan2(dx, dz);
-      const mat = this.material(
-        "warning",
-        a.id === this.selfId ? "#6bccd4" : "#d8673d",
-        1,
-      );
-      mat.alpha = 0.32;
-      mat.disableLighting = true;
-      warning.material = mat;
-      warning.isPickable = false;
-      this.eventMeshes.push(warning);
+      mesh.visibility = 0.35 + progress * 0.55;
     }
   }
   private showEvent(e: CombatEvent) {
-    if (
-      e.type === "hit" ||
-      e.type === "heal" ||
-      e.type === "dodge" ||
-      e.type === "loot"
-    ) {
-      const color =
-        e.type === "heal"
-          ? "#92ddbb"
-          : e.type === "dodge"
-            ? "#9fceda"
-            : e.key === "1"
-              ? "#e4b362"
-              : "#d1d4c4";
-      const mesh = this.ring(
-        `fx-${e.id}`,
-        e.type === "dodge" ? 0.4 : 0.2,
-        color,
-      );
-      mesh.position.set(e.x, 0.1, e.z);
-      this.effects.push({
-        mesh,
-        start: this.time,
-        until: this.time + 0.5,
-        mode: "ring",
-      });
-      if (e.type === "hit")
-        for (let i = 0; i < 6; i++) {
-          const spark = MeshBuilder.CreateSphere(
-            "spark",
-            { diameter: 0.05, segments: 3 },
-            this.scene,
-          );
-          spark.material = this.material("spark", color, 2);
-          spark.position.set(
-            e.x + (Math.random() - 0.5) * 0.65,
-            0.7 + Math.random() * 0.5,
-            e.z + (Math.random() - 0.5) * 0.65,
-          );
-          spark.isPickable = false;
-          this.effects.push({
-            mesh: spark,
-            start: this.time,
-            until: this.time + 0.3,
-            mode: "spark",
-          });
-        }
+    if (!this.snapshot) return;
+    this.combatFx.event(e, this.snapshot);
+    if (e.type === "hit") {
+      const target = this.actors.get(e.target),
+        source = this.snapshot.actors.find((a) => a.id === e.source);
+      if (target && source) {
+        target.hitAt = this.time;
+        target.hitHeading = Math.atan2(e.x - source.x, e.z - source.z);
+      }
     }
   }
   private makeBoundaries() {
@@ -1052,7 +1134,13 @@ export class GameScene {
     return {
       x: (p.x * this.canvas.clientWidth) / this.engine.getRenderWidth(),
       y: (p.y * this.canvas.clientHeight) / this.engine.getRenderHeight(),
-      visible: p.z >= 0 && p.z <= 1,
+      visible:
+        p.z >= 0 &&
+        p.z <= 1 &&
+        p.x >= 0 &&
+        p.x <= this.engine.getRenderWidth() &&
+        p.y >= 0 &&
+        p.y <= this.engine.getRenderHeight(),
     };
   }
   direction(x: number, z: number): Vec2 {
@@ -1107,6 +1195,7 @@ export class GameScene {
       assetReadyAfterNavigationMs: this.assetReady,
       renderer: this.engine.description,
       assets: [...this.loadingReport],
+      combatEffects: this.combatFx.metrics(),
       camera: {
         alpha: this.camera.alpha,
         beta: this.camera.beta,
@@ -1158,7 +1247,11 @@ export class GameScene {
       };
       const v = this.makeActor(actor);
       v.ring.isVisible = false;
-      this.clip(v, i % 3 ? "run" : "attack", 0.9 + (i % 3) * 0.1);
+      this.clip(
+        v,
+        i % 3 ? "run" : v.model === "knight" ? "cut" : "attack",
+        0.9 + (i % 3) * 0.1,
+      );
       this.stressActors.push(v);
     }
     this.summonSource = MeshBuilder.CreatePolyhedron(
@@ -1258,6 +1351,7 @@ export class GameScene {
   dispose() {
     this.stopResize();
     this.engine.stopRenderLoop();
+    this.combatFx.dispose();
     this.scene.dispose();
     this.engine.dispose();
   }

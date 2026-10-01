@@ -1,0 +1,15 @@
+{
+  "model": "knight",
+  "triangles": 24089,
+  "bones": 24,
+  "animations": [
+    "idle",
+    "run",
+    "attack",
+    "dodge",
+    "death"
+  ],
+  "bytes": 7602200,
+  "root_motion": "horizontal travel removed; server owns movement",
+  "equipment": "Original Blender sword and shield"
+}

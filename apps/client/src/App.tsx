@@ -17,6 +17,7 @@ import { Connection } from "./network";
 import { GameScene } from "./scene";
 import { Soundscape } from "./audio";
 import { FieldLab } from "./FieldLab";
+import { canDisplayTarget } from "./combat-presentation";
 import "./style.css";
 
 const clock = (seconds: number) =>
@@ -94,6 +95,10 @@ export default function App() {
     [help, setHelp] = useState(false),
     [corpse, setCorpse] = useState<string | null>(null);
   const select = (id: string) => {
+    const s = snap.current,
+      actor = s?.actors.find((a) => a.id === id),
+      observer = s?.actors.find((a) => a.id === s.self.id);
+    if (id && actor && observer && !canDisplayTarget(actor, observer)) return;
     targetRef.current = id;
     setSelected(id);
     scene.current?.select(id);
@@ -124,6 +129,16 @@ export default function App() {
     renderer.onFrame = () => {
       const s = snap.current;
       if (!s) return;
+      const observer = s.actors.find((a) => a.id === s.self.id);
+      const selectedActor = s.actors.find((a) => a.id === targetRef.current);
+      if (
+        targetRef.current &&
+        observer &&
+        (!selectedActor ||
+          !canDisplayTarget(selectedActor, observer) ||
+          !renderer.project(selectedActor).visible)
+      )
+        select("");
       for (const el of document.querySelectorAll<HTMLElement>(
         "[data-world-id]",
       )) {
@@ -159,7 +174,7 @@ export default function App() {
       snap.current = s;
       setSnapshot(s);
       renderer.setSnapshot(s);
-      sound.current.events(s.events);
+      sound.current.events(s.events, s.actors, s.self.id);
       const p = s.actors.find((a) => a.id === s.self.id);
       sound.current.zone(Boolean(p && !p.safe));
     };
@@ -229,7 +244,9 @@ export default function App() {
         const list = s.actors
           .filter(
             (a) =>
-              a.kind === "wolf" && a.life !== "dead" && distance(p, a) < 22,
+              a.kind === "wolf" &&
+              canDisplayTarget(a, p) &&
+              renderer.project(a).visible,
           )
           .sort((a, b) => distance(p, a) - distance(p, b));
         const index = list.findIndex((a) => a.id === targetRef.current);
@@ -466,7 +483,7 @@ export default function App() {
                 </span>
               ))}
             {snapshot.actors
-              .filter((a) => a.life !== "dead" && (!me || distance(me, a) < 24))
+              .filter((a) => !me || canDisplayTarget(a, me))
               .map((a) => (
                 <button
                   key={a.id}
@@ -568,54 +585,61 @@ export default function App() {
               {me?.z && me.z > 0 ? "The Thirteenth Bell" : "The Briar Gate"}
             </span>
           </div>
-          {target && target.id !== me?.id && (
-            <section className={`target-frame ${target.red > 0 ? "red" : ""}`}>
-              <div>
-                <span>{target.name}</span>
-                <small>
-                  {target.kind === "player"
-                    ? target.red > 0
-                      ? "OUTLAW PLAYER"
-                      : "PLAYER"
-                    : target.kind === "wolf"
-                      ? "CREATURE"
-                      : "RESIDENT"}
-                </small>
-              </div>
-              <div className="meter health">
-                <i style={{ width: `${(target.hp / target.maxHp) * 100}%` }} />
-                <strong>
-                  {Math.ceil(target.hp)} / {target.maxHp}
-                </strong>
-              </div>
-              {target.cast && (
-                <div className="cast-meter">
-                  <i
-                    style={{
-                      width: `${Math.min(100, ((snapshot.now - target.cast.start) / (target.cast.end - target.cast.start)) * 100)}%`,
-                    }}
-                  />
-                  <span>{target.cast.name}</span>
+          {target &&
+            me &&
+            canDisplayTarget(target, me) &&
+            target.id !== me.id && (
+              <section
+                className={`target-frame ${target.red > 0 ? "red" : ""}`}
+              >
+                <div>
+                  <span>{target.name}</span>
+                  <small>
+                    {target.kind === "player"
+                      ? target.red > 0
+                        ? "OUTLAW PLAYER"
+                        : "PLAYER"
+                      : target.kind === "wolf"
+                        ? "CREATURE"
+                        : "RESIDENT"}
+                  </small>
                 </div>
-              )}
-              {target.kind === "player" &&
-                target.life === "downed" &&
-                me &&
-                distance(me, target) < 3 && (
-                  <button
-                    className="revive"
-                    onClick={() =>
-                      connection.current.send({
-                        type: "interact",
-                        target: target.id,
-                      })
-                    }
-                  >
-                    E · Help them up (4s)
-                  </button>
+                <div className="meter health">
+                  <i
+                    style={{ width: `${(target.hp / target.maxHp) * 100}%` }}
+                  />
+                  <strong>
+                    {Math.ceil(target.hp)} / {target.maxHp}
+                  </strong>
+                </div>
+                {target.cast && (
+                  <div className="cast-meter">
+                    <i
+                      style={{
+                        width: `${Math.min(100, ((snapshot.now - target.cast.start) / (target.cast.end - target.cast.start)) * 100)}%`,
+                      }}
+                    />
+                    <span>{target.cast.name}</span>
+                  </div>
                 )}
-            </section>
-          )}
+                {target.kind === "player" &&
+                  target.life === "downed" &&
+                  me &&
+                  distance(me, target) < 3 && (
+                    <button
+                      className="revive"
+                      onClick={() =>
+                        connection.current.send({
+                          type: "interact",
+                          target: target.id,
+                        })
+                      }
+                    >
+                      E · Help them up (4s)
+                    </button>
+                  )}
+              </section>
+            )}
           <aside className="right-rail">
             <div className="minimap-frame">
               <span className="north">N</span>
@@ -717,15 +741,15 @@ export default function App() {
                 {snapshot.self.quest === "unheard"
                   ? "Speak to Mara by the north gate."
                   : snapshot.self.quest === "accepted"
-                    ? "Cross the Briar bridge and examine the weathered epitaph."
+                    ? "Cross the wooden Briar bridge. Turn left at the ruined arch and copy the bridge keeper’s memorial."
                     : snapshot.self.quest === "inspected"
-                      ? "Return the copied verse to Mara in Highcross."
-                      : "The first verse is yours. Hollow Abbey holds the next."}
+                      ? "Bring Elian Voss’s name and the copied inscription back to Mara at the north gate."
+                      : "Mara matched your evidence to her father’s ledger. The Watch will investigate the bridge at dusk. Your reward is in your inventory."}
               </p>
               <small>
                 {snapshot.self.quest === "complete"
-                  ? "FIRST CLUE RECOVERED"
-                  : "JOURNEY 01 · A STOLEN HOUR"}
+                  ? "EXPEDITION COMPLETE"
+                  : "JOURNEY 01 · THE BRIDGE KEEPER"}
               </small>
             </section>
           </aside>
