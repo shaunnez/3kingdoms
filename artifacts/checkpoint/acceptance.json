@@ -290,6 +290,17 @@
       ],
       "result": "Hand-fitted equipment; thirteen action/locomotion clips; confirmed-hit VFX/audio; retreat and visibility cleanup; coherent memorial quest, observed final return reward and repeated-reward rejection. All 37 local checks pass. Post-combat cosmetic counts return to zero.",
       "limit": "Developer rehearsal, not independent fun testing. Acting and reference-level environment art still require work; no new long-memory or lower-end hardware qualification."
+    },
+    {
+      "id": "renderer-after-combat-repair",
+      "status": "completed-diagnostic-not-qualified",
+      "source_fingerprint": "03698a82f0c180cd1777c21df1c83bf04174b40acca79365af772d809ad8fc27",
+      "evidence": [
+        "artifacts/checkpoint/captures/2026-10-01T05-09-00-795Z-2a68f0ae.json",
+        "artifacts/checkpoint/combat-repair.json"
+      ],
+      "result": "601.06 seconds, zero hidden samples, median 72.15fps, p95 20.50ms, p99 28.80ms, maximum stall 976.70ms; p95 203 draws and maximum 1,468,777 active triangles.",
+      "limit": "Viewport was 1920x1080 at benchmark start but the final report records 1745x2188 at pixel ratio 1.1. Resize timing and cause were not recorded. Mixed viewport and concurrent host work prevent a controlled 1080p comparison; p95 20.5ms also exceeds the 20ms reference. Not a passed hardware, full-combat or eight-signature qualification."
     }
   ],
   "remaining_game_scope": [

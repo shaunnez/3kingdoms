@@ -95,6 +95,8 @@ Retreating hounds turn toward home and finish that return before reacquiring. Re
 
 All 37 automated checks pass, including movement/evade cancellation, retreat state and facing, target eligibility, commit/block event reporting, existing PvP law/loot and real WebSocket reconnect/ownership behavior. Production build and formatting pass; six GLBs have zero errors and eleven warnings. No new provider job or paid generation was used. Full environment fidelity, human fun, the twelve complete guilds and the previous memory-budget miss remain open.
 
+The [new renderer trace](../artifacts/checkpoint/captures/2026-10-01T05-09-00-795Z-2a68f0ae.json) completed 601.06 seconds with zero hidden samples: 72.15fps median, p95 20.50ms, p99 28.80ms, maximum 976.70ms, 203 p95 draws and 1,468,777 maximum active triangles. **Diagnostic only:** its initial viewport was 1920×1080, but its final report records 1745×2188 at 1.1 pixel ratio. The change was not timestamped. This does not qualify a fixed-resolution comparison or resolve the 20ms p95 target. Retain the stall and the viewport discrepancy; do not relabel the older passing trace as new evidence.
+
 ## Remaining game work
 
 Neither practice kit implements its full exploration utility, mastery, trials or equipment variants. Healing field/drone presentation currently resolves as self support; party fields and destroyable drone AI remain. Party membership, chat, banking, trade, crafting, authentic account login, PostgreSQL transactions, room transfer, complete guild resource mechanics and the other ten playable guilds are future stages. Cooldown/CC balance and the new Knight recovery motion need human playtesting.
@@ -111,7 +113,7 @@ See the [Higgsfield receipts](../artifacts/checkpoint/higgsfield-receipts.json),
 
 ## Delivery state
 
-Local source, local checks, GitHub publication and ChatGPT Sites publication are independent outcomes. The final landmark collision repair is pushed to `main` as `b49c48f92d700c9347e988be0f1a03cbc7ba7b66`; [CI 36736079686](https://github.com/shaunnez/3kingdoms/actions/runs/36736079686) passed on that exact source. The final memory evidence and journal publication are recorded separately. The journal retains its owner-private audience. Its deployed source version is recorded in [the repository publication receipt](https://github.com/shaunnez/3kingdoms/blob/main/devlog/site.json). A local game URL is not an internet deployment of the game.
+Local source, local checks, GitHub publication and ChatGPT Sites publication are independent outcomes. The combat and quest repair is pushed to `main` as `16d58c5df921d54be6809644070b317c7edc842d`; [CI 36818046116](https://github.com/shaunnez/3kingdoms/actions/runs/36818046116) passed on that exact game source. The final memory evidence and journal publication are recorded separately. The journal retains its owner-private audience. Its deployed source version is recorded in [the repository publication receipt](https://github.com/shaunnez/3kingdoms/blob/main/devlog/site.json). A local game URL is not an internet deployment of the game.
 
 The next production decision follows the completed browser and rigging evidence. Any failed quality or correctness category gets a concrete repair and rerun before expanding the asset batch. Human playtesting remains necessary to decide whether the combat and equipment risk are enjoyable.
 

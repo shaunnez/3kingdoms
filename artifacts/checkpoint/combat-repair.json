@@ -76,5 +76,38 @@
     "No new 30-minute memory qualification; prior heap-budget miss remains unresolved.",
     "All twelve full guilds remain required; two practice kits are the implemented slice."
   ],
-  "next": "Environment and HUD art pass on this expedition, followed by observed human play and tuning before expanding bulk asset production."
+  "next": "Environment and HUD art pass on this expedition, followed by observed human play and tuning before expanding bulk asset production.",
+  "source_commit": "16d58c5df921d54be6809644070b317c7edc842d",
+  "github_ci": {
+    "run": 36818046116,
+    "conclusion": "success",
+    "url": "https://github.com/shaunnez/3kingdoms/actions/runs/36818046116"
+  },
+  "renderer_trace": {
+    "status": "completed-diagnostic-not-qualified",
+    "evidence": "artifacts/checkpoint/captures/2026-10-01T05-09-00-795Z-2a68f0ae.json",
+    "duration_seconds": 601.0613000000119,
+    "summary": {
+      "hiddenSamples": 0,
+      "fpsMedian": 72.15007214800359,
+      "frameMeasurement": "Uncapped animation-frame intervals collected while loaded and visible; simulation dt is independently clamped.",
+      "frameCount": 42052,
+      "frameP95Ms": 20.5,
+      "frameP99Ms": 28.80000001192093,
+      "largestFrameMs": 976.6999999880791,
+      "drawsP95": 203,
+      "activeTrianglesMax": 1468777
+    },
+    "reported_final_viewport": {
+      "width": 1745,
+      "height": 2188,
+      "pixelRatio": 1.100000023841858
+    },
+    "initial_viewport": {
+      "width": 1920,
+      "height": 1080,
+      "pixelRatio": 1
+    },
+    "limit": "Viewport was 1920x1080 at benchmark start but the final report records 1745x2188 at pixel ratio 1.1. Resize timing and cause were not recorded. Mixed viewport and concurrent host work prevent a controlled 1080p comparison; p95 20.5ms also exceeds the 20ms reference. Not a passed hardware, full-combat or eight-signature qualification."
+  }
 }

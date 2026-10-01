@@ -76,3 +76,7 @@ Milestones 001–006 are published to the existing owner-private [THREEFOLD jour
 ## Combat and quest repair — 1 October
 
 Runtime source `03698a82f0c180cd1777c21df1c83bf04174b40acca79365af772d809ad8fc27` adds held-equipment correction, thirteen Knight clips, action-specific effects and sound, explicit returning-creature state and a coherent local quest conclusion. The [repair receipt](../artifacts/checkpoint/combat-repair.json) preserves build associations and rejected diagnostic evidence. All 37 local checks, typing, formatting and production build pass. Six GLBs have zero errors and eleven warnings. The final browser expedition and post-recording quest reward are captured separately. This does not relabel older multi-client PvP or memory evidence as a fresh result, and reference art acceptance remains open.
+
+Game source `16d58c5df921d54be6809644070b317c7edc842d` is pushed to `main`; [CI 36818046116](https://github.com/shaunnez/3kingdoms/actions/runs/36818046116) passed every required step. Later evidence and journal receipt commits do not change the runtime fingerprint.
+
+Milestone 007, “Giving the Knight weight,” is published to the existing owner-private journal, including the actual browser recording and subsequent quest reward frame. The native Sites deployment succeeded for source `b93f8eeedf7e44474c0bdadcd90383ae01a4f773`; exact version, deployment and archive receipts are in [devlog/site.json](../devlog/site.json). This is journal publication; the playable game remains a local preview.
