@@ -2,8 +2,8 @@
   "source": "tools/build_environment.py",
   "seed": 1847,
   "blender": "5.2.1 LTS",
-  "objects": 65,
-  "vertices_before_modifiers": 307433,
-  "bytes": 52478244,
+  "objects": 189,
+  "vertices_before_modifiers": 216729,
+  "bytes": 59922660,
   "note": "Blender assembly: generated merchant house plus original terrain, props and foliage. Runtime lighting, water and VFX are added by Babylon."
 }

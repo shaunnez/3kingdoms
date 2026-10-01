@@ -1,7 +1,7 @@
 import type { Vec2 } from "../contracts/game";
 export const MAP = { minX: -20, maxX: 20, minZ: -40, maxZ: 60, safeZ: 0 };
 export const REFUGE = { x: 14, z: 45, radius: 4 };
-const ASTROLABE = { x: -5, z: -28, radius: 2.1 };
+const ASTROLABE = { x: 0, z: -10, radius: 2.1 };
 export const OBSTACLES = [
   // Match the four scaled 6.5m house footprints in build_environment.py.
   { x: -13, z: -24, w: 6.825, d: 6.825 },
@@ -13,6 +13,8 @@ export const OBSTACLES = [
   { x: -11, z: 5, w: 10, d: 1.8 },
   { x: 9, z: 5, w: 7, d: 1.8 },
   { x: -13, z: 31, w: 6, d: 6 },
+  { x: -6.2, z: 34.8, w: 0.65, d: 0.68 },
+  { x: -1.8, z: 34.8, w: 0.65, d: 0.68 },
 ];
 export const NPCS = {
   mara: { x: -5, z: -9 },

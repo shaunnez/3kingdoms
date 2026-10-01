@@ -1,0 +1,541 @@
+/Users/shaun/new-game/tools/build_environment.py:455: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat=bpy.data.materials.new(name);mat.diffuse_color=(*color,1);mat.use_nodes=True
+Info: Saved as "briar-gate.blend"
+INFO Draco is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_draco_bridge.dylib
+INFO MeshOptimizer is available, use library at /Applications/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_meshopt_bridge.dylib
+19:32:15 | INFO: Starting glTF 2.0 export
+19:32:15 | INFO: Extracting primitive: Mesh_0
+19:32:15 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+19:32:15 | INFO: Primitives created: 1
+19:32:15 | INFO: Extracting primitive: occluder-awning.cream
+19:32:15 | INFO: Primitives created: 1
+19:32:15 | INFO: Extracting primitive: occluder-awning.teal
+19:32:15 | INFO: Primitives created: 1
+19:32:15 | INFO: Extracting primitive: occluder-gate.brass
+19:32:15 | INFO: Primitives created: 1
+19:32:15 | INFO: Extracting primitive: occluder-gate.stone
+19:32:15 | INFO: Primitives created: 1
+19:32:15 | INFO: Extracting primitive: occluder-gate.stone-light
+19:32:15 | INFO: Primitives created: 1
+19:32:15 | INFO: Extracting primitive: occluder-tower.5.6.5.brass
+19:32:15 | WARNING: occluder-tower.5.6.5.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:15 | INFO: Primitives created: 1
+19:32:15 | INFO: Extracting primitive: occluder-tower.5.6.5.foliage
+19:32:15 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+19:32:15 | INFO: Primitives created: 1
+19:32:15 | INFO: Extracting primitive: occluder-tower.5.6.5.glow
+19:32:15 | INFO: Primitives created: 1
+19:32:15 | INFO: Extracting primitive: occluder-tower.5.6.5.iron
+19:32:15 | INFO: Primitives created: 1
+19:32:15 | INFO: Extracting primitive: occluder-tower.5.6.5.masonry
+19:32:15 | INFO: Primitives created: 1
+19:32:15 | INFO: Extracting primitive: occluder-tower.5.6.5.stone
+19:32:15 | INFO: Primitives created: 1
+19:32:15 | INFO: Extracting primitive: occluder-tower.5.6.5.stone-light
+19:32:15 | INFO: Primitives created: 1
+19:32:15 | INFO: Extracting primitive: occluder-tower.5.6.5.teal
+19:32:15 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tower.-5.6.5.brass
+19:32:16 | WARNING: occluder-tower.-5.6.5.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tower.-5.6.5.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tower.-5.6.5.glow
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tower.-5.6.5.iron
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tower.-5.6.5.masonry
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tower.-5.6.5.stone
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tower.-5.6.5.stone-light
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tower.-5.6.5.teal
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.8.02.35.75.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.8.02.35.75.timber
+19:32:16 | WARNING: occluder-tree.8.02.35.75.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.10.43.26.18.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.10.43.26.18.timber
+19:32:16 | WARNING: occluder-tree.10.43.26.18.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.10.91.14.21.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.10.91.14.21.timber
+19:32:16 | WARNING: occluder-tree.10.91.14.21.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.11.53.7.32.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.11.53.7.32.timber
+19:32:16 | WARNING: occluder-tree.11.53.7.32.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.12.07.39.30.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.12.07.39.30.timber
+19:32:16 | WARNING: occluder-tree.12.07.39.30.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.12.32.56.29.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.12.32.56.29.timber
+19:32:16 | WARNING: occluder-tree.12.32.56.29.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.14.87.13.70.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.14.87.13.70.timber
+19:32:16 | WARNING: occluder-tree.14.87.13.70.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.15.29.37.99.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.15.29.37.99.timber
+19:32:16 | WARNING: occluder-tree.15.29.37.99.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.15.43.26.54.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.15.43.26.54.timber
+19:32:16 | WARNING: occluder-tree.15.43.26.54.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.15.91.9.06.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.15.91.9.06.timber
+19:32:16 | WARNING: occluder-tree.15.91.9.06.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.16.03.25.20.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.16.03.25.20.timber
+19:32:16 | WARNING: occluder-tree.16.03.25.20.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.16.25.28.82.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.16.25.28.82.timber
+19:32:16 | WARNING: occluder-tree.16.25.28.82.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.16.39.51.33.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.16.39.51.33.timber
+19:32:16 | WARNING: occluder-tree.16.39.51.33.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.16.86.26.92.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.16.86.26.92.timber
+19:32:16 | WARNING: occluder-tree.16.86.26.92.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.17.35.39.42.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.17.35.39.42.timber
+19:32:16 | WARNING: occluder-tree.17.35.39.42.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.17.42.51.88.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.17.42.51.88.timber
+19:32:16 | WARNING: occluder-tree.17.42.51.88.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.17.61.9.43.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.17.61.9.43.timber
+19:32:16 | WARNING: occluder-tree.17.61.9.43.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.18.93.53.52.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.18.93.53.52.timber
+19:32:16 | WARNING: occluder-tree.18.93.53.52.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.18.97.30.72.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.18.97.30.72.timber
+19:32:16 | WARNING: occluder-tree.18.97.30.72.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-8.36.14.48.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-8.36.14.48.timber
+19:32:16 | WARNING: occluder-tree.-8.36.14.48.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-8.84.41.74.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-8.84.41.74.timber
+19:32:16 | WARNING: occluder-tree.-8.84.41.74.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-8.96.40.97.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-8.96.40.97.timber
+19:32:16 | WARNING: occluder-tree.-8.96.40.97.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.04.42.91.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.04.42.91.timber
+19:32:16 | WARNING: occluder-tree.-9.04.42.91.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.37.50.43.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.37.50.43.timber
+19:32:16 | WARNING: occluder-tree.-9.37.50.43.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.39.47.68.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.39.47.68.timber
+19:32:16 | WARNING: occluder-tree.-9.39.47.68.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.39.52.15.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.39.52.15.timber
+19:32:16 | WARNING: occluder-tree.-9.39.52.15.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.45.7.84.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.45.7.84.timber
+19:32:16 | WARNING: occluder-tree.-9.45.7.84.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.82.42.89.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.82.42.89.timber
+19:32:16 | WARNING: occluder-tree.-9.82.42.89.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.87.50.95.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.87.50.95.timber
+19:32:16 | WARNING: occluder-tree.-9.87.50.95.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.99.10.74.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-9.99.10.74.timber
+19:32:16 | WARNING: occluder-tree.-9.99.10.74.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-10.10.25.75.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-10.10.25.75.timber
+19:32:16 | WARNING: occluder-tree.-10.10.25.75.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-10.54.10.89.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-10.54.10.89.timber
+19:32:16 | WARNING: occluder-tree.-10.54.10.89.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-10.55.56.17.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-10.55.56.17.timber
+19:32:16 | WARNING: occluder-tree.-10.55.56.17.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-11.72.7.94.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-11.72.7.94.timber
+19:32:16 | WARNING: occluder-tree.-11.72.7.94.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-12.25.46.86.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-12.25.46.86.timber
+19:32:16 | WARNING: occluder-tree.-12.25.46.86.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-12.28.53.11.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-12.28.53.11.timber
+19:32:16 | WARNING: occluder-tree.-12.28.53.11.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-12.76.47.26.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-12.76.47.26.timber
+19:32:16 | WARNING: occluder-tree.-12.76.47.26.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-13.00.49.19.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-13.00.49.19.timber
+19:32:16 | WARNING: occluder-tree.-13.00.49.19.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-13.14.44.27.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-13.14.44.27.timber
+19:32:16 | WARNING: occluder-tree.-13.14.44.27.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-13.16.50.63.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-13.16.50.63.timber
+19:32:16 | WARNING: occluder-tree.-13.16.50.63.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-13.22.11.20.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-13.22.11.20.timber
+19:32:16 | WARNING: occluder-tree.-13.22.11.20.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-13.87.55.91.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-13.87.55.91.timber
+19:32:16 | WARNING: occluder-tree.-13.87.55.91.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-14.88.7.92.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-14.88.7.92.timber
+19:32:16 | WARNING: occluder-tree.-14.88.7.92.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-15.29.46.13.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-15.29.46.13.timber
+19:32:16 | WARNING: occluder-tree.-15.29.46.13.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-15.51.8.04.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-15.51.8.04.timber
+19:32:16 | WARNING: occluder-tree.-15.51.8.04.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-15.95.55.39.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-15.95.55.39.timber
+19:32:16 | WARNING: occluder-tree.-15.95.55.39.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-16.50.58.16.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-16.50.58.16.timber
+19:32:16 | WARNING: occluder-tree.-16.50.58.16.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-16.71.56.39.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-16.71.56.39.timber
+19:32:16 | WARNING: occluder-tree.-16.71.56.39.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-16.86.10.48.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-16.86.10.48.timber
+19:32:16 | WARNING: occluder-tree.-16.86.10.48.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-17.16.8.98.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: occluder-tree.-17.16.8.98.timber
+19:32:16 | WARNING: occluder-tree.-17.16.8.98.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.brass
+19:32:16 | WARNING: sector.0.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.earth
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.glow
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.iron
+19:32:16 | WARNING: sector.0.iron: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.leaf
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.leaf-dark
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.masonry
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.mud
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.paving
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.stone
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.stone-dark
+19:32:16 | WARNING: sector.0.stone-dark: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.stone-light
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.timber
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.0.wood
+19:32:16 | WARNING: sector.0.wood: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.brass
+19:32:16 | WARNING: sector.1.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.copper
+19:32:16 | WARNING: sector.1.copper: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.glow
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.iron
+19:32:16 | WARNING: sector.1.iron: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.leaf
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.leaf-dark
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.masonry
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.mud
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.paving
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.stone
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.stone-dark
+19:32:16 | WARNING: sector.1.stone-dark: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.stone-light
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.timber
+19:32:16 | WARNING: sector.1.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.waterbed
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.1.wood
+19:32:16 | WARNING: sector.1.wood: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.2.brass
+19:32:16 | WARNING: sector.2.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.2.foliage
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.2.glow
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.2.iron
+19:32:16 | WARNING: sector.2.iron: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.2.leaf
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.2.leaf-dark
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.2.mud
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.2.stone
+19:32:16 | WARNING: sector.2.stone: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.2.stone-dark
+19:32:16 | WARNING: sector.2.stone-dark: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.2.stone-light
+19:32:16 | WARNING: sector.2.stone-light: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.brass
+19:32:16 | WARNING: sector.-1.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.copper
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.flower
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.glow
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.iron
+19:32:16 | WARNING: sector.-1.iron: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.leaf-gold
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.masonry
+19:32:16 | WARNING: sector.-1.masonry: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.paving
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.slate
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.stone
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.stone-dark
+19:32:16 | WARNING: sector.-1.stone-dark: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.stone-light
+19:32:16 | WARNING: sector.-1.stone-light: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.timber
+19:32:16 | WARNING: sector.-1.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-1.wood
+19:32:16 | WARNING: sector.-1.wood: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-2.brass
+19:32:16 | WARNING: sector.-2.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-2.glow
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-2.iron
+19:32:16 | WARNING: sector.-2.iron: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-2.paving
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-2.stone
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-2.stone-dark
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-2.timber
+19:32:16 | INFO: Primitives created: 1
+19:32:16 | INFO: Extracting primitive: sector.-2.wood
+19:32:16 | WARNING: sector.-2.wood: Could not calculate tangents. Please try to triangulate the mesh first.
+19:32:16 | INFO: Primitives created: 1
+19:32:17 | INFO: Finished glTF 2.0 export in 1.6883442401885986 s
+
+Warning: occluder-tower.5.6.5.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tower.-5.6.5.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.8.02.35.75.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.10.43.26.18.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.10.91.14.21.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.11.53.7.32.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.12.07.39.30.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.12.32.56.29.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.14.87.13.70.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.15.29.37.99.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.15.43.26.54.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.15.91.9.06.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.16.03.25.20.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.16.25.28.82.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.16.39.51.33.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.16.86.26.92.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.17.35.39.42.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.17.42.51.88.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.17.61.9.43.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.18.93.53.52.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.18.97.30.72.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-8.36.14.48.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-8.84.41.74.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-8.96.40.97.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-9.04.42.91.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-9.37.50.43.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-9.39.47.68.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-9.39.52.15.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-9.45.7.84.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-9.82.42.89.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-9.87.50.95.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-9.99.10.74.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-10.10.25.75.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-10.54.10.89.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-10.55.56.17.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-11.72.7.94.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-12.25.46.86.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-12.28.53.11.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-12.76.47.26.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-13.00.49.19.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-13.14.44.27.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-13.16.50.63.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-13.22.11.20.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-13.87.55.91.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-14.88.7.92.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-15.29.46.13.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-15.51.8.04.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-15.95.55.39.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-16.50.58.16.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-16.71.56.39.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-16.86.10.48.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: occluder-tree.-17.16.8.98.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.0.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.0.iron: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.0.stone-dark: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.0.wood: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.1.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.1.copper: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.1.iron: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.1.stone-dark: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.1.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.1.wood: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.2.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.2.iron: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.2.stone: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.2.stone-dark: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.2.stone-light: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.-1.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.-1.iron: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.-1.masonry: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.-1.stone-dark: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.-1.stone-light: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.-1.timber: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.-1.wood: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.-2.brass: Could not calculate tangents. Please try to triangulate the mesh first.
+/Users/shaun/new-game/tools/build_environment.py:512: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes=True;scene.world.node_tree.nodes['Background'].inputs[0].default_value=(.24,.30,.38,1)
+00:12.918  render           | Saved: '/Users/shaun/new-game/assets/source/private/briar-map.png'
+Warning: sector.-2.iron: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: sector.-2.wood: Could not calculate tangents. Please try to triangulate the mesh first.
+{"source": "tools/build_environment.py", "seed": 1847, "blender": "5.2.1 LTS", "objects": 189, "vertices_before_modifiers": 216729, "bytes": 54936528, "note": "Blender assembly: generated merchant house plus original terrain, props and foliage. Runtime lighting, water and VFX are added by Babylon."}
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 01:35:57)
+
+Blender quit

@@ -30,6 +30,19 @@ export async function benchmark(
   const duration = mode === "stress" ? 600 : 1800,
     started = performance.now(),
     samples: Sample[] = [];
+  const viewport = () => ({
+    width: innerWidth,
+    height: innerHeight,
+    pixelRatio: devicePixelRatio,
+  });
+  const initialViewport = viewport();
+  let previousViewport = JSON.stringify(initialViewport);
+  const viewportChanges: {
+    elapsed: number;
+    width: number;
+    height: number;
+    pixelRatio: number;
+  }[] = [];
   let loaded = false;
   scene.stress(false);
   const baseline = scene.metrics();
@@ -43,6 +56,11 @@ export async function benchmark(
     await new Promise<void>((resolve, reject) => {
       const timer = setInterval(() => {
         const elapsed = (performance.now() - started) / 1000;
+        const currentViewport = viewport();
+        if (JSON.stringify(currentViewport) !== previousViewport) {
+          viewportChanges.push({ elapsed, ...currentViewport });
+          previousViewport = JSON.stringify(currentViewport);
+        }
         const wantLoaded =
           mode === "stress" ||
           (elapsed >= 60 && Math.floor((elapsed - 60) / 60) % 2 === 0);
@@ -100,11 +118,10 @@ export async function benchmark(
     durationSeconds: (performance.now() - started) / 1000,
     fixture:
       "Synthetic animation and draw stress: 15 extra player bodies, 45 extra hounds, 32 low-poly summon bodies. Existing scene has one player and three hounds. No network or full summon AI claim.",
-    viewport: {
-      width: innerWidth,
-      height: innerHeight,
-      pixelRatio: devicePixelRatio,
-    },
+    viewport: viewport(),
+    initialViewport,
+    viewportChanges,
+    fixedViewport: viewportChanges.length === 0,
     gpu: baseline.gpu,
     baseline: {
       meshes: baseline.meshes,

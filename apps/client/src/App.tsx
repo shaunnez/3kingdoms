@@ -12,11 +12,12 @@ import {
   type Snapshot,
   type Vec2,
 } from "../../../packages/contracts/game";
-import { NPCS, REFUGE } from "../../../packages/simulation/map";
+import { NPCS } from "../../../packages/simulation/map";
 import { Connection } from "./network";
 import { GameScene } from "./scene";
 import { Soundscape } from "./audio";
 import { FieldLab } from "./FieldLab";
+import { Minimap } from "./Minimap";
 import { canDisplayTarget } from "./combat-presentation";
 import "./style.css";
 
@@ -93,7 +94,8 @@ export default function App() {
     [muted, setMuted] = useState(true),
     [low, setLow] = useState(false),
     [help, setHelp] = useState(false),
-    [corpse, setCorpse] = useState<string | null>(null);
+    [corpse, setCorpse] = useState<string | null>(null),
+    [logOpen, setLogOpen] = useState(false);
   const select = (id: string) => {
     const s = snap.current,
       actor = s?.actors.find((a) => a.id === id),
@@ -570,7 +572,9 @@ export default function App() {
               </div>
             </div>
           </header>
-          <div className="location-title">
+          <div
+            className={`location-title ${target && me && target.id !== me.id && canDisplayTarget(target, me) ? "has-target" : ""}`}
+          >
             <span className="eyebrow">
               {me?.safe ? "THE CONCORD’S LANTERNS" : "THE FANTASY REALM"}
             </span>
@@ -643,76 +647,13 @@ export default function App() {
           <aside className="right-rail">
             <div className="minimap-frame">
               <span className="north">N</span>
-              <svg
-                viewBox={`${-(me?.x ?? 0) - 16} ${-(me?.z ?? 0) - 16} 32 32`}
-                role="img"
-                aria-label="Nearby map, town to the south, Briar March to the north"
-              >
-                <g transform="scale(-1,1)">
-                  <rect
-                    x="-30"
-                    y="-70"
-                    width="60"
-                    height="120"
-                    fill="#182528"
-                  />
-                  <rect x="-20" y="0" width="40" height="40" fill="#334746" />
-                  <path
-                    d="M 0 38 L 0 -17 M 0 -23 Q -3 -35 2 -58"
-                    stroke="#8c8262"
-                    strokeWidth="4"
-                    fill="none"
-                  />
-                  <path
-                    d="M -20 -20 L 20 -20"
-                    stroke="#487f89"
-                    strokeWidth="5"
-                  />
-                  <path
-                    d="M 0 -16 L 0 -24 M 15 -16 L 15 -24"
-                    stroke="#b8a377"
-                    strokeWidth="3"
-                  />
-                  <path
-                    d="M -20 0 L 20 0"
-                    stroke="#8abeb5"
-                    strokeWidth=".18"
-                    strokeDasharray=".5 .4"
-                  />
-                  <circle cx={REFUGE.x} cy={-REFUGE.z} r={4} fill="#526753" />
-                  <circle
-                    cx={NPCS.inscription.x}
-                    cy={-NPCS.inscription.z}
-                    r=".65"
-                    fill="#d7b571"
-                  />
-                  {snapshot.actors
-                    .filter((a) => a.life !== "dead")
-                    .map((a) => (
-                      <circle
-                        key={a.id}
-                        cx={a.x}
-                        cy={-a.z}
-                        r={a.id === me?.id ? 0.65 : 0.42}
-                        fill={
-                          a.id === me?.id
-                            ? "#f7e5b5"
-                            : a.red > 0
-                              ? "#e45c4b"
-                              : a.kind === "wolf"
-                                ? "#a86d58"
-                                : "#97c8c0"
-                        }
-                      />
-                    ))}
-                </g>
-              </svg>
+              {me && <Minimap me={me} snapshot={snapshot} />}
               <span className="map-coordinates">
                 {Math.round(me?.x ?? 0)} · {Math.round(me?.z ?? 0)}
               </span>
             </div>
             <div className={`safety ${me?.safe ? "safe" : "open"}`}>
-              <span>{me?.safe ? "◇" : "⚔"}</span>
+              <Icon index={me?.safe ? 1 : 0} className="safety-icon" />
               <div>
                 <strong>
                   {me?.safe
@@ -735,7 +676,7 @@ export default function App() {
               </div>
             </div>
             <section className="quest">
-              <p className="eyebrow">◇ THE MISSING HOUR</p>
+              <p className="eyebrow">THE MISSING HOUR</p>
               <h3>The Thirteenth Bell</h3>
               <p>
                 {snapshot.self.quest === "unheard"
@@ -767,15 +708,24 @@ export default function App() {
               </div>
             </div>
           )}
-          <section className="chat-log" aria-label="Journey log">
+          <section
+            className={`chat-log ${logOpen ? "expanded" : ""}`}
+            aria-label="Journey log"
+          >
             <div>
-              <span>JOURNEY</span>
+              <button
+                className="log-toggle"
+                aria-expanded={logOpen}
+                onClick={() => setLogOpen(!logOpen)}
+              >
+                Journey {logOpen ? "−" : "+"}
+              </button>
               <small>
                 {snapshot.population} traveller
                 {snapshot.population === 1 ? "" : "s"} nearby
               </small>
             </div>
-            {log.slice(-3).map((line, i) => (
+            {(logOpen ? log.slice(-5) : log.slice(-1)).map((line, i) => (
               <p key={i}>{line}</p>
             ))}
           </section>

@@ -440,16 +440,26 @@ test("solid landmarks block entry without closing the gate or the paths around t
   }
   assert.ok(Math.abs(move({ x: 0, z: 0 }, 0, 10).z - 10) < 1e-10);
   assert.equal(lineOfSight({ x: 0, z: 0 }, { x: 0, z: 10 }), true);
-  assert.equal(walkable({ x: -5, z: -28 }), false);
-  assert.ok(move({ x: -5, z: -34 }, 0, 12).z <= -30.5);
-  assert.equal(lineOfSight({ x: 0, z: -28 }, { x: -9, z: -28 }), false);
+  assert.equal(walkable({ x: 0, z: -10 }), false);
+  assert.ok(move({ x: 0, z: -16 }, 0, 12).z <= -12.5);
+  assert.equal(lineOfSight({ x: 5, z: -10 }, { x: -4, z: -10 }), false);
   for (const point of [
-    { x: -2.4, z: -28 },
-    { x: -7.6, z: -28 },
-    { x: -3, z: -26 },
-    { x: -7, z: -30 },
+    { x: 2.6, z: -10 },
+    { x: -2.6, z: -10 },
+    { x: 2, z: -8 },
+    { x: -2, z: -12 },
   ])
     assert.equal(walkable(point), true);
+});
+test("the memorial arch blocks its pillars while keeping the clue and centre passage reachable", () => {
+  for (const x of [-6.2, -1.8]) {
+    assert.equal(walkable({ x, z: 34.8 }), false);
+    assert.ok(move({ x, z: 32 }, 0, 5).z < 34.1);
+    assert.equal(lineOfSight({ x, z: 32 }, { x, z: 37 }), false);
+  }
+  assert.equal(walkable({ x: -4, z: 34 }), true);
+  assert.ok(Math.abs(move({ x: -4, z: 32 }, 0, 5).z - 37) < 1e-10);
+  assert.equal(lineOfSight({ x: -4, z: 32 }, { x: -4, z: 34 }), true);
 });
 test("guards attack a visible outlaw in town but ignore clean bystanders", () => {
   const { w, a, b } = fixture();

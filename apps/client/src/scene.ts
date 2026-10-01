@@ -13,6 +13,7 @@ import {
   MeshBuilder,
   PBRMaterial,
   PointLight,
+  Ray,
   RawCubeTexture,
   Scene,
   SceneLoader,
@@ -141,6 +142,7 @@ export class GameScene {
   private lastFrame = performance.now();
   private eventMeshes: Mesh[] = [];
   private light: PointLight;
+  private sun: DirectionalLight;
   private worldLights: PointLight[] = [];
   private marker: Mesh;
   private time = 0;
@@ -155,9 +157,8 @@ export class GameScene {
   private houndStudy: Visual | null = null;
   private houndStudyStarted = 0;
   private gateOccluders: PBRMaterial[] = [];
+  private solidOccluders: { mesh: AbstractMesh; material: PBRMaterial }[] = [];
   private awningOccluders: PBRMaterial[] = [];
-  private canopyOccluders: { material: PBRMaterial; x: number; z: number }[] =
-    [];
   private studyCamera: { alpha: number; beta: number; radius: number } | null =
     null;
   constructor(
@@ -181,24 +182,24 @@ export class GameScene {
     this.instrumentation = new SceneInstrumentation(s);
     s.clearColor = new Color4(0.065, 0.11, 0.145, 1);
     s.fogMode = Scene.FOGMODE_EXP2;
-    s.fogDensity = 0.012;
-    s.fogColor = new Color3(0.14, 0.22, 0.25);
+    s.fogDensity = 0.009;
+    s.fogColor = new Color3(0.1, 0.16, 0.23);
     s.ambientColor = new Color3(0.4, 0.46, 0.48);
     this.camera = new ArcRotateCamera(
       "camera",
       -Math.PI / 2 - 0.18,
-      0.72,
-      22,
+      0.79,
+      26,
       new Vector3(0, 0.7, -6),
       s,
     );
-    this.camera.fov = 0.66;
+    this.camera.fov = 0.52;
     this.camera.minZ = 0.2;
     this.camera.maxZ = 200;
     this.camera.lowerRadiusLimit = 18;
     this.camera.upperRadiusLimit = 36;
     const hemi = new HemisphericLight("sky", new Vector3(0.1, 1, -0.3), s);
-    hemi.intensity = 0.8;
+    hemi.intensity = 0.65;
     hemi.diffuse = new Color3(0.62, 0.77, 0.9);
     hemi.groundColor = new Color3(0.18, 0.2, 0.18);
     const sun = new DirectionalLight(
@@ -206,18 +207,22 @@ export class GameScene {
       new Vector3(-0.5, -1, 0.55),
       s,
     );
+    this.sun = sun;
     sun.position = new Vector3(15, 35, -20);
-    sun.intensity = 1.8;
-    sun.diffuse = new Color3(0.83, 0.88, 1);
+    sun.intensity = 1.65;
+    sun.diffuse = new Color3(0.65, 0.77, 1);
+    sun.shadowFrustumSize = 42;
+    sun.shadowMinZ = 1;
+    sun.shadowMaxZ = 80;
     this.shadow = new ShadowGenerator(2048, sun);
     this.shadow.usePercentageCloserFiltering = true;
     this.shadow.filteringQuality = ShadowGenerator.QUALITY_MEDIUM;
     this.shadow.bias = 0.0007;
     this.shadow.normalBias = 0.035;
-    this.shadow.setDarkness(0.35);
+    this.shadow.setDarkness(0.23);
     this.light = new PointLight("traveller-lantern", new Vector3(0, 2, -14), s);
     this.light.diffuse = new Color3(1, 0.56, 0.25);
-    this.light.intensity = 14;
+    this.light.intensity = 9;
     this.light.range = 7;
     for (let i = 0; i < 3; i++) {
       const l = new PointLight(
@@ -225,9 +230,9 @@ export class GameScene {
         new Vector3(0, 2.6, 0),
         s,
       );
-      l.diffuse = new Color3(1, 0.52, 0.2);
-      l.intensity = 115;
-      l.range = 14;
+      l.diffuse = new Color3(1, 0.48, 0.16);
+      l.intensity = 145;
+      l.range = 12;
       this.worldLights.push(l);
     }
     const size = 32;
@@ -255,20 +260,20 @@ export class GameScene {
       false,
       Constants.TEXTURE_TRILINEAR_SAMPLINGMODE,
     );
-    s.environmentIntensity = 0.7;
+    s.environmentIntensity = 0.85;
     const pipeline = new DefaultRenderingPipeline("finish", true, s, [
       this.camera,
     ]);
     pipeline.fxaaEnabled = true;
     pipeline.bloomEnabled = true;
-    pipeline.bloomThreshold = 1.5;
-    pipeline.bloomWeight = 0.18;
+    pipeline.bloomThreshold = 1.7;
+    pipeline.bloomWeight = 0.15;
     pipeline.bloomKernel = 32;
     pipeline.samples = 1;
     s.imageProcessingConfiguration.toneMappingEnabled = true;
     s.imageProcessingConfiguration.toneMappingType = 1;
-    s.imageProcessingConfiguration.exposure = 1.15;
-    s.imageProcessingConfiguration.contrast = 1.07;
+    s.imageProcessingConfiguration.exposure = 1.18;
+    s.imageProcessingConfiguration.contrast = 1.12;
     s.imageProcessingConfiguration.vignetteEnabled = true;
     s.imageProcessingConfiguration.vignetteWeight = 1.3;
     s.imageProcessingConfiguration.vignetteStretch = 0.2;
@@ -323,7 +328,8 @@ export class GameScene {
       if (!document.hidden) {
         this.frames.push(frameMs);
         this.frameCount++;
-        if (this.frames.length > 36000) this.frames.shift();
+        // Benchmarks collect intervals every second; keep a bounded recent window.
+        if (this.frames.length > 4096) this.frames.shift();
       }
       this.update(dt);
       s.render();
@@ -342,6 +348,18 @@ export class GameScene {
         mesh.isPickable = false;
         mesh.receiveShadows = true;
         if (
+          (mesh.name.includes("occluder-tower.") ||
+            mesh.name.includes("occluder-tree.")) &&
+          mesh.material instanceof PBRMaterial
+        ) {
+          const material = mesh.material.clone(`${mesh.name}-fade`);
+          material.transparencyMode = material.albedoTexture?.hasAlpha
+            ? PBRMaterial.PBRMATERIAL_ALPHATESTANDBLEND
+            : PBRMaterial.PBRMATERIAL_ALPHABLEND;
+          mesh.material = material;
+          this.solidOccluders.push({ mesh, material });
+        }
+        if (
           mesh.name.includes("occluder-gate.") &&
           mesh.material instanceof PBRMaterial
         ) {
@@ -350,7 +368,6 @@ export class GameScene {
           mesh.material = material;
           this.gateOccluders.push(material);
         }
-        const canopy = /occluder-canopy\.(-?\d+)\.(-?\d+)\./.exec(mesh.name);
         if (
           mesh.name.includes("occluder-awning.") &&
           mesh.material instanceof PBRMaterial
@@ -360,18 +377,10 @@ export class GameScene {
           mesh.material = material;
           this.awningOccluders.push(material);
         }
-        if (canopy && mesh.material instanceof PBRMaterial) {
-          const material = mesh.material.clone(`${mesh.name}-fade`);
-          material.transparencyMode = PBRMaterial.PBRMATERIAL_ALPHABLEND;
-          material.backFaceCulling = false;
-          mesh.material = material;
-          this.canopyOccluders.push({
-            material,
-            x: Number(canopy[1]),
-            z: Number(canopy[2]),
-          });
-        }
-        if (mesh.getTotalVertices() > 0)
+        if (
+          mesh.getTotalVertices() > 0 &&
+          !/\.(earth|paving|mud|waterbed)$/.test(mesh.name)
+        )
           this.shadow.addShadowCaster(mesh, false);
         mesh.freezeWorldMatrix();
       }
@@ -652,6 +661,7 @@ export class GameScene {
         true, // Follow the traveller while preserving the player's orbit and zoom.
       );
       this.light.position.set(me.x, 2, me.z - 1);
+      this.sun.position.set(me.x + 15, 35, me.z - 19.25);
       const nearby = [...LANTERNS].sort(
         (a, b) =>
           Math.hypot(a[0] - me.x, a[1] - me.z) -
@@ -668,13 +678,29 @@ export class GameScene {
         Math.abs(me.x - 7.5) < 3.5 && Math.abs(me.z + 15) < 5 ? 0.16 : 1;
       for (const material of this.awningOccluders)
         material.alpha += (awningAlpha - material.alpha) * Math.min(1, dt * 6);
-      for (const canopy of this.canopyOccluders) {
+      const focus = new Vector3(me.x, 1.1, me.z);
+      const sight = focus.subtract(this.camera.position);
+      const cameraRay = new Ray(
+        this.camera.position,
+        sight.normalizeToNew(),
+        sight.length(),
+      );
+      // Box tests use infinite rays; both directions bound the camera-to-player segment.
+      const reverseRay = new Ray(focus, cameraRay.direction.negate());
+      for (const { mesh, material } of this.solidOccluders) {
+        const bounds = mesh.getBoundingInfo().boundingBox;
         const alpha =
-          Math.abs(me.x - canopy.x) < 12 && Math.abs(me.z - canopy.z) < 12
-            ? 0.08
+          cameraRay.intersectsBoxMinMax(
+            bounds.minimumWorld,
+            bounds.maximumWorld,
+          ) &&
+          reverseRay.intersectsBoxMinMax(
+            bounds.minimumWorld,
+            bounds.maximumWorld,
+          )
+            ? 0.16
             : 1;
-        canopy.material.alpha +=
-          (alpha - canopy.material.alpha) * Math.min(1, dt * 6);
+        material.alpha += (alpha - material.alpha) * Math.min(1, dt * 7);
       }
       for (const [i, v] of this.stressActors.entries()) {
         v.root.position.set(

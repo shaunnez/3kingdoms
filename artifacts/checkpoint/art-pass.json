@@ -1,0 +1,57 @@
+{
+  "source_fingerprint": "7ae7fc7c5b86923611c39c37312ee499d65b578d0f17d45e39f78d4eed0c3fe5",
+  "recording_source_fingerprint": "b3dcdc0a267970f67f8e1dfedcf50327cc1921ea4111b35d6c4a13c8b572f44f",
+  "recording": {
+    "raw_path": "artifacts/raw/art-pass-expedition.webm",
+    "raw_sha256": "069b1f1e234d0ecdbeff991f0c72f5cc86a3ead64ee9bb9fdf9368518367b598",
+    "published_path": "artifacts/checkpoint/captures/highcross-art-expedition.mp4",
+    "duration_seconds": 75.04,
+    "video": "1920x1080, H264, 30fps, actual canvas and HUD sampled at 2Hz",
+    "audio": "Actual game synthesis; AAC stereo 48kHz",
+    "scope": "Developer route rehearsal, before final tree fade, fern grade, tangent export and map-water corrections. Quest reward verified after recording."
+  },
+  "tests": {
+    "automated_checks": 38,
+    "result": "passed",
+    "log": "artifacts/checkpoint/all-tests.tap",
+    "typecheck": "passed through npm run build",
+    "production_build": "passed",
+    "format": "passed",
+    "gltf_errors": 0,
+    "gltf_warnings": 6,
+    "environment_gltf_warnings": 0
+  },
+  "runtime_environment": {
+    "name": "briar-gate",
+    "sourceBytes": 59922660,
+    "repairedTangents": 1710,
+    "runtimeBytes": 13455252,
+    "sha256": "de996b2e79fcc2ab66bb76c60ffef84a21115d3f7a6cff4742b1d294d1c18bcd",
+    "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+  },
+  "new_paid_generation": {
+    "provider": "Higgsfield",
+    "jobs": 3,
+    "estimated_credits": 8.25,
+    "actual_charge_verified": false,
+    "receipt": "artifacts/checkpoint/art-pass/generation.json",
+    "meshy_jobs": 0
+  },
+  "browser_journey": {
+    "traveller": "Elowen",
+    "initial_marks": 35,
+    "marks_before_turnin": 59,
+    "marks_after_turnin": 99,
+    "reward_item": "Mara’s hourglass charm",
+    "quest": "complete",
+    "method": "UI interactions and Field Lab commands using ordinary server movement/abilities. Not an uncoached human playtest."
+  },
+  "browser_console": "No warnings or errors in the final production tab before the sustained trace.",
+  "remaining": [
+    "Full reference art fidelity",
+    "Uncoached human enjoyment and readability",
+    "Prior 300 MiB heap budget miss",
+    "Lower-end hardware and impaired network qualification",
+    "Ten remaining playable guilds and full content scope"
+  ]
+}

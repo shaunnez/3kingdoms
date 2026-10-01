@@ -25,7 +25,7 @@ class References(HTMLParser):
 
 
 def main():
-    files = [ROOT / "game-plan.md", ROOT / "game-concept.md", ROOT / "tools/build_catalogue.py"]
+    files = [ROOT / "game-plan.md", ROOT / "game-concept.md", ROOT / "design-qa.md", ROOT / "tools/build_catalogue.py"]
     for pattern in ("devlog/index.html", "devlog/style.css", "devlog/posts/*.html",
                     "docs/*.md", "design/*.json", "design/*.html", "design/screens/*.png",
                     "design/prompts/*.txt"):

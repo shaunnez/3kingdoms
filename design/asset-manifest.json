@@ -30576,15 +30576,17 @@
       "output": "assets/scene/scene.highcross.json",
       "acceptance": "docs/asset-bible.md",
       "source_job": null,
-      "source_hash": "993edfd04d36fcdfa54d107e4c2bf3816a27ff7296d95989f6431e326d4f95e4",
+      "source_hash": "de996b2e79fcc2ab66bb76c60ffef84a21115d3f7a6cff4742b1d294d1c18bcd",
       "license_evidence": null,
       "verified_in_browser": true,
       "prototype_output": "assets/runtime/models/briar-gate.glb",
-      "limitations": "Shared checkpoint environment only: one Highcross corner and one Briar route. The full map, scene logic, encounter set, streaming and final art remain.",
+      "limitations": "One Highcross corner and one Briar route. Art/HUD and obstruction pass reviewed in browser; full architectural detail, finished prop set, complete scene/encounter content and streaming remain. Final art acceptance stays open.",
       "evidence": [
         "artifacts/checkpoint/captures/2026-09-30T14-26-31-442Z-07cd5623.png",
         "artifacts/checkpoint/captures/briar-return-revised.mp4",
-        "artifacts/checkpoint/environment-repair.json"
+        "artifacts/checkpoint/environment-repair.json",
+        "artifacts/checkpoint/captures/art-direction-comparison.jpg",
+        "artifacts/checkpoint/captures/2026-10-01T06-37-03-806Z-4e664b09.png"
       ]
     },
     {
@@ -30957,15 +30959,17 @@
       "output": "assets/scene/scene.briar-march.json",
       "acceptance": "docs/asset-bible.md",
       "source_job": null,
-      "source_hash": "993edfd04d36fcdfa54d107e4c2bf3816a27ff7296d95989f6431e326d4f95e4",
+      "source_hash": "de996b2e79fcc2ab66bb76c60ffef84a21115d3f7a6cff4742b1d294d1c18bcd",
       "license_evidence": null,
       "verified_in_browser": true,
       "prototype_output": "assets/runtime/models/briar-gate.glb",
-      "limitations": "Shared checkpoint environment only: one Highcross corner and one Briar route. The full map, scene logic, encounter set, streaming and final art remain.",
+      "limitations": "One Highcross corner and one Briar route. Art/HUD and obstruction pass reviewed in browser; full architectural detail, finished prop set, complete scene/encounter content and streaming remain. Final art acceptance stays open.",
       "evidence": [
         "artifacts/checkpoint/captures/2026-09-30T14-26-31-442Z-07cd5623.png",
         "artifacts/checkpoint/captures/briar-return-revised.mp4",
-        "artifacts/checkpoint/environment-repair.json"
+        "artifacts/checkpoint/environment-repair.json",
+        "artifacts/checkpoint/captures/art-direction-comparison.jpg",
+        "artifacts/checkpoint/captures/2026-10-01T06-37-03-806Z-4e664b09.png"
       ]
     },
     {

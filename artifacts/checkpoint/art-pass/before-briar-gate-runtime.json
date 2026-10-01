@@ -1,0 +1,8 @@
+{
+  "name": "briar-gate",
+  "sourceBytes": 52478244,
+  "repairedTangents": 3,
+  "runtimeBytes": 15942328,
+  "sha256": "993edfd04d36fcdfa54d107e4c2bf3816a27ff7296d95989f6431e326d4f95e4",
+  "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+}

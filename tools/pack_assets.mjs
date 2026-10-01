@@ -14,6 +14,12 @@ for (const name of names) {
   const source = `assets/source/private/runtime-unoptimized/${name}.glb`,
     output = `assets/runtime/models/${name}.glb`;
   const document = await io.read(source);
+  if (name === "briar-gate") {
+    for (const material of document.getRoot().listMaterials()) {
+      if (material.getName() === "foliage")
+        material.setAlphaMode("MASK").setAlphaCutoff(0.42).setDoubleSided(true);
+    }
+  }
   let repairedTangents = 0;
   for (const mesh of document.getRoot().listMeshes())
     for (const primitive of mesh.listPrimitives()) {

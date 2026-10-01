@@ -2,43 +2,73 @@
   {
     "name": "briar-gate",
     "errors": 0,
-    "warnings": 5,
+    "warnings": 0,
     "issues": [
       {
-        "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
-        "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
-        "severity": 1,
-        "pointer": "/meshes/1/primitives/0/material"
-      },
-      {
-        "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
-        "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
-        "severity": 1,
-        "pointer": "/meshes/54/primitives/0/material"
-      },
-      {
-        "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
-        "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
-        "severity": 1,
-        "pointer": "/meshes/55/primitives/0/material"
-      },
-      {
-        "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
-        "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
-        "severity": 1,
-        "pointer": "/meshes/58/primitives/0/material"
-      },
-      {
-        "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
-        "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
-        "severity": 1,
-        "pointer": "/meshes/60/primitives/0/material"
+        "code": "ACCESSOR_INDEX_TRIANGLE_DEGENERATE",
+        "message": "Indices accessor contains 37 degenerate triangles (out of 376).",
+        "severity": 2,
+        "pointer": "/meshes/6/primitives/0/indices"
       },
       {
         "code": "ACCESSOR_INDEX_TRIANGLE_DEGENERATE",
-        "message": "Indices accessor contains 704 degenerate triangles (out of 8664).",
+        "message": "Indices accessor contains 56 degenerate triangles (out of 264).",
         "severity": 2,
-        "pointer": "/meshes/6/primitives/0/indices"
+        "pointer": "/meshes/9/primitives/0/indices"
+      },
+      {
+        "code": "ACCESSOR_INDEX_TRIANGLE_DEGENERATE",
+        "message": "Indices accessor contains 37 degenerate triangles (out of 376).",
+        "severity": 2,
+        "pointer": "/meshes/14/primitives/0/indices"
+      },
+      {
+        "code": "ACCESSOR_INDEX_TRIANGLE_DEGENERATE",
+        "message": "Indices accessor contains 56 degenerate triangles (out of 264).",
+        "severity": 2,
+        "pointer": "/meshes/17/primitives/0/indices"
+      },
+      {
+        "code": "ACCESSOR_INDEX_TRIANGLE_DEGENERATE",
+        "message": "Indices accessor contains 42 degenerate triangles (out of 316).",
+        "severity": 2,
+        "pointer": "/meshes/122/primitives/0/indices"
+      },
+      {
+        "code": "ACCESSOR_INDEX_TRIANGLE_DEGENERATE",
+        "message": "Indices accessor contains 136 degenerate triangles (out of 1464).",
+        "severity": 2,
+        "pointer": "/meshes/126/primitives/0/indices"
+      },
+      {
+        "code": "ACCESSOR_INDEX_TRIANGLE_DEGENERATE",
+        "message": "Indices accessor contains 136 degenerate triangles (out of 2352).",
+        "severity": 2,
+        "pointer": "/meshes/141/primitives/0/indices"
+      },
+      {
+        "code": "ACCESSOR_INDEX_TRIANGLE_DEGENERATE",
+        "message": "Indices accessor contains 258 degenerate triangles (out of 884).",
+        "severity": 2,
+        "pointer": "/meshes/156/primitives/0/indices"
+      },
+      {
+        "code": "ACCESSOR_INDEX_TRIANGLE_DEGENERATE",
+        "message": "Indices accessor contains 358 degenerate triangles (out of 4056).",
+        "severity": 2,
+        "pointer": "/meshes/167/primitives/0/indices"
+      },
+      {
+        "code": "ACCESSOR_INDEX_TRIANGLE_DEGENERATE",
+        "message": "Indices accessor contains 28 degenerate triangles (out of 1788).",
+        "severity": 2,
+        "pointer": "/meshes/174/primitives/0/indices"
+      },
+      {
+        "code": "ACCESSOR_INDEX_TRIANGLE_DEGENERATE",
+        "message": "Indices accessor contains 76 degenerate triangles (out of 936).",
+        "severity": 2,
+        "pointer": "/meshes/179/primitives/0/indices"
       }
     ]
   },

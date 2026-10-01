@@ -1,0 +1,39 @@
+{
+  "assets": [
+    {
+      "name": "courtyard-paving",
+      "job_id": "965cc02c-c7eb-44cd-8ba9-cf943f084d85",
+      "model": "gpt_image_2_5",
+      "estimated_credits": 2.75,
+      "status": "completed",
+      "prompt_path": "design/prompts/p2-courtyard-paving.txt",
+      "image": "design/calibration/courtyard-paving.png",
+      "bytes": 10157948,
+      "sha256": "9e9ff64042fed025dd5132ed75d671b1d5dd6c37335ab62efdb8fb9baee9cb10"
+    },
+    {
+      "name": "aged-limestone",
+      "job_id": "5e938491-edcb-489e-b356-22aa7d238c04",
+      "model": "gpt_image_2_5",
+      "estimated_credits": 2.75,
+      "status": "completed",
+      "prompt_path": "design/prompts/p2-aged-limestone.txt",
+      "image": "design/calibration/aged-limestone.png",
+      "bytes": 10860529,
+      "sha256": "83d45acefe9337f3a09d99ad52fa0612df356e48121d6be2a2a8a678f4adae0c"
+    },
+    {
+      "name": "briar-leaf-cluster",
+      "job_id": "ab803ca4-cb72-43b7-b490-2fdb350b862d",
+      "model": "gpt_image_2_5",
+      "estimated_credits": 2.75,
+      "status": "completed",
+      "prompt_path": "design/prompts/p2-briar-leaf-cluster.txt",
+      "image": "design/calibration/briar-leaf-cluster.png",
+      "bytes": 6440513,
+      "sha256": "680ccfbbe6f5244b68958b1e996745bffc8a586f6887143a8e094fb14deffd2e"
+    }
+  ],
+  "estimated_credits": 8.25,
+  "actual_charged_credits": null
+}

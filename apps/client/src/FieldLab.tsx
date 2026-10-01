@@ -132,6 +132,13 @@ export function FieldLab({
     }
   };
   const me = snapshot.actors.find((a) => a.id === snapshot.self.id);
+  const townExit =
+    me && me.z < -12
+      ? [
+          { x: -4, z: -14 },
+          { x: -4, z: -6 },
+        ]
+      : [];
   return (
     <aside
       className="field-lab"
@@ -158,10 +165,7 @@ export function FieldLab({
           </button>
           <button
             onClick={() =>
-              travel([
-                { x: 0, z: -3 },
-                { x: 0, z: 7 },
-              ])
+              travel([...townExit, { x: 0, z: -3 }, { x: 0, z: 7 }])
             }
           >
             Walk through gate
@@ -169,6 +173,7 @@ export function FieldLab({
           <button
             onClick={() =>
               travel([
+                ...townExit,
                 ...(me && me.z < 26 ? [{ x: 0, z: 14 }] : []),
                 { x: 0, z: 26 },
                 { x: -4, z: 32 },
@@ -187,6 +192,7 @@ export function FieldLab({
           <button
             onClick={() =>
               travel([
+                ...townExit,
                 ...(me && me.z < 17 ? [{ x: 0, z: 14 }] : []),
                 ...(me && me.z < 35
                   ? [
@@ -215,6 +221,7 @@ export function FieldLab({
           <button
             onClick={() =>
               travel([
+                ...townExit,
                 ...(me && me.z > 26 ? [{ x: 0, z: 26 }] : []),
                 ...(me && me.z > 14 ? [{ x: 0, z: 14 }] : []),
                 { x: 0, z: -3 },
