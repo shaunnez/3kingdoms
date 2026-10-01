@@ -8,7 +8,10 @@
     "duration_seconds": 75.04,
     "video": "1920x1080, H264, 30fps, actual canvas and HUD sampled at 2Hz",
     "audio": "Actual game synthesis; AAC stereo 48kHz",
-    "scope": "Developer route rehearsal, before final tree fade, fern grade, tangent export and map-water corrections. Quest reward verified after recording."
+    "scope": "Developer route rehearsal, before final tree fade, fern grade, tangent export and map-water corrections. Quest reward verified after recording.",
+    "delivery_bytes": 14732403,
+    "delivery_sha256": "e9a93d99c91fe34e8d63b8d89358c464ada7f29979c4ed12bfbb118b84270603",
+    "delivery_encoding": "H264 CRF 25, maximum 2300 kbit/s, 30fps; AAC 112 kbit/s. Original VP9 and first larger encode retained in artifacts/raw."
   },
   "tests": {
     "automated_checks": 38,
@@ -72,5 +75,9 @@
     "limits": "Apple M5 / Chromium / WebGL2, synthetic animation/draw population. Meets numerical frame/draw/triangle thresholds for this fixture, not qualification of GTX 1660 or M1 hardware, a real multiplayer battle, eight simultaneous signatures, or the 30-minute heap target. Light documentation and Git publication ran during the trace; no Blender job or video encoder ran during it. The longest stall is retained and its cause is not established."
   },
   "final_town_capture": "artifacts/checkpoint/captures/2026-10-01T06-50-21-535Z-8b67f8be.png",
-  "ordinary_controls": "Right-click ground movement checked after the benchmark; walked around the astrolabe through standard player input."
+  "ordinary_controls": "Right-click ground movement checked after the benchmark; walked around the astrolabe through standard player input.",
+  "journal_delivery_recovery": {
+    "failed_deployment": "appgdep_6abe0380e6688191a7a03c3bb5209e99",
+    "reason": "First delivery video was 27,327,338 bytes, exceeding the 26,214,400-byte host limit. Re-encoded from the original and added a per-file export preflight."
+  }
 }

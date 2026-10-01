@@ -11,6 +11,7 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / ".sites" / "journal"
 DIST = SITE / "dist"
+MAX_FILE_BYTES = 25 * 1024 * 1024
 
 
 class References(HTMLParser):
@@ -55,6 +56,10 @@ def main():
                     raise ValueError(f"Missing or unapproved checkpoint evidence: {evidence}")
                 files.append(source)
     files = sorted(set(files))
+    for source in files:
+        if source.stat().st_size > MAX_FILE_BYTES:
+            raise ValueError(f"Sites file exceeds 25 MiB: {source.relative_to(ROOT)}. "
+                             "Compress the delivery copy and retain the original outside the export.")
     DIST.mkdir(parents=True, exist_ok=True)
     expected = {str(path.relative_to(ROOT)) for path in files}
     expected.update({"index.html", "publication.json"})
