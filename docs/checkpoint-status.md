@@ -51,14 +51,14 @@ The [build manifest](../artifacts/checkpoint/build-manifest.json) hashes runtime
 
 | Gate | Current evidence | Limit |
 | --- | --- | --- |
-| Generation recovery | 14 Higgsfield references and 18 completed Meshy tasks; sanitized recovery IDs and hashes retained | Provider completion does not certify game-ready quality |
-| GLB validity | Six runtime files, zero Khronos errors and eleven retained warnings | Imported skin roots and decorative tangent issues still need visual review |
-| Rules and transport | 37 checks passed, including independent real WebSockets, durable item claims, reconnect, capacity and identity races | Loopback, not impaired internet or production database |
+| Generation recovery | 17 Higgsfield references/material sources and 18 completed Meshy tasks; sanitized recovery IDs and hashes retained | Provider completion does not certify game-ready quality |
+| GLB validity | Six runtime files, zero Khronos errors and six retained character warnings; environment has none | Imported character skin-root/tangent warnings still need review |
+| Rules and transport | 38 checks passed, including independent real WebSockets, durable item claims, reconnect, capacity and identity races | Loopback, not impaired internet or production database |
 | Two actual browser clients | Town rejection, red aggression, guard pursuit, clean victim one-item transfer, red victim two-item transfer, lawful hunter stays clean, merchant refusal, refuge respawn | Two tabs in one Chromium instance; full guild/party/summon matrix is later work |
 | Uncut expedition | [75-second actual browser recording](../artifacts/checkpoint/captures/briar-gate-expedition.mp4), including town, combat, bridge, clue and return | Field tools send ordinary inputs; this character revisits an already-completed quest |
 | Custom wolf motion | Six clips inspected live; [18-second study excerpt](../artifacts/checkpoint/captures/hound-motion-study.mp4) and deformed bounds retained | Prototype weighting/acting; not a playable Changeling transformation |
 | Elemental surfaces | [Four materials in the browser](../artifacts/checkpoint/captures/2026-09-30T13-14-34-125Z-38faf925.png): emission, water, air and opaque earth | Deliberately simple silhouettes, not finished guild art |
-| Sustained renderer | 600.38s: median 108.58fps; uncapped frame p95 10.30ms / p99 11.10ms; 202 p95 draws, 1,468,177 maximum active triangles; no hidden samples | Apple M5 / Chromium 154 / WebGL2, synthetic crowd. Worst frame 312.80ms, cause unestablished. Not M1 qualification or a full networked battle |
+| Sustained renderer | Latest art source: 600.54s, fixed 1080p, median 83.73fps, p95 17.40ms / p99 21.30ms; 234 p95 draws, 1,239,422 maximum active triangles; no hidden samples | Apple M5 / WebGL2 synthetic crowd. Worst frame 511.20ms, cause unestablished. Not M1/GTX 1660 qualification or a full networked battle |
 | Repeated load/unload | 1800.07s, zero hidden samples, fourteen measured disposal phases; retained-count growth at most 1.25%; heap 278.15–559.35 MiB, so 300 MiB target missed | Count/heap stability is not a GPU-memory measurement or real zone transition test |
 | Visual target | Follow camera, equipment grounding, HUD portrait capture, gate/canopy/awning obstruction repaired; house/foliage/light pass inspected | Environment richness and motion remain below the approved image targets; no final art acceptance |
 | Human fun and readability | Not run | Requires a person playing without developer guidance |
@@ -85,7 +85,7 @@ The earlier `5267608d…` production preview's resource timing reported approxim
 
 ## Combat and quest repair — 1 October
 
-Current source fingerprint: `03698a82f0c180cd1777c21df1c83bf04174b40acca79365af772d809ad8fc27`. The [repair record](../artifacts/checkpoint/combat-repair.json) binds the local checks, model, captures and remaining limits to this revision. It supersedes the earlier runtime manifest without relabelling historical PvP, renderer or memory traces.
+Source fingerprint for this repair: `03698a82f0c180cd1777c21df1c83bf04174b40acca79365af772d809ad8fc27`. The [repair record](../artifacts/checkpoint/combat-repair.json) binds the local checks, model, captures and remaining limits to this revision. It supersedes the earlier runtime manifest without relabelling historical PvP, renderer or memory traces.
 
 The shield now has a solid face and rear grip fitted to the left hand; the sword sits in the adjusted palm. Thirteen baked clips replace the Knight's shared attack pose. Action time follows the server windup and committed hit, with blended locomotion and recovery. Movement or evade cancels preparation, including basic attacks; cancellation spends no resource and does no damage. This deliberately plants the practice attacks. It is a combat-feel change to assess in the next human session, not a claim that final timing is settled.
 
@@ -96,6 +96,18 @@ Retreating hounds turn toward home and finish that return before reacquiring. Re
 All 37 automated checks pass, including movement/evade cancellation, retreat state and facing, target eligibility, commit/block event reporting, existing PvP law/loot and real WebSocket reconnect/ownership behavior. Production build and formatting pass; six GLBs have zero errors and eleven warnings. No new provider job or paid generation was used. Full environment fidelity, human fun, the twelve complete guilds and the previous memory-budget miss remain open.
 
 The [new renderer trace](../artifacts/checkpoint/captures/2026-10-01T05-09-00-795Z-2a68f0ae.json) completed 601.06 seconds with zero hidden samples: 72.15fps median, p95 20.50ms, p99 28.80ms, maximum 976.70ms, 203 p95 draws and 1,468,777 maximum active triangles. **Diagnostic only:** its initial viewport was 1920×1080, but its final report records 1745×2188 at 1.1 pixel ratio. The change was not timestamped. This does not qualify a fixed-resolution comparison or resolve the 20ms p95 target. Retain the stall and the viewport discrepancy; do not relabel the older passing trace as new evidence.
+
+## Art and HUD pass — 1 October
+
+Runtime source [9e767f9](https://github.com/shaunnez/3kingdoms/commit/9e767f9110a260b3e932a9cc540dbcd9823ffd86), fingerprint `7ae7fc7c5b86923611c39c37312ee499d65b578d0f17d45e39f78d4eed0c3fe5`. The [art-pass record](../artifacts/checkpoint/art-pass.json) binds assets, tests, source footage and later evidence. The [visual QA report](../design-qa.md) remains blocked on full reference fidelity; the runtime changes and repaired visibility are independently verified.
+
+Three completed Higgsfield jobs supply paving, masonry and an alpha leaf cluster, estimated at 8.25 credits; billing is not independently verified. Blender adds the central astrolabe, layered gate masonry, banners, ivy and the memorial arch. Server collision follows the plinth and new pillars. Per-tree obstruction fading replaces the broad canopy-only fade, so trunks cannot continue hiding the player after their leaves vanish. Explicit triangulation before tangent export leaves the revised environment with zero validation errors or warnings. The runtime GLB is 13,455,252 bytes with 139,492 unique mesh triangles; its source and failed exports remain recoverable.
+
+The larger HUD retains actual portrait/action art, collapses the journey log and gives selected targets priority over location text. The minimap uses a Blender survey of the assembled world plus authoritative actor, quest and safety markers. The final normal camera is alpha −1.7508, beta 0.79, radius 26 and FOV 0.52 radians. Captures use this follow camera rather than a cinematic view.
+
+Elowen completed the briefing, road fights, bridge, memorial and return reward. Marks rose from 59 to 99 on turn-in, and the hourglass charm appeared in inventory. The [75.04-second recording](../artifacts/checkpoint/captures/highcross-art-expedition.mp4) is source `b3dcdc0a…`; it predates the last tree, fern, tangent and map-water corrections. The final forest still is `7ae7fc7c…`. Both 1920×1080 and 1280×720 layouts were inspected; all 38 gameplay/transport checks, formatting and production build pass. The [new fixed-viewport trace](../artifacts/checkpoint/captures/2026-10-01T06-47-14-184Z-f2b47586.json) completed: 600.54 seconds at fixed 1920×1080, pixel ratio 1, no viewport changes or hidden samples. Median 83.73fps, p95 17.40ms, p99 21.30ms; maximum 511.20ms. Draws p95 234; maximum active triangles 1,239,422. Apple M5 / Chromium / WebGL2, synthetic animation/draw population. Meets numerical frame/draw/triangle thresholds for this fixture, not qualification of GTX 1660 or M1 hardware, a real multiplayer battle, eight simultaneous signatures, or the 30-minute heap target. Light documentation and Git publication ran during the trace; no Blender job or video encoder ran during it. The longest stall is retained and its cause is not established. Historical traces above retain their original build identities.
+
+Next, follow the [uncoached expedition brief](expedition-playtest.md). No human fun test has been run. This pass does not resolve the earlier 300 MiB heap target, qualify the specified M1/GTX 1660 hardware, or clear the environment quality gate for bulk guild production.
 
 ## Remaining game work
 

@@ -42,7 +42,7 @@ This report concerns fidelity to the approved visual target. The revised slice i
 
 **Interactions and checks**
 
-Browser review covered briefing, target selection/combat through ordinary server inputs, bridge traversal, clue, return reward, inventory, 720p layout and off-path camera obstruction. The final production browser had no captured warning/error log entries before the sustained render test. This was a developer rehearsal; follow `docs/expedition-playtest.md` for the separate human test. Full multiplayer rules have automated coverage and retained earlier browser evidence, not a new multi-player visual acceptance in this art pass.
+Browser review covered briefing, target selection/combat through ordinary server inputs, bridge traversal, clue, return reward, inventory, 720p layout and off-path camera obstruction. The final production browser had no captured warning/error log entries before or after the sustained render test. The fixed 1080p, 600.54-second M5 trace reports 83.73fps median, 17.40ms p95 and 21.30ms p99, with no hidden samples. Its 511.20ms maximum stall is retained; this is a synthetic rendering fixture. This was a developer rehearsal; follow `docs/expedition-playtest.md` for the separate human test. Full multiplayer rules have automated coverage and retained earlier browser evidence, not a new multi-player visual acceptance in this art pass.
 
 **Implementation checklist**
 

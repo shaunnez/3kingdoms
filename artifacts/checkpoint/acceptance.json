@@ -28,9 +28,9 @@
         "artifacts/checkpoint/all-tests.tap",
         "artifacts/checkpoint/network-boundary-fixture.json"
       ],
-      "result": "32 automated checks: 31 simulation behaviors and one real multi-client WebSocket integration suite. Includes house/tower/astrolabe collision, open gate and bypasses, reconnect, identity reservation, capacity and durable claims.",
+      "result": "38 checks pass, including rule/transport behavior, complete quest journey and collision around the plaza astrolabe and memorial arch.",
       "limit": "Loopback; no packet impairment, database transaction or production-account claim.",
-      "source_fingerprint": "41e30695fe06c0c86733c42820b896d714472ff80497a27256d3783ed9926c67"
+      "source_fingerprint": "7ae7fc7c5b86923611c39c37312ee499d65b578d0f17d45e39f78d4eed0c3fe5"
     },
     {
       "id": "runtime-models",
@@ -38,8 +38,9 @@
       "evidence": [
         "artifacts/checkpoint/gltf-validation.json"
       ],
-      "result": "Six GLBs, zero errors, eleven retained warnings.",
-      "limit": "Validity is separate from visual acceptance."
+      "result": "Six GLBs, zero errors, six retained character warnings. Revised environment has zero errors or warnings.",
+      "limit": "Validity is separate from visual acceptance.",
+      "source_fingerprint": "7ae7fc7c5b86923611c39c37312ee499d65b578d0f17d45e39f78d4eed0c3fe5"
     },
     {
       "id": "real-browser-town-safety",
@@ -158,7 +159,7 @@
         "artifacts/checkpoint/captures/2026-09-30T13-59-47-935Z-0db2d7dd.json",
         "artifacts/checkpoint/memory-before-environment-repair.json"
       ],
-      "result": "1800.09s, zero hidden samples, 14 measured unloaded phases: 128 meshes, 67 textures, 73 materials, 9 skeletons, 32 animation groups retained with zero count growth. Heap 330.04\u2013517.33 MiB; 300 MiB target exceeded.",
+      "result": "1800.09s, zero hidden samples, 14 measured unloaded phases: 128 meshes, 67 textures, 73 materials, 9 skeletons, 32 animation groups retained with zero count growth. Heap 330.04–517.33 MiB; 300 MiB target exceeded.",
       "limit": "Synthetic crowd cycles and Chromium JS heap, not real zone round trips or GPU-memory measurements. This is the pre-environment-repair build; the new build requires its own trace.",
       "source_fingerprint": "5267608d4f38e8d0cbb9fe46fbf768654ddc340bae30294bfeb57033be11cd2c"
     },
@@ -242,7 +243,7 @@
         "artifacts/checkpoint/build-manifest-before-landmarks.json",
         "artifacts/checkpoint/client-landmark-equivalence.json"
       ],
-      "result": "1800.07s, zero hidden samples, 14 measured unloaded phases. Meshes 138, textures 67, skeletons 9 and animation groups 32 return to baseline; materials 80 to 81 (1.25% growth). Approximate heap 278.15\u2013559.35 MiB; 300 MiB target exceeded.",
+      "result": "1800.07s, zero hidden samples, 14 measured unloaded phases. Meshes 138, textures 67, skeletons 9 and animation groups 32 return to baseline; materials 80 to 81 (1.25% growth). Approximate heap 278.15–559.35 MiB; 300 MiB target exceeded.",
       "limit": "Legacy Chromium heap estimate; not isolated process/GPU attribution or real zone round trips. One pre-load transition sample excluded from disposal counts. Light documentation and Git publication ran concurrently; no Blender or encoding. Final server-only landmarks retain all 266 client runtime files unchanged."
     },
     {
@@ -301,6 +302,30 @@
       ],
       "result": "601.06 seconds, zero hidden samples, median 72.15fps, p95 20.50ms, p99 28.80ms, maximum stall 976.70ms; p95 203 draws and maximum 1,468,777 active triangles.",
       "limit": "Viewport was 1920x1080 at benchmark start but the final report records 1745x2188 at pixel ratio 1.1. Resize timing and cause were not recorded. Mixed viewport and concurrent host work prevent a controlled 1080p comparison; p95 20.5ms also exceeds the 20ms reference. Not a passed hardware, full-combat or eight-signature qualification."
+    },
+    {
+      "id": "highcross-art-and-hud",
+      "status": "improved-not-final-art-acceptance",
+      "source_fingerprint": "7ae7fc7c5b86923611c39c37312ee499d65b578d0f17d45e39f78d4eed0c3fe5",
+      "evidence": [
+        "artifacts/checkpoint/art-pass.json",
+        "artifacts/checkpoint/captures/art-direction-comparison.jpg",
+        "artifacts/checkpoint/captures/art-hud-comparison.jpg",
+        "artifacts/checkpoint/captures/2026-10-01T06-37-03-806Z-4e664b09.png"
+      ],
+      "result": "New material sources, central astrolabe, architectural details, memorial arch, foliage, terrain survey minimap and larger HUD; collision and browser route verified. Camera-to-player tree obstruction corrected.",
+      "limit": "Full architectural detail, prop density, human fun and the earlier heap target remain open. Video and comparison images retain their own pre-final fingerprints."
+    },
+    {
+      "id": "art-pass-fixed-viewport-renderer",
+      "status": "passed-for-render-fixture",
+      "source_fingerprint": "7ae7fc7c5b86923611c39c37312ee499d65b578d0f17d45e39f78d4eed0c3fe5",
+      "evidence": [
+        "artifacts/checkpoint/captures/2026-10-01T06-47-14-184Z-f2b47586.json",
+        "artifacts/checkpoint/art-pass.json"
+      ],
+      "result": "600.54 seconds at fixed 1920×1080, pixel ratio 1, no viewport changes or hidden samples. Median 83.73fps, p95 17.40ms, p99 21.30ms; maximum 511.20ms. Draws p95 234; maximum active triangles 1,239,422.",
+      "limit": "Apple M5 / Chromium / WebGL2, synthetic animation/draw population. Meets numerical frame/draw/triangle thresholds for this fixture, not qualification of GTX 1660 or M1 hardware, a real multiplayer battle, eight simultaneous signatures, or the 30-minute heap target. Light documentation and Git publication ran during the trace; no Blender job or video encoder ran during it. The longest stall is retained and its cause is not established."
     }
   ],
   "remaining_game_scope": [
@@ -323,7 +348,7 @@
   "publication": {
     "local": "playable",
     "github": "Final game code b49c48f92d700c9347e988be0f1a03cbc7ba7b66 pushed to main; GitHub CI 36736079686 succeeded. Journal/evidence changes follow separately.",
-    "journal": "Milestones 001\u2013006 are in the journal package. The actual deployed source version and owner-private audience are recorded in devlog/site.json in the repository.",
+    "journal": "Milestones 001–006 are in the journal package. The actual deployed source version and owner-private audience are recorded in devlog/site.json in the repository.",
     "public_game": "not-deployed"
   }
 }

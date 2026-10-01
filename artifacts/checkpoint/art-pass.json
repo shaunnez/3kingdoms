@@ -27,7 +27,11 @@
     "repairedTangents": 1710,
     "runtimeBytes": 13455252,
     "sha256": "de996b2e79fcc2ab66bb76c60ffef84a21115d3f7a6cff4742b1d294d1c18bcd",
-    "compression": "KHR_mesh_quantization and WebP; no remote decoder"
+    "compression": "KHR_mesh_quantization and WebP; no remote decoder",
+    "unique_mesh_triangles": 139492,
+    "meshes": 185,
+    "textures": 46,
+    "materials": 23
   },
   "new_paid_generation": {
     "provider": "Higgsfield",
@@ -46,12 +50,27 @@
     "quest": "complete",
     "method": "UI interactions and Field Lab commands using ordinary server movement/abilities. Not an uncoached human playtest."
   },
-  "browser_console": "No warnings or errors in the final production tab before the sustained trace.",
+  "browser_console": "No warning/error log entries before or after the final production render trace.",
   "remaining": [
     "Full reference art fidelity",
     "Uncoached human enjoyment and readability",
     "Prior 300 MiB heap budget miss",
     "Lower-end hardware and impaired network qualification",
     "Ten remaining playable guilds and full content scope"
-  ]
+  ],
+  "runtime_commit_sha": "9e767f9110a260b3e932a9cc540dbcd9823ffd86",
+  "remote_ci": {
+    "head_sha": "9e767f9110a260b3e932a9cc540dbcd9823ffd86",
+    "url": "https://github.com/shaunnez/3kingdoms/actions/runs/36826235826",
+    "conclusion": "success"
+  },
+  "renderer": {
+    "report": "artifacts/checkpoint/captures/2026-10-01T06-47-14-184Z-f2b47586.json",
+    "source_fingerprint": "7ae7fc7c5b86923611c39c37312ee499d65b578d0f17d45e39f78d4eed0c3fe5",
+    "result": "600.54 seconds at fixed 1920×1080, pixel ratio 1, no viewport changes or hidden samples. Median 83.73fps, p95 17.40ms, p99 21.30ms; maximum 511.20ms. Draws p95 234; maximum active triangles 1,239,422.",
+    "status": "passed-for-render-fixture",
+    "limits": "Apple M5 / Chromium / WebGL2, synthetic animation/draw population. Meets numerical frame/draw/triangle thresholds for this fixture, not qualification of GTX 1660 or M1 hardware, a real multiplayer battle, eight simultaneous signatures, or the 30-minute heap target. Light documentation and Git publication ran during the trace; no Blender job or video encoder ran during it. The longest stall is retained and its cause is not established."
+  },
+  "final_town_capture": "artifacts/checkpoint/captures/2026-10-01T06-50-21-535Z-8b67f8be.png",
+  "ordinary_controls": "Right-click ground movement checked after the benchmark; walked around the astrolabe through standard player input."
 }
