@@ -33,10 +33,10 @@ const FADED = 0.18;
 const FADE_RATE = 7;
 /**
  * Shadow casters farther than this from the focus (XZ, metres) are dropped:
- * shadow maps are not frustum-culled, and the scene's ~50 m shadow frustum
- * around the player cannot receive shadows from farther away.
+ * shadow maps are not frustum-culled, and the scene's 48 m shadow frustum
+ * (light kept above ~38° elevation) cannot receive shadows from farther away.
  */
-const CASTER_RADIUS = 36;
+const CASTER_RADIUS = 28;
 
 /** Emissive kind codes written into vertex alpha for the glow plugin. */
 const EMISSIVE_CODES = new Map<number, number>([
