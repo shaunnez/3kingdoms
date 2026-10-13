@@ -7,12 +7,41 @@ import {
   type Snapshot,
   type CombatEvent,
 } from "../../../packages/contracts/game";
-type Intent = Command extends infer C
+import { LocalConnection, retainEvents } from "./local-world";
+
+export type ConnectionMode = "solo" | "server";
+export type Intent = Command extends infer C
   ? C extends Command
     ? Omit<C, "seq">
     : never
   : never;
-export class Connection {
+/** What the client needs from a world host, in the page or over Colyseus. */
+export interface GameConnection {
+  readonly mode: ConnectionMode;
+  onSnapshot: (snapshot: Snapshot) => void;
+  onNotice: (notice: Notice) => void;
+  onStatus: (status: string) => void;
+  join(name: string, guild: Guild): Promise<void>;
+  send(command: Intent): void;
+  leave(): void;
+}
+
+/** `?server` or `?mode=server` selects the local Colyseus server; everything else plays solo. */
+export function preferredMode(search?: string): ConnectionMode {
+  const query =
+    search ?? (typeof location !== "undefined" ? location.search : "");
+  const params = new URLSearchParams(query);
+  return params.has("server") || params.get("mode") === "server"
+    ? "server"
+    : "solo";
+}
+
+export function createConnection(mode: ConnectionMode): GameConnection {
+  return mode === "server" ? new Connection() : new LocalConnection();
+}
+
+export class Connection implements GameConnection {
+  readonly mode = "server";
   room: Room | null = null;
   private seq = 0;
   private recentEvents: CombatEvent[] = [];
@@ -43,10 +72,7 @@ export class Connection {
         this.onStatus("Version mismatch. Reload the client.");
         return;
       }
-      // The wire sends new events once; retain their short presentation lifetime locally.
-      const last = this.recentEvents.at(-1)?.id ?? 0;
-      this.recentEvents = this.recentEvents.filter((e) => s.now - e.at < 2);
-      this.recentEvents.push(...s.events.filter((e) => e.id > last));
+      this.recentEvents = retainEvents(this.recentEvents, s);
       this.onSnapshot({ ...s, events: this.recentEvents });
     });
     room.onMessage("notice", (n: Notice) => this.onNotice(n));
