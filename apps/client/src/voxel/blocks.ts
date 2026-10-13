@@ -3,7 +3,8 @@
  * so world generation and meshing can run in tests and workers.
  *
  * One block is VOXEL metres on each side. The walkable ground surface is y = 0,
- * so the top ground block occupies iy = -1 (world y -0.5..0).
+ * so the top ground block spans world y -0.5..0: global layer -1, which is
+ * local index (-0.5 - WORLD_BOUNDS.minY) / VOXEL = 7 in the world VoxelGrid.
  */
 export const VOXEL = 0.5;
 
@@ -283,6 +284,29 @@ export const B = {
   REEDS: block("reeds", "cross", "reeds"),
 } as const;
 export type BlockId = number;
+
+// Trunks, props and building fabric are never standing surfaces: the server lets
+// travellers pass through decorative trunks and props, so visuals must not climb them.
+for (const id of [
+  B.LOG,
+  B.BIRCH_LOG,
+  B.PLASTER,
+  B.TIMBER,
+  B.ROOF_RED,
+  B.ROOF_BLUE,
+  B.ROOF_TEAL,
+  B.ROOF_RED_SLAB,
+  B.ROOF_BLUE_SLAB,
+  B.ROOF_TEAL_SLAB,
+  B.GLASS_LIT,
+  B.DOOR,
+  B.LANTERN,
+  B.HAY,
+  B.PUMPKIN,
+  B.CRATE,
+  B.BARREL,
+])
+  defs[id].ground = false;
 
 export const BLOCKS: readonly BlockDef[] = defs;
 const opaque = new Uint8Array(256);
