@@ -207,15 +207,19 @@ test(
   },
 );
 
-test("commands are limited to fifty per second", async () => {
+test("commands are limited per kind like the server", async () => {
   const p = probe(new LocalConnection({ storage: memoryStorage() }));
   try {
     await p.connection.join("Hasty", "knight");
-    // Synchronous sends share one simulated second.
-    for (let i = 0; i < 70; i++)
+    // Synchronous sends share one simulated second: 10 actions, 30 moves.
+    for (let i = 0; i < 40; i++)
       p.connection.send({ type: "interact", target: "inscription" });
+    for (let i = 0; i < 40; i++)
+      p.connection.send({ type: "move", x: i % 2 ? 1 : -1, z: 0 });
     await sleep(60);
-    assert.equal(p.notices.length, 50);
+    assert.equal(p.notices.length, 10);
+    // The 30th accepted move carries sequence 70 (10 actions + 30 dropped + 30).
+    assert.equal(p.connection.world.actors.get(p.connection.id)!.lastSeq, 70);
   } finally {
     p.connection.leave();
   }

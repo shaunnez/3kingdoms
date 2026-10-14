@@ -6,9 +6,13 @@ import type {
   Snapshot,
 } from "../../../packages/contracts/game";
 import type { GameConnection, Intent } from "./network";
+import { retainEvents } from "./events";
+
+export { retainEvents } from "./events";
 
 // Solo play: the authoritative World runs in the page with the same cadence and
-// limits as apps/server/main.ts (20 Hz steps, 10 Hz snapshots, 50 commands/s).
+// command limits as apps/server/main.ts (20 Hz steps, 10 Hz snapshots, 30
+// moves and 10 other commands per second).
 
 export type SoloStorage = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 export type SoloLocks = Pick<LockManager, "request">;
@@ -45,25 +49,17 @@ const MAX_CATCH_UP = 5;
 const SAVE_EVERY_MS = 5000;
 const SAVE_GAP_MS = 250;
 const MAX_SAVE_CHARS = 2 * 1024 * 1024;
-const RATE_LIMIT = 50;
-const EVENT_LIFETIME = 2;
+const LIMITS = { move: 30, action: 10 };
 const LOCK_WAIT_MS = 1000;
 /** Status shown once the in-page world has stopped; only a reload clears it. */
 export const SOLO_STOPPED =
   "The solo world stopped after an error. Reload to continue, or start a new solo world from the entrance screen.";
 
-/** The wire sends new events once; retain their short presentation lifetime locally. */
-export function retainEvents(
-  recent: CombatEvent[],
-  snapshot: Pick<Snapshot, "now" | "events">,
-): CombatEvent[] {
-  const last = recent.at(-1)?.id ?? 0;
-  const kept = recent.filter((e) => snapshot.now - e.at < EVENT_LIFETIME);
-  for (const e of snapshot.events) if (e.id > last) kept.push(e);
-  return kept;
-}
-
-/** Mirrors the server's onAuth sanitisation. */
+/**
+ * The server's character filter. The server also normalises to NFKC first and
+ * then applies its name rules (apps/server/names.ts); solo has no other
+ * travellers to impersonate.
+ */
 export function sanitiseName(name: unknown): string {
   const clean =
     typeof name === "string"
@@ -292,7 +288,7 @@ export class LocalConnection implements GameConnection {
   private joined = false;
   private failed = false;
   private seq = 0;
-  private rate = { second: -1, count: 0 };
+  private rate = { second: -1, move: 0, action: 0 };
   private lastBroadcastEvent = 0;
   private recentEvents: CombatEvent[] = [];
   private accumulator = 0;
@@ -339,7 +335,7 @@ export class LocalConnection implements GameConnection {
     );
     this.joined = true;
     this.seq = 0;
-    this.rate = { second: -1, count: 0 };
+    this.rate = { second: -1, move: 0, action: 0 };
     this.recentEvents = [];
     this.accumulator = 0;
     this.lastPump = this.clock();
@@ -358,9 +354,10 @@ export class LocalConnection implements GameConnection {
     if (!this.joined) return;
     const payload = detach({ ...command, seq: ++this.seq });
     const second = Math.floor(this.world.now);
-    if (this.rate.second !== second) this.rate = { second, count: 0 };
-    if (++this.rate.count > RATE_LIMIT) return;
-    if (this.world.command(this.id, payload) && payload.type !== "move")
+    if (this.rate.second !== second) this.rate = { second, move: 0, action: 0 };
+    const kind = payload.type === "move" ? "move" : "action";
+    if (++this.rate[kind] > LIMITS[kind]) return;
+    if (this.world.command(this.id, payload) && kind !== "move")
       this.dirty = true;
     if (this.world.notices.length && !this.noticeFlushQueued) {
       this.noticeFlushQueued = true;

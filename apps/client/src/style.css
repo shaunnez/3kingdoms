@@ -2569,6 +2569,69 @@ small {
   }
 }
 
+/* The in-game Reduced motion setting mirrors the system preference above. */
+:root.reduce-motion .brand-lockup,
+:root.reduce-motion .logo-letter,
+:root.reduce-motion .enter:not(:disabled),
+:root.reduce-motion .interact,
+:root.reduce-motion .nameplate.selected::before,
+:root.reduce-motion .speaker-portrait,
+:root.reduce-motion .death-icon,
+:root.reduce-motion .safety.open,
+:root.reduce-motion .level-up .burst,
+:root.reduce-motion .spinner {
+  animation: none;
+}
+:root.reduce-motion .low-health {
+  animation: none;
+  opacity: 0.8;
+}
+:root.reduce-motion .combat-number b,
+:root.reduce-motion .level-up {
+  animation: simple-fade 1.1s linear both;
+}
+:root.reduce-motion .level-up {
+  animation-duration: 2s;
+}
+:root.reduce-motion .panel,
+:root.reduce-motion .dialogue,
+:root.reduce-motion .arrival-card,
+:root.reduce-motion .target-frame,
+:root.reduce-motion .toast,
+:root.reduce-motion .death-card,
+:root.reduce-motion .slot:hover .ability-tip,
+:root.reduce-motion .slot:focus-visible .ability-tip {
+  animation: none;
+}
+:root.reduce-motion .primary,
+:root.reduce-motion .secondary,
+:root.reduce-motion .slot,
+:root.reduce-motion .guild-tile,
+:root.reduce-motion .utility-bar button,
+:root.reduce-motion .guild-grid button,
+:root.reduce-motion .nameplate .tag,
+:root.reduce-motion .close,
+:root.reduce-motion .loot-item {
+  transition: none;
+}
+:root.reduce-motion .primary:hover:not(:disabled),
+:root.reduce-motion .secondary:hover:not(:disabled),
+:root.reduce-motion .slot:hover:not(:disabled),
+:root.reduce-motion .guild-tile:hover,
+:root.reduce-motion .utility-bar button:hover,
+:root.reduce-motion .guild-grid button:hover,
+:root.reduce-motion .close:hover,
+:root.reduce-motion .nameplate:hover .tag {
+  transform: none;
+}
+
+.connection-banner.waiting {
+  padding-right: 16px;
+}
+.connection-banner .spinner {
+  flex: none;
+}
+
 /* ───────────── scale for large and small screens ─────────────
    The layout is authored at 1280×720; zoom keeps 1920×1080 identical at 1.5×. */
 @media (min-width: 1560px) and (min-height: 880px) {

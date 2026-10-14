@@ -10,6 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test tests/*.test.ts",
     "build": "tsc --noEmit && vite build --config apps/client/vite.config.ts",
+    "build:hosted": "vite build --config apps/client/vite.config.ts --mode hosted && node tools/check-hosted-bundle.mjs dist/hosted && node tools/precompress.mjs dist/hosted",
+    "check:hosted": "node tools/check-hosted-bundle.mjs dist/hosted",
     "validate:plan": "python3 tools/validate_plan.py",
     "preview": "node tools/preview.mjs",
     "validate:assets": "node tools/validate-runtime.mjs",

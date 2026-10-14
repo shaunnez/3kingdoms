@@ -364,8 +364,12 @@ export class GameScene {
       rig: (id) => this.actors.get(id)?.rig,
       selfId: () => this.selfId,
       groundHeight: (x, z) => this.world?.surfaceHeight(x, z) ?? 0,
-      shake: (intensity, duration) => this.shake(intensity, duration),
-      hitStop: (duration) => this.hitStop(duration),
+      shake: (intensity, duration) => {
+        if (!this.reducedMotion) this.shake(intensity, duration);
+      },
+      hitStop: (duration) => {
+        if (!this.reducedMotion) this.hitStop(duration);
+      },
       flashScreen: (color, strength) => {
         if (this.level === "low") strength *= 0.7;
         this.post.flashScreen(color, strength);
@@ -464,6 +468,14 @@ export class GameScene {
   get dayPhase(): number {
     return this.phase;
   }
+
+  /** Player setting, off by default: no shake, hit-stop or big camera moves. */
+  setReducedMotion(enabled: boolean) {
+    this.reducedMotion = enabled;
+    this.post.reducedMotion = enabled;
+    if (enabled) this.shakeLeft = this.stopUntil = 0;
+  }
+  private reducedMotion = false;
 
   setDayCycle(enabled: boolean) {
     this.dayCycle = enabled;
@@ -1137,7 +1149,10 @@ export class GameScene {
       cam.radius + (this.radiusGoal - cam.radius) * (1 - Math.exp(-pdt * 10));
     const target = this.camTarget.copyFrom(this.follow);
     if (this.handoff >= 0) {
-      this.handoff = Math.min(1, this.handoff + dt / HANDOFF_SECONDS);
+      // Reduced motion skips the long attract-to-follow camera glide.
+      this.handoff = this.reducedMotion
+        ? 1
+        : Math.min(1, this.handoff + dt / HANDOFF_SECONDS);
       const e = easeInOut(this.handoff);
       const from = this.handoffFrom;
       alpha = from.alpha + wrapAngle(this.alphaGoal - from.alpha) * e;
