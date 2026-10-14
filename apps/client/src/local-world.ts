@@ -99,7 +99,11 @@ function pageStorage(): SoloStorage {
 }
 
 function pageLocks(): SoloLocks | null {
-  return (typeof navigator !== "undefined" && navigator.locks) || null;
+  try {
+    return (typeof navigator !== "undefined" && navigator.locks) || null;
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -115,16 +119,21 @@ function acquireSave(locks: SoloLocks | null): Promise<(() => void) | null> {
       ? AbortSignal.timeout(LOCK_WAIT_MS)
       : undefined;
   return new Promise((resolve) => {
-    locks
-      .request(
-        SOLO_WORLD_KEY,
-        signal ? { signal } : { ifAvailable: true },
-        (lock) => {
-          if (!lock) return resolve(null);
-          return new Promise<void>((release) => resolve(() => release()));
-        },
-      )
-      .catch(() => resolve(signal?.aborted ? null : () => {}));
+    const unguarded = () => resolve(() => {});
+    try {
+      locks
+        .request(
+          SOLO_WORLD_KEY,
+          signal ? { signal } : { ifAvailable: true },
+          (lock) => {
+            if (!lock) return resolve(null);
+            return new Promise<void>((release) => resolve(() => release()));
+          },
+        )
+        .catch(() => (signal?.aborted ? resolve(null) : unguarded()));
+    } catch {
+      unguarded();
+    }
   });
 }
 
