@@ -56,6 +56,9 @@ export class World implements CombatHost {
         p.move = { x: 0, z: 0 };
         p.cast = null;
         p.channel = null;
+        // Saves before the redirect share was stored cannot carry it over.
+        if (p.interpose && typeof p.interpose.share !== "number")
+          p.interpose = null;
         this.actors.set(p.id, p);
       }
       for (const c of saved.corpses) this.corpses.set(c.id, c);

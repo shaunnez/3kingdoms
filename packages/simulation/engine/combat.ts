@@ -358,6 +358,7 @@ export class Combat {
           owner: p.id,
           until: now + e.duration,
           remaining: p.maxHp * e.capOfCasterMaxHp,
+          share: e.share,
         };
         return;
       case "regen":
@@ -396,7 +397,7 @@ export class Combat {
       const guard = h.actors.get(b.interpose.owner);
       if (guard && guard.life === "alive" && h.canHarm(a, guard)) {
         const share = Math.min(
-          damage * (effectOf(guard.guild, "interpose")?.share ?? 0),
+          damage * b.interpose.share,
           b.interpose.remaining,
         );
         damage -= share;

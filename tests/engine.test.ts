@@ -53,3 +53,36 @@ test("creatures that fight have attack, chase and leash rules", () => {
     assert.ok(def.leash > def.sight);
   }
 });
+
+test("interpose keeps its share if the knight changes guild before a hit", () => {
+  const w = new World();
+  for (const p of w.actors.values()) if (p.kind !== "player") p.active = false;
+  const send = (id: string, body: Record<string, unknown>) =>
+    w.command(id, { seq: w.actors.get(id)!.lastSeq + 1, ...body });
+  const run = (seconds: number) => {
+    for (let t = 0; t < seconds; t += 0.05) w.step(0.05);
+  };
+  const knight = w.join("k", "Knight", "knight"),
+    ally = w.join("a", "Ally", "knight"),
+    foe = w.join("f", "Foe", "knight");
+  Object.assign(knight, { x: 0, z: -2 });
+  Object.assign(ally, { x: 1, z: -2 });
+  Object.assign(foe, { x: 1, z: 44 });
+  assert.ok(send("k", { type: "ability", key: "4", target: "a" }));
+  run(0.3);
+  assert.ok(ally.interpose, "Interpose did not land");
+  assert.ok(send("k", { type: "guild", guild: "cyborg" }));
+  Object.assign(knight, { x: 0, z: 42 });
+  Object.assign(ally, { x: 1, z: 42 });
+  assert.ok(send("f", { type: "ability", key: "basic", target: "a" }));
+  run(0.4);
+  const redirected = w.events.find(
+    (e) => e.type === "hit" && e.source === "f" && e.target === "k",
+  );
+  const struck = w.events.find(
+    (e) => e.type === "hit" && e.source === "f" && e.target === "a",
+  );
+  // A 64-power cut: 30% (19.2) goes to the guard, the ally takes the rest.
+  assert.equal(redirected?.amount, 19, "The redirect share was lost");
+  assert.equal(struck?.amount, 45);
+});

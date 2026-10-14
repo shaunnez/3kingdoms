@@ -48,7 +48,13 @@ export type Actor = ActorView & {
   healUntil: number;
   healTick: number;
   challenge: { owner: string; until: number } | null;
-  interpose: { owner: string; until: number; remaining: number } | null;
+  /** `share` is fixed when applied, so later guild changes cannot alter it. */
+  interpose: {
+    owner: string;
+    until: number;
+    remaining: number;
+    share: number;
+  } | null;
   channel:
     | (
         | {
