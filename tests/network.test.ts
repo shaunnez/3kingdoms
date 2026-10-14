@@ -8,6 +8,9 @@ import { Client, type Room } from "@colyseus/sdk";
 import { World } from "../packages/simulation/world";
 import { PROTOCOL, type Snapshot } from "../packages/contracts/game";
 
+// Parallel checkouts can run the suite at once on separate ports.
+const PORT = process.env.THREEFOLD_TEST_PORT ?? "2579";
+
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 async function until(
   condition: () => boolean,
@@ -63,7 +66,7 @@ test(
       process.execPath,
       ["--import", "tsx", "apps/server/main.ts"],
       {
-        env: { ...process.env, THREEFOLD_PORT: "2579", THREEFOLD_SAVE: save },
+        env: { ...process.env, THREEFOLD_PORT: PORT, THREEFOLD_SAVE: save },
         stdio: ["ignore", "pipe", "pipe"],
       },
     );
@@ -71,7 +74,7 @@ test(
     child.stdout.on("data", (b) => (logs += b.toString()));
     child.stderr.on("data", (b) => (logs += b.toString()));
     const peers: Peer[] = [];
-    const client = new Client("http://127.0.0.1:2579");
+    const client = new Client(`http://127.0.0.1:${PORT}`);
     async function join(token: string): Promise<Peer> {
       const room = await client.joinOrCreate("briar-gate", {
         protocol: PROTOCOL,
