@@ -6,9 +6,13 @@ import type {
   Snapshot,
 } from "../../../packages/contracts/game";
 import type { GameConnection, Intent } from "./network";
+import { retainEvents } from "./events";
+
+export { retainEvents } from "./events";
 
 // Solo play: the authoritative World runs in the page with the same cadence and
-// limits as apps/server/main.ts (20 Hz steps, 10 Hz snapshots, 50 commands/s).
+// command limits as apps/server/main.ts (20 Hz steps, 10 Hz snapshots, 30
+// moves and 10 other commands per second).
 
 export type SoloStorage = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 export type SoloLocks = Pick<LockManager, "request">;
@@ -33,28 +37,29 @@ export class SoloBusyError extends Error {
 
 export const SOLO_TOKEN_KEY = "threefold-solo-token";
 export const SOLO_WORLD_KEY = "threefold-solo-world-v1";
+/** Where an unreadable or abandoned save is set aside for recovery. */
+export const SOLO_BACKUP_KEY = `${SOLO_WORLD_KEY}-corrupt`;
+/** Backups kept: the newest at SOLO_BACKUP_KEY, older ones at `-1` and `-2`. */
+export const SOLO_BACKUPS = 3;
+const backupKey = (age: number) =>
+  age ? `${SOLO_BACKUP_KEY}-${age}` : SOLO_BACKUP_KEY;
 const STEP_MS = 50;
 const PUMP_MS = 20;
 const MAX_CATCH_UP = 5;
 const SAVE_EVERY_MS = 5000;
 const SAVE_GAP_MS = 250;
 const MAX_SAVE_CHARS = 2 * 1024 * 1024;
-const RATE_LIMIT = 50;
-const EVENT_LIFETIME = 2;
+const LIMITS = { move: 30, action: 10 };
 const LOCK_WAIT_MS = 1000;
+/** Status shown once the in-page world has stopped; only a reload clears it. */
+export const SOLO_STOPPED =
+  "The solo world stopped after an error. Reload to continue, or start a new solo world from the entrance screen.";
 
-/** The wire sends new events once; retain their short presentation lifetime locally. */
-export function retainEvents(
-  recent: CombatEvent[],
-  snapshot: Pick<Snapshot, "now" | "events">,
-): CombatEvent[] {
-  const last = recent.at(-1)?.id ?? 0;
-  const kept = recent.filter((e) => snapshot.now - e.at < EVENT_LIFETIME);
-  for (const e of snapshot.events) if (e.id > last) kept.push(e);
-  return kept;
-}
-
-/** Mirrors the server's onAuth sanitisation. */
+/**
+ * The server's character filter. The server also normalises to NFKC first and
+ * then applies its name rules (apps/server/names.ts); solo has no other
+ * travellers to impersonate.
+ */
 export function sanitiseName(name: unknown): string {
   const clean =
     typeof name === "string"
@@ -166,6 +171,14 @@ class SafeStorage {
       return false;
     }
   }
+  remove(key: string) {
+    this.memory.delete(key);
+    try {
+      this.primary.removeItem(key);
+    } catch {
+      // Unusable storage holds nothing to remove.
+    }
+  }
 }
 
 function randomToken(): string {
@@ -274,8 +287,10 @@ export class LocalConnection implements GameConnection {
   private timer: ReturnType<typeof setInterval> | null = null;
   private joined = false;
   private failed = false;
+  /** An unreadable save that could not be backed up stays where it is. */
+  private keepUnreadable = false;
   private seq = 0;
-  private rate = { second: -1, count: 0 };
+  private rate = { second: -1, move: 0, action: 0 };
   private lastBroadcastEvent = 0;
   private recentEvents: CombatEvent[] = [];
   private accumulator = 0;
@@ -300,9 +315,7 @@ export class LocalConnection implements GameConnection {
   async join(name: string, guild: Guild): Promise<void> {
     if (this.joined) this.leave();
     if (this.failed) {
-      this.onStatus(
-        "The solo world stopped after an error. Reload to continue.",
-      );
+      this.onStatus(SOLO_STOPPED);
       return;
     }
     const attempt = ++this.attempt;
@@ -324,7 +337,7 @@ export class LocalConnection implements GameConnection {
     );
     this.joined = true;
     this.seq = 0;
-    this.rate = { second: -1, count: 0 };
+    this.rate = { second: -1, move: 0, action: 0 };
     this.recentEvents = [];
     this.accumulator = 0;
     this.lastPump = this.clock();
@@ -343,9 +356,10 @@ export class LocalConnection implements GameConnection {
     if (!this.joined) return;
     const payload = detach({ ...command, seq: ++this.seq });
     const second = Math.floor(this.world.now);
-    if (this.rate.second !== second) this.rate = { second, count: 0 };
-    if (++this.rate.count > RATE_LIMIT) return;
-    if (this.world.command(this.id, payload) && payload.type !== "move")
+    if (this.rate.second !== second) this.rate = { second, move: 0, action: 0 };
+    const kind = payload.type === "move" ? "move" : "action";
+    if (++this.rate[kind] > LIMITS[kind]) return;
+    if (this.world.command(this.id, payload) && kind !== "move")
       this.dirty = true;
     if (this.world.notices.length && !this.noticeFlushQueued) {
       this.noticeFlushQueued = true;
@@ -365,6 +379,39 @@ export class LocalConnection implements GameConnection {
     this.world.notices.length = 0;
     if (!this.failed) this.persist();
     this.unlockSave();
+  }
+
+  /**
+   * The way out of a save that keeps stopping the world: sets the save aside
+   * as the newest backup and starts an empty world with the same traveller
+   * token. The save is moved, never deleted; if the move cannot be confirmed
+   * this rejects and the save stays where it was.
+   */
+  async startFresh(): Promise<void> {
+    this.leave();
+    const release = await acquireSave(this.locks);
+    if (!release) throw new SoloBusyError();
+    try {
+      const raw = this.storage.get(SOLO_WORLD_KEY);
+      if (raw !== null) {
+        // A refused write lands in page memory, which a reload loses.
+        if (!this.preserve(raw))
+          throw new Error(
+            "This browser would not store a backup, so the solo world was left as it is.",
+          );
+        this.storage.remove(SOLO_WORLD_KEY);
+        if (this.storage.get(SOLO_WORLD_KEY) !== null)
+          throw new Error(
+            "This browser would not clear the solo world, so it was left as it is.",
+          );
+      }
+      this.world = new World();
+      this.savedJson = null;
+      this.failed = false;
+      this.keepUnreadable = false;
+    } finally {
+      release();
+    }
   }
 
   private pump = () => {
@@ -395,9 +442,7 @@ export class LocalConnection implements GameConnection {
       this.stopTimers();
       this.unlockSave();
       report(error);
-      this.onStatus(
-        "The solo world stopped after an error. Reload to continue.",
-      );
+      this.onStatus(SOLO_STOPPED);
       return;
     }
     // Background tabs fire rarely; drop the backlog instead of fast-forwarding.
@@ -468,6 +513,13 @@ export class LocalConnection implements GameConnection {
       );
       return;
     }
+    if (this.keepUnreadable) {
+      this.warnSave(
+        "Solo save withheld: the unreadable save could not be backed up.",
+      );
+      this.savedJson = json;
+      return;
+    }
     // A refused write is kept in page memory, which a reload loses.
     if (!this.storage.set(SOLO_WORLD_KEY, json))
       this.warnSave("Solo save refused by browser storage.");
@@ -501,8 +553,23 @@ export class LocalConnection implements GameConnection {
     } catch (error) {
       // Keep the unreadable save for recovery, then start a fresh world.
       console.warn("Starting a fresh solo world:", error);
-      this.storage.set(`${SOLO_WORLD_KEY}-corrupt`, raw);
+      if (!this.preserve(raw)) this.keepUnreadable = true;
       return new World();
     }
+  }
+
+  /**
+   * Sets a save aside as the newest backup. Older backups shift down a slot
+   * by copying, so a refused write never loses one; only the backup beyond
+   * SOLO_BACKUPS is dropped. Returns false if any write was refused.
+   */
+  private preserve(raw: string): boolean {
+    if (this.storage.get(backupKey(0)) === raw) return true;
+    for (let age = SOLO_BACKUPS - 1; age > 0; age--) {
+      const older = this.storage.get(backupKey(age - 1));
+      if (older !== null && !this.storage.set(backupKey(age), older))
+        return false;
+    }
+    return this.storage.set(backupKey(0), raw);
   }
 }

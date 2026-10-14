@@ -165,9 +165,23 @@ export class ScreenPost {
     return pp;
   }
 
+  /**
+   * Reduced motion (a player setting, off by default): no colour-split
+   * pulses, softer flashes at most twice a second, and a steady low-health
+   * tint instead of a beating one.
+   */
+  reducedMotion = false;
+  private lastFlash = -Infinity;
+
   /** Full-screen colour pulse (CSS hex), e.g. red when the player is hurt. */
   flashScreen(color: string, strength: number) {
-    const s = Math.min(1, Math.max(0, strength));
+    let s = Math.min(1, Math.max(0, strength));
+    if (this.reducedMotion) {
+      const now = performance.now();
+      if (now - this.lastFlash < 500) return;
+      this.lastFlash = now;
+      s = Math.min(s, 0.3);
+    }
     if (s < this.flash * 0.6) return;
     Color3.FromHexString(color).toLinearSpaceToRef(this.tint);
     this.flashColor.copyFrom(Color3.FromHexString(color));
@@ -178,7 +192,7 @@ export class ScreenPost {
 
   /** Brief RGB split for big impacts (pixels at 1080p). */
   pulseAberration(strength: number) {
-    if (this.level === "low") return;
+    if (this.level === "low" || this.reducedMotion) return;
     this.aberration = Math.max(this.aberration, 6 * Math.min(1, strength));
   }
 
@@ -199,9 +213,10 @@ export class ScreenPost {
     // Double-thump heartbeat while health is low (matches the HUD pulse).
     const low = hp !== null && life === "alive" && hp < 0.3;
     const phase = (time % 1.05) / 1.05;
-    const thump =
-      Math.exp(-((phase - 0.08) ** 2) / 0.0015) +
-      0.7 * Math.exp(-((phase - 0.3) ** 2) / 0.0015);
+    const thump = this.reducedMotion
+      ? 0.5
+      : Math.exp(-((phase - 0.08) ** 2) / 0.0015) +
+        0.7 * Math.exp(-((phase - 0.3) ** 2) / 0.0015);
     const beatTarget = low ? (0.35 + 0.65 * thump) * (1 - hp / 0.3) * 0.7 : 0;
     this.beat += (beatTarget - this.beat) * Math.min(1, dt * 14);
 

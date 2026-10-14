@@ -46,9 +46,11 @@ Open `http://127.0.0.1:4177/`, choose **Solo**, pick Knight or Cyborg and enter.
 
 For multiplayer, run `npm run dev` (game server and client), then choose **Multiplayer** or open `http://127.0.0.1:4177/?server`. Two browser tabs create independent characters and can fight outside the gate. Red names lose two eligible items on death; ordinary victims lose one. Protected starter/quest equipment remains yours. Guards and merchants enforce the outlaw rules. `?time=0.9` freezes the day/night cycle (0–1; 0.9 is night). Add `?lab=1` for explicit local capture/benchmark controls.
 
+**Hosted playtest (private).** `npm run build:hosted && npm run build:server` builds the invite-only playtest server, which serves a page without solo code; `npm start` runs it with the public-mode variables shown in "Rehearse locally first" in [deployment](docs/deployment.md). The `Dockerfile` packages it for Railway. Follow [deployment](docs/deployment.md); testers should read the [privacy note](docs/playtest-privacy.md).
+
 For a production-bundle preview, run `npm run build`, then `npm run preview` and open `http://127.0.0.1:4181/`. `npm run build:artifact -- [outDir] [--standalone]` writes a static solo build: a small page plus `game.js` and `game.css`, with fonts inlined. By default the page is a fragment for hosts that wrap pages in their own document, such as a claude.ai Artifact; `--standalone` emits a complete page for any plain static host.
 
-The multiplayer server binds to loopback. Its anonymous local identity and atomic JSON save (`.local/checkpoint-world.json`) are checkpoint infrastructure, not production account security or the planned PostgreSQL service. Do not expose it to the internet. Generated assets are already included; `npm ci`, builds and tests never purchase generation.
+The multiplayer server binds to loopback by default; the only approved exception is the invite-only playtest in [deployment](docs/deployment.md). Its anonymous local identity and atomic JSON save (`.local/checkpoint-world.json`) are checkpoint infrastructure, not production account security or the planned PostgreSQL service. Do not expose it to the internet except through that documented private playtest. Generated assets are already included; `npm ci`, builds and tests never purchase generation.
 
 ```sh
 npm run typecheck

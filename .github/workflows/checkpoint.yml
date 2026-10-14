@@ -27,3 +27,35 @@ jobs:
       - run: npm run validate:plan
       - name: Check deterministic generated documents
         run: git diff --exit-code -- design/asset-manifest.json design/content-catalogue.json docs/catalogue-totals.md docs/guild-ability-catalogue.md devlog/index.html devlog/posts/
+  hosted:
+    # The private playtest image (docs/deployment.md): hosted page without solo
+    # code, bundled server, and the container's start, health and SIGTERM save.
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Normal build still carries solo mode (positive control)
+        run: node tools/check-hosted-bundle.mjs dist/client --expect-solo
+      - name: Hosted build carries no solo code (scan runs inside)
+        run: npm run build:hosted
+      - run: npm run build:server
+      - run: npm run smoke:server
+      - run: docker build -t threefold:ci .
+      - name: Container serves, refuses no one by accident, and saves on SIGTERM
+        run: |
+          docker run -d --name tf -p 2620:8080 -v tfdata:/data \
+            -e THREEFOLD_PLAYTEST_KEYS=ci:ci-key-not-secret-0001 \
+            -e THREEFOLD_ORIGINS=http://127.0.0.1:2620 threefold:ci
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:2620/health && break; sleep 1; done
+          curl -sfI http://127.0.0.1:2620/ | grep -i '^content-security-policy:'
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:2620/evidence/x)" = 404
+          docker stop -t 15 tf
+          test "$(docker inspect -f '{{.State.ExitCode}}' tf)" = 0
+          docker logs tf 2>&1 | grep '"event":"shutdown"'
+          docker run --rm -v tfdata:/data node:22-bookworm-slim ls -l /data/world.json

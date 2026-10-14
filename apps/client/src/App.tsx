@@ -16,14 +16,19 @@ import {
 } from "../../../packages/contracts/game";
 import { NPCS } from "../../../packages/simulation/map";
 import {
+  basicRepeatDue,
   createConnection,
+  joinFailure,
   preferredMode,
   type ConnectionMode,
   type GameConnection,
   type Intent,
+  type StatusAction,
 } from "./network";
+import { HOSTED } from "./build-flags";
+import { ConnectionBanner, InviteField } from "./ConnectionUi";
 import { GameScene } from "./scene";
-import { SoloBusyError } from "./local-world";
+import { LocalConnection, SOLO_STOPPED, SoloBusyError } from "./local-world";
 import { Soundscape } from "./audio";
 import { FieldLab } from "./FieldLab";
 import { Minimap } from "./Minimap";
@@ -44,11 +49,12 @@ const QUALITIES: readonly Quality[] = ["low", "medium", "high"];
 type Handlers = {
   snapshot: (s: Snapshot) => void;
   notice: (n: Notice) => void;
-  status: (text: string) => void;
+  status: (text: string, action?: StatusAction) => void;
 };
 
 const QUALITY_KEY = "threefold-quality",
-  DAY_CYCLE_KEY = "threefold-day-cycle";
+  DAY_CYCLE_KEY = "threefold-day-cycle",
+  REDUCED_MOTION_KEY = "threefold-reduced-motion";
 const readPref = (key: string): string | null => {
   try {
     return localStorage.getItem(key);
@@ -180,7 +186,7 @@ export default function App() {
   const wire = (c: GameConnection) => {
     c.onSnapshot = (s) => handlers.current.snapshot(s);
     c.onNotice = (n) => handlers.current.notice(n);
-    c.onStatus = (text) => handlers.current.status(text);
+    c.onStatus = (text, action) => handlers.current.status(text, action);
     return c;
   };
   const [initialConnection] = useState(() =>
@@ -191,14 +197,18 @@ export default function App() {
     keys = useRef(new Set<string>()),
     targetRef = useRef(""),
     destination = useRef<Vec2 | null>(null),
+    lastLife = useRef<ActorView["life"] | undefined>(undefined),
+    toastTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined),
     blocked = useRef(false);
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null),
     [selected, setSelected] = useState(""),
     [progress, setProgress] = useState("Opening the Briar Gate…"),
     [ready, setReady] = useState(false),
     [status, setStatus] = useState(""),
+    [statusAction, setStatusAction] = useState<StatusAction | undefined>(),
     [joining, setJoining] = useState(false),
     [joinError, setJoinError] = useState(""),
+    [confirmFresh, setConfirmFresh] = useState(false),
     [mode, setMode] = useState<ConnectionMode>(initialConnection.mode);
   const [guild, setGuild] = useState<Guild>("knight"),
     [name, setName] = useState("Thorne"),
@@ -217,9 +227,18 @@ export default function App() {
     [dayCycle, setDayCycleState] = useState(
       () => readPref(DAY_CYCLE_KEY) !== "off",
     ),
+    [reducedMotion, setReducedMotionState] = useState(
+      () => readPref(REDUCED_MOTION_KEY) === "on",
+    ),
     [help, setHelp] = useState(false),
     [corpse, setCorpse] = useState<string | null>(null),
     [logOpen, setLogOpen] = useState(false);
+  /** One toast at a time; a newer toast restarts the four-second timer. */
+  const showToast = (text: string) => {
+    clearTimeout(toastTimer.current);
+    setToast(text);
+    toastTimer.current = setTimeout(() => setToast(""), 4000);
+  };
   const select = (id: string) => {
     const s = snap.current,
       actor = s?.actors.find((a) => a.id === id),
@@ -296,6 +315,10 @@ export default function App() {
         const q = storedQuality();
         if (q) renderer.setQuality(q);
         if (readPref(DAY_CYCLE_KEY) === "off") renderer.setDayCycle(false);
+        if (readPref(REDUCED_MOTION_KEY) === "on") {
+          renderer.setReducedMotion(true);
+          document.documentElement.classList.add("reduce-motion");
+        }
         setReady(true);
       })
       .catch((error) => {
@@ -310,6 +333,9 @@ export default function App() {
         sound.current.events(s.events, s.actors, s.self.id);
         const p = s.actors.find((a) => a.id === s.self.id);
         sound.current.zone(Boolean(p && !p.safe));
+        // Falling, being revived or respawning drops any click-to-move target.
+        if (p && p.life !== lastLife.current) destination.current = null;
+        lastLife.current = p?.life;
       },
       notice: (n) => {
         setLog((lines) => [
@@ -317,12 +343,12 @@ export default function App() {
           `${n.speaker ? n.speaker + ": " : ""}${n.text}`,
         ]);
         if (n.kind === "dialogue") setDialogue(n);
-        else {
-          setToast(n.text);
-          setTimeout(() => setToast(""), 4000);
-        }
+        else showToast(n.text);
       },
-      status: setStatus,
+      status: (text, action) => {
+        setStatus(text);
+        setStatusAction(action);
+      },
     };
     const stop = () => {
       keys.current.clear();
@@ -419,7 +445,9 @@ export default function App() {
     window.addEventListener("blur", stop);
     document.addEventListener("visibilitychange", stop);
     let previous = { x: 0, z: 0 },
-      lastStep = 0;
+      lastStep = 0,
+      lastBasic = 0;
+    const basicsSent: number[] = [];
     const interval = setInterval(() => {
       const s = snap.current,
         p = s?.actors.find((a) => a.id === s.self.id);
@@ -452,12 +480,30 @@ export default function App() {
         sound.current.step();
         lastStep = performance.now();
       }
-      if (keys.current.has("f"))
+      // Held F repeats the basic attack, timed to its cooldown and capped so
+      // the server's ten-actions-a-second limit is never reached.
+      const now = performance.now();
+      while (basicsSent.length && now - basicsSent[0] >= 1000)
+        basicsSent.shift();
+      if (
+        keys.current.has("f") &&
+        s &&
+        basicRepeatDue(
+          s.now,
+          s.self.cooldowns.basic,
+          now - lastBasic,
+          connection.current.latencyMs,
+          basicsSent.length,
+        )
+      ) {
+        lastBasic = now;
+        basicsSent.push(now);
         connection.current.send({
           type: "ability",
           key: "basic",
           target: targetRef.current,
         });
+      }
     }, 70);
     // Dev/capture hook: ordinary player intents through the same connection
     // the keyboard uses. Only on loopback hosts or with ?lab=1.
@@ -484,6 +530,7 @@ export default function App() {
     });
     return () => {
       clearInterval(interval);
+      clearTimeout(toastTimer.current);
       window.removeEventListener("keydown", down);
       window.removeEventListener("keyup", up);
       window.removeEventListener("blur", stop);
@@ -509,6 +556,7 @@ export default function App() {
     setMode(next);
     setStatus("");
     setJoinError("");
+    setConfirmFresh(false);
   };
   async function enter() {
     setJoining(true);
@@ -520,8 +568,10 @@ export default function App() {
         .catch(() => setMuted(true));
       await connection.current.join(name, guild);
     } catch (error) {
-      const message =
-        connection.current.mode === "server"
+      const message = HOSTED
+        ? (joinFailure(error).message ??
+          "Couldn’t reach Highcross. Check your connection and try again.")
+        : connection.current.mode === "server"
           ? "Couldn’t reach the local server. Start it with npm run dev, or play solo in this browser."
           : error instanceof SoloBusyError
             ? error.message
@@ -536,10 +586,37 @@ export default function App() {
     changeMode("solo");
     void enter();
   };
+  /** Sets the solo save aside (never deletes it) and enters a new world. */
+  async function startNewSoloWorld() {
+    setConfirmFresh(false);
+    const solo = connection.current;
+    if (!(solo instanceof LocalConnection) || joining) return;
+    setJoining(true);
+    setJoinError("");
+    try {
+      await solo.startFresh();
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : `The solo world could not be set aside: ${String(error)}`;
+      setStatus(message);
+      setJoinError(message);
+      setJoining(false);
+      return;
+    }
+    await enter();
+  }
   const changeQuality = (level: Quality) => {
     setQualityState(level);
     writePref(QUALITY_KEY, level);
     scene.current?.setQuality(level);
+  };
+  const changeReducedMotion = (enabled: boolean) => {
+    setReducedMotionState(enabled);
+    writePref(REDUCED_MOTION_KEY, enabled ? "on" : "off");
+    scene.current?.setReducedMotion(enabled);
+    document.documentElement.classList.toggle("reduce-motion", enabled);
   };
   const changeDayCycle = (enabled: boolean) => {
     setDayCycleState(enabled);
@@ -661,42 +738,48 @@ export default function App() {
                 </button>
               ))}
             </div>
-            <p className="field-label" id="mode-label">
-              How to play
-            </p>
-            <div
-              className="mode-choice"
-              role="radiogroup"
-              aria-labelledby="mode-label"
-              onKeyDown={radioKeys(
-                MODES.map(([m]) => m),
-                mode,
-                changeMode,
-              )}
-            >
-              {MODES.map(([m, label, hint]) => (
-                <button
-                  key={m}
-                  role="radio"
-                  aria-checked={mode === m}
-                  tabIndex={mode === m ? 0 : -1}
-                  className={mode === m ? "chosen" : ""}
-                  disabled={joining}
-                  onClick={() => changeMode(m)}
+            {HOSTED ? (
+              <InviteField disabled={joining} />
+            ) : (
+              <>
+                <p className="field-label" id="mode-label">
+                  How to play
+                </p>
+                <div
+                  className="mode-choice"
+                  role="radiogroup"
+                  aria-labelledby="mode-label"
+                  onKeyDown={radioKeys(
+                    MODES.map(([m]) => m),
+                    mode,
+                    changeMode,
+                  )}
                 >
-                  <Px src={uiIcon(m === "solo" ? "heart" : "swords")} />
-                  <span>
-                    <strong>{label}</strong>
-                    <small>{hint}</small>
-                  </span>
-                </button>
-              ))}
-            </div>
-            <p className="mode-hint">
-              {mode === "solo"
-                ? "Your progress is kept in this browser. No server needed."
-                : "Requires npm run dev. Open several tabs for open PvP between travellers."}
-            </p>
+                  {MODES.map(([m, label, hint]) => (
+                    <button
+                      key={m}
+                      role="radio"
+                      aria-checked={mode === m}
+                      tabIndex={mode === m ? 0 : -1}
+                      className={mode === m ? "chosen" : ""}
+                      disabled={joining}
+                      onClick={() => changeMode(m)}
+                    >
+                      <Px src={uiIcon(m === "solo" ? "heart" : "swords")} />
+                      <span>
+                        <strong>{label}</strong>
+                        <small>{hint}</small>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+                <p className="mode-hint">
+                  {mode === "solo"
+                    ? "Your progress is kept in this browser. No server needed."
+                    : "Requires npm run dev. Open several tabs for open PvP between travellers."}
+                </p>
+              </>
+            )}
             <button
               className="primary enter"
               disabled={!ready || joining || !name.trim()}
@@ -718,15 +801,55 @@ export default function App() {
               {!ready && !joinError && <span className="spinner" />}
               {shownStatus}
             </p>
-            {joinError && mode === "server" && (
+            {joinError && mode === "server" && !HOSTED && (
               <button className="secondary solo-fallback" onClick={playSolo}>
                 <Px src={uiIcon("heart")} />
                 Play solo instead
               </button>
             )}
+            {mode === "solo" &&
+              (confirmFresh ? (
+                // In-page, since sandboxed hosts can silently refuse confirm().
+                <div
+                  className="fresh-confirm"
+                  role="group"
+                  aria-labelledby="fresh-confirm-copy"
+                >
+                  <p id="fresh-confirm-copy">
+                    Start a new solo world? Your current one is kept as a backup
+                    in this browser, not deleted. The three most recent backups
+                    are kept.
+                  </p>
+                  <div>
+                    <button
+                      className="secondary"
+                      autoFocus
+                      onClick={() => setConfirmFresh(false)}
+                    >
+                      Keep my world
+                    </button>
+                    <button
+                      className="secondary"
+                      disabled={!ready || joining || !name.trim()}
+                      onClick={() => void startNewSoloWorld()}
+                    >
+                      Start new world
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  className="secondary fresh-world"
+                  disabled={!ready || joining}
+                  onClick={() => setConfirmFresh(true)}
+                >
+                  Start a new solo world
+                </button>
+              ))}
             <p className="checkpoint-note">
-              Playable development checkpoint · two practice guilds. The
-              complete game includes all twelve.
+              {HOSTED
+                ? "Private invite-only playtest · two practice guilds. The complete game includes all twelve. Your IP address is used only for abuse limits."
+                : "Playable development checkpoint · two practice guilds. The complete game includes all twelve."}
             </p>
           </section>
           <div className="entrance-bottom">
@@ -1207,10 +1330,11 @@ export default function App() {
             </span>
           </nav>
           {status !== "Connected" && (
-            <div className="connection-banner" role="alert">
-              <span>{status}</span>
-              <button onClick={() => void enter()}>Reconnect</button>
-            </div>
+            <ConnectionBanner
+              status={status}
+              action={status === SOLO_STOPPED ? "reload" : statusAction}
+              onReconnect={() => void enter()}
+            />
           )}
           {me && me.life !== "alive" && (
             <div className="death-overlay">
@@ -1237,7 +1361,10 @@ export default function App() {
                 {me.life === "dead" && (
                   <button
                     className="primary"
-                    onClick={() => connection.current.send({ type: "respawn" })}
+                    onClick={() => {
+                      destination.current = null;
+                      connection.current.send({ type: "respawn" });
+                    }}
                   >
                     <span>
                       Return to {me.red > 0 ? "Wayfarer’s Refuge" : "Highcross"}
@@ -1399,7 +1526,7 @@ export default function App() {
                         if (id === "knight" || id === "cyborg")
                           connection.current.send({ type: "guild", guild: id });
                         else
-                          setToast(
+                          showToast(
                             `${g}: visual identity established; playable kit belongs to the later guild stage.`,
                           );
                       }}
@@ -1493,6 +1620,31 @@ export default function App() {
                   </div>
                 </div>
                 <div className="setting-row">
+                  <span id="set-motion">Reduced motion</span>
+                  <div
+                    className="segmented"
+                    role="radiogroup"
+                    aria-labelledby="set-motion"
+                    onKeyDown={radioKeys(
+                      [true, false],
+                      reducedMotion,
+                      changeReducedMotion,
+                    )}
+                  >
+                    {[true, false].map((on) => (
+                      <button
+                        key={String(on)}
+                        role="radio"
+                        aria-checked={reducedMotion === on}
+                        tabIndex={reducedMotion === on ? 0 : -1}
+                        onClick={() => changeReducedMotion(on)}
+                      >
+                        {on ? "On" : "Off"}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="setting-row">
                   <span>Controls</span>
                   <button className="secondary" onClick={() => setHelp(true)}>
                     View bindings →
@@ -1500,10 +1652,15 @@ export default function App() {
                 </div>
                 <p className="muted">
                   {BUILD} · WebGL2 browser checkpoint ·{" "}
-                  {mode === "solo" ? "solo world" : "local server"}
+                  {HOSTED
+                    ? "private playtest"
+                    : mode === "solo"
+                      ? "solo world"
+                      : "local server"}
                   <br />
-                  Local identities and saves. External multiplayer deployment is
-                  a later stage.
+                  {HOSTED
+                    ? `Invite-only playtest. Characters may be reset.${connection.current.latencyMs != null ? ` Ping ${Math.round(connection.current.latencyMs)} ms.` : ""}`
+                    : "Local identities and saves. External multiplayer deployment is a later stage."}
                 </p>
               </div>
             )}

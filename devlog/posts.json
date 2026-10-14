@@ -1,5 +1,23 @@
 [
   {
+    "number": "010",
+    "slug": "an-invitation-to-highcross",
+    "date": "2026-10-14",
+    "title": "An invitation to Highcross.",
+    "category": "Multiplayer hosting",
+    "status": "Private playtest server built \u00b7 not yet deployed",
+    "summary": "THREEFOLD can now be hosted for a handful of invited friends: one server, personal invite keys, no accounts, and a page that reconnects by itself.",
+    "paragraphs": [
+      "With the voxel build in place, the owner chose to prove the game with friends before adding guilds or accounts. On 14 October they approved paid hosting on Railway for a private, invite-only playtest of about six testers in New Zealand and Australia, in Railway's Singapore region. This is a labelled exception to keeping the checkpoint server off the internet; hosted logins still come before any public test.",
+      "The same game server now serves both the page and the connection from one address. Each tester gets a personal invite key, checked before a seat is reserved. Other websites are refused, and every network address has limits on connections, join attempts and new characters. Movement and actions have separate per-second limits. Saving moves to the background, except when loot changes hands: that is written at once, and if the disk refuses it the server stops rather than let anyone act on unsaved property.",
+      "The hosted page is built without the solo world or its quest data, and the build checks this. It carries the invite field, reconnects by itself after a drop or a redeploy, and hands a character to a newer tab with a clear \u201cPlay here\u201d choice. A reduced-motion setting joins the system preference. A two-stage Docker image runs the server directly, so a redeploy's stop signal reaches the game and it saves. The runbook in docs/deployment.md covers Railway step by step, including a hard spending limit, backups, rollback and latency checks from New Zealand and Australia.",
+      "Nothing is deployed yet. Setting up Railway is the owner's step, after the pull request merges."
+    ],
+    "verified": "Built in PR #24 (issue #6). On the branch through commit d9bd052, a local rehearsal with two headless Chromium browsers confirmed: a wrong key is refused; two testers see each other; a second tab takes over the character; after a server restart, the page reconnects to the same character; no content-security-policy violations. A container rehearsal from prebuilt files confirmed it refuses to start when misconfigured, runs node as process 1 as the node user, saves on stop, and restores the same character in a new container. GitHub CI passed on d9bd052, including the hosted job, which builds the full Docker image and smoke-tests it. Codex review findings were fixed in the following commits; the bundled-server smoke test and all automated checks pass on them. No paid generation or hosting spend was used.",
+    "limitations": "Not deployed: no tester has connected over the internet, and latency from New Zealand and Australia is unmeasured. Railway has no Sydney region; the runbook names Fly.io's Sydney region as a fallback whose pricing is unchecked. There are no accounts, chat or moderation tools; characters are anonymous per browser and may be wiped. The daily new-character limit per address resets on restart. Fun has not been observed in a real playtest. Only Knight and Cyborg are playable, and the other ten guilds remain required.",
+    "media": []
+  },
+  {
     "number": "009",
     "slug": "a-world-made-of-blocks",
     "date": "2026-10-14",
