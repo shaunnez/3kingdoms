@@ -33,6 +33,12 @@ export class SoloBusyError extends Error {
 
 export const SOLO_TOKEN_KEY = "threefold-solo-token";
 export const SOLO_WORLD_KEY = "threefold-solo-world-v1";
+/** Where an unreadable or abandoned save is set aside for recovery. */
+export const SOLO_BACKUP_KEY = `${SOLO_WORLD_KEY}-corrupt`;
+/** Backups kept: the newest at SOLO_BACKUP_KEY, older ones at `-1` and `-2`. */
+export const SOLO_BACKUPS = 3;
+const backupKey = (age: number) =>
+  age ? `${SOLO_BACKUP_KEY}-${age}` : SOLO_BACKUP_KEY;
 const STEP_MS = 50;
 const PUMP_MS = 20;
 const MAX_CATCH_UP = 5;
@@ -42,6 +48,9 @@ const MAX_SAVE_CHARS = 2 * 1024 * 1024;
 const RATE_LIMIT = 50;
 const EVENT_LIFETIME = 2;
 const LOCK_WAIT_MS = 1000;
+/** Status shown once the in-page world has stopped; only a reload clears it. */
+export const SOLO_STOPPED =
+  "The solo world stopped after an error. Reload to continue, or start a new solo world from the entrance screen.";
 
 /** The wire sends new events once; retain their short presentation lifetime locally. */
 export function retainEvents(
@@ -164,6 +173,14 @@ class SafeStorage {
     } catch {
       this.memory.set(key, value);
       return false;
+    }
+  }
+  remove(key: string) {
+    this.memory.delete(key);
+    try {
+      this.primary.removeItem(key);
+    } catch {
+      // Unusable storage holds nothing to remove.
     }
   }
 }
@@ -300,9 +317,7 @@ export class LocalConnection implements GameConnection {
   async join(name: string, guild: Guild): Promise<void> {
     if (this.joined) this.leave();
     if (this.failed) {
-      this.onStatus(
-        "The solo world stopped after an error. Reload to continue.",
-      );
+      this.onStatus(SOLO_STOPPED);
       return;
     }
     const attempt = ++this.attempt;
@@ -367,6 +382,38 @@ export class LocalConnection implements GameConnection {
     this.unlockSave();
   }
 
+  /**
+   * The way out of a save that keeps stopping the world: sets the save aside
+   * as the newest backup and starts an empty world with the same traveller
+   * token. The save is moved, never deleted; if the move cannot be confirmed
+   * this rejects and the save stays where it was.
+   */
+  async startFresh(): Promise<void> {
+    this.leave();
+    const release = await acquireSave(this.locks);
+    if (!release) throw new SoloBusyError();
+    try {
+      const raw = this.storage.get(SOLO_WORLD_KEY);
+      if (raw !== null) {
+        // A refused write lands in page memory, which a reload loses.
+        if (!this.preserve(raw))
+          throw new Error(
+            "This browser would not store a backup, so the solo world was left as it is.",
+          );
+        this.storage.remove(SOLO_WORLD_KEY);
+        if (this.storage.get(SOLO_WORLD_KEY) !== null)
+          throw new Error(
+            "This browser would not clear the solo world, so it was left as it is.",
+          );
+      }
+      this.world = new World();
+      this.savedJson = null;
+      this.failed = false;
+    } finally {
+      release();
+    }
+  }
+
   private pump = () => {
     if (!this.joined) return;
     const t = this.clock();
@@ -395,9 +442,7 @@ export class LocalConnection implements GameConnection {
       this.stopTimers();
       this.unlockSave();
       report(error);
-      this.onStatus(
-        "The solo world stopped after an error. Reload to continue.",
-      );
+      this.onStatus(SOLO_STOPPED);
       return;
     }
     // Background tabs fire rarely; drop the backlog instead of fast-forwarding.
@@ -501,8 +546,23 @@ export class LocalConnection implements GameConnection {
     } catch (error) {
       // Keep the unreadable save for recovery, then start a fresh world.
       console.warn("Starting a fresh solo world:", error);
-      this.storage.set(`${SOLO_WORLD_KEY}-corrupt`, raw);
+      this.preserve(raw);
       return new World();
     }
+  }
+
+  /**
+   * Sets a save aside as the newest backup. Older backups shift down a slot
+   * by copying, so a refused write never loses one; only the backup beyond
+   * SOLO_BACKUPS is dropped. Returns false if any write was refused.
+   */
+  private preserve(raw: string): boolean {
+    if (this.storage.get(backupKey(0)) === raw) return true;
+    for (let age = SOLO_BACKUPS - 1; age > 0; age--) {
+      const older = this.storage.get(backupKey(age - 1));
+      if (older !== null && !this.storage.set(backupKey(age), older))
+        return false;
+    }
+    return this.storage.set(backupKey(0), raw);
   }
 }

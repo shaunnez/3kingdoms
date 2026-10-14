@@ -40,6 +40,30 @@ export function createConnection(mode: ConnectionMode): GameConnection {
   return mode === "server" ? new Connection() : new LocalConnection();
 }
 
+const TOKEN_KEY = "threefold-token";
+// Used for this page session when the browser refuses session storage.
+let pageToken: string | null = null;
+
+/** The reconnect token for this tab. Never throws, even without storage. */
+export function sessionToken(): string {
+  try {
+    const stored = sessionStorage.getItem(TOKEN_KEY);
+    if (stored) return stored;
+  } catch {
+    // Sandboxed frames and some private modes refuse storage entirely.
+  }
+  if (!pageToken) {
+    const bytes = crypto.getRandomValues(new Uint8Array(32));
+    pageToken = [...bytes].map((b) => b.toString(16).padStart(2, "0")).join("");
+  }
+  try {
+    sessionStorage.setItem(TOKEN_KEY, pageToken);
+  } catch {
+    // The page token still lets this page reconnect as the same traveller.
+  }
+  return pageToken;
+}
+
 export class Connection implements GameConnection {
   readonly mode = "server";
   room: Room | null = null;
@@ -52,16 +76,10 @@ export class Connection implements GameConnection {
   async join(name: string, guild: Guild) {
     this.onStatus("Connecting to Highcross…");
     this.client.http.options.credentials = "omit"; // the server never allows credentials
-    let token = sessionStorage.getItem("threefold-token");
-    if (!token) {
-      const bytes = crypto.getRandomValues(new Uint8Array(32));
-      token = [...bytes].map((b) => b.toString(16).padStart(2, "0")).join("");
-      sessionStorage.setItem("threefold-token", token);
-    }
     const room = await this.client.joinOrCreate("briar-gate", {
       name,
       guild,
-      token,
+      token: sessionToken(),
       protocol: PROTOCOL,
     });
     this.room = room;
