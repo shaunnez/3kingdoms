@@ -127,8 +127,11 @@ const CAMERA_FOV = 0.52;
 const HANDOFF_SECONDS = 1.8;
 const DAY_SECONDS = 12 * 60;
 const RUN_SPEED = 4.5;
-const MAX_LIGHTS = 8;
-const POINT_LIGHTS = 4;
+// Sky + sun/moon + 3 lamp lights + the ambient campfire light = 6. A seventh
+// light made every receiver lose its shadow (Babylon 9, observed under
+// SwiftShader), so lit materials are capped at six and lamps share the budget.
+const MAX_LIGHTS = 6;
+const POINT_LIGHTS = 3;
 const SHADOW_FRUSTUM = 48;
 const SHADOW_MAP = 2048;
 const RING_COLORS = {
@@ -1238,7 +1241,7 @@ export class GameScene {
       right.y * r + u.y * uu + dir.y * (d - 60),
       right.z * r + u.z * uu + dir.z * (d - 60),
     );
-    // Four nearest lanterns/magic lights become real point lights at night.
+    // The nearest lanterns/magic lights become real point lights at night.
     if (this.time - this.lightsCheckedAt > 0.25) {
       this.lightsCheckedAt = this.time;
       const nearest = [...this.lightCandidates]
@@ -1299,7 +1302,7 @@ export class GameScene {
   }
 
   private pendingMaterials: Material[] = [];
-  /** Every lit material gets room for all scene lights (sky, sun, 4 lamps, campfire). */
+  /** Every lit material gets room for all scene lights (sky, sun, lamps, campfire). */
   private fixMaterials() {
     for (const m of this.pendingMaterials.splice(0)) {
       const lit = m as Material & { maxSimultaneousLights?: number };

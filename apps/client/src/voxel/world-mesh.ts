@@ -29,7 +29,7 @@ import { buildWaterData, createWaterMaterial } from "./world-mesh-water";
 const CHUNK = 32;
 /** Cross (foliage) meshes merge 2 × 2 chunks: few draw calls, still culled. */
 const CROSS_GROUP = 2;
-const FADED = 0.18;
+const FADED = 0.12;
 const FADE_RATE = 7;
 /**
  * Shadow casters farther than this from the focus (XZ, metres) are dropped:
