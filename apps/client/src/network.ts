@@ -51,6 +51,7 @@ export class Connection implements GameConnection {
   onStatus: (status: string) => void = () => {};
   async join(name: string, guild: Guild) {
     this.onStatus("Connecting to Highcross…");
+    this.client.http.options.credentials = "omit"; // the server never allows credentials
     let token = sessionStorage.getItem("threefold-token");
     if (!token) {
       const bytes = crypto.getRandomValues(new Uint8Array(32));
