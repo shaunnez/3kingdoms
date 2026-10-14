@@ -502,6 +502,33 @@ test(
   },
 );
 
+test("an unreadable save that cannot be backed up is never overwritten", async () => {
+  const storage = memoryStorage();
+  storage.values.set(SOLO_WORLD_KEY, "{not json");
+  // Storage is full: backups are refused, the primary key still accepts writes.
+  const full: SoloStorage = {
+    ...storage,
+    setItem: (key, value) => {
+      if (key !== SOLO_WORLD_KEY) throw new Error("QuotaExceededError");
+      storage.setItem(key, value);
+    },
+  };
+  const warn = console.warn;
+  console.warn = () => {};
+  try {
+    const p = probe(new LocalConnection({ storage: full, locks: null }));
+    await p.connection.join("Fresh", "knight");
+    try {
+      await until(() => p.snapshots.length > 2, "The fresh world did not run");
+    } finally {
+      p.connection.leave();
+    }
+  } finally {
+    console.warn = warn;
+  }
+  assert.equal(storage.values.get(SOLO_WORLD_KEY), "{not json");
+});
+
 test("repeated resets and a later corrupt load keep the recent backups", async () => {
   const storage = memoryStorage();
   const solo = new LocalConnection({ storage, locks: null });

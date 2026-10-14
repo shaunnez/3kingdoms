@@ -291,6 +291,8 @@ export class LocalConnection implements GameConnection {
   private timer: ReturnType<typeof setInterval> | null = null;
   private joined = false;
   private failed = false;
+  /** An unreadable save that could not be backed up stays where it is. */
+  private keepUnreadable = false;
   private seq = 0;
   private rate = { second: -1, count: 0 };
   private lastBroadcastEvent = 0;
@@ -409,6 +411,7 @@ export class LocalConnection implements GameConnection {
       this.world = new World();
       this.savedJson = null;
       this.failed = false;
+      this.keepUnreadable = false;
     } finally {
       release();
     }
@@ -513,6 +516,13 @@ export class LocalConnection implements GameConnection {
       );
       return;
     }
+    if (this.keepUnreadable) {
+      this.warnSave(
+        "Solo save withheld: the unreadable save could not be backed up.",
+      );
+      this.savedJson = json;
+      return;
+    }
     // A refused write is kept in page memory, which a reload loses.
     if (!this.storage.set(SOLO_WORLD_KEY, json))
       this.warnSave("Solo save refused by browser storage.");
@@ -546,7 +556,7 @@ export class LocalConnection implements GameConnection {
     } catch (error) {
       // Keep the unreadable save for recovery, then start a fresh world.
       console.warn("Starting a fresh solo world:", error);
-      this.preserve(raw);
+      if (!this.preserve(raw)) this.keepUnreadable = true;
       return new World();
     }
   }
