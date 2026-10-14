@@ -1,5 +1,92 @@
 [
   {
+    "number": "009",
+    "slug": "a-world-made-of-blocks",
+    "date": "2026-10-14",
+    "title": "A world made of blocks.",
+    "category": "Art direction, effects and in-browser play",
+    "status": "Playable in the browser \u00b7 voxel art pass \u00b7 ten guilds still to build",
+    "summary": "At the owner's direction, THREEFOLD trades its painterly prototype for cute, Minecraft-like blocks and big, readable effects, and now plays entirely in the browser.",
+    "paragraphs": [
+      "On 13 October the owner asked for a change of direction: \u201cTurn this into a browser based game \u2014 more cute cartoony, like Minecraft. Add amazing visual effects.\u201d The runtime now follows a new voxel art direction. The concept images, Meshy bodies, Blender sources and their evidence remain in the repository as preserved references. The game no longer loads those models. The world, the quest, the twelve-guild scope and open PvP outside towns are unchanged.",
+      "Everything on screen is generated in TypeScript when the page loads. No paid generation, provider job or downloaded model was used. The world is built from half-metre blocks textured by a painted 64-tile atlas, meshed with face culling and baked ambient occlusion. Seed 1847 produces 65 structures, 35 light sources and 48 ambient emitters across Highcross and the Briar March. These include the plaza and its astrolabe, the market, houses, gate towers, the road, river, bridge, waterfall, pipe ruin, memorial and refuge. Building footprints sit inside the server's unchanged collision boxes. Trees and houses fade when they hide the traveller.",
+      "Characters are chibi block figures built from ten-centimetre voxels: the Knight, the Cyborg, the Briar Hound, Mara, Nemi and the Concord Watch. Their springy procedural animation follows the server's windup, impact and recovery timings, so a Knight's Sunder still reads as a committed swing.",
+      "Effects remain presentation only. Confirmed server events trigger them: the orange windup ring under a Sunder, the Cyborg's Pulse Lance beam, block debris, stars, rings, trails, screen shake and a brief hit-stop. Ambient effects include fireflies, petals, butterflies, chimney smoke, river sparkles, waterfall mist and the glowing astrolabe. A day and night cycle brings sunsets, stars and lanterns that wake at dusk. Post-processing adds bloom, tone mapping, a gentle tilt-shift and vignette. The HUD was redrawn with pixel-art icons and rounded type, and the synthesized audio became a music box.",
+      "The authoritative simulation can now also run inside the page. It keeps the server's 20 Hz step, 10 Hz snapshots and command limits, and saves to the browser's local storage. Multiplayer still uses the local server. A static build was shared privately by link with the owner, who played it and reported: \u201cthe game as it is right now is perfect. Good performance and all that.\u201d That is an informal first impression on the owner's own device, not a measured trace or an independent playtest.",
+      "An adversarial code review found one serious defect. A solo tab left waiting on the entrance screen could later write its older copy of the world over newer progress from another tab. Joining now takes a single-writer lock, continues from the newest save and tells a second tab to close the first. The review also added a notice when the browser refuses a save, restored the target outline after a guild change and guarded the static build tool's output folder. Regression tests cover the two-tab cases.",
+      "The frames below come from the production build of commit b7e4018, whose client source is the build the owner played. Headless Chromium rendered them in software at 1920 by 1080 with the medium preset, in day and night. Across the selected frames the renderer reported 131 to 230 draw calls and 62,680 to 255,218 active triangles, with no console messages. Software rendering ran at about one frame per second, so these frames show composition, not performance.",
+      "The next step is a roadmap for hosting real multiplayer and growing the world toward its source: the other ten guilds, more puzzle-driven quests in the 3 Kingdoms tradition, and the remaining Chapter One regions. All twelve guilds and open PvP outside towns remain required. This entry does not claim that content is complete."
+    ],
+    "verified": "Captures: production build of commit b7e4018 (client source unchanged since 2260f2e, from which the shared preview was built); headless Chromium with SwiftShader at 1920\u00d71080, medium preset, ?time=0.35 (day) and 0.9 (night); 23 frames with zero console messages. Selected frames: 131\u2013230 draws and 62,680\u2013255,218 active triangles. GitHub CI passed on b7e4018. The review fixes are commits fe2303d and f0c3678. On that source, 58 automated checks pass (11 for solo play, including two new two-tab tests), along with type checking, formatting, the production build, runtime asset validation and catalogue validation. World seed 1847: 160\u00d756\u00d7264 voxel grid, 555,480 solid voxels, 65 structures, 35 lights, 48 emitters. No paid generation, provider job or credit was used.",
+    "limitations": "Only Knight and Cyborg are playable kits. The other ten full guilds and Chapter One's scenes, quests and bosses remain to be built, as do production accounts, durable server persistence and public hosting. The voxel build's frame rate has not been measured on real hardware; the owner's performance report is informal. Software-rendered captures do not show real-time quality, and nobody beyond the owner has played it. Some fade and effect materials still compile their shaders on first use. Earlier GLB traces and memory runs belong to the previous build. The hosted ChatGPT Sites journal has not been redeployed with this entry, and the shared game preview is not a public release.",
+    "media": [
+      {
+        "path": "../artifacts/voxel/captures/01-entrance-attract.jpg",
+        "width": 1600,
+        "height": 900,
+        "alt": "The THREEFOLD title over a slow orbit of the voxel Highcross plaza, with the guild and solo or multiplayer choices",
+        "caption": "In-engine frame \u00b7 entrance screen in attract mode \u00b7 In-engine frame \u00b7 production build of commit b7e4018 \u00b7 headless Chromium with SwiftShader software rendering \u00b7 1920\u00d71080 capture at the medium preset, shown at 1600\u00d7900.",
+        "after_paragraph": 0
+      },
+      {
+        "path": "../artifacts/voxel/captures/02-plaza-astrolabe.jpg",
+        "width": 1600,
+        "height": 900,
+        "alt": "The Knight walks across the block-built Highcross plaza toward the glowing astrolabe, with the market stall and HUD",
+        "caption": "In-engine frame \u00b7 Highcross plaza by day, ordinary follow camera \u00b7 In-engine frame \u00b7 production build of commit b7e4018 \u00b7 headless Chromium with SwiftShader software rendering \u00b7 1920\u00d71080 capture at the medium preset, shown at 1600\u00d7900.",
+        "after_paragraph": 1
+      },
+      {
+        "path": "../artifacts/voxel/captures/05-hound-sunder-1.jpg",
+        "width": 1600,
+        "height": 900,
+        "alt": "The Knight winds up Sunder against a Briar Hound outside the gate, with an orange ring under the attack",
+        "caption": "In-engine frame \u00b7 Knight Sunder windup on a Briar Hound in the open-PvP zone \u00b7 In-engine frame \u00b7 production build of commit b7e4018 \u00b7 headless Chromium with SwiftShader software rendering \u00b7 1920\u00d71080 capture at the medium preset, shown at 1600\u00d7900.",
+        "after_paragraph": 3
+      },
+      {
+        "path": "../artifacts/voxel/captures/14-cyborg-lance-1.jpg",
+        "width": 1600,
+        "height": 900,
+        "alt": "The Cyborg fires the cyan Pulse Lance beam down the road at a Briar Hound",
+        "caption": "In-engine frame \u00b7 Cyborg Pulse Lance during its line attack \u00b7 In-engine frame \u00b7 production build of commit b7e4018 \u00b7 headless Chromium with SwiftShader software rendering \u00b7 1920\u00d71080 capture at the medium preset, shown at 1600\u00d7900.",
+        "after_paragraph": 3
+      },
+      {
+        "path": "../artifacts/voxel/captures/08-bridge-river.jpg",
+        "width": 1600,
+        "height": 900,
+        "alt": "The Knight crosses the wooden bridge over the blue voxel river in the Briar March",
+        "caption": "In-engine frame \u00b7 Briar bridge and river by day \u00b7 In-engine frame \u00b7 production build of commit b7e4018 \u00b7 headless Chromium with SwiftShader software rendering \u00b7 1920\u00d71080 capture at the medium preset, shown at 1600\u00d7900.",
+        "after_paragraph": 1
+      },
+      {
+        "path": "../artifacts/voxel/captures/16-night-plaza.jpg",
+        "width": 1600,
+        "height": 900,
+        "alt": "Highcross at night with lit windows, lanterns and the glowing astrolabe",
+        "caption": "In-engine frame \u00b7 Highcross plaza at night (?time=0.9) \u00b7 In-engine frame \u00b7 production build of commit b7e4018 \u00b7 headless Chromium with SwiftShader software rendering \u00b7 1920\u00d71080 capture at the medium preset, shown at 1600\u00d7900.",
+        "after_paragraph": 3
+      },
+      {
+        "path": "../artifacts/voxel/captures/17-night-forest-fireflies.jpg",
+        "width": 1600,
+        "height": 900,
+        "alt": "The Knight fights a Briar Hound beside the river at night among fireflies",
+        "caption": "In-engine frame \u00b7 night fight by the Briar river (?time=0.9) \u00b7 In-engine frame \u00b7 production build of commit b7e4018 \u00b7 headless Chromium with SwiftShader software rendering \u00b7 1920\u00d71080 capture at the medium preset, shown at 1600\u00d7900.",
+        "after_paragraph": 3
+      },
+      {
+        "path": "../artifacts/voxel/captures/13-guild-codex.jpg",
+        "width": 1600,
+        "height": 900,
+        "alt": "The twelve-guild codex: Knight and Cyborg practice loadouts and ten guilds marked as full guild stage concepts",
+        "caption": "In-engine frame \u00b7 twelve-guild codex. Only the Knight and Cyborg practice loadouts are playable; the other ten guilds are required future work. In-engine frame \u00b7 production build of commit b7e4018 \u00b7 headless Chromium with SwiftShader software rendering \u00b7 1920\u00d71080 capture at the medium preset, shown at 1600\u00d7900.",
+        "after_paragraph": 7
+      }
+    ]
+  },
+  {
     "number": "008",
     "slug": "a-centre-for-highcross",
     "date": "2026-10-01",
