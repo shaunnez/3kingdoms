@@ -12,6 +12,9 @@
     "build": "tsc --noEmit && vite build --config apps/client/vite.config.ts",
     "build:hosted": "vite build --config apps/client/vite.config.ts --mode hosted && node tools/check-hosted-bundle.mjs dist/hosted && node tools/precompress.mjs dist/hosted",
     "check:hosted": "node tools/check-hosted-bundle.mjs dist/hosted",
+    "build:server": "node tools/build-server.mjs",
+    "smoke:server": "node --import tsx tools/smoke-server.mjs",
+    "start": "node dist/server/main.mjs",
     "validate:plan": "python3 tools/validate_plan.py",
     "preview": "node tools/preview.mjs",
     "validate:assets": "node tools/validate-runtime.mjs",
@@ -20,7 +23,7 @@
     "build:artifact": "node tools/build-artifact.mjs"
   },
   "engines": {
-    "node": ">=22.12"
+    "node": ">=22.12 <23"
   },
   "dependencies": {
     "@babylonjs/core": "9.28.0",
@@ -45,6 +48,7 @@
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.1",
+    "esbuild": "0.28.2",
     "gltf-validator": "2.0.0-dev.3.10",
     "prettier": "3.9.9",
     "tsx": "4.23.15",
