@@ -502,6 +502,32 @@ test(
   },
 );
 
+test("repeated resets and a later corrupt load keep the recent backups", async () => {
+  const storage = memoryStorage();
+  const solo = new LocalConnection({ storage, locks: null });
+  for (const save of ["save-1", "save-2", "save-3", "save-4"]) {
+    storage.values.set(SOLO_WORLD_KEY, save);
+    await solo.startFresh();
+  }
+  assert.equal(storage.values.get(SOLO_BACKUP_KEY), "save-4");
+  assert.equal(storage.values.get(`${SOLO_BACKUP_KEY}-1`), "save-3");
+  assert.equal(storage.values.get(`${SOLO_BACKUP_KEY}-2`), "save-2");
+  assert.ok(!storage.values.has(`${SOLO_BACKUP_KEY}-3`), "Unbounded history");
+
+  // An unreadable save found on load joins the same history.
+  storage.values.set(SOLO_WORLD_KEY, "{not json");
+  const warn = console.warn;
+  console.warn = () => {};
+  try {
+    new LocalConnection({ storage, locks: null });
+  } finally {
+    console.warn = warn;
+  }
+  assert.equal(storage.values.get(SOLO_BACKUP_KEY), "{not json");
+  assert.equal(storage.values.get(`${SOLO_BACKUP_KEY}-1`), "save-4");
+  assert.equal(storage.values.get(`${SOLO_BACKUP_KEY}-2`), "save-3");
+});
+
 test("a new solo world never discards a save it cannot set aside", async () => {
   const storage = memoryStorage();
   const locks = tabLocks();

@@ -35,6 +35,10 @@ export const SOLO_TOKEN_KEY = "threefold-solo-token";
 export const SOLO_WORLD_KEY = "threefold-solo-world-v1";
 /** Where an unreadable or abandoned save is set aside for recovery. */
 export const SOLO_BACKUP_KEY = `${SOLO_WORLD_KEY}-corrupt`;
+/** Backups kept: the newest at SOLO_BACKUP_KEY, older ones at `-1` and `-2`. */
+export const SOLO_BACKUPS = 3;
+const backupKey = (age: number) =>
+  age ? `${SOLO_BACKUP_KEY}-${age}` : SOLO_BACKUP_KEY;
 const STEP_MS = 50;
 const PUMP_MS = 20;
 const MAX_CATCH_UP = 5;
@@ -379,7 +383,7 @@ export class LocalConnection implements GameConnection {
 
   /**
    * The way out of a save that keeps stopping the world: sets the save aside
-   * under SOLO_BACKUP_KEY and starts an empty world with the same traveller
+   * as the newest backup and starts an empty world with the same traveller
    * token. The save is moved, never deleted; if the move cannot be confirmed
    * this rejects and the save stays where it was.
    */
@@ -391,7 +395,7 @@ export class LocalConnection implements GameConnection {
       const raw = this.storage.get(SOLO_WORLD_KEY);
       if (raw !== null) {
         // A refused write lands in page memory, which a reload loses.
-        if (!this.storage.set(SOLO_BACKUP_KEY, raw))
+        if (!this.preserve(raw))
           throw new Error(
             "This browser would not store a backup, so the solo world was left as it is.",
           );
@@ -541,8 +545,23 @@ export class LocalConnection implements GameConnection {
     } catch (error) {
       // Keep the unreadable save for recovery, then start a fresh world.
       console.warn("Starting a fresh solo world:", error);
-      this.storage.set(SOLO_BACKUP_KEY, raw);
+      this.preserve(raw);
       return new World();
     }
+  }
+
+  /**
+   * Sets a save aside as the newest backup. Older backups shift down a slot
+   * by copying, so a refused write never loses one; only the backup beyond
+   * SOLO_BACKUPS is dropped. Returns false if any write was refused.
+   */
+  private preserve(raw: string): boolean {
+    if (this.storage.get(backupKey(0)) === raw) return true;
+    for (let age = SOLO_BACKUPS - 1; age > 0; age--) {
+      const older = this.storage.get(backupKey(age - 1));
+      if (older !== null && !this.storage.set(backupKey(age), older))
+        return false;
+    }
+    return this.storage.set(backupKey(0), raw);
   }
 }

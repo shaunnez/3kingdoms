@@ -766,7 +766,8 @@ export default function App() {
                 >
                   <p id="fresh-confirm-copy">
                     Start a new solo world? Your current one is kept as a backup
-                    in this browser, not deleted.
+                    in this browser, not deleted. The three most recent backups
+                    are kept.
                   </p>
                   <div>
                     <button
