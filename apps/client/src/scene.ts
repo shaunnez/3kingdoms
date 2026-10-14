@@ -838,6 +838,8 @@ export class GameScene {
     v.rig.dispose();
     v.ring?.dispose();
     this.inkDirty = true;
+    // A rebuilt rig (guild change) must be re-added to the selection outline.
+    if (v.id === this.selectionShown) this.selectionShown = "";
   }
 
   /**

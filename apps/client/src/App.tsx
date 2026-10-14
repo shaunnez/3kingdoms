@@ -23,6 +23,7 @@ import {
   type Intent,
 } from "./network";
 import { GameScene } from "./scene";
+import { SoloBusyError } from "./local-world";
 import { Soundscape } from "./audio";
 import { FieldLab } from "./FieldLab";
 import { Minimap } from "./Minimap";
@@ -522,7 +523,9 @@ export default function App() {
       const message =
         connection.current.mode === "server"
           ? "Couldn’t reach the local server. Start it with npm run dev, or play solo in this browser."
-          : `The world could not start: ${String(error)}`;
+          : error instanceof SoloBusyError
+            ? error.message
+            : `The world could not start: ${String(error)}`;
       setStatus(message);
       setJoinError(message);
     } finally {

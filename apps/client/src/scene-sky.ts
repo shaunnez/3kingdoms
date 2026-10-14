@@ -434,8 +434,9 @@ export class Sky {
     m.setFloat("time", time);
     m.setFloat("sunVisible", smooth(-0.12, 0.05, state.sunDir.y));
     m.setFloat("moonVisible", smooth(-0.1, 0.08, state.moonDir.y));
-    this.cloudMaterial.diffuseColor.copyFrom(state.cloud);
-    // Clouds drift west to east and wrap around the diorama.
+    // Lighting is disabled on clouds, so their colour comes from emission alone.
+    this.cloudMaterial.emissiveColor.copyFrom(state.cloud);
+    // Clouds drift toward +x (east to west: +x is west) and wrap around the diorama.
     for (const c of this.clouds) {
       c.x += c.speed * dt;
       if (c.x > 150) c.x -= 300;

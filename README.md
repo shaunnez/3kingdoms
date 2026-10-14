@@ -46,7 +46,7 @@ Open `http://127.0.0.1:4177/`, choose **Solo**, pick Knight or Cyborg and enter.
 
 For multiplayer, run `npm run dev` (game server and client), then choose **Multiplayer** or open `http://127.0.0.1:4177/?server`. Two browser tabs create independent characters and can fight outside the gate. Red names lose two eligible items on death; ordinary victims lose one. Protected starter/quest equipment remains yours. Guards and merchants enforce the outlaw rules. `?time=0.9` freezes the day/night cycle (0–1; 0.9 is night). Add `?lab=1` for explicit local capture/benchmark controls.
 
-For a production-bundle preview, run `npm run build`, then `npm run preview` and open `http://127.0.0.1:4181/`. `npm run build:artifact [outDir]` writes a static solo build (a small page plus `game.js` and `game.css`, fonts inlined) for any plain static host.
+For a production-bundle preview, run `npm run build`, then `npm run preview` and open `http://127.0.0.1:4181/`. `npm run build:artifact -- [outDir] [--standalone]` writes a static solo build: a small page plus `game.js` and `game.css`, with fonts inlined. By default the page is a fragment for hosts that wrap pages in their own document, such as a claude.ai Artifact; `--standalone` emits a complete page for any plain static host.
 
 The multiplayer server binds to loopback. Its anonymous local identity and atomic JSON save (`.local/checkpoint-world.json`) are checkpoint infrastructure, not production account security or the planned PostgreSQL service. Do not expose it to the internet. Generated assets are already included; `npm ci`, builds and tests never purchase generation.
 

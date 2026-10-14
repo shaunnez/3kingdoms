@@ -4,7 +4,9 @@ import {
   LocalConnection,
   SOLO_TOKEN_KEY,
   SOLO_WORLD_KEY,
+  SoloBusyError,
   sanitiseName,
+  type SoloLocks,
   type SoloStorage,
 } from "../apps/client/src/local-world";
 import { createConnection, preferredMode } from "../apps/client/src/network";
@@ -36,6 +38,28 @@ function memoryStorage(): SoloStorage & { values: Map<string, string> } {
     setItem: (key, value) => void values.set(key, value),
     removeItem: (key) => void values.delete(key),
   };
+}
+/** Web Locks stand-in shared by the "tabs" of one test. */
+function tabLocks(): SoloLocks {
+  const held = new Set<string>();
+  const request = async (
+    name: string,
+    options: LockOptions,
+    callback: LockGrantedCallback<unknown>,
+  ) => {
+    while (held.has(name)) {
+      if (!options.signal) return callback(null);
+      if (options.signal.aborted) throw options.signal.reason;
+      await sleep(5);
+    }
+    held.add(name);
+    try {
+      return await callback({ name, mode: "exclusive" });
+    } finally {
+      held.delete(name);
+    }
+  };
+  return { request: request as SoloLocks["request"] };
 }
 type Probe = {
   connection: LocalConnection;
@@ -296,6 +320,58 @@ test(
   },
 );
 
+test(
+  "a page opened before another tab played continues from the newest save",
+  { timeout: 8000 },
+  async () => {
+    const storage = memoryStorage();
+    // The stale page loads first and waits on the entrance screen.
+    const stale = probe(new LocalConnection({ storage }));
+    const active = probe(new LocalConnection({ storage }));
+    await active.connection.join("Keeper", "knight");
+    active.connection.send({ type: "guild", guild: "cyborg" });
+    await until(() => active.me().guild === "cyborg", "Guild change missing");
+    active.connection.leave();
+    try {
+      await stale.connection.join("Keeper", "knight");
+      assert.equal(stale.me().guild, "cyborg", "Stale copy replaced progress");
+      const saved = JSON.parse(storage.values.get(SOLO_WORLD_KEY)!) as {
+        players: { guild: string }[];
+      };
+      assert.equal(saved.players[0].guild, "cyborg");
+    } finally {
+      stale.connection.leave();
+    }
+  },
+);
+
+test("only one tab plays the solo world at a time", async () => {
+  const storage = memoryStorage();
+  const locks = tabLocks();
+  const first = probe(new LocalConnection({ storage, locks }));
+  const second = probe(new LocalConnection({ storage, locks }));
+  await first.connection.join("Keeper", "knight");
+  try {
+    await assert.rejects(
+      second.connection.join("Keeper", "knight"),
+      SoloBusyError,
+    );
+    assert.equal(second.snapshots.length, 0);
+  } finally {
+    first.connection.leave();
+  }
+  // Closing the first tab hands the world over.
+  await second.connection.join("Keeper", "knight");
+  try {
+    await until(() => second.snapshots.length > 0, "Second tab did not start");
+    // Leaving and re-entering at once waits out this page's own release.
+    second.connection.leave();
+    await second.connection.join("Keeper", "knight");
+  } finally {
+    second.connection.leave();
+  }
+});
+
 test("corrupt or unavailable storage starts a playable fresh world", async () => {
   const storage = memoryStorage();
   storage.values.set(SOLO_WORLD_KEY, "{not json");
@@ -303,7 +379,7 @@ test("corrupt or unavailable storage starts a playable fresh world", async () =>
   console.warn = () => {};
   let corrupt: LocalConnection;
   try {
-    corrupt = new LocalConnection({ storage });
+    corrupt = new LocalConnection({ storage, locks: null });
   } finally {
     console.warn = warn;
   }
@@ -329,7 +405,7 @@ test("corrupt or unavailable storage starts a playable fresh world", async () =>
       throw new Error("SecurityError");
     },
   };
-  const p = probe(new LocalConnection({ storage: broken }));
+  const p = probe(new LocalConnection({ storage: broken, locks: null }));
   const q = probe(corrupt);
   try {
     await p.connection.join("Ghost", "knight");

@@ -11,12 +11,25 @@ import type { GameConnection, Intent } from "./network";
 // limits as apps/server/main.ts (20 Hz steps, 10 Hz snapshots, 50 commands/s).
 
 export type SoloStorage = Pick<Storage, "getItem" | "setItem" | "removeItem">;
+export type SoloLocks = Pick<LockManager, "request">;
 export type LocalConnectionOptions = {
   /** Defaults to localStorage, or an in-page memory store when that is unavailable. */
   storage?: SoloStorage;
   /** Millisecond clock driving the fixed step. Defaults to performance.now. */
   now?: () => number;
+  /** Single-writer lock for the save. Defaults to navigator.locks where available. */
+  locks?: SoloLocks | null;
 };
+
+/** Another tab of this browser is already playing the solo world. */
+export class SoloBusyError extends Error {
+  constructor() {
+    super(
+      "THREEFOLD is already open in another tab of this browser. Close it there to play here.",
+    );
+    this.name = "SoloBusyError";
+  }
+}
 
 export const SOLO_TOKEN_KEY = "threefold-solo-token";
 export const SOLO_WORLD_KEY = "threefold-solo-world-v1";
@@ -28,6 +41,7 @@ const SAVE_GAP_MS = 250;
 const MAX_SAVE_CHARS = 2 * 1024 * 1024;
 const RATE_LIMIT = 50;
 const EVENT_LIFETIME = 2;
+const LOCK_WAIT_MS = 1000;
 
 /** The wire sends new events once; retain their short presentation lifetime locally. */
 export function retainEvents(
@@ -72,15 +86,46 @@ const fallbacks = new WeakMap<SoloStorage, Map<string, string>>();
 function pageStorage(): SoloStorage {
   try {
     const storage = globalThis.localStorage;
+    // A read proves access. A full quota only fails writes, and SafeStorage
+    // keeps those in page memory without hiding the existing save.
     if (storage) {
-      storage.setItem("threefold-probe", "1");
-      storage.removeItem("threefold-probe");
+      storage.getItem(SOLO_TOKEN_KEY);
       return storage;
     }
   } catch {
     // Private windows and sandboxed frames can refuse storage entirely.
   }
   return pageMemory;
+}
+
+function pageLocks(): SoloLocks | null {
+  return (typeof navigator !== "undefined" && navigator.locks) || null;
+}
+
+/**
+ * Holds the save's single-writer lock until the returned release is called.
+ * Waits briefly, since a lock this page just released frees asynchronously,
+ * and resolves null when another tab keeps it. Hosts that refuse the Web Locks
+ * API (opaque or sandboxed origins) play without the guard.
+ */
+function acquireSave(locks: SoloLocks | null): Promise<(() => void) | null> {
+  if (!locks) return Promise.resolve(() => {});
+  const signal =
+    typeof AbortSignal.timeout === "function"
+      ? AbortSignal.timeout(LOCK_WAIT_MS)
+      : undefined;
+  return new Promise((resolve) => {
+    locks
+      .request(
+        SOLO_WORLD_KEY,
+        signal ? { signal } : { ifAvailable: true },
+        (lock) => {
+          if (!lock) return resolve(null);
+          return new Promise<void>((release) => resolve(() => release()));
+        },
+      )
+      .catch(() => resolve(signal?.aborted ? null : () => {}));
+  });
 }
 
 /** Storage access that never throws; failed writes fall back to page memory. */
@@ -207,10 +252,16 @@ export class LocalConnection implements GameConnection {
   onNotice: (notice: Notice) => void = () => {};
   onStatus: (status: string) => void = () => {};
   /** The in-page authoritative world. Exposed for diagnostics and tests only. */
-  readonly world: World;
+  world: World;
   readonly id: string;
   private storage: SafeStorage;
   private clock: () => number;
+  private locks: SoloLocks | null;
+  private releaseSave: (() => void) | null = null;
+  private attempt = 0;
+  /** The save text this world was loaded from or last wrote. */
+  private savedJson: string | null = null;
+  private warnedSave = false;
   private timer: ReturnType<typeof setInterval> | null = null;
   private joined = false;
   private failed = false;
@@ -223,11 +274,11 @@ export class LocalConnection implements GameConnection {
   private lastSave = 0;
   private dirty = false;
   private noticeFlushQueued = false;
-  private warnedSize = false;
 
   constructor(options: LocalConnectionOptions = {}) {
     this.storage = new SafeStorage(options.storage ?? pageStorage());
     this.clock = options.now ?? (() => performance.now());
+    this.locks = options.locks === undefined ? pageLocks() : options.locks;
     let token = this.storage.get(SOLO_TOKEN_KEY);
     if (!token || !/^[a-f0-9]{64}$/.test(token)) {
       token = randomToken();
@@ -245,6 +296,18 @@ export class LocalConnection implements GameConnection {
       );
       return;
     }
+    const attempt = ++this.attempt;
+    const release = await acquireSave(this.locks);
+    if (!release) throw new SoloBusyError();
+    if (attempt !== this.attempt || this.failed) {
+      release(); // left again while waiting for the lock
+      return;
+    }
+    this.releaseSave = release;
+    // Another tab may have played since this page loaded: continue from the
+    // newest save rather than writing this page's older copy over it.
+    if (this.storage.get(SOLO_WORLD_KEY) !== this.savedJson)
+      this.world = this.load();
     this.world.join(
       this.id,
       sanitiseName(name),
@@ -285,12 +348,14 @@ export class LocalConnection implements GameConnection {
   }
 
   leave(): void {
+    this.attempt++;
     if (!this.joined) return;
     this.joined = false;
     this.stopTimers();
     this.world.disconnect(this.id);
     this.world.notices.length = 0;
     if (!this.failed) this.persist();
+    this.unlockSave();
   }
 
   private pump = () => {
@@ -319,6 +384,7 @@ export class LocalConnection implements GameConnection {
       this.failed = true;
       this.joined = false;
       this.stopTimers();
+      this.unlockSave();
       report(error);
       this.onStatus(
         "The solo world stopped after an error. Reload to continue.",
@@ -369,6 +435,11 @@ export class LocalConnection implements GameConnection {
     if (document.visibilityState === "hidden") this.flush();
   };
 
+  private unlockSave() {
+    this.releaseSave?.();
+    this.releaseSave = null;
+  }
+
   private stopTimers() {
     if (this.timer !== null) clearInterval(this.timer);
     this.timer = null;
@@ -383,18 +454,36 @@ export class LocalConnection implements GameConnection {
     this.dirty = false;
     const json = JSON.stringify(this.world.save());
     if (json.length > MAX_SAVE_CHARS) {
-      if (!this.warnedSize)
-        console.warn(
-          `Solo save skipped: ${json.length} characters exceeds the limit.`,
-        );
-      this.warnedSize = true;
+      this.warnSave(
+        `Solo save skipped: ${json.length} characters exceeds the limit.`,
+      );
       return;
     }
-    this.storage.set(SOLO_WORLD_KEY, json);
+    // A refused write is kept in page memory, which a reload loses.
+    if (!this.storage.set(SOLO_WORLD_KEY, json))
+      this.warnSave("Solo save refused by browser storage.");
+    this.savedJson = json;
+  }
+
+  /** Tells the traveller once that progress will not outlive this page. */
+  private warnSave(reason: string) {
+    if (this.warnedSave) return;
+    this.warnedSave = true;
+    console.warn(reason);
+    if (this.joined)
+      try {
+        this.onNotice({
+          kind: "error",
+          text: "This browser isn’t saving your solo progress, so it will be lost when this page closes.",
+        });
+      } catch (error) {
+        report(error);
+      }
   }
 
   private load(): World {
     const raw = this.storage.get(SOLO_WORLD_KEY);
+    this.savedJson = raw;
     if (!raw) return new World();
     try {
       const saved: unknown = JSON.parse(raw);
