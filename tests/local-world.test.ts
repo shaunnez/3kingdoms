@@ -2,6 +2,7 @@ import { strict as assert } from "node:assert";
 import { test } from "node:test";
 import {
   LocalConnection,
+  SOLO_BACKUP_KEY,
   SOLO_TOKEN_KEY,
   SOLO_WORLD_KEY,
   SoloBusyError,
@@ -439,5 +440,100 @@ test("background catch-up is clamped to five steps per callback", async () => {
     assert.equal(p.last().tick - tick, 5, "The backlog was not dropped");
   } finally {
     p.connection.leave();
+  }
+});
+
+test(
+  "a new solo world sets a failing save aside and plays fresh",
+  { timeout: 8000 },
+  async () => {
+    const storage = memoryStorage();
+    const first = probe(new LocalConnection({ storage, locks: tabLocks() }));
+    await first.connection.join("Keeper", "knight");
+    first.connection.send({ type: "guild", guild: "cyborg" });
+    await until(() => first.me().guild === "cyborg", "Guild change missing");
+    first.connection.leave();
+
+    // A save whose world throws on every step stops the world again on reload.
+    const p = probe(new LocalConnection({ storage, locks: tabLocks() }));
+    await p.connection.join("Keeper", "knight");
+    const save = storage.values.get(SOLO_WORLD_KEY)!;
+    assert.equal(p.me().guild, "cyborg");
+    const error = console.error;
+    console.error = () => {};
+    try {
+      p.connection.world.step = () => {
+        throw new Error("Broken save");
+      };
+      await until(
+        () => p.statuses.some((s) => s.includes("stopped after an error")),
+        "The broken world kept running",
+      );
+    } finally {
+      console.error = error;
+    }
+    assert.equal(storage.values.get(SOLO_WORLD_KEY), save, "Failure saved");
+    const count = p.snapshots.length;
+    await p.connection.join("Keeper", "knight");
+    assert.equal(p.snapshots.length, count, "A stopped world rejoined");
+
+    await p.connection.startFresh();
+    assert.equal(storage.values.get(SOLO_BACKUP_KEY), save, "Save not kept");
+    assert.ok(!storage.values.has(SOLO_WORLD_KEY), "Old save still loads");
+    try {
+      await p.connection.join("Wren", "knight");
+      await until(() => p.snapshots.length > count + 2, "Fresh world idle");
+      assert.equal(p.me().name, "Wren", "The old traveller came back");
+      assert.equal(p.me().guild, "knight");
+      assert.equal(p.last().self.quest, "unheard");
+      assert.equal(p.last().self.id, first.connection.id, "Identity changed");
+      const fresh = JSON.parse(storage.values.get(SOLO_WORLD_KEY)!) as {
+        players: { name: string }[];
+      };
+      assert.deepEqual(
+        fresh.players.map((player) => player.name),
+        ["Wren"],
+      );
+    } finally {
+      p.connection.leave();
+    }
+    // The backup is never overwritten by play in the new world.
+    assert.equal(storage.values.get(SOLO_BACKUP_KEY), save);
+  },
+);
+
+test("a new solo world never discards a save it cannot set aside", async () => {
+  const storage = memoryStorage();
+  const locks = tabLocks();
+  const first = probe(new LocalConnection({ storage, locks }));
+  await first.connection.join("Keeper", "knight");
+  const other = new LocalConnection({ storage, locks });
+  try {
+    // Another tab is playing this save.
+    await assert.rejects(other.startFresh(), SoloBusyError);
+  } finally {
+    first.connection.leave();
+  }
+  const save = storage.values.get(SOLO_WORLD_KEY)!;
+  assert.ok(save);
+  assert.ok(!storage.values.has(SOLO_BACKUP_KEY));
+
+  // The browser refuses the backup write, for example when storage is full.
+  const full: SoloStorage = {
+    ...storage,
+    setItem: (key, value) => {
+      if (key === SOLO_BACKUP_KEY) throw new Error("QuotaExceededError");
+      storage.setItem(key, value);
+    },
+  };
+  const refused = probe(new LocalConnection({ storage: full, locks: null }));
+  await assert.rejects(refused.connection.startFresh(), /left as it is/);
+  assert.equal(storage.values.get(SOLO_WORLD_KEY), save);
+  assert.ok(!storage.values.has(SOLO_BACKUP_KEY));
+  try {
+    await refused.connection.join("Somebody else", "knight");
+    assert.equal(refused.me().name, "Keeper", "The kept save did not load");
+  } finally {
+    refused.connection.leave();
   }
 });
