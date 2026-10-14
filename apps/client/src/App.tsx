@@ -23,7 +23,7 @@ import {
   type Intent,
 } from "./network";
 import { GameScene } from "./scene";
-import { SoloBusyError } from "./local-world";
+import { LocalConnection, SOLO_STOPPED, SoloBusyError } from "./local-world";
 import { Soundscape } from "./audio";
 import { FieldLab } from "./FieldLab";
 import { Minimap } from "./Minimap";
@@ -191,6 +191,8 @@ export default function App() {
     keys = useRef(new Set<string>()),
     targetRef = useRef(""),
     destination = useRef<Vec2 | null>(null),
+    lastLife = useRef<ActorView["life"] | undefined>(undefined),
+    toastTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined),
     blocked = useRef(false);
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null),
     [selected, setSelected] = useState(""),
@@ -199,6 +201,7 @@ export default function App() {
     [status, setStatus] = useState(""),
     [joining, setJoining] = useState(false),
     [joinError, setJoinError] = useState(""),
+    [confirmFresh, setConfirmFresh] = useState(false),
     [mode, setMode] = useState<ConnectionMode>(initialConnection.mode);
   const [guild, setGuild] = useState<Guild>("knight"),
     [name, setName] = useState("Thorne"),
@@ -220,6 +223,12 @@ export default function App() {
     [help, setHelp] = useState(false),
     [corpse, setCorpse] = useState<string | null>(null),
     [logOpen, setLogOpen] = useState(false);
+  /** One toast at a time; a newer toast restarts the four-second timer. */
+  const showToast = (text: string) => {
+    clearTimeout(toastTimer.current);
+    setToast(text);
+    toastTimer.current = setTimeout(() => setToast(""), 4000);
+  };
   const select = (id: string) => {
     const s = snap.current,
       actor = s?.actors.find((a) => a.id === id),
@@ -310,6 +319,9 @@ export default function App() {
         sound.current.events(s.events, s.actors, s.self.id);
         const p = s.actors.find((a) => a.id === s.self.id);
         sound.current.zone(Boolean(p && !p.safe));
+        // Falling, being revived or respawning drops any click-to-move target.
+        if (p && p.life !== lastLife.current) destination.current = null;
+        lastLife.current = p?.life;
       },
       notice: (n) => {
         setLog((lines) => [
@@ -317,10 +329,7 @@ export default function App() {
           `${n.speaker ? n.speaker + ": " : ""}${n.text}`,
         ]);
         if (n.kind === "dialogue") setDialogue(n);
-        else {
-          setToast(n.text);
-          setTimeout(() => setToast(""), 4000);
-        }
+        else showToast(n.text);
       },
       status: setStatus,
     };
@@ -484,6 +493,7 @@ export default function App() {
     });
     return () => {
       clearInterval(interval);
+      clearTimeout(toastTimer.current);
       window.removeEventListener("keydown", down);
       window.removeEventListener("keyup", up);
       window.removeEventListener("blur", stop);
@@ -509,6 +519,7 @@ export default function App() {
     setMode(next);
     setStatus("");
     setJoinError("");
+    setConfirmFresh(false);
   };
   async function enter() {
     setJoining(true);
@@ -536,6 +547,27 @@ export default function App() {
     changeMode("solo");
     void enter();
   };
+  /** Sets the solo save aside (never deletes it) and enters a new world. */
+  async function startNewSoloWorld() {
+    setConfirmFresh(false);
+    const solo = connection.current;
+    if (!(solo instanceof LocalConnection) || joining) return;
+    setJoining(true);
+    setJoinError("");
+    try {
+      await solo.startFresh();
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : `The solo world could not be set aside: ${String(error)}`;
+      setStatus(message);
+      setJoinError(message);
+      setJoining(false);
+      return;
+    }
+    await enter();
+  }
   const changeQuality = (level: Quality) => {
     setQualityState(level);
     writePref(QUALITY_KEY, level);
@@ -724,6 +756,45 @@ export default function App() {
                 Play solo instead
               </button>
             )}
+            {mode === "solo" &&
+              (confirmFresh ? (
+                // In-page, since sandboxed hosts can silently refuse confirm().
+                <div
+                  className="fresh-confirm"
+                  role="group"
+                  aria-labelledby="fresh-confirm-copy"
+                >
+                  <p id="fresh-confirm-copy">
+                    Start a new solo world? Your current one is kept as a backup
+                    in this browser, not deleted. The three most recent backups
+                    are kept.
+                  </p>
+                  <div>
+                    <button
+                      className="secondary"
+                      autoFocus
+                      onClick={() => setConfirmFresh(false)}
+                    >
+                      Keep my world
+                    </button>
+                    <button
+                      className="secondary"
+                      disabled={!ready || joining || !name.trim()}
+                      onClick={() => void startNewSoloWorld()}
+                    >
+                      Start new world
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  className="secondary fresh-world"
+                  disabled={!ready || joining}
+                  onClick={() => setConfirmFresh(true)}
+                >
+                  Start a new solo world
+                </button>
+              ))}
             <p className="checkpoint-note">
               Playable development checkpoint · two practice guilds. The
               complete game includes all twelve.
@@ -1209,7 +1280,13 @@ export default function App() {
           {status !== "Connected" && (
             <div className="connection-banner" role="alert">
               <span>{status}</span>
-              <button onClick={() => void enter()}>Reconnect</button>
+              {status === SOLO_STOPPED ? (
+                // Rejoining cannot restart a stopped world; the entrance
+                // screen after a reload offers a new one.
+                <button onClick={() => location.reload()}>Reload</button>
+              ) : (
+                <button onClick={() => void enter()}>Reconnect</button>
+              )}
             </div>
           )}
           {me && me.life !== "alive" && (
@@ -1237,7 +1314,10 @@ export default function App() {
                 {me.life === "dead" && (
                   <button
                     className="primary"
-                    onClick={() => connection.current.send({ type: "respawn" })}
+                    onClick={() => {
+                      destination.current = null;
+                      connection.current.send({ type: "respawn" });
+                    }}
                   >
                     <span>
                       Return to {me.red > 0 ? "Wayfarer’s Refuge" : "Highcross"}
@@ -1399,7 +1479,7 @@ export default function App() {
                         if (id === "knight" || id === "cyborg")
                           connection.current.send({ type: "guild", guild: id });
                         else
-                          setToast(
+                          showToast(
                             `${g}: visual identity established; playable kit belongs to the later guild stage.`,
                           );
                       }}
