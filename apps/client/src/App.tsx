@@ -23,7 +23,7 @@ import {
   type Intent,
 } from "./network";
 import { GameScene } from "./scene";
-import { LocalConnection, SoloBusyError } from "./local-world";
+import { LocalConnection, SOLO_STOPPED, SoloBusyError } from "./local-world";
 import { Soundscape } from "./audio";
 import { FieldLab } from "./FieldLab";
 import { Minimap } from "./Minimap";
@@ -1280,7 +1280,13 @@ export default function App() {
           {status !== "Connected" && (
             <div className="connection-banner" role="alert">
               <span>{status}</span>
-              <button onClick={() => void enter()}>Reconnect</button>
+              {status === SOLO_STOPPED ? (
+                // Rejoining cannot restart a stopped world; the entrance
+                // screen after a reload offers a new one.
+                <button onClick={() => location.reload()}>Reload</button>
+              ) : (
+                <button onClick={() => void enter()}>Reconnect</button>
+              )}
             </div>
           )}
           {me && me.life !== "alive" && (

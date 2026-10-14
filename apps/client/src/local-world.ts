@@ -48,7 +48,8 @@ const MAX_SAVE_CHARS = 2 * 1024 * 1024;
 const RATE_LIMIT = 50;
 const EVENT_LIFETIME = 2;
 const LOCK_WAIT_MS = 1000;
-const STOPPED =
+/** Status shown once the in-page world has stopped; only a reload clears it. */
+export const SOLO_STOPPED =
   "The solo world stopped after an error. Reload to continue, or start a new solo world from the entrance screen.";
 
 /** The wire sends new events once; retain their short presentation lifetime locally. */
@@ -316,7 +317,7 @@ export class LocalConnection implements GameConnection {
   async join(name: string, guild: Guild): Promise<void> {
     if (this.joined) this.leave();
     if (this.failed) {
-      this.onStatus(STOPPED);
+      this.onStatus(SOLO_STOPPED);
       return;
     }
     const attempt = ++this.attempt;
@@ -441,7 +442,7 @@ export class LocalConnection implements GameConnection {
       this.stopTimers();
       this.unlockSave();
       report(error);
-      this.onStatus(STOPPED);
+      this.onStatus(SOLO_STOPPED);
       return;
     }
     // Background tabs fire rarely; drop the backlog instead of fast-forwarding.
