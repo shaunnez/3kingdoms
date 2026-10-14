@@ -4,7 +4,7 @@ Version 3 · 1 October 2026 · **P1/P2 production authorized and underway.** The
 
 THREEFOLD is a persistent desktop browser RPG about belonging to a guild, discovering strange places, and returning to a shared home. Fantasy, Science and Chaos meet in Highcross. Combat is real time, the world remembers progress, and players can attack one another everywhere outside towns and explicitly marked safe zones.
 
-This plan develops the approved [concept](game-concept.md). All twelve guilds are required. Newly specified numbers, names and supporting rules below are **implementation defaults requiring playtesting**, not tested balance. The existing three [screen concepts](design/art-direction.json) remain the agreed visual direction; the browser checkpoint must demonstrate how closely it can match them. Their level 28 characters, figures and decorative icons are illustrative; Chapter One caps at level 20.
+This plan develops the approved [concept](game-concept.md). All twelve guilds are required. Newly specified numbers, names and supporting rules below are **implementation defaults requiring playtesting**, not tested balance. The three [screen concepts](design/art-direction.json) set the original visual direction; on 13 October 2026 the user replaced the runtime look with cute, Minecraft-like voxel art and big visual effects ([voxel art direction](docs/voxel-art-direction.md)). The concepts remain preserved references for layout, composition and HUD structure. Their level 28 characters, figures and decorative icons are illustrative; Chapter One caps at level 20.
 
 ## Read the production package
 

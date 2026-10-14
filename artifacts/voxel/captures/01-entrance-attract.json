@@ -1,0 +1,34 @@
+{
+  "label": "01-entrance-attract",
+  "kind": "in-engine frame (headless Chromium, SwiftShader software GL)",
+  "note": "Attract-mode orbit behind the title",
+  "session": "Thorne",
+  "guild": "knight",
+  "url": "http://127.0.0.1:4181/?time=0.35",
+  "commit": "b7e4018",
+  "capturedAt": "2026-10-14T01:33:43.238Z",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "build": "0.1.0-briar-gate",
+  "position": null,
+  "dayPhase": 0.35,
+  "quality": "medium",
+  "metrics": {
+    "draws": 213,
+    "activeTriangles": 255218,
+    "meshes": 218,
+    "fps": 0.81,
+    "combatEffects": {
+      "meshes": 0,
+      "burstSystems": 0,
+      "particles": 0
+    },
+    "ambient": {
+      "systems": 6,
+      "particles": 73,
+      "meshes": 13
+    }
+  }
+}

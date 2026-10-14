@@ -1,0 +1,123 @@
+{
+  "base": "http://127.0.0.1:4181/",
+  "commit": "b7e4018",
+  "dirty": false,
+  "frames": [
+    {
+      "label": "01-entrance-attract",
+      "draws": 213,
+      "file": "/home/user/3kingdoms/.local/captures/final/01-entrance-attract.png"
+    },
+    {
+      "label": "02-plaza-astrolabe",
+      "draws": 207,
+      "file": "/home/user/3kingdoms/.local/captures/final/02-plaza-astrolabe.png"
+    },
+    {
+      "label": "03-mara-dialogue",
+      "draws": 206,
+      "file": "/home/user/3kingdoms/.local/captures/final/03-mara-dialogue.png"
+    },
+    {
+      "label": "04-gate-safe-line",
+      "draws": 202,
+      "file": "/home/user/3kingdoms/.local/captures/final/04-gate-safe-line.png"
+    },
+    {
+      "label": "05-hound-sunder-1",
+      "draws": 210,
+      "file": "/home/user/3kingdoms/.local/captures/final/05-hound-sunder-1.png"
+    },
+    {
+      "label": "05-hound-sunder-2",
+      "draws": 209,
+      "file": "/home/user/3kingdoms/.local/captures/final/05-hound-sunder-2.png"
+    },
+    {
+      "label": "05-hound-sunder-3",
+      "draws": 207,
+      "file": "/home/user/3kingdoms/.local/captures/final/05-hound-sunder-3.png"
+    },
+    {
+      "label": "05-hound-sunder-4",
+      "draws": 208,
+      "file": "/home/user/3kingdoms/.local/captures/final/05-hound-sunder-4.png"
+    },
+    {
+      "label": "06-hound-melee",
+      "draws": 205,
+      "file": "/home/user/3kingdoms/.local/captures/final/06-hound-melee.png"
+    },
+    {
+      "label": "07-hound-defeated",
+      "draws": 196,
+      "file": "/home/user/3kingdoms/.local/captures/final/07-hound-defeated.png"
+    },
+    {
+      "label": "08-bridge-river",
+      "draws": 194,
+      "file": "/home/user/3kingdoms/.local/captures/final/08-bridge-river.png"
+    },
+    {
+      "label": "09-memorial",
+      "draws": 194,
+      "file": "/home/user/3kingdoms/.local/captures/final/09-memorial.png"
+    },
+    {
+      "label": "10-pipe-ruin",
+      "draws": 173,
+      "file": "/home/user/3kingdoms/.local/captures/final/10-pipe-ruin.png"
+    },
+    {
+      "label": "11-refuge",
+      "draws": 125,
+      "file": "/home/user/3kingdoms/.local/captures/final/11-refuge.png"
+    },
+    {
+      "label": "12-inventory",
+      "draws": 126,
+      "file": "/home/user/3kingdoms/.local/captures/final/12-inventory.png"
+    },
+    {
+      "label": "13-guild-codex",
+      "draws": 131,
+      "file": "/home/user/3kingdoms/.local/captures/final/13-guild-codex.png"
+    },
+    {
+      "label": "14-cyborg-lance-1",
+      "draws": 230,
+      "file": "/home/user/3kingdoms/.local/captures/final/14-cyborg-lance-1.png"
+    },
+    {
+      "label": "14-cyborg-lance-2",
+      "draws": 217,
+      "file": "/home/user/3kingdoms/.local/captures/final/14-cyborg-lance-2.png"
+    },
+    {
+      "label": "14-cyborg-lance-3",
+      "draws": 232,
+      "file": "/home/user/3kingdoms/.local/captures/final/14-cyborg-lance-3.png"
+    },
+    {
+      "label": "14-cyborg-lance-4",
+      "draws": 216,
+      "file": "/home/user/3kingdoms/.local/captures/final/14-cyborg-lance-4.png"
+    },
+    {
+      "label": "15-cyborg-after",
+      "draws": 204,
+      "file": "/home/user/3kingdoms/.local/captures/final/15-cyborg-after.png"
+    },
+    {
+      "label": "16-night-plaza",
+      "draws": 207,
+      "file": "/home/user/3kingdoms/.local/captures/final/16-night-plaza.png"
+    },
+    {
+      "label": "17-night-forest-fireflies",
+      "draws": 181,
+      "file": "/home/user/3kingdoms/.local/captures/final/17-night-forest-fireflies.png"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,37 @@
+{
+  "label": "14-cyborg-lance-1",
+  "kind": "in-engine frame (headless Chromium, SwiftShader software GL)",
+  "note": "Cyborg Pulse Lance on a hound",
+  "session": "Vela",
+  "guild": "cyborg",
+  "url": "http://127.0.0.1:4181/?time=0.42",
+  "commit": "b7e4018",
+  "capturedAt": "2026-10-14T01:42:17.657Z",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "build": "0.1.0-briar-gate",
+  "position": {
+    "x": 0.5104220218361912,
+    "z": 3.9519255385558365
+  },
+  "dayPhase": 0.42,
+  "quality": "medium",
+  "metrics": {
+    "draws": 230,
+    "activeTriangles": 66308,
+    "meshes": 301,
+    "fps": 1.27,
+    "combatEffects": {
+      "meshes": 13,
+      "burstSystems": 0,
+      "particles": 14
+    },
+    "ambient": {
+      "systems": 14,
+      "particles": 390,
+      "meshes": 18
+    }
+  }
+}

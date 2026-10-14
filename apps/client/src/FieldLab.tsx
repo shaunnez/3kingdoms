@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { GameScene } from "./scene";
-import type { Connection } from "./network";
+import type { GameConnection as Connection } from "./network";
 import {
   distance,
   type Snapshot,

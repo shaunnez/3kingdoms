@@ -1,0 +1,37 @@
+{
+  "label": "13-guild-codex",
+  "kind": "in-engine frame (headless Chromium, SwiftShader software GL)",
+  "note": "Guild codex",
+  "session": "Thorne",
+  "guild": "knight",
+  "url": "http://127.0.0.1:4181/?time=0.35",
+  "commit": "b7e4018",
+  "capturedAt": "2026-10-14T01:41:05.420Z",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "build": "0.1.0-briar-gate",
+  "position": {
+    "x": 12.941331823480457,
+    "z": 42.46392501943194
+  },
+  "dayPhase": 0.35,
+  "quality": "medium",
+  "metrics": {
+    "draws": 131,
+    "activeTriangles": 62680,
+    "meshes": 304,
+    "fps": 0.72,
+    "combatEffects": {
+      "meshes": 0,
+      "burstSystems": 0,
+      "particles": 0
+    },
+    "ambient": {
+      "systems": 11,
+      "particles": 362,
+      "meshes": 18
+    }
+  }
+}

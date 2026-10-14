@@ -6,6 +6,8 @@ The PvP/outlaw revision adds a corpse-claim composition/component bundle, red-na
 
 ## Visual direction and reference review
 
+**Runtime direction changed on 13 October 2026.** At the user's request the game now renders procedurally generated voxel art (0.5 m world blocks, chibi characters built from 0.1 m voxels, a painted 16-pixel texture atlas) with stylised lighting and effects. [Voxel art direction](voxel-art-direction.md) owns the current look. The semi-realistic direction below, the Higgsfield/Meshy/Blender plan and their outputs remain preserved records; the runtime no longer loads those models. Manifest units keep their identities. Producing them as voxel/procedural assets rather than generated models is a pipeline change, so it needs its own estimate before bulk production.
+
 Mature, tactile semi-realism: worn stone and metal, visible cloth weave, restrained saturation, strong silhouettes. Highcross's warm amber light against blue dusk is the shared anchor. Fantasy uses moss, wet slate and aged gold; Science oxidised steel, white ceramic, cold cyan and sodium orange; Chaos velvet, porcelain, ink and bruised violet. Characters must look as though they occupy the same lighting environment despite incompatible origins.
 
 The inspected three concept images are 1672×941, targeting a 1920×1080 composition. The town image establishes architecture, open movement space, three gates and player scale; the combat image establishes a thin hostile lane, clear feet and source/target distinction; the guild image establishes Knight detail and the twelve-guild selection layout. Their art is a target, not proof of renderer performance. They were created with built-in image generation, not Higgsfield. Do not relabel them retrospectively.

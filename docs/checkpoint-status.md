@@ -2,6 +2,8 @@
 
 1 October 2026 · P1/P2 · Local build `0.1.0-briar-gate`.
 
+**14 October update:** the runtime now uses procedurally generated voxel art and plays entirely in the browser in solo mode. See [Voxel overhaul — 14 October](#voxel-overhaul--14-october). Sections below that describe GLB models, Blender materials and their traces record the previous build.
+
 The first playable THREEFOLD scene now runs in a browser. Walk from Highcross through the Briar gate, speak to Mara, fight hounds, examine the epitaph and return with a clue. Knight and Cyborg are practice kits. The other ten guilds remain in the approved catalogue and the in-game codex; they have not been quietly removed from the game scope.
 
 The user explicitly authorized Higgsfield and Meshy and instructed work to continue. This checkpoint exercises the production pipeline before bulk generation. The separate 48-hour build experiment has not started.
@@ -108,6 +110,14 @@ The larger HUD retains actual portrait/action art, collapses the journey log and
 Elowen completed the briefing, road fights, bridge, memorial and return reward. Marks rose from 59 to 99 on turn-in, and the hourglass charm appeared in inventory. The [75.04-second recording](../artifacts/checkpoint/captures/highcross-art-expedition.mp4) is source `b3dcdc0a…`; it predates the last tree, fern, tangent and map-water corrections. The final forest still is `7ae7fc7c…`. Both 1920×1080 and 1280×720 layouts were inspected; all 38 gameplay/transport checks, formatting and production build pass. The [new fixed-viewport trace](../artifacts/checkpoint/captures/2026-10-01T06-47-14-184Z-f2b47586.json) completed: 600.54 seconds at fixed 1920×1080, pixel ratio 1, no viewport changes or hidden samples. Median 83.73fps, p95 17.40ms, p99 21.30ms; maximum 511.20ms. Draws p95 234; maximum active triangles 1,239,422. Apple M5 / Chromium / WebGL2, synthetic animation/draw population. Meets numerical frame/draw/triangle thresholds for this fixture, not qualification of GTX 1660 or M1 hardware, a real multiplayer battle, eight simultaneous signatures, or the 30-minute heap target. Light documentation and Git publication ran during the trace; no Blender job or video encoder ran during it. The longest stall is retained and its cause is not established. Historical traces above retain their original build identities.
 
 Next, follow the [uncoached expedition brief](expedition-playtest.md). No human fun test has been run. This pass does not resolve the earlier 300 MiB heap target, qualify the specified M1/GTX 1660 hardware, or clear the environment quality gate for bulk guild production.
+
+## Voxel overhaul — 14 October
+
+At the owner's request (“more cute cartoony, like Minecraft. Add amazing visual effects”), the runtime look was replaced; see the [voxel art direction](voxel-art-direction.md). The world, characters, atlas, effects, sky, HUD icons and audio are generated in TypeScript at load. No provider job or paid generation was used. Game rules, collision, the quest, the twelve-guild scope and open PvP are unchanged. The GLB models, Blender sources and earlier evidence remain preserved; the client no longer loads them.
+
+The simulation now also runs in the page. `npm run dev:client` alone is playable: choose **Solo**. It keeps the server's 20Hz step, 10Hz snapshots and command limits, and saves in the browser's local storage. Since `f0c3678` only one tab plays a solo world at a time; a second tab is asked to close the first. Multiplayer still uses the loopback server through `npm run dev` and `?server`; nothing in this update makes it safe to expose publicly. `npm run build:artifact` writes a static solo build. One such build was shared privately by link with the owner, who reported informally that it plays well with good performance. That is not a measured trace or an independent playtest.
+
+Evidence is in [journal entry 009](../devlog/posts/a-world-made-of-blocks.html) and [its captures](../artifacts/voxel/captures/capture-summary.json). The production build of `b7e4018` was captured headless with SwiftShader at 1920×1080: 23 frames, zero console messages, 131–230 draws and 62,680–255,218 active triangles in the selected frames. Software rendering measures composition, not frame rate. On the review-fix source, 58 automated checks, type checking, formatting, the production build and both validators pass. Real-hardware frame and memory traces for the voxel build, a human playtest and the remaining guild, quest and world content are still open.
 
 ## Remaining game work
 

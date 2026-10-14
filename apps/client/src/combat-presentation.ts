@@ -50,3 +50,42 @@ export function actionPhase(
     ),
   );
 }
+
+/** Phase of an ability motion for the procedural voxel rigs. */
+export type ActionState = {
+  phase: "windup" | "impact" | "recovery";
+  /** 0..1 within the phase. */
+  t: number;
+  /** 0..1 across the whole motion, with actionPhase semantics. */
+  progress: number;
+};
+
+/**
+ * Split an ability motion into windup (until the server resolves it), a short
+ * impact hold, then recovery. Returns false once the motion has finished.
+ */
+export function actionState(
+  elapsed: number,
+  windup: number,
+  impact: number,
+  recovery: number,
+  out: ActionState,
+): boolean {
+  if (elapsed < 0 || elapsed > windup + recovery) return false;
+  const hold = Math.min(0.09, recovery * 0.3);
+  out.progress = actionPhase(elapsed, windup, impact, recovery);
+  if (elapsed < windup) {
+    out.phase = "windup";
+    out.t = elapsed / Math.max(0.001, windup);
+  } else if (elapsed < windup + hold) {
+    out.phase = "impact";
+    out.t = (elapsed - windup) / Math.max(0.001, hold);
+  } else {
+    out.phase = "recovery";
+    out.t = Math.min(
+      1,
+      (elapsed - windup - hold) / Math.max(0.001, recovery - hold),
+    );
+  }
+  return true;
+}

@@ -16,6 +16,8 @@ This document defines the game concept, world, player experience, screen invento
 
 The latest guild and PvP decisions supersede the original proposal to defer nine guilds and limit PvP to consensual duels or specially entered battlegrounds.
 
+On 13 October 2026 the user changed the visual direction: _“Turn this into a browser based game — more cute cartoony, like Minecraft. Add amazing visual effects.”_ The runtime now uses procedurally generated, chunky voxel art with chibi characters and big, playful effects; see [Voxel art direction](docs/voxel-art-direction.md). The world, guilds, quests, combat rules and open PvP are unchanged. The original concept images remain preserved references for composition, layout and mood, not the target look.
+
 ## The player promise
 
 You begin as an ordinary adventurer, discover a guild that changes how you play, and gradually become someone other players recognise.
@@ -285,6 +287,8 @@ The original arena concept normalises major equipment advantages while preservin
 Combat, inventory, rewards, and trading need server authority. Reconnection and persistent saves belong in the first playable multiplayer version. Shared play must be validated with actual independent clients rather than simulated local companions.
 
 ## Visual direction
+
+**Superseded for the runtime on 13 October 2026.** The game now uses the cute voxel direction in [Voxel art direction](docs/voxel-art-direction.md). The palettes and moods below still guide each realm's colour and atmosphere inside that blocky, cartoony style; the painterly semi-realism they originally described is historical.
 
 Handcrafted, tactile, and slightly strange. The realms share a coherent rendering style while differing in materials, architecture, lighting, and atmosphere.
 
