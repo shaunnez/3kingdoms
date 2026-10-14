@@ -1,15 +1,16 @@
 /**
- * Build the game as one self-contained HTML page for static hosts that only
- * allow inline scripts (for example a claude.ai Artifact). The page runs in
- * solo mode: the world simulation is hosted in the page, so no server is needed.
+ * Build the game for a plain static host (for example a claude.ai Artifact):
+ * one tiny page plus game.js and game.css, with fonts inlined as data URIs and
+ * no other assets. The page runs in solo mode: the world simulation is hosted
+ * in the page, so no server is needed.
  *
- * Usage: node tools/build-artifact.mjs [outFile=dist/artifact/threefold.html]
+ * Usage: node tools/build-artifact.mjs [outDir=dist/artifact]
  */
 import { build } from "vite";
-import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
-import { dirname, join, resolve } from "node:path";
+import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { join, resolve } from "node:path";
 
-const out = resolve(process.argv[2] ?? "dist/artifact/threefold.html");
+const out = resolve(process.argv[2] ?? "dist/artifact");
 const work = resolve("dist/artifact-build");
 await build({
   configFile: resolve("apps/client/vite.config.ts"),
@@ -27,50 +28,41 @@ await build({
   },
 });
 
-const html = await readFile(join(work, "index.html"), "utf8");
-const assets = new Map();
-for (const name of await readdir(join(work, "assets")))
-  assets.set(
-    `./assets/${name}`,
-    await readFile(join(work, "assets", name), "utf8"),
-  );
-const take = (href) => {
-  const body = assets.get(href);
-  if (body === undefined) throw new Error(`Missing built asset ${href}`);
-  assets.delete(href);
-  return body;
-};
-
-const title =
-  html.match(/<title>[\s\S]*?<\/title>/)?.[0] ?? "<title>THREEFOLD</title>";
-const styles = [
-  ...html.matchAll(/<link rel="stylesheet"[^>]*href="([^"]+)"[^>]*>/g),
-].map((m) => `<style>\n${take(m[1])}\n</style>`);
-const scripts = [
-  ...html.matchAll(/<script type="module"[^>]*src="([^"]+)"[^>]*><\/script>/g),
-].map(
-  (m) =>
-    // Inline module code must never contain a literal closing script tag.
-    `<script type="module">\n${take(m[1]).replace(/<\/script/gi, "<\\/script")}\n</script>`,
+const built = (await readdir(join(work, "assets"))).filter(
+  (name) => !name.endsWith(".map"),
 );
-if (!scripts.length)
-  throw new Error("No module entry found in the built index.html");
-const leftover = [...assets.keys()].filter((k) => !k.endsWith(".map"));
-if (leftover.length)
-  throw new Error(`Unreferenced chunks would be lost: ${leftover.join(", ")}`);
+const script = built.filter((name) => name.endsWith(".js"));
+const style = built.filter((name) => name.endsWith(".css"));
+if (script.length !== 1 || style.length !== 1 || built.length !== 2)
+  throw new Error(`Expected one script and one stylesheet, got ${built}`);
 
-// The host supplies <!doctype>, <html>, <head> and <body>; ship only the content.
+// Hosts that wrap pages supply <!doctype>, <html>, <head> and <body>.
 const page = [
-  title,
+  "<title>THREEFOLD</title>",
   '<meta name="theme-color" content="#2b2140" />',
-  ...styles,
+  '<link rel="stylesheet" href="game.css" />',
   '<div id="root"></div>',
-  ...scripts,
+  '<script type="module" src="game.js"></script>',
   "",
 ].join("\n");
-await mkdir(dirname(out), { recursive: true });
-await writeFile(out, page);
-const mib = Buffer.byteLength(page) / 1024 / 1024;
-console.log(JSON.stringify({ out, mib: Number(mib.toFixed(2)) }));
-if (mib > 15.5)
-  throw new Error("Single-file page exceeds the 16 MB host limit");
+await rm(out, { recursive: true, force: true });
+await mkdir(out, { recursive: true });
+await writeFile(join(out, "index.html"), page);
+await writeFile(
+  join(out, "game.js"),
+  await readFile(join(work, "assets", script[0])),
+);
+await writeFile(
+  join(out, "game.css"),
+  await readFile(join(work, "assets", style[0])),
+);
+const files = await readdir(out);
+const sizes = {};
+let total = 0;
+for (const name of files) {
+  const bytes = (await readFile(join(out, name))).length;
+  sizes[name] = bytes;
+  total += bytes;
+}
+console.log(JSON.stringify({ out, sizes, mib: +(total / 2 ** 20).toFixed(2) }));
+if (total > 60 * 2 ** 20) throw new Error("Build exceeds the host's limits");
