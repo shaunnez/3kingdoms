@@ -447,6 +447,7 @@ export default function App() {
     let previous = { x: 0, z: 0 },
       lastStep = 0,
       lastBasic = 0;
+    const basicsSent: number[] = [];
     const interval = setInterval(() => {
       const s = snap.current,
         p = s?.actors.find((a) => a.id === s.self.id);
@@ -479,19 +480,24 @@ export default function App() {
         sound.current.step();
         lastStep = performance.now();
       }
-      // Held F repeats the basic attack, timed to its cooldown so the server's
-      // ten-actions-a-second limit is never reached.
+      // Held F repeats the basic attack, timed to its cooldown and capped so
+      // the server's ten-actions-a-second limit is never reached.
+      const now = performance.now();
+      while (basicsSent.length && now - basicsSent[0] >= 1000)
+        basicsSent.shift();
       if (
         keys.current.has("f") &&
         s &&
         basicRepeatDue(
           s.now,
           s.self.cooldowns.basic,
-          performance.now() - lastBasic,
+          now - lastBasic,
           connection.current.latencyMs,
+          basicsSent.length,
         )
       ) {
-        lastBasic = performance.now();
+        lastBasic = now;
+        basicsSent.push(now);
         connection.current.send({
           type: "ability",
           key: "basic",

@@ -65,7 +65,7 @@ The server **refuses to start** if a required variable is missing. The log line 
 | `RAILWAY_DEPLOYMENT_DRAINING_SECONDS` | recommended | Time the old deployment gets to save before it stops. | `15` |
 | `RAILWAY_DEPLOYMENT_OVERLAP_SECONDS` | recommended | Railway already stops two deployments mounting one volume; setting this makes it explicit. | `0` |
 | `THREEFOLD_MAX_CHARACTERS` | no | Most characters the save keeps. | `200` (default) |
-| `THREEFOLD_NEW_CHARACTERS_PER_IP` | no | New characters per address per day. | `4` (default) |
+| `THREEFOLD_NEW_CHARACTERS_PER_IP` | no | New characters per address per day. The count is kept in memory, so a restart or redeploy resets it; `THREEFOLD_MAX_CHARACTERS` still caps the total. | `4` (default) |
 | `THREEFOLD_MAX_SOCKETS_PER_IP` | no | Open connections per address. | `4` (default) |
 | `THREEFOLD_MATCHMAKE_PER_MINUTE` | no | Join attempts per address per minute. | `30` (default) |
 | `THREEFOLD_PENDING_SEATS_PER_IP` | no | Seats an address may hold while connecting. | `2` (default) |
@@ -73,6 +73,10 @@ The server **refuses to start** if a required variable is missing. The log line 
 | `THREEFOLD_WS_DEFLATE` | no | WebSocket compression. Leave it off until its CPU cost has been measured. | unset |
 
 If the logs say `/data` is not writable, set `RAILWAY_RUN_UID=0`. The image then fixes the volume's ownership itself before it drops privileges.
+
+## If saving fails
+
+The logs show `save-failed` when the volume refuses a write. Ordinary progress is retried. When loot changes hands (a body drops, items are claimed) and that save fails, the server logs `escrow-unsaved` and stops at once, so nobody acts on property that never reached the disk. Railway restarts it from the last good save. If it keeps stopping, check the volume's free space in **Volume → Metrics**.
 
 ## Add or remove a tester
 
@@ -119,8 +123,18 @@ Fly's Sydney pricing has not been checked.
 
 ## Rehearse locally first (no spend)
 
+Without Docker, run the bundle on this machine in public mode (`npm start` alone has no invite keys or matching origin, so it refuses the page's join):
+
 ```sh
 npm run build:hosted && npm run build:server && npm run smoke:server
+THREEFOLD_PUBLIC=1 THREEFOLD_PORT=2620 THREEFOLD_ORIGINS=http://127.0.0.1:2620 \
+  THREEFOLD_SAVE=.local/playtest-world.json \
+  THREEFOLD_PLAYTEST_KEYS=you:<a-real-key> npm start
+```
+
+Open `http://127.0.0.1:2620` and paste the key. To try it in the container instead:
+
+```sh
 docker build -t threefold .
 docker run -p 2620:8080 -v threefold-data:/data \
   -e THREEFOLD_ORIGINS=http://<this-machine's-LAN-IP>:2620 \

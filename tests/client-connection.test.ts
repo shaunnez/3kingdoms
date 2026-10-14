@@ -102,6 +102,29 @@ test("held F repeats at the cooldown, never faster than seven a second", () => {
   // Long past ready: throttled to one send per 140 ms.
   assert.equal(basicRepeatDue(20, 11, 100, 50), false);
   assert.equal(basicRepeatDue(20, 11, 140, 50), true);
+  // Seven already sent in the last second: wait, even at the cooldown.
+  assert.equal(basicRepeatDue(10.9, 11, 0, 50, 6), true);
+  assert.equal(basicRepeatDue(10.9, 11, 0, 50, 7), false);
+});
+
+test("a held F stays under seven a second through cooldown windows", () => {
+  // 1 s cooldown and a slow 300 ms round trip: the new cooldown only shows
+  // up in a snapshot well after the attack lands.
+  const rtt = 300,
+    sent: number[] = [];
+  let ready = 1,
+    last = -Infinity;
+  for (let ms = 0; ms < 10_000; ms += 70) {
+    const seenNow = ms / 1000 - 0.1 - rtt / 2000;
+    while (sent.length && ms - sent[0] >= 1000) sent.shift();
+    if (basicRepeatDue(seenNow, ready, ms - last, rtt, sent.length)) {
+      sent.push(ms);
+      last = ms;
+      const arrives = ms / 1000 + rtt / 2000;
+      if (arrives >= ready) ready = arrives + 1;
+    }
+    assert.ok(sent.length <= 7, `${sent.length} sends in a second at ${ms} ms`);
+  }
 });
 
 test("the identity token and invite key survive refused storage", () => {

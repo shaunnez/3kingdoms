@@ -245,18 +245,25 @@ export function joinFailure(error: unknown): JoinFailure {
   return { message: null, permanent: false };
 }
 
+/** Most basic attacks a held F sends in any second, leaving room for abilities. */
+export const BASIC_REPEATS_PER_SECOND = 7;
+
 /**
  * Held F repeats the basic attack. Around the moment its cooldown ends it
- * goes out on every 70 ms input tick, as before, so the attack lands as soon
- * as it can. Otherwise (no target, out of range) it repeats at most every
- * 140 ms, so a held key stays well inside the server's 10 actions a second.
+ * goes out on every 70 ms input tick, so the attack lands as soon as it can.
+ * Otherwise (no target, out of range) it repeats at most every 140 ms. Either
+ * way, no more than BASIC_REPEATS_PER_SECOND go out in any second
+ * (`sentLastSecond`), so a held key stays inside the server's 10 actions a
+ * second and abilities pressed meanwhile still get through.
  */
 export function basicRepeatDue(
   serverNow: number,
   readyAt: number | undefined,
   sinceLastMs: number,
   rttMs?: number | null,
+  sentLastSecond = 0,
 ): boolean {
+  if (sentLastSecond >= BASIC_REPEATS_PER_SECOND) return false;
   const ready = readyAt ?? 0;
   // Snapshots trail the server by up to 0.1 s plus half a round trip, and
   // the command needs the other half: start that much early.

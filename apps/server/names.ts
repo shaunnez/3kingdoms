@@ -116,11 +116,13 @@ function containsWords(name: string[], phrase: string[]): boolean {
 
 export class Names {
   private staff: Set<string>;
+  private staffWords: string[][];
   private npcs: string[][];
   private index = new Map<string, Set<string>>();
   /** `extra` reserves the names of characters the world already defines. */
   constructor(extra: Iterable<string> = []) {
     this.staff = new Set(STAFF.map(nameKey));
+    this.staffWords = STAFF.map(words).filter((w) => w.length);
     this.npcs = [...NPCS, ...[...extra].flatMap((n) => n.split("·"))]
       .map(words)
       .filter((w) => w.length);
@@ -135,6 +137,7 @@ export class Names {
       parts = words(name);
     if (
       this.staff.has(key) ||
+      this.staffWords.some((staff) => containsWords(parts, staff)) ||
       this.npcs.some((npc) => npc.join("") === key || containsWords(parts, npc))
     )
       return "reserved";

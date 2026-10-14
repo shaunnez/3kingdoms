@@ -152,12 +152,17 @@ class BriarRoom extends Room {
       const previousCorpses = world.corpses.size;
       world.step(dt);
       // Loot escrow and receipts reach the disk before anyone can act on them.
+      // If they cannot, stop at once: the restart restores the last durable
+      // save, so nobody claims or moves property that was never written.
       if (
         world.receipts.size !== previousReceipts ||
         world.corpses.size !== previousCorpses
-      )
-        saves.flushNow("escrow");
-      else if (this.players.size) saves.requestSave();
+      ) {
+        if (!saves.flushNow("escrow")) {
+          log("escrow-unsaved", { players: this.players.size });
+          process.exit(1);
+        }
+      } else if (this.players.size) saves.requestSave();
       if (world.tick % 2 === 0) {
         for (const client of this.clients) {
           const id = this.players.get(client.sessionId);
