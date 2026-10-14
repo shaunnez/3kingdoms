@@ -6,6 +6,7 @@ import { mkdtempSync, writeFileSync, readFileSync, mkdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { Client, type Room } from "@colyseus/sdk";
 import { World } from "../packages/simulation/world";
+import { sessionToken } from "../apps/client/src/network";
 import { PROTOCOL, type Snapshot } from "../packages/contracts/game";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -318,3 +319,53 @@ test(
     }
   },
 );
+
+test("the reconnect token survives a browser that refuses session storage", () => {
+  const original = Object.getOwnPropertyDescriptor(
+    globalThis,
+    "sessionStorage",
+  );
+  const use = (descriptor: PropertyDescriptor) =>
+    Object.defineProperty(globalThis, "sessionStorage", {
+      configurable: true,
+      ...descriptor,
+    });
+  try {
+    // Sandboxed frames throw on any access to the storage object.
+    use({
+      get() {
+        throw new DOMException("The operation is insecure.", "SecurityError");
+      },
+    });
+    const token = sessionToken();
+    assert.match(token, /^[a-f0-9]{64}$/);
+    assert.equal(sessionToken(), token, "Reconnects changed the traveller");
+
+    // A store that reads but refuses writes keeps the same page token.
+    use({
+      value: {
+        getItem: () => null,
+        setItem: () => {
+          throw new DOMException("Full", "QuotaExceededError");
+        },
+      },
+    });
+    assert.equal(sessionToken(), token);
+
+    // Working session storage is used, and its token wins.
+    const values = new Map<string, string>();
+    use({
+      value: {
+        getItem: (key: string) => values.get(key) ?? null,
+        setItem: (key: string, value: string) => void values.set(key, value),
+      },
+    });
+    assert.equal(sessionToken(), token);
+    assert.equal(values.get("threefold-token"), token);
+    values.set("threefold-token", "a".repeat(64));
+    assert.equal(sessionToken(), "a".repeat(64));
+  } finally {
+    if (original) Object.defineProperty(globalThis, "sessionStorage", original);
+    else delete (globalThis as { sessionStorage?: Storage }).sessionStorage;
+  }
+});
