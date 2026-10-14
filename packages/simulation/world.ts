@@ -1,97 +1,24 @@
 import {
   BUILD,
   PROTOCOL,
-  KITS,
   distance,
-  type AbilityKey,
   type ActorView,
   type CombatEvent,
   type Command,
-  type CorpseView,
   type Guild,
-  type Item,
   type Notice,
-  type Quest,
   type Snapshot,
   type Vec2,
 } from "../contracts/game";
+import type { Actor, Corpse, Mine, Projectile } from "./actor";
+import { CREATURES } from "./data/creatures";
+import { GUILD_COMBAT } from "./data/guilds";
+import { Combat, COMBAT_WINDOW, RETALIATION_WINDOW } from "./engine/combat";
+import * as statuses from "./engine/statuses";
+import type { CombatHost } from "./engine/types";
 import { isSafe, lineOfSight, move, NPCS, REFUGE } from "./map";
 
-type DamageRecord = {
-  amount: number;
-  first: number;
-  last: number;
-  unlawful: boolean;
-};
-export type Actor = ActorView & {
-  resource: number;
-  xp: number;
-  marks: number;
-  quest: Quest;
-  inventory: Item[];
-  recovery: Item[];
-  cooldowns: Partial<Record<AbilityKey, number>>;
-  move: Vec2;
-  moveUntil: number;
-  lastSeq: number;
-  combatUntil: number;
-  disconnectedAt: number | null;
-  downedUntil: number;
-  downedLock: number;
-  evadeUntil: number;
-  evadeCharges: number;
-  evadeRecoverAt: number;
-  braceUntil: number;
-  stunUntil: number;
-  rootUntil: number;
-  slowUntil: number;
-  oathUntil: number;
-  overclockUntil: number;
-  sunderUntil: number;
-  healUntil: number;
-  healTick: number;
-  challenge: { owner: string; until: number } | null;
-  interpose: { owner: string; until: number; remaining: number } | null;
-  channel:
-    | (
-        | {
-            kind: "loot";
-            name: string;
-            start: number;
-            end: number;
-            corpse: string;
-            item: string;
-            origin: Vec2;
-          }
-        | {
-            kind: "revive";
-            name: string;
-            start: number;
-            end: number;
-            target: string;
-            origin: Vec2;
-          }
-      )
-    | null;
-  damage: Record<string, DamageRecord>;
-  retaliation: Record<string, number>;
-  target: string | null;
-  home: Vec2;
-  respawnAt: number;
-  active: boolean;
-};
-type Corpse = CorpseView & { priorItems: Item[] };
-type Mine = Vec2 & { id: number; owner: string; arm: number; expires: number };
-type Projectile = Vec2 & {
-  id: number;
-  owner: string;
-  key: AbilityKey;
-  dx: number;
-  dz: number;
-  travelled: number;
-  range: number;
-  damage: number;
-};
+export type { Actor } from "./actor";
 export type SavedWorld = {
   version: 1;
   now: number;
@@ -100,7 +27,7 @@ export type SavedWorld = {
   corpses: Corpse[];
   receipts: string[];
 };
-export class World {
+export class World implements CombatHost {
   now = 0;
   tick = 0;
   counter = 0;
@@ -111,6 +38,7 @@ export class World {
   notices: { id: string; notice: Notice }[] = [];
   mines: Mine[] = [];
   projectiles: Projectile[] = [];
+  readonly combat = new Combat(this);
   constructor(saved?: SavedWorld) {
     if (saved) {
       if (saved.version !== 1)
@@ -142,6 +70,18 @@ export class World {
   }
   private id(prefix: string): string {
     return `${prefix}-${++this.counter}`;
+  }
+  nextId(): number {
+    return ++this.counter;
+  }
+  isSafe(p: Vec2): boolean {
+    return isSafe(p);
+  }
+  lineOfSight(a: Vec2, b: Vec2): boolean {
+    return lineOfSight(a, b);
+  }
+  move(p: Vec2, dx: number, dz: number): Vec2 {
+    return move(p, dx, dz);
   }
   private base(
     id: string,
@@ -175,7 +115,7 @@ export class World {
       returning: false,
       oath: false,
       protectedBy: null,
-      resource: guild === "knight" ? 60 : 0,
+      resource: GUILD_COMBAT[guild].resource.start,
       xp: 0,
       marks: 35,
       quest: "unheard",
@@ -280,7 +220,7 @@ export class World {
       p.cast = null;
     }
   }
-  private say(
+  say(
     id: string,
     text: string,
     kind: Notice["kind"] = "info",
@@ -288,7 +228,7 @@ export class World {
   ) {
     this.notices.push({ id, notice: { kind, text, speaker } });
   }
-  private event(
+  emit(
     type: CombatEvent["type"],
     source: Actor,
     target: Actor,
@@ -309,11 +249,11 @@ export class World {
       z: target.z,
     });
   }
-  private offence(p: Actor, killer = false) {
+  offence(p: Actor, killer = false) {
     p.red = Math.max(p.red, killer ? 3600 : 600);
     p.killer = p.killer || killer;
   }
-  private canHarm(a: Actor, b: Actor): boolean {
+  canHarm(a: Actor, b: Actor): boolean {
     if (
       a.id === b.id ||
       !b.active ||
@@ -335,13 +275,13 @@ export class World {
   private legal(a: Actor, b: Actor): boolean {
     return b.red > 0 || (a.retaliation[b.id] ?? 0) > this.now;
   }
-  private aggression(a: Actor, b: Actor) {
+  aggression(a: Actor, b: Actor) {
     if (a.kind !== "player") return;
     if (b.kind === "guard") this.offence(a);
     if (b.kind !== "player") return;
     const unlawful = !this.legal(a, b);
     if (unlawful) this.offence(a);
-    b.retaliation[a.id] = this.now + 30;
+    b.retaliation[a.id] = this.now + RETALIATION_WINDOW;
     if (unlawful) {
       const r = b.damage[a.id] ?? {
         amount: 0,
@@ -353,7 +293,7 @@ export class World {
       r.last = this.now;
       b.damage[a.id] = r;
     }
-    a.combatUntil = b.combatUntil = this.now + 20;
+    a.combatUntil = b.combatUntil = this.now + COMBAT_WINDOW;
   }
   command(id: string, input: unknown): boolean {
     const p = this.actors.get(id);
@@ -389,7 +329,7 @@ export class World {
         return true;
       }
       case "ability":
-        return this.ability(
+        return this.combat.begin(
           p,
           c.key,
           typeof c.target === "string" ? c.target : "",
@@ -436,7 +376,7 @@ export class World {
         )
           return false;
         p.guild = c.guild;
-        p.resource = c.guild === "knight" ? 60 : 0;
+        p.resource = GUILD_COMBAT[c.guild].resource.start;
         p.cooldowns = {};
         this.say(
           id,
@@ -453,365 +393,31 @@ export class World {
         return false;
     }
   }
-  private ability(
-    p: Actor,
-    key: AbilityKey,
-    targetId: string,
-    aim?: Vec2,
-  ): boolean {
-    const a = KITS[p.guild].find((x) => x.key === key);
-    if (
-      !a ||
-      (p.stunUntil > this.now && key !== "c") ||
-      (p.cast && key !== "space" && key !== "c") ||
-      (p.cooldowns[key] ?? 0) > this.now
-    )
-      return false;
-    if (key === "c") {
-      p.cast = null;
-      p.stunUntil = p.rootUntil = 0;
-      p.cooldowns.c = this.now + 45;
-      this.event("dodge", p, p, key);
-      return true;
-    }
-    if (key === "space") {
-      if (p.evadeCharges <= 0) return false;
-      if (p.rootUntil > this.now) return false;
-      p.cast = null;
-      const dir =
-        Math.hypot(p.move.x, p.move.z) > 0.1
-          ? p.move
-          : { x: Math.sin(p.heading), z: Math.cos(p.heading) };
-      Object.assign(p, move(p, dir.x * 3, dir.z * 3));
-      p.evadeUntil = this.now + 0.35;
-      if (p.evadeCharges === 2) p.evadeRecoverAt = this.now + 7;
-      p.evadeCharges--;
-      p.cooldowns.space = p.evadeCharges > 0 ? 0 : p.evadeRecoverAt;
-      p.channel = null;
-      p.safe = isSafe(p);
-      this.event("dodge", p, p, key);
-      return true;
-    }
-    const t = this.actors.get(targetId);
-    const hostile =
-      key === "basic" ||
-      key === "1" ||
-      key === "2" ||
-      (key === "3" && p.guild === "knight");
-    if (hostile && (!t || !this.canHarm(p, t))) {
-      this.say(
-        p.id,
-        t
-          ? "Town and sanctuary boundaries prevent player attacks."
-          : "Select a target first.",
-        "error",
-      );
-      return false;
-    }
-    if (
-      hostile &&
-      t &&
-      (distance(p, t) > a.range + 0.3 || !lineOfSight(p, t))
-    ) {
-      this.say(p.id, "Move closer and keep a clear line of sight.", "error");
-      return false;
-    }
-    if (p.guild === "knight" && p.resource < a.cost) {
-      this.say(
-        p.id,
-        "Not enough Resolve. Measured Cut and Brace rebuild it.",
-        "error",
-      );
-      return false;
-    }
-    if (p.guild === "cyborg" && a.cost > 0 && p.resource + a.cost > 100) {
-      this.say(
-        p.id,
-        "Heat limit. Use Coolant Burst or allow the core to cool.",
-        "error",
-      );
-      return false;
-    }
-    if (
-      p.guild === "knight" &&
-      key === "4" &&
-      (!t ||
-        t.kind !== "player" ||
-        t.id === p.id ||
-        distance(p, t) > 8 ||
-        isSafe(p) !== isSafe(t))
-    ) {
-      this.say(
-        p.id,
-        "Select a nearby ally on the same side of the safe boundary.",
-        "error",
-      );
-      return false;
-    }
-    if (hostile && t) this.aggression(p, t);
-    const validAim =
-      aim &&
-      Number.isFinite(aim.x) &&
-      Number.isFinite(aim.z) &&
-      Math.abs(aim.x) < 80 &&
-      Math.abs(aim.z) < 100
-        ? aim
-        : (t ?? {
-            x: p.x + Math.sin(p.heading) * 6,
-            z: p.z + Math.cos(p.heading) * 6,
-          });
-    if (t) p.heading = Math.atan2(t.x - p.x, t.z - p.z);
-    p.cast = {
-      key,
-      name: a.name,
-      start: this.now,
-      end: this.now + a.windup,
-      target: targetId,
-      aim: { x: validAim.x, z: validAim.z },
-    };
-    p.move = { x: 0, z: 0 };
-    p.channel = null;
-    this.event("cast", p, t ?? p, key);
-    return true;
-  }
-  private resolve(p: Actor) {
-    const c = p.cast;
-    if (!c) return;
-    p.cast = null;
-    const a = KITS[p.guild].find((x) => x.key === c.key)!;
-    if (
-      (p.guild === "knight" && p.resource < a.cost) ||
-      (p.guild === "cyborg" && a.cost > 0 && p.resource + a.cost > 100)
-    )
-      return;
-    p.resource = Math.max(
-      0,
-      Math.min(100, p.resource + (p.guild === "cyborg" ? a.cost : -a.cost)),
-    );
-    p.cooldowns[c.key] =
-      this.now +
-      a.cooldown *
-        (c.key === "basic" && p.overclockUntil > this.now ? 0.75 : 1);
-    const t = this.actors.get(c.target);
-    const power = 40 + 6 * (p.level - 1);
-    this.event("resolve", p, t ?? p, c.key, 0, { aim: c.aim });
-    if (c.key === "q") {
-      p.braceUntil = this.now + (p.guild === "knight" ? 0.8 : 1);
-      if (p.guild === "knight") p.resource = Math.min(100, p.resource + 8);
-      return;
-    }
-    if (c.key === "r") {
-      if (p.guild === "knight") p.oathUntil = this.now + 6;
-      else p.overclockUntil = this.now + 6;
-      return;
-    }
-    if (c.key === "5") {
-      p.healUntil = this.now + (p.guild === "knight" ? 4 : 5);
-      p.healTick = this.now;
-      return;
-    }
-    if (c.key === "4") {
-      if (p.guild === "cyborg") {
-        for (const other of this.actors.values())
-          if (
-            other.id !== p.id &&
-            distance(p, other) <= 3 &&
-            this.canHarm(p, other)
-          ) {
-            this.aggression(p, other);
-            other.slowUntil = this.now + 2;
-          }
-      } else if (t && distance(p, t) <= 8 && isSafe(p) === isSafe(t)) {
-        t.interpose = {
-          owner: p.id,
-          until: this.now + 3,
-          remaining: p.maxHp * 0.2,
-        };
-        if (t.red > 0 && t.combatUntil > this.now && !isSafe(t))
-          this.offence(p);
-      }
-      return;
-    }
-    if (c.key === "3") {
-      if (p.guild === "cyborg") {
-        const d = distance(p, c.aim),
-          f = d > 6 ? 6 / d : 1;
-        this.mines = this.mines.filter((m) => m.owner !== p.id);
-        this.mines.push({
-          id: ++this.counter,
-          x: p.x + (c.aim.x - p.x) * f,
-          z: p.z + (c.aim.z - p.z) * f,
-          owner: p.id,
-          arm: this.now + 1,
-          expires: this.now + 12,
-        });
-      } else if (t && this.canHarm(p, t)) {
-        t.challenge = { owner: p.id, until: this.now + 4 };
-        if (t.kind !== "player") t.target = p.id;
-      }
-      return;
-    }
-    if (p.guild === "cyborg" && c.key === "1") {
-      const dx = c.aim.x - p.x,
-        dz = c.aim.z - p.z,
-        len = Math.hypot(dx, dz) || 1;
-      const targets = [...this.actors.values()]
-        .filter((b) => {
-          const f = ((b.x - p.x) * dx + (b.z - p.z) * dz) / len;
-          const side = Math.abs((b.x - p.x) * dz - (b.z - p.z) * dx) / len;
-          return (
-            f > 0 &&
-            f <= a.range &&
-            side < 0.75 &&
-            this.canHarm(p, b) &&
-            lineOfSight(p, b)
-          );
-        })
-        .sort((a, b) => distance(p, a) - distance(p, b));
-      targets.forEach((b, i) => {
-        this.aggression(p, b);
-        this.hit(p, b, power * a.power * (i ? 0.5 : 1), c.key);
-      });
-      if (!targets.length) this.event("miss", p, t ?? p, c.key);
-      return;
-    }
-    if (p.guild === "cyborg" && ["basic", "2"].includes(c.key) && t) {
-      const dx = t.x - p.x,
-        dz = t.z - p.z,
-        len = Math.hypot(dx, dz) || 1;
-      this.projectiles.push({
-        id: ++this.counter,
-        owner: p.id,
-        key: c.key,
-        x: p.x,
-        z: p.z,
-        dx: dx / len,
-        dz: dz / len,
-        travelled: 0,
-        range: a.range,
-        damage: power * a.power,
-      });
-      return;
-    }
-    if (
-      t &&
-      distance(p, t) <= a.range + 0.4 &&
-      lineOfSight(p, t) &&
-      this.canHarm(p, t)
-    ) {
-      this.hit(p, t, power * a.power, c.key);
-      if (c.key === "1" && p.guild === "knight") t.sunderUntil = this.now + 5;
-      if (c.key === "2" && t.life === "alive" && t.evadeUntil <= this.now) {
-        t.cast = null;
-        if (p.guild === "knight") t.stunUntil = this.now + 0.7;
-        else t.rootUntil = this.now + 1;
-      }
-      if (c.key === "basic" && p.guild === "knight")
-        p.resource = Math.min(100, p.resource + 10);
-    } else this.event("miss", p, t ?? p, c.key);
-  }
-  private hit(
-    a: Actor,
-    b: Actor,
-    amount: number,
-    key: string,
-    redirected = false,
-  ) {
-    if (!this.canHarm(a, b)) return;
-    if (b.evadeUntil > this.now) {
-      this.event("miss", a, b, key);
-      return;
-    }
-    let damage =
-      amount *
-      (a.overclockUntil > this.now ? 1.15 : 1) *
-      (b.sunderUntil > this.now ? 1.15 : 1);
-    if (
-      a.challenge &&
-      a.challenge.until > this.now &&
-      a.challenge.owner !== b.id
-    )
-      damage *= 0.85;
-    let blocked = false;
-    if (b.braceUntil > this.now) {
-      const facing = Math.cos(b.heading - Math.atan2(a.x - b.x, a.z - b.z));
-      if (b.guild === "cyborg" || facing > 0.2) {
-        blocked = true;
-        damage *= b.guild === "knight" ? 0.4 : 0.55;
-        if (b.oathUntil > this.now) this.heal(b, b, 25);
-      }
-    }
-    if (!redirected && b.interpose && b.interpose.until > this.now) {
-      const guard = this.actors.get(b.interpose.owner);
-      if (guard && guard.life === "alive" && this.canHarm(a, guard)) {
-        const share = Math.min(damage * 0.3, b.interpose.remaining);
-        damage -= share;
-        b.interpose.remaining -= share;
-        this.hit(a, guard, share, key, true);
-      }
-    }
-    damage = Math.max(1, Math.round(damage));
-    const record = b.damage[a.id] ?? {
-      amount: 0,
-      first: this.now,
-      last: this.now,
-      unlawful: false,
-    };
-    record.amount += Math.min(damage, b.hp);
-    record.last = this.now;
-    b.damage[a.id] = record;
-    a.combatUntil = b.combatUntil = this.now + 20;
-    b.channel = null;
-    b.healUntil = 0;
-    if (a.kind === "player" && b.kind === "player")
-      b.retaliation[a.id] = this.now + 30;
-    b.hp = Math.max(0, b.hp - damage);
-    this.event("hit", a, b, key, damage, blocked ? { blocked: true } : {});
-    if (b.hp === 0) {
-      if (
-        b.kind === "player" &&
-        b.life === "alive" &&
-        b.downedLock <= this.now
-      ) {
-        b.life = "downed";
-        b.downedUntil = this.now + 10;
-        b.downedLock = this.now + 60;
-        b.cast = null;
-        b.move = { x: 0, z: 0 };
-      } else this.die(b, a);
-    }
-  }
-  private heal(source: Actor, target: Actor, n: number) {
-    if (target.life !== "alive") return;
-    const amount = Math.min(target.maxHp - target.hp, Math.round(n));
-    if (amount > 0) {
-      target.hp += amount;
-      this.event("heal", source, target, "heal", amount);
-    }
-  }
-  private die(p: Actor, last?: Actor) {
+  die(p: Actor, last?: Actor) {
     if (p.life === "dead") return;
     p.life = "dead";
     p.hp = 0;
     p.cast = null;
     p.channel = null;
     p.move = { x: 0, z: 0 };
-    this.event("death", last ?? p, p, "death");
+    this.emit("death", last ?? p, p, "death");
     if (p.kind !== "player") {
-      p.respawnAt = this.now + (p.kind === "guard" ? 60 : 35);
+      const creature = CREATURES[p.kind];
+      p.respawnAt = this.now + (creature?.respawn ?? 35);
       if (p.kind === "guard" && last?.kind === "player")
         this.offence(last, true);
-      if (p.kind === "wolf")
+      const reward = creature?.reward;
+      if (reward)
         for (const [id, r] of Object.entries(p.damage)) {
           const winner = this.actors.get(id);
           if (
             winner &&
             winner.kind === "player" &&
-            r.amount >= p.maxHp * 0.05 &&
-            this.now - r.last < 20
+            r.amount >= p.maxHp * reward.minShare &&
+            this.now - r.last < reward.window
           ) {
-            this.awardExperience(winner, 65);
-            winner.marks += 6;
+            this.awardExperience(winner, reward.xp);
+            winner.marks += reward.marks;
           }
         }
       return;
@@ -864,7 +470,7 @@ export class World {
     p.cast = null;
     p.channel = null;
     p.move = { x: 0, z: 0 };
-    p.resource = p.guild === "knight" ? 60 : 0;
+    p.resource = GUILD_COMBAT[p.guild].resource.start;
   }
   private beginClaim(p: Actor, corpseId: string, itemId: string): boolean {
     const c = this.corpses.get(corpseId);
@@ -925,7 +531,7 @@ export class World {
     c.quota--;
     c.owner = p.id;
     this.receipts.add(receipt);
-    this.event("loot", p, p, "loot");
+    this.emit("loot", p, p, "loot");
     this.say(
       p.id,
       `${item.name} claimed. ${c.quota} item${c.quota === 1 ? "" : "s"} remaining.`,
@@ -1044,11 +650,7 @@ export class World {
     this.events = this.events.filter((e) => this.now - e.at < 2);
     for (const p of this.actors.values()) {
       if (!p.active) continue;
-      if (p.evadeCharges < 2 && p.evadeRecoverAt <= this.now) {
-        p.evadeCharges++;
-        p.evadeRecoverAt = p.evadeCharges < 2 ? this.now + 7 : 0;
-        p.cooldowns.space = 0;
-      }
+      this.combat.recoverEvade(p);
 
       if (p.kind === "player" && p.connected) {
         p.red = Math.max(0, p.red - dt);
@@ -1080,32 +682,16 @@ export class World {
         continue;
       }
       if (p.kind === "guard" || p.kind === "wolf") this.ai(p, dt);
-      if (
-        p.moveUntil > this.now &&
-        p.rootUntil <= this.now &&
-        p.stunUntil <= this.now &&
-        p.braceUntil <= this.now
-      ) {
-        const speed = 4.5 * (p.slowUntil > this.now ? 0.7 : 1);
+      if (p.moveUntil > this.now && !statuses.blocksMovement(p, this.now)) {
+        const speed = 4.5 * statuses.speedScale(p, this.now);
         Object.assign(p, move(p, p.move.x * speed * dt, p.move.z * speed * dt));
         if (Math.hypot(p.move.x, p.move.z) > 0.1)
           p.heading = Math.atan2(p.move.x, p.move.z);
       }
       const safe = isSafe(p);
-      if (safe && !p.safe) {
-        p.rootUntil = p.stunUntil = p.slowUntil = 0;
-      }
+      if (safe && !p.safe) statuses.clearOnSafety(p);
       p.safe = safe;
-      if (p.cast && p.cast.end <= this.now) {
-        if (p.kind === "player") this.resolve(p);
-        else {
-          const target = this.actors.get(p.cast.target);
-          this.event("resolve", p, target ?? p, p.cast.key);
-          p.cast = null;
-          if (target && distance(p, target) < 2.8)
-            this.hit(p, target, p.kind === "guard" ? 150 : 30, "basic");
-        }
-      }
+      if (p.cast && p.cast.end <= this.now) this.combat.commit(p);
       if (p.channel) {
         if (distance(p, p.channel.origin) > 0.15) p.channel = null;
         else if (p.channel.kind === "revive") {
@@ -1121,114 +707,31 @@ export class World {
             target.life = "alive";
             target.hp = Math.round(target.maxHp * 0.35);
             target.downedUntil = 0;
-            target.stunUntil = target.rootUntil = 0;
+            statuses.clear(target, "stun");
+            statuses.clear(target, "root");
             p.channel = null;
-            this.event("heal", p, target, "revive", target.hp);
+            this.emit("heal", p, target, "revive", target.hp);
             this.say(target.id, `${p.name} helped you to your feet.`);
           }
         } else if (p.channel.end <= this.now) this.finishClaim(p);
       }
-      if (p.guild === "cyborg" && p.kind === "player") {
-        p.resource = Math.max(0, p.resource - dt * 5);
-        if (p.overclockUntil > this.now) {
-          p.resource = Math.min(100, p.resource + dt * 8);
-          if (p.resource >= 100) p.overclockUntil = 0;
-        }
-      }
-      if (p.healUntil > this.now && p.healTick <= this.now) {
-        p.healTick = this.now + 1;
-        this.heal(
-          p,
-          p,
-          (40 + 6 * (p.level - 1)) *
-            (p.guild === "knight" ? 0.25 : 0.3) *
-            (p.combatUntil > this.now ? 0.75 : 1),
-        );
-      }
-      if (p.kind === "player" && p.combatUntil <= this.now) {
-        p.hp = Math.min(p.maxHp, p.hp + dt * 12);
-        if (p.guild === "knight")
-          p.resource = Math.min(60, p.resource + dt * 4);
-      }
-      p.guarding = p.braceUntil > this.now;
-      p.dodging = p.evadeUntil > this.now;
-      p.stunned = p.stunUntil > this.now || p.rootUntil > this.now;
-      p.healing = p.healUntil > this.now;
+      this.combat.tick(p, dt);
+      this.combat.flags(p);
     }
-    for (const shot of this.projectiles) {
-      const owner = this.actors.get(shot.owner);
-      if (!owner || !owner.active) {
-        shot.travelled = shot.range;
-        continue;
-      }
-      const length = Math.min(shot.range - shot.travelled, dt * 18);
-      const origin = { x: shot.x, z: shot.z };
-      shot.x += shot.dx * length;
-      shot.z += shot.dz * length;
-      shot.travelled += length;
-      if (!lineOfSight(origin, shot)) {
-        shot.travelled = shot.range;
-        continue;
-      }
-      const hit = [...this.actors.values()]
-        .filter((t) => {
-          if (!this.canHarm(owner, t)) return false;
-          const along = Math.max(
-            0,
-            Math.min(
-              length,
-              (t.x - origin.x) * shot.dx + (t.z - origin.z) * shot.dz,
-            ),
-          );
-          return (
-            Math.hypot(
-              t.x - origin.x - shot.dx * along,
-              t.z - origin.z - shot.dz * along,
-            ) < 0.48
-          );
-        })
-        .sort((a, b) => distance(origin, a) - distance(origin, b))[0];
-      if (hit) {
-        this.aggression(owner, hit);
-        this.hit(owner, hit, shot.damage, shot.key);
-        if (
-          shot.key === "2" &&
-          hit.evadeUntil <= this.now &&
-          hit.life === "alive"
-        )
-          hit.rootUntil = this.now + 1;
-        shot.travelled = shot.range;
-      }
-    }
-    this.projectiles = this.projectiles.filter((s) => s.travelled < s.range);
-    for (const m of this.mines) {
-      if (m.arm > this.now || m.expires <= this.now) continue;
-      const owner = this.actors.get(m.owner);
-      if (!owner || owner.life !== "alive") continue;
-      const targets = [...this.actors.values()].filter(
-        (t) => distance(m, t) <= 2 && this.canHarm(owner, t),
-      );
-      if (targets.length) {
-        for (const t of targets) {
-          this.aggression(owner, t);
-          this.hit(owner, t, 51, "3");
-          t.slowUntil = this.now + 2;
-        }
-        m.expires = 0;
-      }
-    }
-    this.mines = this.mines.filter((m) => m.expires > this.now);
+    this.combat.stepObjects(dt);
     for (const c of this.corpses.values())
       if (c.expires <= this.now) this.release(c);
   }
   private ai(p: Actor, dt: number) {
-    if (p.stunUntil > this.now || p.rootUntil > this.now || p.cast) return;
+    if (statuses.blocksMovement(p, this.now) || p.cast) return;
     // Finish a retreat before reacquiring: the old leash oscillated at its edge.
     if (p.returning) {
       this.returnHome(p, dt);
       return;
     }
-    const limit = p.kind === "guard" ? 20 : 8;
+    const creature = CREATURES[p.kind];
+    if (!creature) return;
+    const limit = creature.sight;
     const candidates = [...this.actors.values()].filter(
       (t) =>
         t.kind === "player" &&
@@ -1244,30 +747,20 @@ export class World {
         : undefined;
     const target =
       forced ?? candidates.sort((a, b) => distance(p, a) - distance(p, b))[0];
-    if (target && distance(p, p.home) < (p.kind === "guard" ? 40 : 14)) {
+    if (target && distance(p, p.home) < creature.leash) {
       p.target = target.id;
       const d = distance(p, target);
       p.heading = Math.atan2(target.x - p.x, target.z - p.z);
-      if (d > 1.9) {
-        const speed = p.kind === "guard" ? 4.8 : 3.8;
+      if (d > creature.attack.engage) {
+        const speed = creature.speed;
         const proposed = move(
           p,
           ((target.x - p.x) / d) * speed * dt,
           ((target.z - p.z) / d) * speed * dt,
         );
         if (!this.inRefuge(proposed)) Object.assign(p, proposed);
-      } else if ((p.cooldowns.basic ?? 0) <= this.now) {
-        p.cooldowns.basic = this.now + (p.kind === "guard" ? 1.7 : 2.2);
-        p.cast = {
-          key: "basic",
-          name: p.kind === "guard" ? "Concord strike" : "Rending bite",
-          start: this.now,
-          end: this.now + 0.8,
-          target: target.id,
-          aim: { x: target.x, z: target.z },
-        };
-        this.event("cast", p, target, "basic");
-      }
+      } else if ((p.cooldowns.basic ?? 0) <= this.now)
+        this.combat.startCreatureAttack(p, target);
     } else {
       p.target = null;
       p.returning = distance(p, p.home) > 0.2;
@@ -1301,7 +794,7 @@ export class World {
       p.level++;
       p.maxHp += 72;
       p.hp = p.maxHp;
-      this.event("level", p, p, "level");
+      this.emit("level", p, p, "level");
     }
     if (p.level === 20) p.xp = 0;
   }
@@ -1340,15 +833,15 @@ export class World {
           stunned: a.stunned,
           healing: a.healing,
           returning: a.returning,
-          oath: a.oathUntil > this.now,
+          oath: statuses.active(a, "oath", this.now),
           protectedBy:
             a.interpose && a.interpose.until > this.now
               ? a.interpose.owner
               : null,
           controlRemaining: Math.max(
             0,
-            a.stunUntil - this.now,
-            a.rootUntil - this.now,
+            statuses.until(a, "stun") - this.now,
+            statuses.until(a, "root") - this.now,
           ),
         })),
       corpses: [...this.corpses.values()].map((c) => ({
